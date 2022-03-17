@@ -106,7 +106,7 @@
             this.guna2TextBox1.Location = new System.Drawing.Point(445, 217);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';
-            this.guna2TextBox1.PlaceholderText = "Username :";
+            this.guna2TextBox1.PlaceholderText = "Username";
             this.guna2TextBox1.SelectedText = "";
             this.guna2TextBox1.Size = new System.Drawing.Size(271, 24);
             this.guna2TextBox1.TabIndex = 5;
@@ -127,7 +127,7 @@
             this.guna2TextBox2.Location = new System.Drawing.Point(445, 259);
             this.guna2TextBox2.Name = "guna2TextBox2";
             this.guna2TextBox2.PasswordChar = '\0';
-            this.guna2TextBox2.PlaceholderText = "Password :";
+            this.guna2TextBox2.PlaceholderText = "Password";
             this.guna2TextBox2.SelectedText = "";
             this.guna2TextBox2.Size = new System.Drawing.Size(271, 24);
             this.guna2TextBox2.TabIndex = 6;
