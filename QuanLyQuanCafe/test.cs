@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
-    public partial class Dashboard : Form
+    public partial class test : Form
     {
-        public Dashboard()
+        public test()
         {
             InitializeComponent();
         }
-
-        public void logout()
-        {
-
-        }
-
-        
     }
 }
