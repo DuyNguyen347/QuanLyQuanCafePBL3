@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
-    public partial class Form1 : Form
+    public partial class Seller : Form
     {
-        public Form1()
+        public Seller()
         {
             InitializeComponent();
-        }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Họ và tên : " + guna2TextBox1.Text + "\n" + "pass : " + guna2TextBox2.Text);
         }
     }
 }
