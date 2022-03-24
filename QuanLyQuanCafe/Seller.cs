@@ -12,13 +12,17 @@ namespace QuanLyQuanCafe
 {
     public partial class Seller : Form
     {
+        List<Table> tables = new List<Table>();
         public Seller()
         {
             InitializeComponent();
+            
         }
 
         private void Seller_Load(object sender, EventArgs e)
         {
+            tables.Add(new Table("1", true));
+            tables.Add(new Table("2", false));
             load_cbBchonBan();
         }
 
@@ -26,8 +30,10 @@ namespace QuanLyQuanCafe
         {
             if(cbB_ChonBan.SelectedItem.ToString()== "Tất cả")
             {
-                MessageBox.Show("dihoc");
+                
                 ChonBanForm chonBanForm = new ChonBanForm();
+                chonBanForm.add_table(tables);
+                chonBanForm.chonban = new Chonban(select_tables);
                 chonBanForm.ShowDialog();
             }    
 
@@ -76,6 +82,15 @@ namespace QuanLyQuanCafe
         {
             cbB_ChonBan.Items.Clear();
             cbB_ChonBan.Items.Add("Tất cả");
+            foreach (Table i in tables)
+                if(i.Status)
+                    cbB_ChonBan.Items.Add(i.Id);
+        }
+        void select_tables(string str)
+        {
+            cbB_ChonBan.Text = str;
+            load_cbBchonBan();
+            
         }
     }
 }

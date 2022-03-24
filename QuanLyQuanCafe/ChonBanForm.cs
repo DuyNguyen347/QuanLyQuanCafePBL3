@@ -10,50 +10,20 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
+    public delegate void Chonban(string str);
+    
     public partial class ChonBanForm : Form
     {
-        List<Table> tables = new List<Table>();
+        public Chonban chonban;
+        static List<Table> tables ;
         public ChonBanForm()
         {
             InitializeComponent();
-            
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
 
+        }
+        public void add_table(List<Table> tabless)
+        {
+            tables = tabless;
         }
 
         private void ChonBanForm_Load(object sender, EventArgs e)
@@ -63,15 +33,16 @@ namespace QuanLyQuanCafe
 
         private void BT_OK_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void BT_Cancel_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            this.Close();
         }
         public void load_FLP_Table(List<Table> tables)
         {
+            FLP_Ban.Controls.Clear();
             foreach (Table i in tables)
             {
                 Button button = new Button();
@@ -89,15 +60,22 @@ namespace QuanLyQuanCafe
                 }
                 FLP_Ban.Controls.Add(button);
             }
+            
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
+        
         private void BT_Click(object sender, EventArgs e)
         {
-
+            string str = ((Button)sender).Text.ToString().Split('\n')[0];
+            for (int i = 0; i < tables.Count; i++)
+                if (tables[i].Id == str)
+                    tables[i].Status = !tables[i].Status;
+            chonban(str);
+            load_FLP_Table(tables);
+            this.Close();
         }
+
+        
     }
 }
