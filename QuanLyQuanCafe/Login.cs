@@ -14,72 +14,52 @@ namespace QuanLyQuanCafe
     public partial class Login : Form
     {
         public bool CheckPass = true;
+        const string username_admin = "admin";
+        const string password_admin = "admin";
         public Login()
         {
             InitializeComponent();
         }
-
-        private void BtLogin_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Họ và tên : " + tbUserName.Text + "\n" + "pass : " + tbPassword.Text);
-            Dashboard d = new Dashboard();
-            d.Show();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-            tbUserName.Text = "";
-            tbPassword.Text = "";
-        }
-
         private void BtLogin_Click_1(object sender, EventArgs e)
         {
-            if(tbUserName.Text == "" && tbPassword.Text == "")
+            if (tbUserName.Text == "" && tbPassword.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập UserName và PassWord");
             }
-
+            else if (tbUserName.Text == username_admin && tbPassword.Text == password_admin)
+            {
+                Dashboard ds = new Dashboard();
+                ds.Show();
+                ds.login_show = new Login_show(this.Show);
+                LB_Clear_Click(new object(),new EventArgs());
+                this.Hide();
+            }
+            else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text) == "Admin")
+            //if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
+            {
+                Dashboard ds = new Dashboard();
+                ds.Show();
+                ds.login_show = new Login_show(this.Show);
+                LB_Clear_Click(new object(), new EventArgs());
+                this.Hide();
+            }
+            else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text) != "Admin")
+            {
+                Seller sl = new Seller();
+                sl.Show();
+                sl.login_Show = new Login_show(this.Show);
+                LB_Clear_Click(new object(), new EventArgs());
+                this.Hide();
+            }
             else
             {
-                if(cbbRole.SelectedIndex > -1)
-                {
-                    if(cbbRole.SelectedItem.ToString() == "Admin")
-                    {
-                        if(LoginDAL.Instance.Login(tbUserName.Text,tbPassword.Text,1))
-                        //if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
-                        {
-                            Dashboard ds = new Dashboard();
-                            ds.Show();
-                            ds.login_show = new Login_show(this.Show);
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("UserName và Password không đúng! ");
-                        }
-                    }
-                    else
-                    {
-                        if (LoginDAL.Instance.Login(tbUserName.Text,tbPassword.Text,0))
-                        {
-                            Seller sl = new Seller();
-                            sl.Show();
-                            sl.login_Show = new Login_show(this.Show);
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("UserName và Password không đúng! ");
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Vui lòng chọn vai trò đăng nhập!");
-                }
-            } 
-              
+                MessageBox.Show("UserName và Password không đúng! ");
+                LB_Clear_Click(new object(), new EventArgs());
+            }
+
+
         }
+    
        private void TB_Enter_Keydown(object o,KeyEventArgs e)
         {
             if(e.KeyValue == 13)
@@ -99,6 +79,12 @@ namespace QuanLyQuanCafe
             {
                 tbPassword.PasswordChar = '*';
             }
+        }
+
+        private void LB_Clear_Click(object sender, EventArgs e)
+        {
+            tbUserName.Text = "";
+            tbPassword.Text = "";
         }
     }
 }

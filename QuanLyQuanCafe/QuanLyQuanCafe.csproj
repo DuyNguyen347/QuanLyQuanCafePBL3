@@ -61,6 +61,7 @@
     <Compile Include="ChonBanForm.Designer.cs">
       <DependentUpon>ChonBanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DataNhanVienDAL.cs" />
     <Compile Include="DAL\DataProvider.cs" />
     <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="Dashboard.cs">

@@ -20,32 +20,25 @@ namespace QuanLyQuanCafe
         public Dashboard()
         {
             InitializeComponent();
-            LoadDatabase();
+            DGV_NhanVien.DataSource = DataNhanVienDAL.data();
         }
 
         
-        public void LoadDatabase()
-        {
-            //string s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QuanLiQuanCafe;Integrated Security=True";
-            //SqlConnection cnn = new SqlConnection(s);
-            string query = "select *  from dbo.Account";
-            //cnn.Open();
-            //SqlCommand cmd = new SqlCommand(query, cnn);
-            ////cmd.ExecuteScalar();
-            //SqlDataAdapter da = new SqlDataAdapter(cmd);
-            //DataTable dt = new DataTable();
-            ////DataSet ds = new DataSet();
-            //da.Fill(dt);
-            ////DGV_NhanVien.DataSource = dt;
-            //cnn.Close();
-            //DGV_NhanVien.DataSource = dt;
-            DGV_NhanVien.DataSource = DataProvider.Instance.GetRecords(query);
-        }
+        
 
         public void btLogOut_Click(object sender, EventArgs e)
         {
             login_show();
             this.Close();
+        }
+
+        private void TB_TimNhanVien_TextChanged(object sender, EventArgs e)
+        {
+            List<NhanVien> nhanViens = new List<NhanVien>();
+            foreach (DataRow i in DataNhanVienDAL.data().Rows)
+                if ((i[1].ToString().ToUpper()).Contains(TB_TimNhanVien.Text.ToUpper()))
+                    nhanViens.Add(new NhanVien(i));
+            DGV_NhanVien.DataSource = nhanViens;                    
         }
     }
 }

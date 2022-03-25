@@ -1,14 +1,8 @@
-﻿using QuanLyQuanCafe.DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
@@ -21,9 +15,8 @@ namespace QuanLyQuanCafe
         public string Username { get; set; }
         public string PassWord { get; set; }
         public double Luong { get; set; }
-        public string Email { get; set; }
         public NhanVien() { }
-        public NhanVien(string iD,string name,string ngaysinh, string chucvu,string username,string password,string luong,string email)
+        public NhanVien(string iD,string name,string ngaysinh, string chucvu,string username,string password,string luong)
         {
             ID = iD;
             Name = name;
@@ -31,8 +24,7 @@ namespace QuanLyQuanCafe
             ChucVu = chucvu;
             Username = username;
             PassWord = password;
-            Luong = Convert.ToDouble(luong);
-            Email = email;
+            Luong = Luong;
         }
         public NhanVien(NhanVien nhanVien)
         {
@@ -43,19 +35,6 @@ namespace QuanLyQuanCafe
             ChucVu = nhanVien.ChucVu;
             Username = nhanVien.Username;
             PassWord = nhanVien.PassWord;
-            Email = nhanVien.Email;
-        }
-        
-        public NhanVien(DataRow row)
-        {
-            ID = row[0].ToString();
-            Name = row[1].ToString();
-            NgaySinh = row[2].ToString();
-            ChucVu = row[3].ToString();
-            Username = row[4].ToString();
-            PassWord = row[5].ToString();
-            Luong = Luong;
-            Email = row[6].ToString();
         }
     }
 }

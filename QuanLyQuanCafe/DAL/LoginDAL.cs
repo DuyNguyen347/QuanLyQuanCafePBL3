@@ -24,11 +24,11 @@ namespace QuanLyQuanCafe.DAL
             private set => instance = value; 
         }
         public LoginDAL() { }
-        public bool Login(string username, string password,int role)
+        public string Login(string username, string password)
         {
-            string s = "select * from dbo.Account where UserName = N'" + username + "' and PassWord = '" + password + "' and Type = '" + role + "'";
+            string s = "select ChucVu from NhanVien where UserName = '"+username +"' and PassWord = '"+password+"'";
             DataTable  d =  DataProvider.Instance.GetRecords(s);
-            return d.Rows.Count > 0 ;
+            return d.Rows[0][0].ToString();
         }
     }
 }
