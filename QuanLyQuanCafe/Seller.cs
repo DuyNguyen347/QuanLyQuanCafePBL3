@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
+    
     public partial class Seller : Form
     {
+        public Login_show login_Show;
         List<Table> tables = new List<Table>();
         public Seller()
         {
@@ -59,10 +61,7 @@ namespace QuanLyQuanCafe
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
@@ -91,6 +90,12 @@ namespace QuanLyQuanCafe
             cbB_ChonBan.Text = str;
             load_cbBchonBan();
             
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            login_Show();
+            this.Close();
         }
     }
 }

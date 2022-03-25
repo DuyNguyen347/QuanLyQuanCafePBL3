@@ -16,7 +16,8 @@ namespace QuanLyQuanCafe
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Seller());
+            Application.Run(new Login());
         }
+       
     }
 }
