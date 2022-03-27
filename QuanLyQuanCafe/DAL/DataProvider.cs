@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuanLyQuanCafe.DAL
 {
@@ -30,7 +31,7 @@ namespace QuanLyQuanCafe.DAL
         {
             s = @"Data Source=DESKTOP-G3DN301\SQLEXPRESS;Initial Catalog=QL_cafe2;Integrated Security=True";
         }
-        public bool executeDB(string query,object[] parameter = null)
+        public bool executeDB(string query, object[] parameter = null)
         {
             try
             {
@@ -58,11 +59,11 @@ namespace QuanLyQuanCafe.DAL
             }
             catch (Exception)
             {
-
+                MessageBox.Show("Lỗi!");
                 return false;
             }
         }
-        public DataTable GetRecords(string query,object[] parameter = null)
+        public DataTable GetRecords(string query, object[] parameter = null)
         {
             try
             {
@@ -72,15 +73,15 @@ namespace QuanLyQuanCafe.DAL
                     SqlCommand cmd = new SqlCommand(query, cnn);
                     SqlDataAdapter da = new SqlDataAdapter(cmd);
                     cnn.Open();
-                    if(parameter != null)
+                    if (parameter != null)
                     {
-                        string[] list  = query.Split(' ');
+                        string[] list = query.Split(' ');
                         int i = 0;
                         foreach (string item in list)
                         {
-                            if(item.Contains('@'))
+                            if (item.Contains('@'))
                             {
-                                cmd.Parameters.AddWithValue(item,parameter[i]);
+                                cmd.Parameters.AddWithValue(item, parameter[i]);
                                 i++;
                             }
                         }
@@ -92,6 +93,27 @@ namespace QuanLyQuanCafe.DAL
             }
             catch (Exception)
             {
+                MessageBox.Show("Lỗi");
+                return null;
+            }
+}
+        public DataTable setdata(string query, object[] parameter = null)
+        {
+            try
+            {
+                using (SqlConnection cnn = new SqlConnection(s))
+                {
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    cnn.Open();
+                    cmd.ExecuteNonQuery();
+                    cnn.Close();
+
+                    return GetRecords("select * from NhanVien");
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi!");
                 return null;
             }
         }

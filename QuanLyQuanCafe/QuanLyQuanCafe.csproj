@@ -33,11 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bunifu.Licensing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=f89b4760ba7dcb6b" />
-    <Reference Include="Bunifu.UI.WinForms.1.5.3, Version=1.5.3.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Bunifu.UI.WinForms.1.5.3.dll</HintPath>
-    </Reference>
     <Reference Include="Guna.UI2, Version=2.0.3.1, Culture=neutral, PublicKeyToken=e4b9cdd7b4cde4b4, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.1\lib\net40\Guna.UI2.dll</HintPath>
     </Reference>
@@ -61,8 +56,13 @@
     <Compile Include="ChonBanForm.Designer.cs">
       <DependentUpon>ChonBanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DataBillDAL.cs" />
+    <Compile Include="DAL\DataDanhMucDAL.cs" />
+    <Compile Include="DAL\DataDanhThuDAL.cs" />
+    <Compile Include="DAL\DataMonDAL.cs" />
     <Compile Include="DAL\DataNhanVienDAL.cs" />
     <Compile Include="DAL\DataProvider.cs" />
+    <Compile Include="DAL\DataTableDAL.cs" />
     <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -70,6 +70,8 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="DTO\DanhMuc.cs" />
+    <Compile Include="DTO\Mon.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>

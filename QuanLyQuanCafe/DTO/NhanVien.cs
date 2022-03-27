@@ -50,7 +50,7 @@ namespace QuanLyQuanCafe
         {
             ID = row[0].ToString();
             Name = row[1].ToString();
-            NgaySinh = row[2].ToString();
+            NgaySinh = row[2].ToString().Split(' ').First();
             ChucVu = row[3].ToString();
             Username = row[4].ToString();
             PassWord = row[5].ToString();

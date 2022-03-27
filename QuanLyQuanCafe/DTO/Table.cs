@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace QuanLyQuanCafe
 {
@@ -19,10 +20,10 @@ namespace QuanLyQuanCafe
             Id = id;
             Status = status;
         }
-        public Table(Table table)
+        public Table(DataRow dataRow)
         {
-            Id=table.Id;
-            Status = table.Status;
+            Id = dataRow[0].ToString();
+            Status = Convert.ToBoolean(dataRow[1].ToString());
         }
     }
 }
