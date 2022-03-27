@@ -388,7 +388,7 @@ namespace QuanLyQuanCafe
             DGV_Bill.Columns[1].HeaderText = "Thời gian vào";
             DGV_Bill.Columns[2].HeaderText = "Thời gian ra";
             DGV_Bill.Columns[3].HeaderText = "Bàn";
-            DGV_Bill.Columns[4].HeaderText = "Tổng tiền";
+            DGV_Bill.Columns[4].HeaderText = "Thanh toán";
         }
         void updatedate()
         {
