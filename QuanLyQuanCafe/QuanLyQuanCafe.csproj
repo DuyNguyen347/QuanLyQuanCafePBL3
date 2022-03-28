@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Guna.UI2, Version=2.0.3.1, Culture=neutral, PublicKeyToken=e4b9cdd7b4cde4b4, processorArchitecture=MSIL">
-      <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.1\lib\net40\Guna.UI2.dll</HintPath>
+    <Reference Include="Guna.UI2, Version=2.0.3.2, Culture=neutral, PublicKeyToken=4015e4865bda28a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.2\lib\net40\Guna.UI2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -64,6 +64,7 @@
     <Compile Include="DAL\DataProvider.cs" />
     <Compile Include="DAL\DataTableDAL.cs" />
     <Compile Include="DAL\LoginDAL.cs" />
+    <Compile Include="DAL\ReloadAccountDAL.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +82,12 @@
     <Compile Include="DTO\NhanVien.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReloadAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReloadAccount.Designer.cs">
+      <DependentUpon>ReloadAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Seller.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +113,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReloadAccount.resx">
+      <DependentUpon>ReloadAccount.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Seller.resx">
       <DependentUpon>Seller.cs</DependentUpon>
     </EmbeddedResource>

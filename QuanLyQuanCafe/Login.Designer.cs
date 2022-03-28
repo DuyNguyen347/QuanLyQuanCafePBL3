@@ -43,6 +43,7 @@
             this.LB_Clear = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btShowPass = new Guna.UI2.WinForms.Guna2ImageButton();
+            this.ReloadAccount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -127,7 +128,7 @@
             this.tbPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbPassword.Location = new System.Drawing.Point(445, 247);
+            this.tbPassword.Location = new System.Drawing.Point(445, 244);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.PlaceholderText = "Password";
@@ -211,12 +212,25 @@
             this.btShowPass.TabIndex = 12;
             this.btShowPass.Click += new System.EventHandler(this.btShowPass_Click);
             // 
+            // ReloadAccount
+            // 
+            this.ReloadAccount.AutoSize = true;
+            this.ReloadAccount.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReloadAccount.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.ReloadAccount.Location = new System.Drawing.Point(608, 271);
+            this.ReloadAccount.Name = "ReloadAccount";
+            this.ReloadAccount.Size = new System.Drawing.Size(108, 19);
+            this.ReloadAccount.TabIndex = 13;
+            this.ReloadAccount.Text = "Quên mật khẩu";
+            this.ReloadAccount.Click += new System.EventHandler(this.ReloadAccount_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(29)))), ((int)(((byte)(7)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ReloadAccount);
             this.Controls.Add(this.btShowPass);
             this.Controls.Add(this.LB_Clear);
             this.Controls.Add(this.guna2ControlBox2);
@@ -253,6 +267,7 @@
         private System.Windows.Forms.Label LB_Clear;
         private System.Windows.Forms.ImageList imageList1;
         private Guna.UI2.WinForms.Guna2ImageButton btShowPass;
+        private System.Windows.Forms.Label ReloadAccount;
     }
 }
 
