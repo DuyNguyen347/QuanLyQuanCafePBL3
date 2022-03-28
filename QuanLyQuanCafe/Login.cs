@@ -63,7 +63,7 @@ namespace QuanLyQuanCafe
 
             else
             {
-                if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,' '))
+                if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
                 //if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
                 {
                     Dashboard ds = new Dashboard();

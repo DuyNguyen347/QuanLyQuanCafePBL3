@@ -26,7 +26,7 @@ namespace QuanLyQuanCafe.DAL
         public LoginDAL() { }
         public bool Login(string username, string password,char c)
         {
-            string s = "select * from dbo.NhanVien where UserName = N'" + username + "' and PassWord = '" + password + "' and ChucVu " + c + " = 'Quan Ly '";
+            string s = "select * from dbo.NhanVien where UserName = N'" + username + "' and PassWord = '" + password + "' and ChucVu " + c + "= N'Quản Lý'";
             DataTable d =  DataProvider.Instance.GetRecords(s);
             return d.Rows.Count > 0 ;
         }
