@@ -124,7 +124,7 @@ namespace QuanLyQuanCafe
             {
                 if (d[1].ToString() == DGV_Mon.CurrentRow.Cells[1].Value.ToString())
                 {
-                    foreach (DataRow i in DGV_DaChon.Rows)
+                    foreach (DataRow i in DGV_DaChon.Rows) ;
 
                 }
                     mon_an.Add(new Mon(d));

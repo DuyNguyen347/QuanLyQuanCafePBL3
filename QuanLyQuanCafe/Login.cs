@@ -120,5 +120,7 @@ namespace QuanLyQuanCafe
             ReloadAccount rl = new ReloadAccount();
             rl.Show();
         }
+
+        
     }
 }

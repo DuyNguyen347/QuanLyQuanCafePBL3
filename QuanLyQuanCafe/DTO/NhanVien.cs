@@ -32,7 +32,14 @@ namespace QuanLyQuanCafe
             ChucVu = chucvu;
             Username = username;
             PassWord = password;
-            Luong = Convert.ToDouble(luong);
+            if(luong == "")
+            {
+                Luong = 0;
+            }
+            else
+            {
+                Luong = Convert.ToDouble(luong);
+            }
             Email = email;
             SDT = sdt;
         }
@@ -57,9 +64,9 @@ namespace QuanLyQuanCafe
             ChucVu = row[3].ToString();
             Username = row[4].ToString();
             PassWord = row[5].ToString();
-            Luong = Luong;
             Email = row[6].ToString();
-            SDT = row[7].ToString();
+            Luong = Convert.ToDouble(row[7].ToString());
+            SDT = row[8].ToString();
         }
     }
 }

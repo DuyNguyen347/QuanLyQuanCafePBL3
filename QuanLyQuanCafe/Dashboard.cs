@@ -88,7 +88,8 @@ namespace QuanLyQuanCafe
             TB_ChucVu.Text = "";
             TB_UserName.Text = "";
             TB_PassWord.Text = "";
-            
+            TB_LuongNV.Text = "";
+            TB_SDT.Text = "";
         }
         private void DGV_NhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -108,7 +109,7 @@ namespace QuanLyQuanCafe
                     dem++;
             if(dem== 0)
                     DGV_NhanVien.DataSource = DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(),TB_TenNV.Text,DT_NSNV.Text,
-                                                                  TB_ChucVu.Text,TB_UserName.Text,TB_PassWord.Text, "0" ,TB_emailNV.Text,"null"),1);
+                                                                  TB_ChucVu.Text,TB_UserName.Text,TB_PassWord.Text, TB_LuongNV.Text ,TB_emailNV.Text,TB_SDT.Text),1);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
@@ -123,7 +124,7 @@ namespace QuanLyQuanCafe
             for (int i = 0; i < DataNhanVienDAL.data().Rows.Count; i++)
                 if (DataNhanVienDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDNV.Text)
                     DGV_NhanVien.DataSource = DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                                  TB_ChucVu.Text, TB_UserName.Text, TB_PassWord.Text, "0", TB_emailNV.Text,"null"),3);
+                                                                  TB_ChucVu.Text, TB_UserName.Text, TB_PassWord.Text,TB_LuongNV.Text, TB_emailNV.Text,TB_SDT.Text),3);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void cbB_ChucVu_SelectedIndexChanged(object sender, EventArgs e)

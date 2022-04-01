@@ -106,12 +106,13 @@
             this.tbUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbUserName.Location = new System.Drawing.Point(445, 195);
+            this.tbUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbUserName.IconLeft")));
+            this.tbUserName.Location = new System.Drawing.Point(445, 185);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.PasswordChar = '\0';
             this.tbUserName.PlaceholderText = "Username";
             this.tbUserName.SelectedText = "";
-            this.tbUserName.Size = new System.Drawing.Size(271, 24);
+            this.tbUserName.Size = new System.Drawing.Size(271, 34);
             this.tbUserName.TabIndex = 5;
             this.tbUserName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Enter_Keydown);
             // 
@@ -128,12 +129,13 @@
             this.tbPassword.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbPassword.Location = new System.Drawing.Point(445, 244);
+            this.tbPassword.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbPassword.IconLeft")));
+            this.tbPassword.Location = new System.Drawing.Point(445, 236);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.PlaceholderText = "Password";
             this.tbPassword.SelectedText = "";
-            this.tbPassword.Size = new System.Drawing.Size(271, 24);
+            this.tbPassword.Size = new System.Drawing.Size(271, 32);
             this.tbPassword.TabIndex = 6;
             this.tbPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TB_Enter_Keydown);
             // 
@@ -193,6 +195,7 @@
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "eye-slash.png");
             this.imageList1.Images.SetKeyName(1, "eye-slash.png");
+            this.imageList1.Images.SetKeyName(2, "User.png");
             // 
             // btShowPass
             // 
@@ -205,7 +208,7 @@
             this.btShowPass.ImageOffset = new System.Drawing.Point(0, 0);
             this.btShowPass.ImageRotate = 0F;
             this.btShowPass.ImageSize = new System.Drawing.Size(20, 20);
-            this.btShowPass.Location = new System.Drawing.Point(690, 248);
+            this.btShowPass.Location = new System.Drawing.Point(684, 241);
             this.btShowPass.Name = "btShowPass";
             this.btShowPass.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.btShowPass.Size = new System.Drawing.Size(20, 20);
