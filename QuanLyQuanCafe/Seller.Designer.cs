@@ -42,6 +42,7 @@
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.guna2NumericUpDown1 = new Guna.UI2.WinForms.Guna2NumericUpDown();
             this.BT_refreshMon = new Guna.UI2.WinForms.Guna2GradientButton();
             this.TB_TimDanhMuc = new Guna.UI2.WinForms.Guna2TextBox();
             this.TB_TimMon = new Guna.UI2.WinForms.Guna2TextBox();
@@ -56,6 +57,7 @@
             this.DGV_DaChon = new Guna.UI2.WinForms.Guna2DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BILL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Mon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DaChon)).BeginInit();
@@ -95,6 +97,7 @@
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CustomGradientPanel1.Controls.Add(this.guna2NumericUpDown1);
             this.guna2CustomGradientPanel1.Controls.Add(this.BT_refreshMon);
             this.guna2CustomGradientPanel1.Controls.Add(this.TB_TimDanhMuc);
             this.guna2CustomGradientPanel1.Controls.Add(this.TB_TimMon);
@@ -115,6 +118,18 @@
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(900, 500);
             this.guna2CustomGradientPanel1.TabIndex = 3;
+            this.guna2CustomGradientPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2CustomGradientPanel1_Paint);
+            // 
+            // guna2NumericUpDown1
+            // 
+            this.guna2NumericUpDown1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2NumericUpDown1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2NumericUpDown1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.guna2NumericUpDown1.ForeColor = System.Drawing.Color.Black;
+            this.guna2NumericUpDown1.Location = new System.Drawing.Point(25, 418);
+            this.guna2NumericUpDown1.Name = "guna2NumericUpDown1";
+            this.guna2NumericUpDown1.Size = new System.Drawing.Size(100, 25);
+            this.guna2NumericUpDown1.TabIndex = 1017;
             // 
             // BT_refreshMon
             // 
@@ -172,7 +187,7 @@
             this.TB_TimMon.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimMon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimMon.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TB_TimMon.Location = new System.Drawing.Point(426, 12);
+            this.TB_TimMon.Location = new System.Drawing.Point(376, 9);
             this.TB_TimMon.Name = "TB_TimMon";
             this.TB_TimMon.PasswordChar = '\0';
             this.TB_TimMon.PlaceholderText = "Nhập tên món";
@@ -283,6 +298,7 @@
             this.cbB_ChonBan.Size = new System.Drawing.Size(180, 36);
             this.cbB_ChonBan.TabIndex = 1008;
             this.cbB_ChonBan.SelectedIndexChanged += new System.EventHandler(this.cbB_ChonBan_SelectedIndexChanged);
+            this.cbB_ChonBan.SelectionChangeCommitted += new System.EventHandler(this.cbB_ChonBan_SelectionChangeCommitted);
             // 
             // DGV_BILL
             // 
@@ -376,7 +392,7 @@
             this.DGV_Mon.DefaultCellStyle = dataGridViewCellStyle6;
             this.DGV_Mon.EnableHeadersVisualStyles = false;
             this.DGV_Mon.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DGV_Mon.Location = new System.Drawing.Point(376, 48);
+            this.DGV_Mon.Location = new System.Drawing.Point(377, 48);
             this.DGV_Mon.Name = "DGV_Mon";
             this.DGV_Mon.ReadOnly = true;
             this.DGV_Mon.RowHeadersVisible = false;
@@ -405,6 +421,7 @@
             this.DGV_Mon.ThemeStyle.RowsStyle.Height = 25;
             this.DGV_Mon.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_Mon.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.DGV_Mon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Mon_CellClick);
             this.DGV_Mon.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Mon_CellContentClick);
             // 
             // DGV_DaChon
@@ -487,6 +504,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.guna2CustomGradientPanel1.ResumeLayout(false);
             this.guna2CustomGradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2NumericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BILL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Mon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_DaChon)).EndInit();
@@ -502,7 +520,6 @@
         private Guna.UI2.WinForms.Guna2CustomGradientPanel guna2CustomGradientPanel1;
         private Guna.UI2.WinForms.Guna2GradientButton BT_refreshMon;
         private Guna.UI2.WinForms.Guna2TextBox TB_TimDanhMuc;
-        private Guna.UI2.WinForms.Guna2TextBox TB_TimMon;
         private Guna.UI2.WinForms.Guna2GradientButton BT_Sửa;
         private Guna.UI2.WinForms.Guna2GradientButton BT_Ok;
         private Guna.UI2.WinForms.Guna2GradientButton BT_Huy;
@@ -512,5 +529,7 @@
         private Guna.UI2.WinForms.Guna2DataGridView DGV_BILL;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_Mon;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_DaChon;
+        private Guna.UI2.WinForms.Guna2TextBox TB_TimMon;
+        private Guna.UI2.WinForms.Guna2NumericUpDown guna2NumericUpDown1;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using QuanLyQuanCafe.DAL;
 
 namespace QuanLyQuanCafe
 {
@@ -24,7 +25,9 @@ namespace QuanLyQuanCafe
         private void Seller_Load(object sender, EventArgs e)
         {
             tables.Add(new Table("1", true));
-            tables.Add(new Table("2", false));
+            tables.Add(new Table("2", true));
+            tables.Add(new Table("3", true));
+            tables.Add(new Table("4", true));
             load_cbBchonBan();
         }
 
@@ -61,21 +64,84 @@ namespace QuanLyQuanCafe
 
         }
 
-        
+
 
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
+            List<Mon> mon_an = new List<Mon>();
+            
+            foreach (DataRow d in DataMonDAL.data().Rows)
+                if (d[1].ToString().ToUpper().Contains(TB_TimMon.Text.ToUpper()))
+                {
+                    mon_an.Add(new Mon(d));
+                }
+            DGV_Mon.DataSource = mon_an;
+
+            DGV_Mon.Columns[0].HeaderText = "Mã món";
+            DGV_Mon.Columns[1].HeaderText = "Tên món";
+            DGV_Mon.Columns[2].HeaderText = "Danh mục";
+            DGV_Mon.Columns[3].HeaderText = "Giá";
+
+
 
         }
-
         private void TB_TimDanhMuc_TextChanged(object sender, EventArgs e)
         {
+            List<DanhMuc>danh_muc = new List<DanhMuc>();
 
+            foreach (DataRow d in DataDanhMucDAL.data().Rows)
+                if (d[1].ToString().ToUpper().Contains(TB_TimDanhMuc.Text.ToUpper()))
+                {
+                    danh_muc.Add(new DanhMuc(d));
+                }
+            DGV_Mon.DataSource = danh_muc;
+
+            DGV_Mon.Columns[0].HeaderText = "Mã món";            
+            DGV_Mon.Columns[1].HeaderText = "Danh mục";            
         }
 
+        private void DGV_Mon_Load()
+        {
+            List<Mon> mon_an = new List<Mon>();
+            foreach (DataRow d in DataMonDAL.data().Rows)
+            {
+                mon_an.Add(new Mon(d));
+            }
+            DGV_Mon.DataSource=mon_an;
+        }
+
+        private void Set_Count()
+        {
+            int[] count;
+            /*foreach (DataRow d in DGV_Mon.Rows)
+                count[i] = */
+        }
+
+        private void DGV_Mon_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            List<Mon> mon_an = new List<Mon>();
+            foreach (DataRow d in DataMonDAL.data().Rows)
+            {
+                if (d[1].ToString() == DGV_Mon.CurrentRow.Cells[1].Value.ToString())
+                {
+                    foreach (DataRow i in DGV_DaChon.Rows)
+
+                }
+                    mon_an.Add(new Mon(d));
+                DGV_DaChon.DataSource = mon_an;
+            }               
+            
+            // Add so luong ...
+        }
+        
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            List<Mon> mon_an = new List<Mon>();
+            foreach (DataRow d in DataMonDAL.data().Rows)
+            {
+                mon_an.Add(new Mon(d));
+            }
+            DGV_Mon.DataSource = mon_an;
         }
         void load_cbBchonBan()
         {
@@ -96,6 +162,20 @@ namespace QuanLyQuanCafe
         {
             login_Show();
             this.Close();
+        }
+
+        private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
+        {
+            DGV_Mon_Load();
+            /*DGV_Mon.Columns[0].HeaderText = "Mã món";
+            DGV_Mon.Columns[1].HeaderText = "Tên món";
+            DGV_Mon.Columns[2].HeaderText = "Danh mục";
+            DGV_Mon.Columns[3].HeaderText = "Giá";*/
+        }
+
+        private void cbB_ChonBan_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+
         }
     }
 }
