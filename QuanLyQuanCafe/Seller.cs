@@ -16,7 +16,7 @@ namespace QuanLyQuanCafe
     public partial class Seller : Form
     {
         public Quit login_Show;
-        List<Table> tables = new List<Table>();
+        public Quit quit;
         DataTable dt;
         int n = 0;
         int[] count;
@@ -26,6 +26,8 @@ namespace QuanLyQuanCafe
         {
             InitializeComponent();
 
+            dt = new DataTable();
+            Add_Column();
             count = new int[100];
             food = new string[100];
             Set_Count();
@@ -65,13 +67,14 @@ namespace QuanLyQuanCafe
         {
             if(cbB_ChonBan.SelectedItem.ToString()== "Tất cả")
             {
-                
                 ChonBanForm chonBanForm = new ChonBanForm();
                 chonBanForm.add_table(DataTableDAL.locdulieu());
                 chonBanForm.chonban = new Chonban(select_tables);
                 chonBanForm.ShowDialog();
-            }    
-
+            }
+            dt.Clear();
+            DGV_DaChon.DataSource = dt;
+            
         }
 
         private void BT_Huy_Click(object sender, EventArgs e)
@@ -144,10 +147,6 @@ namespace QuanLyQuanCafe
                 CB_Timdanhmuc.Items.Add(i[1].ToString().Trim());                
             }
         }              
-
-        private void DGV_Mon_CellClick(object sender, DataGridViewCellEventArgs e)
-        {            
-        }
         
         private void Tinh_tong_tien()
         {
@@ -157,38 +156,54 @@ namespace QuanLyQuanCafe
             TB_Tongtien.Text = total_money.ToString();
         }
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {           
-            if (DGV_Mon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)                
+        {
+            if (DGV_Mon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 DGV_Mon.CurrentRow.Selected = true;
                 string ID = DGV_Mon.Rows[e.RowIndex].Cells["ID"].FormattedValue.ToString();
                 string name = DGV_Mon.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
                 string DM = DGV_Mon.Rows[e.RowIndex].Cells["DanhMuc"].FormattedValue.ToString();
                 string gia = DGV_Mon.Rows[e.RowIndex].Cells["Gia"].FormattedValue.ToString();
-                
-                for (int i=0; i<=n; i++)
+                for (int i = 0; i <= n; i++)
                 {
                     if (name == food[i])
                     {
                         ++count[i];
-                        foreach (DataRow dr in dt.Rows)
+                        try
                         {
-                            if (dr["Tên món"] == name)
+
+                            foreach (DataRow dr in dt.Rows)
                             {
-                                dt.Rows.Remove(dr);
-                                break;                                
+                                if (dr["Tên món"].ToString() == name)
+                                {
+                                    dt.Rows.Remove(dr);
+                                    break;
+                                }
                             }
+                            dt.Rows.Add(ID, name, DM, gia, count[i]);
+                            break;
                         }
-                        dt.Rows.Add(ID, name, DM, gia, count[i]);                        
-                        break;
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Vui lòng chọn bàn!");
+                            ex.ToString();
+                        }
+
                     }
                 }
-                    
-                    
+                
+
 
                 //dt.Rows.Add(ID, name, DM, gia, count[n]);                
             }
             DGV_DaChon.DataSource = dt;
+            Tinh_tong_tien();
+
+
+        }
+        private void Numric_Soluong_ValueChanged(object sender, EventArgs e)
+        {
+            DGV_DaChon.CurrentRow.Cells["Số lượng"].Value = Numric_Soluong.Value;
             Tinh_tong_tien();
         }
         void load_cbBchonBan()
@@ -230,8 +245,16 @@ namespace QuanLyQuanCafe
             {
                 DGV_DaChon.CurrentRow.Selected = true;
                 int so_luong = Convert.ToInt32(DGV_DaChon.Rows[e.RowIndex].Cells["Số lượng"].FormattedValue.ToString());
-                guna2NumericUpDown1.Value = so_luong;                                                        
+                Numric_Soluong.Value = so_luong;                                                        
             }
-        }       
+        }
+
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            quit();
+        }
+
+        
     }
 }

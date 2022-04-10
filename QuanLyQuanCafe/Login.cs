@@ -86,7 +86,7 @@ namespace QuanLyQuanCafe
                     Seller sl = new Seller();
                     sl.Show();
                     sl.login_Show = new Quit(this.Show);
-                    //sl.quit = new Quit(this.Close);
+                    sl.quit = new Quit(this.Close);
                     this.Hide();
                 }
                 else
