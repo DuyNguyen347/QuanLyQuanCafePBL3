@@ -26,9 +26,6 @@ namespace QuanLyQuanCafe
         {
             InitializeComponent();
 
-            dt = new DataTable();
-            Add_Column();
-
             count = new int[100];
             food = new string[100];
             Set_Count();
@@ -59,10 +56,7 @@ namespace QuanLyQuanCafe
 
         private void Seller_Load(object sender, EventArgs e)
         {
-            tables.Add(new Table("1", true));
-            tables.Add(new Table("2", true));
-            tables.Add(new Table("3", true));
-            tables.Add(new Table("4", true));
+           
             load_cbBchonBan();
             CB_Timdanhmuc_Load();
         }
@@ -73,7 +67,7 @@ namespace QuanLyQuanCafe
             {
                 
                 ChonBanForm chonBanForm = new ChonBanForm();
-                chonBanForm.add_table(tables);
+                chonBanForm.add_table(DataTableDAL.locdulieu());
                 chonBanForm.chonban = new Chonban(select_tables);
                 chonBanForm.ShowDialog();
             }    
@@ -201,15 +195,13 @@ namespace QuanLyQuanCafe
         {
             cbB_ChonBan.Items.Clear();
             cbB_ChonBan.Items.Add("Tất cả");
-            foreach (Table i in tables)
+            foreach (Table i in DataTableDAL.locdulieu("", "true"))
                 if(i.Status)
                     cbB_ChonBan.Items.Add(i.Id);
         }
         void select_tables(string str)
         {
             cbB_ChonBan.Text = str;
-            load_cbBchonBan();
-            
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

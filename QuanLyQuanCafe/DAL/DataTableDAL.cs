@@ -47,7 +47,7 @@ namespace QuanLyQuanCafe.DAL
         {
             List<Table> tables = new List<Table>();
             foreach (DataRow row in data().Rows)
-                if ((row[0].ToString().ToUpper()).Contains(id.ToUpper()))
+                if (row[0].ToString().ToUpper().Contains(id.ToUpper()) && row[1].ToString().ToUpper().Contains(trangthai.ToUpper()))
                     tables.Add(new Table(row));
             return tables;
         }
