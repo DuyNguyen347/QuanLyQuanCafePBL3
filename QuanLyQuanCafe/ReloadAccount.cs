@@ -32,14 +32,9 @@ namespace QuanLyQuanCafe
                     tbCode.Visible = true;
                     btOk.Visible = true;
                     btCancel.Visible = true;
-                    Random generator = new Random();
-                    s = generator.Next(0, 1000000).ToString("D6");
-                    if (ReloadAccountDAL.Instance.Send(tbEmail.Text, "Mã CODE lấy lại tài khoản", s))
-                    {
+                    s = sendcode(tbEmail.Text);
+                    if (s!=null)
                         lbInfor.Visible = false;
-                        MessageBox.Show("Mã Code vừa được gửi đến Mail của bạn!");
-                    }
-                    else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
                 }
                 else
                 {
@@ -78,7 +73,17 @@ namespace QuanLyQuanCafe
                 }
             }
         }
-
+        public static string sendcode(string gmail,string a = "Mã CODE lấy lại tài khoản")
+        {
+            Random generator = new Random();
+            string str = generator.Next(0, 1000000).ToString("D6");
+            if (ReloadAccountDAL.Instance.Send(gmail, a , str))
+            {
+                MessageBox.Show("Mã Code vừa được gửi đến Mail của bạn!");
+            }
+            else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
+            return str;
+        }
        
     }
 }

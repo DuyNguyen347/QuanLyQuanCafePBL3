@@ -14,8 +14,8 @@ namespace QuanLyQuanCafe
     public partial class Login : Form
     {
         public bool CheckPass = true;
-        const string username_admin = "admin";
-        const string password_admin = "admin";
+        string username_admin = "admin";
+        string password_admin = "admin";
         public Login()
         {
             InitializeComponent();
@@ -63,12 +63,21 @@ namespace QuanLyQuanCafe
 
             else
             {
-                if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
+                if(tbUserName.Text == username_admin && tbPassword.Text == password_admin)
+                {
+                    Dashboard ds = new Dashboard();
+                    ds.Show();
+                    ds.login_show = new Quit(this.Show);
+                    ds.quit = new Quit(this.Close);
+                    this.Hide();
+                }
+                else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
                 //if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
                 {
                     Dashboard ds = new Dashboard();
                     ds.Show();
-                    ds.login_show = new Login_show(this.Show);
+                    ds.login_show = new Quit(this.Show);
+                    ds.quit = new Quit(this.Close);
                     this.Hide();
                 }
                 else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'!'))
@@ -76,7 +85,8 @@ namespace QuanLyQuanCafe
 
                     Seller sl = new Seller();
                     sl.Show();
-                    sl.login_Show = new Login_show(this.Show);
+                    sl.login_Show = new Quit(this.Show);
+                    //sl.quit = new Quit(this.Close);
                     this.Hide();
                 }
                 else

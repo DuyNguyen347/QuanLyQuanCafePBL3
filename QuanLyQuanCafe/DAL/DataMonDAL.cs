@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace QuanLyQuanCafe.DAL
@@ -22,10 +23,16 @@ namespace QuanLyQuanCafe.DAL
             switch (i)
             {   
                 case 1:
-                    query = "insert into Mon values('" + mon.ID + "',N'" + mon.Name + "','"+ID_category+"',"+mon.Gia+")";
+                    int dem = 0;
+                    foreach (DataRow row in DataMonDAL.data().Rows)
+                        if (row[0].ToString() == mon.ID)
+                            dem++;
+                    if (dem == 0)
+                        query = "insert into Mon values('" + mon.ID + "',N'" + mon.Name + "','"+ID_category+"',"+mon.Gia+")";
                     break;
                 case 2:
                     query = "delete from Mon where ID = '" + mon.ID + "'";
+                    DataDanhThuDAL.XoaThongTinHoaDonTuMon(mon.ID);
                     break;
                 case 3:
                     query = "update Mon set TenMon = N'" + mon.Name + "', ID_category = '"+ID_category+"',Gia ="+mon.Gia+"where ID= '" + mon.ID + "' ";
@@ -36,7 +43,21 @@ namespace QuanLyQuanCafe.DAL
             DataTable data;
             data = DataProvider.Instance.setdata(query);
             return data;
-
+        }
+        public static void XoaTuDanhMuc(string ID)
+        {
+            string query = "delete from Mon where ID_category = '" + ID + "'";
+            foreach(DataRow id in DataProvider.Instance.GetRecords("select * from Mon where ID_category = '"+ID+"'").Rows)
+                DataDanhThuDAL.XoaThongTinHoaDonTuMon(id[0].ToString());
+            DataProvider.Instance.setdata(query);
+        }
+        public static List<Mon> locdulieu(string ten = "",string danhmuc = "")
+        {
+            List<Mon> mons = new List<Mon>();
+            foreach (DataRow i in data().Rows)
+                if ((i[1].ToString().ToUpper()).Contains(ten) && i[2].ToString().ToUpper().Trim().Contains(danhmuc))
+                    mons.Add(new Mon(i));
+            return mons;
         }
     }
 }

@@ -63,10 +63,9 @@ namespace QuanLyQuanCafe
             NgaySinh = row[2].ToString().Split(' ').First();
             ChucVu = row[3].ToString();
             Username = row[4].ToString();
-            PassWord = row[5].ToString();
-            Email = row[6].ToString();
-            Luong = Convert.ToDouble(row[7].ToString());
-            SDT = row[8].ToString();
+            Email = row[5].ToString();
+            Luong = Convert.ToDouble(row[6].ToString());
+            SDT = row[7].ToString();
         }
     }
 }

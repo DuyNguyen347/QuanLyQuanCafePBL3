@@ -14,7 +14,7 @@ namespace QuanLyQuanCafe
     
     public partial class Seller : Form
     {
-        public Login_show login_Show;
+        public Quit login_Show;
         List<Table> tables = new List<Table>();
         public Seller()
         {

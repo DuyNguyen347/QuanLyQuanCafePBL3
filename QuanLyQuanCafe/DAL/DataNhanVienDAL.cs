@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+
 namespace QuanLyQuanCafe.DAL
 {
     internal class DataNhanVienDAL
@@ -10,6 +12,7 @@ namespace QuanLyQuanCafe.DAL
             DataTable data;
             string query = "select *  from NhanVien";
             data = DataProvider.Instance.GetRecords(query);
+            data.Columns.RemoveAt(5);
             return data;
         }
         public static DataTable data_Chucvu()
@@ -25,13 +28,18 @@ namespace QuanLyQuanCafe.DAL
             switch (i)
             {
                 case 1:
-                    query = "insert into NhanVien values('" + nhanVien.ID + "',N'" + nhanVien.Name + "','" + nhanVien.NgaySinh + "',N'" + nhanVien.ChucVu + "','" + nhanVien.Username + "','" + nhanVien.PassWord + "','" + nhanVien.Email + "'," + nhanVien.Luong + ",'" + nhanVien.SDT + "' )";
+                    int dem = 0;
+                    foreach (DataRow row in DataNhanVienDAL.data().Rows)
+                        if (row[0].ToString() == nhanVien.ID)
+                            dem++;
+                    if (dem == 0)
+                        query = "insert into NhanVien values('" + nhanVien.ID + "',N'" + nhanVien.Name + "','" + nhanVien.NgaySinh + "',N'" + nhanVien.ChucVu + "','" + nhanVien.Username + "','" + nhanVien.PassWord + "','" + nhanVien.Email + "'," + nhanVien.Luong + ",'" + nhanVien.SDT + "' )";
                     break;
                 case 2:
                     query = "delete from NhanVien where ID = '" + nhanVien.ID + "'";
                     break;
                 case 3:
-                    query = "update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + nhanVien.NgaySinh + "',ChucVu = N'" + nhanVien.ChucVu + "',UserName='" + nhanVien.Username + "',PassWord='" + nhanVien.PassWord + "',Email='" + nhanVien.Email + "',Luong='" + nhanVien.Luong + "', SĐT = '" + nhanVien.SDT + "' where ID= '" + nhanVien.ID + "' ";
+                            query = "update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + nhanVien.NgaySinh + "',ChucVu = N'" + nhanVien.ChucVu + "',UserName='" + nhanVien.Username + "',Email='" + nhanVien.Email + "',Luong='" + nhanVien.Luong + "', SĐT = '" + nhanVien.SDT + "' where ID= '" + nhanVien.ID + "' ";
                     break;
                 default:
                     break;
@@ -41,6 +49,14 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.setdata(query);
             return data;
         }
+        public static List<NhanVien> locdulieu(string ten = "", string chucvu = "")
+        {
+            List<NhanVien> nhanViens = new List<NhanVien>();
+            foreach (DataRow i in data().Rows)
+                if ((i[1].ToString().ToUpper()).Contains(ten.ToUpper()) && (i[3].ToString().ToUpper()).Contains(chucvu.ToUpper()))
+                    nhanViens.Add(new NhanVien(i));
+            return nhanViens;
+        }    
         
     }
 }

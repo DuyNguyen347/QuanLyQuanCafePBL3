@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 namespace QuanLyQuanCafe.DAL
 {
@@ -17,10 +18,16 @@ namespace QuanLyQuanCafe.DAL
             switch (i)
             {
                 case 1:
-                    query = "insert into DanhMuc values('" + danhMuc.ID + "',N'" + danhMuc.Name + "')";
+                    int dem = 0;
+                    foreach (DataRow row in DataDanhMucDAL.data().Rows)
+                        if (row[0].ToString() == danhMuc.ID)
+                            dem++;
+                    if (dem == 0)
+                        query = "insert into DanhMuc values('" + danhMuc.ID + "',N'" + danhMuc.Name + "')";
                     break;
                 case 2:
                     query = "delete from DanhMuc where ID = '" + danhMuc.ID + "'";
+                    DataMonDAL.XoaTuDanhMuc(danhMuc.ID);
                     break;
                 case 3:
                     query = "update DanhMuc set Ten_Category = N'" + danhMuc.Name + "'where ID= '" + danhMuc.ID + "' ";
@@ -31,7 +38,14 @@ namespace QuanLyQuanCafe.DAL
             DataTable data;
             data = DataProvider.Instance.setdata(query);
             return data;
-
+        }
+        public static List<DanhMuc> locdulieu(string ten="")
+        {
+            List<DanhMuc> danhMucs = new List<DanhMuc>();
+            foreach (DataRow i in data().Rows)
+                if ((i[1].ToString().ToUpper()).Contains(ten.ToUpper()))
+                    danhMucs.Add(new DanhMuc(i));
+            return danhMucs;
         }
     }
 }

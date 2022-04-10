@@ -12,10 +12,11 @@ using System.Windows.Forms;
 
 namespace QuanLyQuanCafe
 {
-    public delegate void Login_show();
+    public delegate void Quit();
     public partial class Dashboard : Form
     {
-        public Login_show login_show;
+        public Quit login_show;
+        public Quit quit;
        
         public Dashboard()
         {
@@ -50,11 +51,8 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimNhanVien_TextChanged(object sender, EventArgs e)
         {
-            List<NhanVien> nhanViens = new List<NhanVien>();
-            foreach (DataRow i in DataNhanVienDAL.data().Rows)
-                if ((i[1].ToString().ToUpper()).Contains(TB_TimNhanVien.Text.ToUpper()))
-                    nhanViens.Add(new NhanVien(i));
-            DGV_NhanVien.DataSource = nhanViens;                    
+            DGV_NhanVien.DataSource = DataNhanVienDAL.locdulieu(TB_TimNhanVien.Text.Trim());
+            DGV_NhanVien.Columns.RemoveAt(5);
         }
         private void cbB_ChucVuNV_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -62,11 +60,8 @@ namespace QuanLyQuanCafe
                 DGV_NhanVien.DataSource = DataNhanVienDAL.data();
             else
             {
-                List<NhanVien> nhanViens = new List<NhanVien>();
-                foreach (DataRow i in DataNhanVienDAL.data().Rows)
-                    if ((i[3].ToString().ToUpper() == cbB_ChucVuNV.Text.ToUpper()))
-                        nhanViens.Add(new NhanVien(i));
-                DGV_NhanVien.DataSource = nhanViens;
+                DGV_NhanVien.DataSource = DataNhanVienDAL.locdulieu("",cbB_ChucVuNV.Text.Trim());
+                DGV_NhanVien.Columns.RemoveAt(5);
             }
         }
         private void BT_Refresh_Click_NhanVien(object sender, EventArgs e)
@@ -77,9 +72,8 @@ namespace QuanLyQuanCafe
             DGV_NhanVien.Columns[2].HeaderText = "Ngày sinh";
             DGV_NhanVien.Columns[3].HeaderText = "Chức vụ";
             DGV_NhanVien.Columns[4].HeaderText = "Tài khoản";
-            DGV_NhanVien.Columns[5].HeaderText = "Mật khẩu";
-            DGV_NhanVien.Columns[6].HeaderText = "Email";
-            DGV_NhanVien.Columns[7].HeaderText = "Lương";
+            DGV_NhanVien.Columns[5].HeaderText = "Email";
+            DGV_NhanVien.Columns[6].HeaderText = "Lương";
             load_cbb_chucvu();
             TB_TimNhanVien.Text = "";
             TB_TenNV.Text = "";
@@ -87,7 +81,6 @@ namespace QuanLyQuanCafe
             TB_emailNV.Text = "";
             TB_ChucVu.Text = "";
             TB_UserName.Text = "";
-            TB_PassWord.Text = "";
             TB_LuongNV.Text = "";
             TB_SDT.Text = "";
         }
@@ -98,33 +91,27 @@ namespace QuanLyQuanCafe
             DT_NSNV.Text = DGV_NhanVien.CurrentRow.Cells[2].Value.ToString().Trim();
             TB_ChucVu.Text = DGV_NhanVien.CurrentRow.Cells[3].Value.ToString().Trim();
             TB_UserName.Text = DGV_NhanVien.CurrentRow.Cells[4].Value.ToString().Trim();
-            TB_PassWord.Text = DGV_NhanVien.CurrentRow.Cells[5].Value.ToString().Trim();
-            TB_emailNV.Text = DGV_NhanVien.CurrentRow.Cells[6].Value.ToString().Trim();
+            TB_emailNV.Text = DGV_NhanVien.CurrentRow.Cells[5].Value.ToString().Trim();
+            TB_LuongNV.Text = DGV_NhanVien.CurrentRow.Cells[6].Value.ToString().Trim(); 
+            TB_SDT.Text = DGV_NhanVien.CurrentRow.Cells[7].Value.ToString().Trim();
+            
         }
         private void BT_Them1_Click(object sender, EventArgs e)
         {
-            int dem= 0;
-            foreach (DataRow i in DataNhanVienDAL.data().Rows)
-                if (i[0].ToString() == TB_IDNV.Text)
-                    dem++;
-            if(dem== 0)
-                    DGV_NhanVien.DataSource = DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(),TB_TenNV.Text,DT_NSNV.Text,
-                                                                  TB_ChucVu.Text,TB_UserName.Text,TB_PassWord.Text, TB_LuongNV.Text ,TB_emailNV.Text,TB_SDT.Text),1);
+            string password = ReloadAccount.sendcode(TB_emailNV.Text,"Mật khẩu của bạn");
+            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(),TB_TenNV.Text,DT_NSNV.Text,
+                                                   TB_ChucVu.Text,TB_UserName.Text,password, TB_LuongNV.Text ,TB_emailNV.Text,TB_SDT.Text),1);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DataNhanVienDAL.data().Rows.Count; i++)
-                if (DataNhanVienDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDNV.Text)
-                    DGV_NhanVien.DataSource = DataNhanVienDAL.capnhatNV(new NhanVien(DataNhanVienDAL.data().Rows[i]),2);
+            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(),"","","","","","","",""), 2) ;
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void BT_Sua1_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DataNhanVienDAL.data().Rows.Count; i++)
-                if (DataNhanVienDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDNV.Text)
-                    DGV_NhanVien.DataSource = DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                                  TB_ChucVu.Text, TB_UserName.Text, TB_PassWord.Text,TB_LuongNV.Text, TB_emailNV.Text,TB_SDT.Text),3);
+            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                                                   TB_ChucVu.Text, TB_UserName.Text,"",TB_LuongNV.Text, TB_emailNV.Text,TB_SDT.Text),3);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void cbB_ChucVu_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,11 +135,7 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimDM_TextChanged(object sender, EventArgs e)
         {
-            List<DanhMuc> danhMucs = new List<DanhMuc>();
-            foreach (DataRow i in DataDanhMucDAL.data().Rows)
-                if ((i[1].ToString().ToUpper()).Contains(TB_TimDM.Text.ToUpper()))
-                    danhMucs.Add(new DanhMuc(i));
-            DGV_DanhMuc.DataSource = danhMucs;
+            DGV_DanhMuc.DataSource = DataDanhMucDAL.locdulieu(TB_TimDM.Text.Trim());
             DGV_DanhMuc.Columns[0].HeaderText = "Mã DM";
             DGV_DanhMuc.Columns[1].HeaderText = "Tên danh mục";
         }
@@ -173,26 +156,17 @@ namespace QuanLyQuanCafe
         }
         private void BT_Them3_Click(object sender, EventArgs e)
         {
-            int dem = 0;
-            foreach (DataRow i in DataDanhMucDAL.data().Rows)
-                if (i[0].ToString() == TB_ID_DM.Text)
-                    dem++;
-            if (dem == 0)
-                DGV_DanhMuc.DataSource = DataDanhMucDAL.capnhatDM(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()),1);
+            DataDanhMucDAL.capnhatDM(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()),1);
             BT_refresh_DanhMuc_Click(new object(), new EventArgs());
         }
         private void BT_Xoa3_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DataDanhMucDAL.data().Rows.Count; i++)
-                if (DataDanhMucDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_ID_DM.Text)
-                    DGV_DanhMuc.DataSource = DataDanhMucDAL.capnhatDM(new DanhMuc(DataDanhMucDAL.data().Rows[i]), 2);
+            DataDanhMucDAL.capnhatDM(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(),""), 2);
             BT_refresh_DanhMuc_Click(new object(), new EventArgs());
         }
         private void BT_Sua3_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < DataDanhMucDAL.data().Rows.Count; i++)
-                if (DataDanhMucDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_ID_DM.Text.ToString().ToUpper())
-                DGV_DanhMuc.DataSource = DataDanhMucDAL.capnhatDM(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()), 3);
+            DataDanhMucDAL.capnhatDM(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()), 3);
             BT_refresh_DanhMuc_Click(new object(), new EventArgs());
         }
 
@@ -202,11 +176,7 @@ namespace QuanLyQuanCafe
         /// 
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
-            List<Mon> mons = new List<Mon>();
-            foreach (DataRow i in DataMonDAL.data().Rows)
-                if ((i[1].ToString().ToUpper()).Contains(TB_TimMon.Text.ToUpper()))
-                    mons.Add(new Mon(i));
-            DGV_Mon.DataSource = mons;
+            DGV_Mon.DataSource = DataMonDAL.locdulieu(TB_TimMon.Text.ToUpper());
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -214,11 +184,7 @@ namespace QuanLyQuanCafe
         }
         private void CBB_DanhMuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            List<Mon> mons = new List<Mon>();
-            foreach (DataRow i in DataMonDAL.data().Rows)
-                if ((i[2].ToString().ToUpper().Trim() == CBB_DanhMuc.Text.ToUpper()))
-                    mons.Add(new Mon(i));
-            DGV_Mon.DataSource = mons;
+            DGV_Mon.DataSource = DataMonDAL.locdulieu("",CBB_DanhMuc.Text.ToUpper().Trim());
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -247,26 +213,17 @@ namespace QuanLyQuanCafe
         }
         private void BT_Them2_Click(object sender, EventArgs e)
         {
-            int dem = 0;
-            foreach (DataRow i in DataMonDAL.data().Rows)
-                if (i[0].ToString() == TB_IDmon.Text)
-                    dem++;
-            if (dem == 0)
-                DGV_Mon.DataSource = DataMonDAL.capnhatMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),TB_DanhMuc.Text.ToString().Trim(),Convert.ToInt32(TB_Gia.Text)), 1);
+            DataMonDAL.capnhatMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),TB_DanhMuc.Text.ToString().Trim(),Convert.ToInt32(TB_Gia.Text)), 1);
             BT_Refresh2_Click(new object(), new EventArgs());
         }
         private void BT_Sua2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DataMonDAL.data().Rows.Count; i++)
-                if (DataMonDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDmon.Text.ToString().ToUpper())
-                    DGV_Mon.DataSource = DataMonDAL.capnhatMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(), TB_DanhMuc.Text.ToString().Trim(), Convert.ToInt32(TB_Gia.Text)), 3);
+            DataMonDAL.capnhatMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(), TB_DanhMuc.Text.ToString().Trim(), Convert.ToInt32(TB_Gia.Text)), 3);
             BT_Refresh2_Click(new object(), new EventArgs());
         }
         private void BT_Xoa2_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < DataMonDAL.data().Rows.Count; i++)
-                if (DataMonDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDmon.Text.ToString().ToUpper())
-                    DGV_Mon.DataSource = DataMonDAL.capnhatMon(new Mon(DataMonDAL.data().Rows[i]), 2);
+            DataMonDAL.capnhatMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(),"","",0), 2);
             BT_Refresh2_Click(new object(), new EventArgs());
         }
         private void CBB_ChonDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
@@ -290,11 +247,7 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimBan_TextChanged(object sender, EventArgs e)
         {
-            List<Table>tables = new List<Table>();
-            foreach (DataRow i in DataTableDAL.data().Rows)
-                if ((i[0].ToString().ToUpper()).Contains(TB_TimBan.Text.ToUpper()))
-                    tables.Add(new Table (i));
-            load_FLP_Table(tables);
+            load_FLP_Table(DataTableDAL.locdulieu(TB_TimBan.Text.Trim()));
         }
         private void cbB_TrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -303,11 +256,7 @@ namespace QuanLyQuanCafe
                 str = "True";
             else if (cbB_TrangThai.Text.Trim() == "Có người")
                 str = "False";
-            List<Table> tables = new List<Table>();
-            foreach (DataRow i in DataTableDAL.data().Rows)
-                if ((i[1].ToString().ToUpper().Trim() == str.ToUpper()))
-                    tables.Add(new Table(i));
-            load_FLP_Table(tables);
+            load_FLP_Table(DataTableDAL.locdulieu("",str));
         }
         private void BT_Refresh_Ban_Click(object sender, EventArgs e)
         {
@@ -322,12 +271,7 @@ namespace QuanLyQuanCafe
         }
         private void BT_Them4_Click(object sender, EventArgs e)
         {
-            int dem = 0;
-            foreach (DataRow i in DataTableDAL.data().Rows)
-                if (i[0].ToString() == TB_IDban.Text)
-                    dem++;
-            if (dem == 0)
-                DataTableDAL.capnhatBan(new Table(TB_IDban.Text.ToString().ToUpper().Trim(),Convert.ToBoolean("True")), 1);
+            DataTableDAL.capnhatBan(new Table(TB_IDban.Text.ToString().ToUpper().Trim(),Convert.ToBoolean("True")), 1);
             BT_Refresh_Ban_Click(new object(), new EventArgs());
         }
         private void BT_Xoa4_Click(object sender, EventArgs e)
@@ -336,9 +280,7 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Lỗi!");
             else
             {
-                for (int i = 0; i < DataTableDAL.data().Rows.Count; i++)
-                    if (DataTableDAL.data().Rows[i][0].ToString().ToUpper().Trim() == TB_IDban.Text.ToString().ToUpper().Trim())
-                        DataTableDAL.capnhatBan(new Table(DataTableDAL.data().Rows[i]), 2);
+                DataTableDAL.capnhatBan(new Table(TB_IDban.Text.Trim().ToUpper(),true), 2);
                 BT_Refresh_Ban_Click(new object(), new EventArgs());
             }
         }
@@ -403,6 +345,9 @@ namespace QuanLyQuanCafe
             
         }
 
-        
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
+        {
+            quit();
+        }
     }
 }
