@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ARSoft.Tools.Net, Version=2.2.2.0, Culture=neutral, PublicKeyToken=1940454cd762ec57, processorArchitecture=MSIL">
+      <HintPath>..\packages\ARSoft.Tools.Net.2.2.2\lib\net45\ARSoft.Tools.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EmailValidation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EmailValidator.NET.1.0.5\lib\net45\EmailValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Guna.UI2, Version=2.0.3.2, Culture=neutral, PublicKeyToken=4015e4865bda28a4, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.3.2\lib\net40\Guna.UI2.dll</HintPath>
     </Reference>
@@ -56,6 +65,7 @@
     <Compile Include="ChonBanForm.Designer.cs">
       <DependentUpon>ChonBanForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DAL\CheckEmail.cs" />
     <Compile Include="DAL\DataBillDAL.cs" />
     <Compile Include="DAL\DataDanhMucDAL.cs" />
     <Compile Include="DAL\DataDanhThuDAL.cs" />
@@ -73,6 +83,12 @@
     </Compile>
     <Compile Include="DTO\DanhMuc.cs" />
     <Compile Include="DTO\Mon.cs" />
+    <Compile Include="InforAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InforAccount.Designer.cs">
+      <DependentUpon>InforAccount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InforAccount.resx">
+      <DependentUpon>InforAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>

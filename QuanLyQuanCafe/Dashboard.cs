@@ -98,10 +98,24 @@ namespace QuanLyQuanCafe
         }
         private void BT_Them1_Click(object sender, EventArgs e)
         {
-            string password = ReloadAccount.sendcode(TB_emailNV.Text,"Mật khẩu của bạn");
-            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(),TB_TenNV.Text,DT_NSNV.Text,
-                                                   TB_ChucVu.Text,TB_UserName.Text,password, TB_LuongNV.Text ,TB_emailNV.Text,TB_SDT.Text),1);
-            BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+            if(TB_emailNV.Text == "")
+            {
+                DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                                                   TB_ChucVu.Text,"", "", TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
+                BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+            }
+            else
+            {
+                if (CheckEmail.Instance.Check(TB_emailNV.Text))
+                {
+                    string password = ReloadAccount.sendcode(TB_emailNV.Text, 1);
+                    DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                                                           TB_ChucVu.Text, TB_UserName.Text, password, TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
+                    BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+                }
+                else MessageBox.Show("Email không tồn tại");
+            }
+            
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
         {

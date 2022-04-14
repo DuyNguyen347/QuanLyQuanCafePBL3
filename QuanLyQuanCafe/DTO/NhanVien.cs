@@ -23,7 +23,8 @@ namespace QuanLyQuanCafe
         public double Luong { get; set; }
         public string Email { get; set; }
         public string SDT { get; set; }
-        public NhanVien() { }
+        public NhanVien() {
+        }
         public NhanVien(string iD,string name,string ngaysinh, string chucvu,string username,string password,string luong,string email,string sdt)
         {
             ID = iD;

@@ -84,6 +84,10 @@ namespace QuanLyQuanCafe
                 {
 
                     Seller sl = new Seller();
+                    NhanVien nv = DataNhanVienDAL.Instance.getNVbyUserNameAndPassWork(tbUserName.Text,tbPassword.Text);
+                    sl.loadInforNV(nv);
+                    string s = DataNhanVienDAL.Instance.getNameNV(tbUserName.Text, tbPassword.Text);
+                    sl.setNameBtAccount(s);
                     sl.Show();
                     sl.login_Show = new Quit(this.Show);
                     sl.quit = new Quit(this.Close);

@@ -1,12 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace QuanLyQuanCafe.DAL
 {
-    internal class DataNhanVienDAL
+    public class DataNhanVienDAL
     {
 
-        
+        private static DataNhanVienDAL _Instance;
+
+        public static DataNhanVienDAL Instance {
+            get
+            {
+                if (_Instance == null)
+                {
+                    _Instance = new DataNhanVienDAL();
+                }    
+                return _Instance;
+            }
+            set => _Instance = value; }
+
         public static DataTable data()
         {
             DataTable data;
@@ -57,6 +71,30 @@ namespace QuanLyQuanCafe.DAL
                     nhanViens.Add(new NhanVien(i));
             return nhanViens;
         }    
+        public NhanVien getNVbyUserNameAndPassWork(string username,string pass)
+        {
+            NhanVien nhanVien = new NhanVien();
+            string query = "select * from Nhanvien where UserName = '" + username + "' and PassWord = '" + pass + "'";
+            DataTable data = DataProvider.Instance.GetRecords(query);
+            nhanVien.ID = data.Rows[0]["ID"].ToString();
+            nhanVien.Name = data.Rows[0]["Name"].ToString();
+            nhanVien.NgaySinh = data.Rows[0]["NgaySinh"].ToString();
+            nhanVien.ChucVu = data.Rows[0]["ChucVu"].ToString();
+            nhanVien.Username = data.Rows[0]["UserName"].ToString();
+            nhanVien.PassWord = data.Rows[0]["PassWord"].ToString().Replace(" ","");
+            nhanVien.Email = data.Rows[0]["Email"].ToString();
+            nhanVien.Luong = Convert.ToDouble(data.Rows[0]["Luong"].ToString());
+            nhanVien.SDT = data.Rows[0]["SĐT"].ToString();
+            return nhanVien;
+        }
+        public string getNameNV(string username,string pass)
+        {
+            string name;
+            string query = "select * from Nhanvien where UserName = '" + username + "' and PassWord = '" + pass + "'";
+            DataTable data = DataProvider.Instance.GetRecords(query);
+            name = data.Rows[0]["Name"].ToString();
+            return name;
+        }
         
     }
 }

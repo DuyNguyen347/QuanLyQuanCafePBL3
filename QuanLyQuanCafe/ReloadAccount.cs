@@ -32,7 +32,7 @@ namespace QuanLyQuanCafe
                     tbCode.Visible = true;
                     btOk.Visible = true;
                     btCancel.Visible = true;
-                    s = sendcode(tbEmail.Text);
+                    s = sendcode(tbEmail.Text,0);
                     if (s!=null)
                         lbInfor.Visible = false;
                 }
@@ -73,10 +73,13 @@ namespace QuanLyQuanCafe
                 }
             }
         }
-        public static string sendcode(string gmail,string a = "Mã CODE lấy lại tài khoản")
+        public static string sendcode(string gmail,int i)
         {
+            string a;
+            if (i == 0) a = "Mã Code lấy tài khoản";
+            else a = "Mật khẩu của bạn là: ";
             Random generator = new Random();
-            string str = generator.Next(0, 1000000).ToString("D6");
+            string str = generator.Next(0, 100000).ToString("D6");
             if (ReloadAccountDAL.Instance.Send(gmail, a , str))
             {
                 MessageBox.Show("Mã Code vừa được gửi đến Mail của bạn!");

@@ -21,6 +21,8 @@ namespace QuanLyQuanCafe
         int n = 0;
         int[] count;
         string[] food;
+        NhanVien nv = new NhanVien();
+        
 
         public Seller()
         {
@@ -31,6 +33,8 @@ namespace QuanLyQuanCafe
             count = new int[100];
             food = new string[100];
             Set_Count();
+            //setNameBtAccount();
+            btAccount.Text = nv.Name;
         }
         
         private void Add_Column()
@@ -255,6 +259,25 @@ namespace QuanLyQuanCafe
             quit();
         }
 
-        
+        private void btAccount_Click(object sender, EventArgs e)
+        {
+            InforAccount i = new InforAccount(nv);
+            i.Show();
+        }
+        public void loadInforNV(NhanVien s)
+        {
+            nv.Name = s.Name;
+            nv.NgaySinh = s.NgaySinh;
+            nv.ChucVu = s.ChucVu;
+            nv.SDT = s.SDT;
+            nv.Email = s.Email;
+            nv.Luong = s.Luong;
+            nv.Username = s.Username;
+            nv.PassWord = s.PassWord;
+        }
+        public void setNameBtAccount(string s)
+        {
+            btAccount.Text = s;
+        }
     }
 }
