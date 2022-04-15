@@ -28,34 +28,33 @@ namespace QuanLyQuanCafe.DAL
             bool check = false;
             EmailValidator emailValidator = new EmailValidator();
             EmailValidationResult result;
-            if (!emailValidator.Validate(mail, out result))
+            //if (!emailValidator.Validate(mail, out result))
+            //{
+            //    //Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
+            //    MessageBox.Show("Không thể kiểm tra email");
+            //}
+            emailValidator.Validate(mail, out result);
+            switch (result)
             {
-                //Console.WriteLine("Unable to check email"); // no internet connection or mailserver is down / busy
-                MessageBox.Show("Không thể kiểm tra email");
+                case EmailValidationResult.OK:
+                    //MessageBox.Show("Email tồn tại");
+                    check = true;
+                    break;
+
+                case EmailValidationResult.MailboxUnavailable:
+                    break;
+
+                    //case EmailValidationResult.MailboxStorageExceeded:
+                    //    MessageBox.Show("Mailbox overflow");
+                    //    //Console.WriteLine("Mailbox overflow");
+                    //    break;
+
+                    //case EmailValidationResult.NoMailForDomain:
+                    //    MessageBox.Show("Emails are not configured for domain(no MX records)");
+                    //    //Console.WriteLine("Emails are not configured for domain (no MX records)");
+                    //    break;
             }
-            else
-            {
-                switch (result)
-                {
-                    case EmailValidationResult.OK:
-                        //MessageBox.Show("Email tồn tại");
-                        check = true;
-                        break;
-
-                    case EmailValidationResult.MailboxUnavailable:
-                        break;
-
-                        //case EmailValidationResult.MailboxStorageExceeded:
-                        //    MessageBox.Show("Mailbox overflow");
-                        //    //Console.WriteLine("Mailbox overflow");
-                        //    break;
-
-                        //case EmailValidationResult.NoMailForDomain:
-                        //    MessageBox.Show("Emails are not configured for domain(no MX records)");
-                        //    //Console.WriteLine("Emails are not configured for domain (no MX records)");
-                        //    break;
-                }
-            }
+            
             return check;
         }
     }

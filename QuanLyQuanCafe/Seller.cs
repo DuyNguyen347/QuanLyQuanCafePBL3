@@ -62,7 +62,7 @@ namespace QuanLyQuanCafe
 
         private void Seller_Load(object sender, EventArgs e)
         {
-           
+            DGV_Mon_Load();
             load_cbBchonBan();
             CB_Timdanhmuc_Load();
         }
@@ -81,10 +81,7 @@ namespace QuanLyQuanCafe
             
         }
 
-        private void BT_Huy_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void BT_Ok_Click(object sender, EventArgs e)
         {
@@ -93,7 +90,40 @@ namespace QuanLyQuanCafe
 
         private void BT_Sửa_Click(object sender, EventArgs e)
         {
+            DGV_DaChon.Rows[indexRow].Selected = true;
+            int d = Convert.ToInt32(Numric_Soluong.Value.ToString());
+            if (d == 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["Mã món"] == DGV_DaChon.Rows[indexRow].Cells["Mã món"].Value.ToString())
+                    {
+                        dt.Rows.Remove(dr);
+                        break;
+                    }
+                }
+                DGV_DaChon.DataSource = dt;
+                Tinh_tong_tien();
+            }
+            else
+            {
+                string ID = DGV_DaChon.Rows[indexRow].Cells["Mã món"].FormattedValue.ToString();
+                string name = DGV_DaChon.Rows[indexRow].Cells["Tên món"].FormattedValue.ToString();
+                string DM = DGV_DaChon.Rows[indexRow].Cells["Danh mục"].FormattedValue.ToString();
+                string gia = DGV_DaChon.Rows[indexRow].Cells["Giá"].FormattedValue.ToString();
 
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["Mã món"] == DGV_DaChon.Rows[indexRow].Cells["Mã món"].Value.ToString())
+                    {
+                        dt.Rows.Remove(dr);
+                        dt.Rows.Add(ID, name, DM, gia, d);
+                        break;
+                    }
+                }
+                DGV_DaChon.DataSource = dt;
+                Tinh_tong_tien();
+            }
         }
 
         private void BT_refreshMon_Click(object sender, EventArgs e)
@@ -127,7 +157,7 @@ namespace QuanLyQuanCafe
         {
             List<Mon> mon_an = new List<Mon>();
             foreach (DataRow i in DataMonDAL.data().Rows)
-                if ((i[2].ToString().ToUpper().Trim() == CB_Timdanhmuc.Text.ToUpper()))
+                if ((i[2].ToString().ToUpper().Trim() == Cbb_Danhmuc.Text.ToUpper()))
                     mon_an.Add(new Mon(i));
 
             DGV_Mon.DataSource = mon_an;
@@ -148,7 +178,7 @@ namespace QuanLyQuanCafe
         {
             foreach (DataRow i in DataDanhMucDAL.data().Rows)
             {
-                CB_Timdanhmuc.Items.Add(i[1].ToString().Trim());                
+                Cbb_Danhmuc.Items.Add(i[1].ToString().Trim());                
             }
         }              
         
@@ -207,8 +237,8 @@ namespace QuanLyQuanCafe
         }
         private void Numric_Soluong_ValueChanged(object sender, EventArgs e)
         {
-            DGV_DaChon.CurrentRow.Cells["Số lượng"].Value = Numric_Soluong.Value;
-            Tinh_tong_tien();
+            /*DGV_DaChon.CurrentRow.Cells["Số lượng"].Value = Numric_Soluong.Value;
+            Tinh_tong_tien();*/
         }
         void load_cbBchonBan()
         {
@@ -231,7 +261,7 @@ namespace QuanLyQuanCafe
 
         private void guna2CustomGradientPanel1_Paint(object sender, PaintEventArgs e)
         {
-            DGV_Mon_Load();
+            
             /*DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -243,8 +273,10 @@ namespace QuanLyQuanCafe
 
         }
 
+        int indexRow;
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            indexRow = e.RowIndex;
             if (DGV_DaChon.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null)
             {
                 DGV_DaChon.CurrentRow.Selected = true;
@@ -278,6 +310,19 @@ namespace QuanLyQuanCafe
         public void setNameBtAccount(string s)
         {
             btAccount.Text = s;
+        }
+
+        
+
+        private void Cbb_Danhmuc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Mon> mon_an = new List<Mon>();
+            foreach (DataRow i in DataMonDAL.data().Rows)
+                if ((i[2].ToString().ToUpper().Trim() == Cbb_Danhmuc.Text.ToUpper()))
+                    mon_an.Add(new Mon(i));
+
+            DGV_Mon.DataSource = mon_an;
+            Change_HeaderText();
         }
     }
 }
