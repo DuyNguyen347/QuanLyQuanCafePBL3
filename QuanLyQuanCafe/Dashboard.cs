@@ -113,9 +113,8 @@ namespace QuanLyQuanCafe
                                                            TB_ChucVu.Text, TB_UserName.Text, password, TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                 }
-                else MessageBox.Show("Email không tồn tại");
+                else MessageBox.Show("Có lỗi trong quá trình kiểm tra email. Vui lòng thực hiện lại!!");
             }
-            
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
         {

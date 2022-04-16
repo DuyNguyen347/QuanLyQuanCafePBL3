@@ -54,7 +54,6 @@ namespace QuanLyQuanCafe.DAL
                     //    //Console.WriteLine("Emails are not configured for domain (no MX records)");
                     //    break;
             }
-            
             return check;
         }
     }

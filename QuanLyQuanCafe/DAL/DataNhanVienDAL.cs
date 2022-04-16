@@ -95,6 +95,13 @@ namespace QuanLyQuanCafe.DAL
             name = data.Rows[0]["Name"].ToString();
             return name;
         }
-        
+        public string getPassNV(string id)
+        {
+            string pass;
+            string query = "select * from Nhanvien where ID = '" + id +  "'";
+            DataTable data = DataProvider.Instance.GetRecords(query);
+            pass = data.Rows[0]["PassWord"].ToString();
+            return pass;
+        }
     }
 }

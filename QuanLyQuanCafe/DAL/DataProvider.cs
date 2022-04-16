@@ -29,7 +29,10 @@ namespace QuanLyQuanCafe.DAL
         }
         public DataProvider()
         {
-            s = @"Data Source=DESKTOP-G3DN301;Initial Catalog=QL_cafe2;Integrated Security=True";
+            // ConnectionString of Tinh 
+            //s = @"Data Source=DESKTOP-G3DN301;Initial Catalog=QL_cafe2;Integrated Security=True";
+            // ConnectionString of Duy
+            s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QL_cafe2;Integrated Security=True";
         }
         public bool executeDB(string query, object[] parameter = null)
         {

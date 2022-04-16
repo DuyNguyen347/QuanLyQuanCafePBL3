@@ -82,7 +82,7 @@ namespace QuanLyQuanCafe
             string str = generator.Next(0, 100000).ToString("D6");
             if (ReloadAccountDAL.Instance.Send(gmail, a , str))
             {
-                MessageBox.Show("Mã Code vừa được gửi đến Mail của bạn!");
+                MessageBox.Show("Mã Code vừa được gửi đến Mail vừa nhập!");
             }
             else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
             return str;

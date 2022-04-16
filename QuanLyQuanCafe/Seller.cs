@@ -29,6 +29,8 @@ namespace QuanLyQuanCafe
             dt = new DataTable();
             Add_Column();
             btAccount.Text = nv.Name;
+            TB_nhanvien.Text = nv.Name;
+            TB_nhanvien.Enabled = false;
         }
 
         
@@ -86,7 +88,7 @@ namespace QuanLyQuanCafe
                     {
                         TB_IDban.Text = i.Id;
                         TB_Checkin.Text = DateTime.Now.ToString();
-                        TB_nhanvien.Text = nv.ID;
+                        TB_nhanvien.Text = nv.Name;
                     }
                     else
                     {
@@ -116,7 +118,20 @@ namespace QuanLyQuanCafe
                 new DataColumn {ColumnName = "Giá", DataType = typeof(string) },
                 new DataColumn {ColumnName = "Số lượng", DataType = typeof(int)},
            });
+            DataGridViewButtonColumn bt = new DataGridViewButtonColumn();
+            bt.HeaderText = "Xoá";
+            bt.Name = "btXoa";
+            bt.Text = "X";
+            bt.UseColumnTextForButtonValue = true;
             DGV_DaChon.DataSource = dt;
+            DGV_DaChon.Columns.Add(bt);
+            DGV_DaChon.Columns[0].Width = 30;
+            DGV_DaChon.Columns[1].Width = 40;
+            DGV_DaChon.Columns[2].Width = 40;
+            DGV_DaChon.Columns[3].Width = 30;
+            DGV_DaChon.Columns[4].Width = 25;
+            DGV_DaChon.Columns[5].Width = 35;
+            DGV_DaChon.ColumnHeadersHeight = 60;
         }
 
         private void Change_HeaderText()
@@ -206,7 +221,7 @@ namespace QuanLyQuanCafe
                 if (dt.Rows[i][0].ToString() == ID)
                 {
                     dem++;
-                    dt.Rows[i][4] = Convert.ToInt32(dt.Rows[i][4].ToString()) + 1;
+                    dt.Rows[i]["Số lượng"] = Convert.ToInt32(dt.Rows[i]["Số lượng"].ToString()) + 1;
                     break;
                 }
             }
@@ -220,19 +235,25 @@ namespace QuanLyQuanCafe
                 else
                     DGV_DaChon.Rows[i].Selected = false;
             }
-            loadnumric(DGV_DaChon.SelectedRows[0].Cells[0].Value.ToString());
+            //loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
             Tinh_tong_tien();
         }
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            loadnumric(DGV_DaChon.SelectedRows[0].Cells[0].Value.ToString());
+            if(DGV_DaChon.Columns[e.ColumnIndex].Name == "btXoa")
+            {
+                dt.Rows.RemoveAt(e.RowIndex);
+                dt.AcceptChanges();
+                Tinh_tong_tien();
+            }
+            else loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
         }
         #endregion
         
         #region Tĩnh numric
         void loadnumric(string id)
         {
-            Numric_Soluong.Value = Convert.ToInt32(DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value.ToString()); ;
+            Numric_Soluong.Value = Convert.ToInt32(DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value.ToString());
         }
 
         private void Numric_Soluong_ValueChanged(object sender, EventArgs e)
@@ -244,7 +265,7 @@ namespace QuanLyQuanCafe
                     DGV_DaChon.Rows.Remove(DGV_DaChon.SelectedRows[0]);
                 }
                 else
-                    DGV_DaChon.SelectedRows[0].Cells[4].Value = Numric_Soluong.Value;
+                    DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value = Numric_Soluong.Value;
                 Tinh_tong_tien();
             }
             catch (Exception ex)
@@ -262,6 +283,7 @@ namespace QuanLyQuanCafe
         }
         public void loadInforNV(NhanVien s)
         {
+            nv.ID = s.ID;
             nv.Name = s.Name;
             nv.NgaySinh = s.NgaySinh;
             nv.ChucVu = s.ChucVu;
@@ -290,8 +312,9 @@ namespace QuanLyQuanCafe
             this.Close();
             //quit();
         }
-        #endregion
 
+
+        #endregion
 
     }
 }

@@ -29,6 +29,12 @@ namespace QuanLyQuanCafe
             tbEmail.Text = nv.Email;
             tbSDT.Text = nv.SDT;
             tbUserName.Text = nv.Username;
+            tbName.Enabled = false;
+            tbNgaySinh.Enabled = false;
+            tbLuong.Enabled = false ;
+            tbChucVu.Enabled = false ;
+            tbEmail.Enabled = false ;
+            tbSDT.Enabled = false ;
         }
 
         private void btUpdate_Click(object sender, EventArgs e)
@@ -43,7 +49,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                    if(nv.PassWord.ToString() != oldpass)
+                    if(oldpass != DataNhanVienDAL.Instance.getPassNV(nv.ID).Replace(" ",""))
                     { 
                         MessageBox.Show("Vui lòng nhập đúng  mật khẩu cũ","Xác nhận mật khẩu",MessageBoxButtons.OK,MessageBoxIcon.Warning );
                     }
