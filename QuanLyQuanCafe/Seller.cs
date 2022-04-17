@@ -12,15 +12,18 @@ using QuanLyQuanCafe.DAL;
 
 namespace QuanLyQuanCafe
 {
-
     public partial class Seller : Form
     {
         public Quit login_Show;
         public Quit quit;
-        DataTable dt;
+        DataTable dt;        
         int n = 0;
         NhanVien nv = new NhanVien();
 
+        int sl_Table = 0;
+        String[] ID_tab;
+        DataTable[] d_tab;
+        int vt_tab = 0;
 
         public Seller()
         {
@@ -28,11 +31,47 @@ namespace QuanLyQuanCafe
 
             dt = new DataTable();
             Add_Column();
+            
             btAccount.Text = nv.Name;
-            TB_nhanvien.Text = nv.Name;
-            TB_nhanvien.Enabled = false;
+            Find_SL_Tables(DataTableDAL.locdulieu());
+            ID_tab = new String[sl_Table];
+            d_tab = new DataTable[sl_Table];
+            Add_DataTable_Tables();
+            Add_Id_Tables(DataTableDAL.locdulieu());
         }
 
+        private void Add_DataTable_Tables()
+        {            
+            for (int i = 0; i < sl_Table; i++)
+            {
+                d_tab[i] = new DataTable();
+                d_tab[i].Columns.AddRange(new DataColumn[]
+                {
+                new DataColumn {ColumnName = "Mã món", DataType = typeof(string)},
+                new DataColumn {ColumnName = "Tên món", DataType = typeof(string)},
+                new DataColumn {ColumnName = "Danh mục", DataType = typeof(string )},
+                new DataColumn {ColumnName = "Giá", DataType = typeof(string) },
+                new DataColumn {ColumnName = "Số lượng", DataType = typeof(int)},
+                });
+            }            
+        }
+        private void Find_SL_Tables(List <Table> tables)
+        {
+            foreach (Table i in tables)
+            {
+                sl_Table++;               
+            }                        
+        }
+
+        private void Add_Id_Tables(List <Table> tables) 
+        {
+            int n = 0;
+            foreach (Table i in tables)
+            {
+                ID_tab[n] = i.Id;
+                n++;
+            }
+        }
         
         private void Seller_Load(object sender, EventArgs e)
         {
@@ -57,7 +96,7 @@ namespace QuanLyQuanCafe
         {
             FLP_table.Controls.Clear();
             foreach (Table i in tables)
-            {
+            {                                
                 Button button = new Button();
                 button.Text = i.Id + "\n" + (i.Status ? "Trống" : "Có người");
                 button.BackColor = System.Drawing.Color.SpringGreen;
@@ -88,20 +127,30 @@ namespace QuanLyQuanCafe
                     {
                         TB_IDban.Text = i.Id;
                         TB_Checkin.Text = DateTime.Now.ToString();
-                        TB_nhanvien.Text = nv.Name;
+                        TB_nhanvien.Text = nv.ID;
                     }
                     else
                     {
                         //// LoadDatabill chưa làm
                     }    
                 }
-            if (currenttable != "" && currenttable != TB_IDban.Text)
+            /*if (currenttable != "" && currenttable != TB_IDban.Text)
             {
                 dt.Clear();
                 DGV_DaChon.DataSource = dt;
-            }
+            }*/
             currenttable = TB_IDban.Text;
 
+            Search_vt_table(TB_IDban.Text);            
+            DGV_DaChon.DataSource = d_tab[vt_tab];
+            Tinh_tong_tien();
+        }
+
+        private void Search_vt_table(String ID)
+        {
+            for (int i=0; i<sl_Table; i++)            
+                if (ID_tab[i] == ID)
+                    vt_tab = i;               
         }
 
         #endregion
@@ -109,29 +158,16 @@ namespace QuanLyQuanCafe
         #region Long tạp nham
 
         private void Add_Column()
-        {
+        {            
             dt.Columns.AddRange(new DataColumn[]
-           {
+                {
                 new DataColumn {ColumnName = "Mã món", DataType = typeof(string)},
                 new DataColumn {ColumnName = "Tên món", DataType = typeof(string)},
                 new DataColumn {ColumnName = "Danh mục", DataType = typeof(string )},
                 new DataColumn {ColumnName = "Giá", DataType = typeof(string) },
                 new DataColumn {ColumnName = "Số lượng", DataType = typeof(int)},
-           });
-            DataGridViewButtonColumn bt = new DataGridViewButtonColumn();
-            bt.HeaderText = "Xoá";
-            bt.Name = "btXoa";
-            bt.Text = "X";
-            bt.UseColumnTextForButtonValue = true;
+                });                       
             DGV_DaChon.DataSource = dt;
-            DGV_DaChon.Columns.Add(bt);
-            DGV_DaChon.Columns[0].Width = 30;
-            DGV_DaChon.Columns[1].Width = 40;
-            DGV_DaChon.Columns[2].Width = 40;
-            DGV_DaChon.Columns[3].Width = 30;
-            DGV_DaChon.Columns[4].Width = 25;
-            DGV_DaChon.Columns[5].Width = 35;
-            DGV_DaChon.ColumnHeadersHeight = 60;
         }
 
         private void Change_HeaderText()
@@ -143,6 +179,7 @@ namespace QuanLyQuanCafe
         }
         private void Tinh_tong_tien()
         {
+            dt = d_tab[vt_tab];
             int total_money = 0;
             foreach (DataRow dr in dt.Rows)
                 total_money += Convert.ToInt32(dr["GIá"].ToString()) * Convert.ToInt32(dr["Số lượng"].ToString());
@@ -210,7 +247,8 @@ namespace QuanLyQuanCafe
         
         #region Long CellContentClick
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        {            
+            dt = d_tab[vt_tab];            
             string ID = DGV_Mon.Rows[e.RowIndex].Cells["ID"].FormattedValue.ToString();
             string name = DGV_Mon.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
             string DM = DGV_Mon.Rows[e.RowIndex].Cells["DanhMuc"].FormattedValue.ToString();
@@ -221,13 +259,14 @@ namespace QuanLyQuanCafe
                 if (dt.Rows[i][0].ToString() == ID)
                 {
                     dem++;
-                    dt.Rows[i]["Số lượng"] = Convert.ToInt32(dt.Rows[i]["Số lượng"].ToString()) + 1;
+                    dt.Rows[i][4] = Convert.ToInt32(dt.Rows[i][4].ToString()) + 1;
                     break;
                 }
             }
-            if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);
-
+            if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);            
             DGV_DaChon.DataSource = dt;
+            d_tab[vt_tab] = dt;
+
             for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
             {
                 if (DGV_DaChon.Rows[i].Cells[0].Value == DGV_Mon.CurrentRow.Cells[0].Value)
@@ -235,25 +274,19 @@ namespace QuanLyQuanCafe
                 else
                     DGV_DaChon.Rows[i].Selected = false;
             }
-            //loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
-            Tinh_tong_tien();
+            loadnumric(DGV_DaChon.SelectedRows[0].Cells[0].Value.ToString());
+            Tinh_tong_tien();                        
         }
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(DGV_DaChon.Columns[e.ColumnIndex].Name == "btXoa")
-            {
-                dt.Rows.RemoveAt(e.RowIndex);
-                dt.AcceptChanges();
-                Tinh_tong_tien();
-            }
-            else loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
+            loadnumric(DGV_DaChon.SelectedRows[0].Cells[0].Value.ToString());
         }
         #endregion
         
         #region Tĩnh numric
         void loadnumric(string id)
         {
-            Numric_Soluong.Value = Convert.ToInt32(DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value.ToString());
+            Numric_Soluong.Value = Convert.ToInt32(DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value.ToString()); ;
         }
 
         private void Numric_Soluong_ValueChanged(object sender, EventArgs e)
@@ -265,7 +298,7 @@ namespace QuanLyQuanCafe
                     DGV_DaChon.Rows.Remove(DGV_DaChon.SelectedRows[0]);
                 }
                 else
-                    DGV_DaChon.SelectedRows[0].Cells["Số lượng"].Value = Numric_Soluong.Value;
+                    DGV_DaChon.SelectedRows[0].Cells[4].Value = Numric_Soluong.Value;
                 Tinh_tong_tien();
             }
             catch (Exception ex)
@@ -283,7 +316,6 @@ namespace QuanLyQuanCafe
         }
         public void loadInforNV(NhanVien s)
         {
-            nv.ID = s.ID;
             nv.Name = s.Name;
             nv.NgaySinh = s.NgaySinh;
             nv.ChucVu = s.ChucVu;
@@ -313,8 +345,11 @@ namespace QuanLyQuanCafe
             //quit();
         }
 
-
         #endregion
 
+        private void FLP_table_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
