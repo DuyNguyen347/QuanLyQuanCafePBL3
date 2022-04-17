@@ -459,7 +459,7 @@
             this.DGV_BILL.RowHeadersWidth = 51;
             this.DGV_BILL.RowTemplate.Height = 25;
             this.DGV_BILL.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_BILL.Size = new System.Drawing.Size(340, 151);
+            this.DGV_BILL.Size = new System.Drawing.Size(340, 134);
             this.DGV_BILL.TabIndex = 1007;
             this.DGV_BILL.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DGV_BILL.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -582,14 +582,14 @@
             this.DGV_DaChon.DefaultCellStyle = dataGridViewCellStyle9;
             this.DGV_DaChon.EnableHeadersVisualStyles = false;
             this.DGV_DaChon.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.DGV_DaChon.Location = new System.Drawing.Point(645, 173);
+            this.DGV_DaChon.Location = new System.Drawing.Point(642, 147);
             this.DGV_DaChon.Name = "DGV_DaChon";
             this.DGV_DaChon.ReadOnly = true;
             this.DGV_DaChon.RowHeadersVisible = false;
             this.DGV_DaChon.RowHeadersWidth = 51;
             this.DGV_DaChon.RowTemplate.Height = 25;
             this.DGV_DaChon.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_DaChon.Size = new System.Drawing.Size(340, 237);
+            this.DGV_DaChon.Size = new System.Drawing.Size(340, 264);
             this.DGV_DaChon.TabIndex = 1005;
             this.DGV_DaChon.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DGV_DaChon.ThemeStyle.AlternatingRowsStyle.Font = null;

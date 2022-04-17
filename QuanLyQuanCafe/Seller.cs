@@ -228,14 +228,14 @@ namespace QuanLyQuanCafe
             if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);
 
             DGV_DaChon.DataSource = dt;
-            for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
-            {
-                if (DGV_DaChon.Rows[i].Cells[0].Value == DGV_Mon.CurrentRow.Cells[0].Value)
-                    DGV_DaChon.Rows[i].Selected = true;
-                else
-                    DGV_DaChon.Rows[i].Selected = false;
-            }
-            //loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
+            //for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
+            //{
+            //    if (DGV_DaChon.Rows[i].Cells[0].Value == DGV_Mon.CurrentRow.Cells[0].Value)
+            //        DGV_DaChon.Rows[i].Selected = true;
+            //    else
+            //        DGV_DaChon.Rows[i].Selected = false;
+            //}
+            loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
             Tinh_tong_tien();
         }
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
