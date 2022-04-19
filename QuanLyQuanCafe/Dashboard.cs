@@ -339,7 +339,7 @@ namespace QuanLyQuanCafe
         }
         private void BT_List_Bill_Click(object sender, EventArgs e)
         {
-            DGV_Bill.DataSource = DataBillDAL.data(DT_Bill_Begin.Value, DT_Bill_End.Value);
+            DGV_Bill.DataSource = DataBillDAL.locdata(DT_Bill_Begin.Value, DT_Bill_End.Value);
             DGV_Bill.Columns[0].HeaderText = "Mã hóa đơn";
             DGV_Bill.Columns[1].HeaderText = "Thời gian vào";
             DGV_Bill.Columns[2].HeaderText = "Thời gian ra";

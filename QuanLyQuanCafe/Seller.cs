@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyQuanCafe.DAL;
-
+using QuanLyQuanCafe.DTO;
 namespace QuanLyQuanCafe
 {
     public partial class Seller : Form
@@ -17,68 +17,23 @@ namespace QuanLyQuanCafe
         public Quit login_Show;
         public Quit quit;
         DataTable dt;        
-        int n = 0;
         NhanVien nv = new NhanVien();
-
-        int sl_Table = 0;
-        String[] ID_tab;
-        DataTable[] d_tab;
-        int vt_tab = 0;
-
         public Seller()
         {
             InitializeComponent();
 
             dt = new DataTable();
             Add_Column();
-            
-            btAccount.Text = nv.Name;
-            Find_SL_Tables(DataTableDAL.locdulieu());
-            ID_tab = new String[sl_Table];
-            d_tab = new DataTable[sl_Table];
-            Add_DataTable_Tables();
-            Add_Id_Tables(DataTableDAL.locdulieu());
+          
         }
 
-        private void Add_DataTable_Tables()
-        {            
-            for (int i = 0; i < sl_Table; i++)
-            {
-                d_tab[i] = new DataTable();
-                d_tab[i].Columns.AddRange(new DataColumn[]
-                {
-                new DataColumn {ColumnName = "Mã món", DataType = typeof(string)},
-                new DataColumn {ColumnName = "Tên món", DataType = typeof(string)},
-                new DataColumn {ColumnName = "Danh mục", DataType = typeof(string )},
-                new DataColumn {ColumnName = "Giá", DataType = typeof(string) },
-                new DataColumn {ColumnName = "Số lượng", DataType = typeof(int)},
-                });
-            }            
-        }
-        private void Find_SL_Tables(List <Table> tables)
-        {
-            foreach (Table i in tables)
-            {
-                sl_Table++;               
-            }                        
-        }
-
-        private void Add_Id_Tables(List <Table> tables) 
-        {
-            int n = 0;
-            foreach (Table i in tables)
-            {
-                ID_tab[n] = i.Id;
-                n++;
-            }
-        }
-        
         private void Seller_Load(object sender, EventArgs e)
         {
             DGV_Mon_Load();
             load_cbBchonBan();
             CB_Timdanhmuc_Load();
             load_FLP_Table(DataTableDAL.locdulieu());
+            TB_nhanvien.Text = nv.ID + " ( " + nv.Name + " )";
         }
         #region Tĩnh bàn
         private void cbB_ChonBan_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,6 +41,11 @@ namespace QuanLyQuanCafe
             if (cbB_ChonBan.SelectedItem.ToString() == "Tất cả")
             {
                 load_FLP_Table(DataTableDAL.locdulieu());
+                TB_IDban.Clear();
+                TB_Checkin.Clear();
+                TB_IDhoadon.Clear();
+                TB_nhanvien.Clear();
+                currenttable = "";
             }
             else if(cbB_ChonBan.SelectedItem.ToString() == "Trống")
                 load_FLP_Table(DataTableDAL.locdulieu("","True"));
@@ -96,7 +56,7 @@ namespace QuanLyQuanCafe
         {
             FLP_table.Controls.Clear();
             foreach (Table i in tables)
-            {                                
+            {
                 Button button = new Button();
                 button.Text = i.Id + "\n" + (i.Status ? "Trống" : "Có người");
                 button.BackColor = System.Drawing.Color.SpringGreen;
@@ -126,38 +86,28 @@ namespace QuanLyQuanCafe
                     if (i.Status)
                     {
                         TB_IDban.Text = i.Id;
-                        TB_Checkin.Text = DateTime.Now.ToString();
-                        TB_nhanvien.Text = nv.Name;
+                        if (currenttable.Trim() =="" || TB_IDban.Text == currenttable) ;
+                        else
+                        {
+                            dt.Clear();
+                            DGV_DaChon.DataSource = dt;
+                        }
                     }
                     else
                     {
-                        //// LoadDatabill chưa làm
+                        DataBillDAL.locdulieu("", i.Id);
                     }    
                 }
-            /*if (currenttable != "" && currenttable != TB_IDban.Text)
-            {
-                dt.Clear();
-                DGV_DaChon.DataSource = dt;
-            }*/
+            
             currenttable = TB_IDban.Text;
-
-            Search_vt_table(TB_IDban.Text);            
-            DGV_DaChon.DataSource = d_tab[vt_tab];
             Tinh_tong_tien();
         }
+        
+            #endregion
 
-        private void Search_vt_table(String ID)
-        {
-            for (int i=0; i<sl_Table; i++)            
-                if (ID_tab[i] == ID)
-                    vt_tab = i;               
-        }
+            #region Long tạp nham
 
-        #endregion
-
-        #region Long tạp nham
-
-        private void Add_Column()
+            private void Add_Column()
         {            
             dt.Columns.AddRange(new DataColumn[]
                 {
@@ -192,7 +142,6 @@ namespace QuanLyQuanCafe
         }
         private void Tinh_tong_tien()
         {
-            dt = d_tab[vt_tab];
             int total_money = 0;
             foreach (DataRow dr in dt.Rows)
                 total_money += Convert.ToInt32(dr["GIá"].ToString()) * Convert.ToInt32(dr["Số lượng"].ToString());
@@ -217,6 +166,8 @@ namespace QuanLyQuanCafe
         {
             DGV_Mon.DataSource = DataMonDAL.locdulieu();
             Change_HeaderText();
+            load_cbBchonBan();
+            TB_TimMon.Text = "";
         }
         
         private void DGV_Mon_Load()
@@ -261,7 +212,6 @@ namespace QuanLyQuanCafe
         #region Long CellContentClick
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {            
-            dt = d_tab[vt_tab];            
             string ID = DGV_Mon.Rows[e.RowIndex].Cells["ID"].FormattedValue.ToString();
             string name = DGV_Mon.Rows[e.RowIndex].Cells["Name"].FormattedValue.ToString();
             string DM = DGV_Mon.Rows[e.RowIndex].Cells["DanhMuc"].FormattedValue.ToString();
@@ -278,15 +228,14 @@ namespace QuanLyQuanCafe
             }
             if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);            
             DGV_DaChon.DataSource = dt;
-            d_tab[vt_tab] = dt;
 
-            //for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
-            //{
-            //    if (DGV_DaChon.Rows[i].Cells[0].Value == DGV_Mon.CurrentRow.Cells[0].Value)
-            //        DGV_DaChon.Rows[i].Selected = true;
-            //    else
-            //        DGV_DaChon.Rows[i].Selected = false;
-            //}
+            for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
+            {
+                if (DGV_DaChon.Rows[i].Cells[1].Value == DGV_Mon.CurrentRow.Cells[0].Value)
+                    DGV_DaChon.Rows[i].Selected = true;
+                else
+                    DGV_DaChon.Rows[i].Selected = false;
+            }
             loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
             Tinh_tong_tien();                        
         }
@@ -364,10 +313,19 @@ namespace QuanLyQuanCafe
             //quit();
         }
 
+
         #endregion
 
-        private void FLP_table_Paint(object sender, PaintEventArgs e)
+        private void BT_ThanhToan_Click(object sender, EventArgs e)
         {
+            TB_Checkin.Text = DateTime.Now.ToString();
+            DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim()), 1);
+            foreach (DataGridViewRow i in DGV_DaChon.Rows)
+                DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(),Convert.ToInt32(i.Cells[5].Value.ToString())),1);
+            MessageBox.Show("Checkin thành công!");
+            if (TB_IDban.Text.Trim() != "")
+                DataTableDAL.capnhatBan(new Table(TB_IDban.Text.Trim().ToUpper(), false),3);
+            load_FLP_Table(DataTableDAL.locdulieu());
 
         }
     }

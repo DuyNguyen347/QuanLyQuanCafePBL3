@@ -36,6 +36,9 @@ namespace QuanLyQuanCafe.DAL
                     query = "delete from BanAn where ID = '" +table.Id + "'";
                     DataDanhThuDAL.XoaHoaDonTuBan(table.Id);
                     break;
+                case 3:
+                    query = "update BanAn set Status = '"+table.Status.ToString()+"'  where ID = '" + table.Id + "'";
+                    break;
                 default:
                     break;
             }
