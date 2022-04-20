@@ -351,9 +351,9 @@ namespace QuanLyQuanCafe
             DateTime d = DateTime.Now;
             TimeSpan aInterval = new System.TimeSpan(1, 0, 0, 0);
             DT_Bill_Begin.Value = d.Subtract(aInterval);
-            DT_Bill_End.Value = d;
+            DT_Bill_End.Value = d.Add(aInterval);
             DT_Danhthu_Begin.Value = d.Subtract(aInterval);
-            DT_Danhthu_End.Value = d;
+            DT_Danhthu_End.Value = d.Add(aInterval);
             DT_NSNV.Value = d;
             
         }

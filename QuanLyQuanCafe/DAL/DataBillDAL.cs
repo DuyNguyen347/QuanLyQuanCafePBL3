@@ -13,7 +13,8 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable locdata(DateTime datebegin,DateTime dateend)
         {
             DataTable data;
-            string query = " select HoaDon.ID_Hoa,TimeCheckin,TimeCheckout,ID_table,TongTien from HoaDon inner join HoaDon2 on HoaDon.ID_Hoa = HoaDon2.ID_Hoa where TimeCheckout >= '" + datebegin+"' and TimeCheckout <= '"+dateend+"'   ";
+            string query = " select HoaDon.ID_Hoa,TimeCheckin,TimeCheckout,ID_table,TongTien from HoaDon inner join HoaDon2 on HoaDon.ID_Hoa = HoaDon2.ID_Hoa " +
+                           "where TimeCheckout >= '" +FormatDatetimeShort(datebegin)+ "' and TimeCheckout <= '"+ FormatDatetimeShort(dateend) +"'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
@@ -24,12 +25,14 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public static List<HoaDon> locdulieu(string id = "",string id_table = "")
+        public static List<HoaDon> locdulieu(string id = "", string id_table = "", string checkout = "01/01/2001 12:00:00 SA")
         {
             List<HoaDon> hoaDons = new List<HoaDon>();
             foreach (DataRow i in data().Rows)
-                if (i[0].ToString().Contains(id.ToUpper().Trim()) && i[3].ToString().Contains(id_table.ToUpper().Trim()))
+                if (i[0].ToString().Contains(id.ToUpper().Trim()) && i[3].ToString().Contains(id_table.ToUpper().Trim()) && i[2].ToString() == checkout)
+                {
                     hoaDons.Add(new HoaDon(i));
+                }
             return hoaDons;
         }
         public static DataTable capnhatHoaDon(HoaDon hoadon,int i)
@@ -50,7 +53,7 @@ namespace QuanLyQuanCafe.DAL
                     DataDanhThuDAL.XoaThongTinHoaDonTuHoaDon(hoadon.ID);
                     break;
                 case 3:
-                    query = "update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + " and ID_table"+ hoadon.ID_ban +"where ID_Hoa= '" + hoadon.ID + "' ";
+                    query = "update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + ", ID_table = '"+ hoadon.ID_ban +"' where ID_Hoa= '" + hoadon.ID + "' ";
                     break;
                 default:
                     break;
@@ -65,6 +68,12 @@ namespace QuanLyQuanCafe.DAL
             s += dateTime.Day.ToString() + "-" + dateTime.Month.ToString() + "-" + (dateTime.Year % 100).ToString() + " " +
                dateTime.Hour.ToString() + ":" + dateTime.Minute.ToString() + ":" + dateTime.Second.ToString();
             return "convert(datetime, '"+ s +"', 5)";
+        }
+        public static string FormatDatetimeShort(DateTime dateTime)
+        {
+            string s = "";
+            s = dateTime.Year + "/" + dateTime.Month + "/" + dateTime.Day;
+            return s;
         }
     }
 }

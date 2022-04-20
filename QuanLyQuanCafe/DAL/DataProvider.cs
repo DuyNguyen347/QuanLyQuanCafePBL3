@@ -14,7 +14,7 @@ namespace QuanLyQuanCafe.DAL
         private static DataProvider _Instance;
         private string s;
 
-        
+
 
         public static DataProvider Instance {
             get
@@ -25,7 +25,7 @@ namespace QuanLyQuanCafe.DAL
                 }
                 return _Instance;
             }
-            private set => _Instance = value; 
+            private set => _Instance = value;
         }
         public DataProvider()
         {
@@ -68,38 +68,38 @@ namespace QuanLyQuanCafe.DAL
         }
         public DataTable GetRecords(string query, object[] parameter = null)
         {
-            try
+            //try
+            //{
+            DataTable dt = new DataTable();
+            using (SqlConnection cnn = new SqlConnection(s))
             {
-                DataTable dt = new DataTable();
-                using (SqlConnection cnn = new SqlConnection(s))
+                SqlCommand cmd = new SqlCommand(query, cnn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cnn.Open();
+                if (parameter != null)
                 {
-                    SqlCommand cmd = new SqlCommand(query, cnn);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    cnn.Open();
-                    if (parameter != null)
+                    string[] list = query.Split(' ');
+                    int i = 0;
+                    foreach (string item in list)
                     {
-                        string[] list = query.Split(' ');
-                        int i = 0;
-                        foreach (string item in list)
+                        if (item.Contains('@'))
                         {
-                            if (item.Contains('@'))
-                            {
-                                cmd.Parameters.AddWithValue(item, parameter[i]);
-                                i++;
-                            }
+                            cmd.Parameters.AddWithValue(item, parameter[i]);
+                            i++;
                         }
                     }
-                    da.Fill(dt);
-                    cnn.Close();
-                    return dt;
                 }
+                da.Fill(dt);
+                cnn.Close();
+                return dt;
             }
-            catch (Exception e)
-            {
-                MessageBox.Show("Lỗi");
-                return null;
-            }
-}
+        }
+        //catch (Exception e)
+        //{
+        //    MessageBox.Show("Lỗi");
+        //    return null;
+        //}
+ 
         public DataTable setdata(string query, object[] parameter = null)
         {
             //try

@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace QuanLyQuanCafe.DAL
 {
@@ -15,16 +16,31 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable data(string idbill = "")
         {
             DataTable data;
-            string query = " select * from ThongTinHoaDon where ID_HoaDon like'%"+idbill+"%'";
+            string query = " select * from ThongTinHoaDon where ID_HoaDon ='"+idbill+"'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
+        public static DataTable LoadMonDaChon(string idbill)
+        {
+            DataTable dt = new DataTable();
+            
+            string query = "select ID_Mon,TenMon,Ten_Category,Gia,Soluong from ThongTinHoaDon inner join Mon on ID_Mon = Mon.ID inner join DanhMuc on ID_category = DanhMuc.ID where ThongTinHoaDon.ID_HoaDon ='"+idbill+"'";
+            dt = DataProvider.Instance.GetRecords(query);
+            dt.Columns[0].ColumnName = "Mã món";
+            dt.Columns[1].ColumnName = "Tên món";
+            dt.Columns[2].ColumnName = "Danh mục";
+            dt.Columns[3].ColumnName = "Giá";
+            dt.Columns[4].ColumnName = "Số lượng";
+            return dt;
+        }
         public static List<InforBill> locdulieu(string idbill = "")
         {
+            
             List<InforBill> list = new List<InforBill>();
             foreach (DataRow i in DataInforBillDAL.data(idbill).Rows)
                 list.Add(new InforBill(i));
             return list;
+            
         }
         public static DataTable capnhatInforHoaDon(InforBill inforBill, int i)
         {

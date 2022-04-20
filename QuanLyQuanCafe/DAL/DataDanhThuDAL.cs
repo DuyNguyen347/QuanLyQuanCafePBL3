@@ -11,7 +11,7 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable data(DateTime datebegin, DateTime dateend)
         {
             DataTable data;
-            string query = "select DanhThu1.TimeCheckout,SoDon,TongTien from DanhThu1 inner join DanhThu2 on DanhThu1.TimeCheckout = DanhThu2.TimeCheckout where DanhThu1.TimeCheckout >= '"+datebegin+"' and DanhThu1.TimeCheckout <= '"+dateend+"'";
+            string query = "select DanhThu1.TimeCheckout,SoDon,TongTien from DanhThu1 inner join DanhThu2 on DanhThu1.TimeCheckout = DanhThu2.TimeCheckout where DanhThu1.TimeCheckout >= '"+DataBillDAL.FormatDatetimeShort(datebegin)+"' and DanhThu1.TimeCheckout <= '"+DataBillDAL.FormatDatetimeShort(dateend)+"'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }

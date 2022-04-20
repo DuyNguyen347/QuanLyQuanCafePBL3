@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Windows.Forms;
+
 namespace QuanLyQuanCafe.DTO
 {
     public class HoaDon
@@ -18,7 +20,6 @@ namespace QuanLyQuanCafe.DTO
             ID = id;
             TimeCheckin = timecheckin;
             ID_ban = idban;
-            TimeCheckout = timecheckin;
         }
         public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout)
         {
