@@ -59,7 +59,17 @@ namespace QuanLyQuanCafe.DAL
                     query = "delete from ThongTinHoaDon where ID = '" + inforBill.ID + "'";
                     break;
                 case 3:
-                    query = "update ThongTinHoaDon set Soluong = " + inforBill.Soluong + "where ID= '" + inforBill.ID + "' ";
+                    int count = 0;
+                    foreach (InforBill infor in locdulieu(inforBill.ID_Bill))
+                        if (infor.ID_Mon.Trim() == inforBill.ID_Mon.Trim())
+                        {
+                            count++;
+                            if (infor.Soluong < inforBill.Soluong)
+                                query = "update ThongTinHoaDon set Soluong = " + inforBill.Soluong + "where ID_Mon= '" + inforBill.ID_Mon + "' ";
+                            else query = "";
+                        }
+                    if(count == 0)
+                        query = "insert into ThongTinHoaDon values('" + inforBill.ID + "','" + inforBill.ID_Bill + "','" + inforBill.ID_Mon + "'," + inforBill.Soluong + ")";
                     break;
                 default:
                     break;

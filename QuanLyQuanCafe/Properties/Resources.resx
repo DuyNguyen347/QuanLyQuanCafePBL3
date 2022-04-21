@@ -121,4 +121,7 @@
   <data name="LoginImage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LoginImage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="coffee_foam_cup_140184_3840x2160" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\coffee_foam_cup_140184_3840x2160.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
