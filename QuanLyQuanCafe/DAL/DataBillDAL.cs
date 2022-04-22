@@ -25,7 +25,7 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public static List<HoaDon> locdulieu(string id = "", string id_table = "", string checkout = "01/01/2001 12:00:00 SA")
+        public static List<HoaDon> locdulieu(string id = "", string id_table = "", string checkout = "1/1/2001 12:00:00 AM")
         {
             List<HoaDon> hoaDons = new List<HoaDon>();
             foreach (DataRow i in data().Rows)
@@ -74,6 +74,36 @@ namespace QuanLyQuanCafe.DAL
             string s = "";
             s = dateTime.Year + "/" + dateTime.Month + "/" + dateTime.Day;
             return s;
+        }
+        public static string CapIdHoaDon()
+        {
+            string id = "";
+            int n = GetCountNumOfOrderInDate();
+            string m = "";
+            if (DateTime.Now.Month < 10)
+            {
+                m = "0" + DateTime.Now.Month.ToString();
+            }
+            else m = DateTime.Now.Month.ToString();
+            if (n < 10)
+            {
+                id = "HD00" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+            }
+            else if (n < 100)
+            {
+                id = "HD0" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+            }
+            else
+            {
+                id = "HD" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+            }
+            return id;
+        }
+        public static int GetCountNumOfOrderInDate()
+        {
+            string sql = "select * from HoaDon where convert(nvarchar(10),TimeCheckIn,103) = convert(nvarchar(10),getdate(),103)";
+            DataTable dt = DataProvider.Instance.GetRecords(sql);
+            return dt.Rows.Count;
         }
     }
 }

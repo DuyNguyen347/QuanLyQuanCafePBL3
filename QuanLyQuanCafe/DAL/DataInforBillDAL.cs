@@ -64,7 +64,8 @@ namespace QuanLyQuanCafe.DAL
                         if (infor.ID_Mon.Trim() == inforBill.ID_Mon.Trim())
                         {
                             count++;
-                            if (infor.Soluong < inforBill.Soluong)
+                            if (infor.Soluong <=
+                                inforBill.Soluong)
                                 query = "update ThongTinHoaDon set Soluong = " + inforBill.Soluong + "where ID_Mon= '" + inforBill.ID_Mon + "' ";
                             else query = "";
                         }
@@ -78,5 +79,6 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.setdata(query);
             return data;
         }
+        
     }
 }

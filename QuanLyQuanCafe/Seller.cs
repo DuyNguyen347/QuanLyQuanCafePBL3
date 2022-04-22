@@ -16,7 +16,7 @@ namespace QuanLyQuanCafe
     {
         public Quit login_Show;
         public Quit quit;
-        DataTable dt;        
+        DataTable dt;
         NhanVien nv = new NhanVien();
         public Seller()
         {
@@ -27,8 +27,8 @@ namespace QuanLyQuanCafe
 
         private void Seller_Load(object sender, EventArgs e)
         {
-            refresh(false,true,false,true,true,true);
-           //TB_nhanvien.Text = nv.ID.Trim() + " ( " + nv.Name.Trim() + " )";
+            refresh(false, true, false, true, true, true);
+            TB_nhanvien.Text = nv.ID.Trim() + " ( " + nv.Name.Trim() + " )";
         }
         #region Tĩnh bàn
         string current_cbb = "Tất cả";
@@ -45,8 +45,8 @@ namespace QuanLyQuanCafe
                     currenttable = "";
                 }
             }
-            else if(cbB_ChonBan.SelectedItem.ToString() == "Trống")
-                load_FLP_Table(DataTableDAL.locdulieu("","True"));
+            else if (cbB_ChonBan.SelectedItem.ToString() == "Trống")
+                load_FLP_Table(DataTableDAL.locdulieu("", "True"));
             else if (cbB_ChonBan.SelectedItem.ToString() == "Có người")
                 load_FLP_Table(DataTableDAL.locdulieu("", "False"));
             current_cbb = cbB_ChonBan.Text.Trim();
@@ -71,7 +71,6 @@ namespace QuanLyQuanCafe
                 }
                 FLP_table.Controls.Add(button);
             }
-
         }
 
 
@@ -85,38 +84,38 @@ namespace QuanLyQuanCafe
                     if (i.Status)
                     {
                         TB_IDban.Text = i.Id;
-                        if (currenttable.Trim() =="" || TB_IDban.Text == currenttable) ;
+                        if (currenttable.Trim() == "" || TB_IDban.Text == currenttable) { }
                         else
                         {
-                            refresh(true,false,true,false,false,false);
+                            refresh(true, false, true, false, false, false);
                             TB_IDban.Text = i.Id;
                         }
                         Panel_DoiBan.Visible = false;
                     }
                     else
                     {
-                        HoaDon hoaDon =  DataBillDAL.locdulieu("", i.Id)[0];
+                        HoaDon hoaDon = DataBillDAL.locdulieu("", i.Id)[0];
                         TB_IDban.Text = hoaDon.ID_ban;
                         TB_IDhoadon.Text = hoaDon.ID;
                         TB_Checkin.Text = hoaDon.TimeCheckin.ToString();
                         dt.Clear();
                         dt = DataInforBillDAL.LoadMonDaChon(hoaDon.ID);
                         DGV_DaChon.DataSource = dt;
-                        loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
+                        try { loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString()); } catch(Exception ex) { }
                         Panel_DoiBan.Visible = true;
-                    }    
+                    }
                 }
-            
+
             currenttable = TB_IDban.Text;
             Tinh_tong_tien();
         }
-        
-            #endregion
+
+        #endregion
 
         #region Long tạp nham
 
-            private void Add_Column()
-        {            
+        private void Add_Column()
+        {
             dt.Columns.AddRange(new DataColumn[]
                 {
                 new DataColumn {ColumnName = "Mã món", DataType = typeof(string)},
@@ -172,17 +171,17 @@ namespace QuanLyQuanCafe
 
         private void BT_refreshMon_Click(object sender, EventArgs e)
         {
-            refresh(false,true,false,false,false,true);
+            refresh(false, true, false, false, false, true);
             DGV_Mon.DataSource = DataMonDAL.locdulieu();
             Change_HeaderText();
         }
-        
+
         #endregion
 
-        
+
         #region Long CellContentClick
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {            
+        {
             string ID = DGV_Mon.CurrentRow.Cells["ID"].FormattedValue.ToString();
             string name = DGV_Mon.CurrentRow.Cells["Name"].FormattedValue.ToString();
             string DM = DGV_Mon.CurrentRow.Cells["DanhMuc"].FormattedValue.ToString();
@@ -197,7 +196,7 @@ namespace QuanLyQuanCafe
                     break;
                 }
             }
-            if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);            
+            if (dem == 0) dt.Rows.Add(ID, name, DM, gia, 1);
             DGV_DaChon.DataSource = dt;
 
             for (int i = 0; i < DGV_DaChon.Rows.Count; i++)
@@ -208,7 +207,7 @@ namespace QuanLyQuanCafe
                     DGV_DaChon.Rows[i].Selected = false;
             }
             loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
-            Tinh_tong_tien();                        
+            Tinh_tong_tien();
         }
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -221,7 +220,7 @@ namespace QuanLyQuanCafe
             else loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
         }
         #endregion
-        
+
         #region Tĩnh numric
         void loadnumric(string id)
         {
@@ -246,7 +245,7 @@ namespace QuanLyQuanCafe
             }
         }
         #endregion
-        
+
         #region Duy Account
         private void btAccount_Click(object sender, EventArgs e)
         {
@@ -290,55 +289,75 @@ namespace QuanLyQuanCafe
 
         private void BT_ThanhToan_Click(object sender, EventArgs e)
         {
-            if (DataTableDAL.locdulieu(TB_IDban.Text.ToString().Trim().ToUpper())[0].Status)
+            if (DGV_DaChon.Rows.Count != 0)
             {
-                if (TB_IDban.Text.Trim() != "")
+                if (DataTableDAL.locdulieu(TB_IDban.Text.ToString().Trim().ToUpper())[0].Status)
                 {
-                    try
+                    if (TB_IDban.Text.Trim() != "")
                     {
-                        TB_Checkin.Text = DateTime.Now.ToString();
-                        DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim()), 1);
-                        foreach (DataGridViewRow i in DGV_DaChon.Rows)
-                            DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 1);
-                        MessageBox.Show("Thanh toán thành công!");
-                        DataTableDAL.capnhatBan(new Table(TB_IDban.Text.Trim().ToUpper(), false), 3);
-                        refresh(false, false, false, true, true, false);
+                        try
+                        {
+                            TB_Checkin.Text = DateTime.Now.ToString();
+                            TB_IDhoadon.Text =  DataBillDAL.CapIdHoaDon();
+                            DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim()), 1);
+                            foreach (DataGridViewRow i in DGV_DaChon.Rows)
+                                DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 1);
+                            MessageBox.Show("Thanh toán thành công!");
+                            DataTableDAL.capnhatBan(new Table(TB_IDban.Text.Trim().ToUpper(), false), 3);
+                            refresh(false, false, false, true, true, false);
+                        }
+                        catch (Exception ex) { refresh(true, false, false, false, false, false); MessageBox.Show(ex.Message); }
                     }
-                    catch (Exception ex) { refresh(true, false, false, false, false, false); MessageBox.Show(ex.Message); }
+                    else
+                    {
+                        try
+                        {
+                            TB_Checkin.Text = DateTime.Now.ToString();
+                            TB_IDhoadon.Text = DataBillDAL.CapIdHoaDon();
+                            DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim(), Convert.ToDateTime(TB_Checkin.Text)), 1);
+                            foreach (DataGridViewRow i in DGV_DaChon.Rows)
+                                DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 1);
+                            MessageBox.Show("Đã thanh toán!");
+                        }
+                        catch (Exception ex) { refresh(true, false, false, false, false, false); MessageBox.Show(ex.Message); }
+                    }
+                    
                 }
                 else
                 {
-                    try
-                    {
-                        TB_Checkin.Text = DateTime.Now.ToString();
-                        DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim(), Convert.ToDateTime(TB_Checkin.Text)), 1);
-                        foreach (DataGridViewRow i in DGV_DaChon.Rows)
-                            DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 1);
-                        MessageBox.Show("Đã thanh toán!");
-                    }
-                    catch (Exception ex) { refresh(true, false, false, false, false, false); MessageBox.Show(ex.Message); }
+                    foreach (DataGridViewRow i in DGV_DaChon.Rows)
+                        try
+                        {
+                            DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 3);
+                        }
+                        catch (Exception ex) { MessageBox.Show("Ở " + i.Cells["Mã món"].Value.ToString().Trim() + " chưa được cập nhật!"); }
+                    MessageBox.Show("Thanh toán thành công!");
                 }
-            }
-            else
-            {
-                foreach (DataGridViewRow i in DGV_DaChon.Rows)
+                {
                     try
                     {
-                        DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 3);
+                        HoaDon hoaDon = DataBillDAL.locdulieu("", TB_IDban.Text.Trim())[0];
+                        TB_IDban.Text = hoaDon.ID_ban;
+                        TB_IDhoadon.Text = hoaDon.ID;
+                        TB_Checkin.Text = hoaDon.TimeCheckin.ToString();
+                        dt.Clear();
+                        dt = DataInforBillDAL.LoadMonDaChon(hoaDon.ID);
+                        DGV_DaChon.DataSource = dt;
                     }
-                    catch (Exception ex) { MessageBox.Show("Ở "+i.Cells["Mã món"].Value.ToString().Trim()+" chưa được cập nhật!"); }
-                MessageBox.Show("Thanh toán thành công!");
-            }
-            {
-                HoaDon hoaDon = DataBillDAL.locdulieu("", TB_IDban.Text.Trim())[0];
-                TB_IDban.Text = hoaDon.ID_ban;
-                TB_IDhoadon.Text = hoaDon.ID;
-                TB_Checkin.Text = hoaDon.TimeCheckin.ToString();
-                dt.Clear();
-                dt = DataInforBillDAL.LoadMonDaChon(hoaDon.ID);
-                DGV_DaChon.DataSource = dt;
-                loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
-                Panel_DoiBan.Visible = true;
+                    catch (Exception)
+                    {
+
+                    }
+                    
+                    //MessageBox.Show(hoaDon.ID);
+                    try
+                    {
+                        loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
+                        Panel_DoiBan.Visible = true;
+                    }
+                    catch (Exception){  }
+                    
+                }
             }
         }
 
