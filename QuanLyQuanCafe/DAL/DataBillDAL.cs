@@ -14,7 +14,7 @@ namespace QuanLyQuanCafe.DAL
         {
             DataTable data;
             string query = " select HoaDon.ID_Hoa,TimeCheckin,TimeCheckout,ID_table,TongTien from HoaDon inner join HoaDon2 on HoaDon.ID_Hoa = HoaDon2.ID_Hoa " +
-                           "where TimeCheckout >= '" +FormatDatetimeShort(datebegin)+ "' and TimeCheckout <= '"+ FormatDatetimeShort(dateend) +"'";
+                           "where TimeCheckout >= '" +FormatDatetimeShort(datebegin)+ "' and TimeCheckout <= '"+ FormatDatetimeShort(dateend) +"' order by TimeCheckout asc";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
@@ -89,7 +89,7 @@ namespace QuanLyQuanCafe.DAL
             {
                 id = "HD00" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
             }
-            else if (n < 100)
+            else if (n >=10 && n < 100)
             {
                 id = "HD0" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
             }

@@ -215,7 +215,7 @@
             this.tabPage2.ImageIndex = 6;
             this.tabPage2.Location = new System.Drawing.Point(134, 4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(736, 464);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Thực đơn";
@@ -586,7 +586,7 @@
             this.tabPage3.ImageIndex = 14;
             this.tabPage3.Location = new System.Drawing.Point(134, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(736, 464);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Danh mục";
@@ -858,7 +858,7 @@
             this.tabPage4.ImageIndex = 13;
             this.tabPage4.Location = new System.Drawing.Point(134, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(736, 464);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "DSach Bàn";
@@ -1073,7 +1073,7 @@
             this.tabPage5.ImageIndex = 12;
             this.tabPage5.Location = new System.Drawing.Point(134, 4);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage5.Size = new System.Drawing.Size(736, 464);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Doanh thu";
@@ -1203,7 +1203,7 @@
             this.tabPage6.ImageIndex = 14;
             this.tabPage6.Location = new System.Drawing.Point(134, 4);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(736, 464);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Lịch sử";
@@ -1337,7 +1337,7 @@
             this.tabPage1.ImageIndex = 3;
             this.tabPage1.Location = new System.Drawing.Point(134, 4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(736, 464);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Nhân viên";

@@ -23,6 +23,10 @@ namespace QuanLyQuanCafe
             InitializeComponent();
             dt = new DataTable();
             Add_Column();
+            TB_IDban.Enabled = false;
+            TB_IDhoadon.Enabled = false;
+            TB_Checkin.Enabled = false;
+            TB_nhanvien.Enabled = false;
         }
 
         private void Seller_Load(object sender, EventArgs e)
@@ -425,5 +429,7 @@ namespace QuanLyQuanCafe
             }
 
         }
+
+        
     }
 }
