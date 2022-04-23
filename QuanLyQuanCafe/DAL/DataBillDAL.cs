@@ -25,14 +25,17 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public static List<HoaDon> locdulieu(string id = "", string id_table = "", string checkout = "1/1/2001 12:00:00 AM")
+        public static List<HoaDon> locdulieu(string id = "", string id_table = "", DateTime s = default)
         {
+            s = new DateTime(2001, 01, 01);
             List<HoaDon> hoaDons = new List<HoaDon>();
             foreach (DataRow i in data().Rows)
-                if (i[0].ToString().Contains(id.ToUpper().Trim()) && i[3].ToString().Contains(id_table.ToUpper().Trim()) && i[2].ToString() == checkout)
+            {
+                if (i[0].ToString().Contains(id.ToUpper().Trim()) && i[3].ToString().Contains(id_table.ToUpper().Trim()) && i[2].ToString() == s.ToString())
                 {
                     hoaDons.Add(new HoaDon(i));
                 }
+            }
             return hoaDons;
         }
         public static DataTable capnhatHoaDon(HoaDon hoadon,int i)
@@ -87,15 +90,15 @@ namespace QuanLyQuanCafe.DAL
             else m = DateTime.Now.Month.ToString();
             if (n < 10)
             {
-                id = "HD00" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2)+m + DateTime.Now.Day.ToString() +  "00" + (n + 1).ToString();
             }
             else if (n >=10 && n < 100)
             {
-                id = "HD0" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + DateTime.Now.Day.ToString() + "0" + (n + 1).ToString();
             }
             else
             {
-                id = "HD" + (n + 1).ToString() + DateTime.Now.Day.ToString() + m + DateTime.Now.Year.ToString().Remove(0, 2);
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + DateTime.Now.Day.ToString() + (n + 1).ToString();
             }
             return id;
         }

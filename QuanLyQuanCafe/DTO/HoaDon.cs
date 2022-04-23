@@ -20,6 +20,7 @@ namespace QuanLyQuanCafe.DTO
             ID = id;
             TimeCheckin = timecheckin;
             ID_ban = idban;
+            TimeCheckout = new DateTime();
         }
         public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout)
         {
