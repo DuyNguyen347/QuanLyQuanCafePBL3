@@ -31,9 +31,9 @@ namespace QuanLyQuanCafe.DAL
         public DataProvider()
         {
             // ConnectionString of Tinh 
-            //s = @"Data Source=DESKTOP-G3DN301;Initial Catalog=QL_cafe2;Integrated Security=True";
+            s = @"Data Source=DESKTOP-G3DN301;Initial Catalog=QL_cafe2;Integrated Security=True";
             // ConnectionString of Duy
-            s = ConfigurationManager.ConnectionStrings["QuanLyQuanCafeConnectionString"].ConnectionString;
+            //s = ConfigurationManager.ConnectionStrings["QuanLyQuanCafeConnectionString"].ConnectionString;
             //s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QL_cafe2;Integrated Security=True";
             //connect to tĩnh network
             //s = @"Data Source = 14.165.149.140,1433; Initial Catalog = QL_cafe2; User ID = NQT; Password = 68709502";

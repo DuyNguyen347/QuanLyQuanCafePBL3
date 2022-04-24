@@ -28,14 +28,23 @@ namespace QuanLyQuanCafe.DAL
         public static List<HoaDon> locdulieu(string id = "", string id_table = "", DateTime s = default)
         {
             s = new DateTime(2001, 01, 01);
+            DataTable data;
+            string query = " select * from HoaDon where TimeCheckout = " + FormatDatetimetoSQL(s);
+            data = DataProvider.Instance.GetRecords(query);
             List<HoaDon> hoaDons = new List<HoaDon>();
-            foreach (DataRow i in data().Rows)
-            {
-                if (i[0].ToString().Contains(id.ToUpper().Trim()) && i[3].ToString().Contains(id_table.ToUpper().Trim()) && i[2].ToString() == s.ToString())
+            if (id == "")
+                foreach (DataRow i in data.Rows)
                 {
-                    hoaDons.Add(new HoaDon(i));
+                    //MessageBox.Show(i[3].ToString().Trim() + "|" + id_table.ToUpper().Trim());
+                    if (i[3].ToString().Trim() == id_table.ToUpper().Trim() && i[2].ToString() == s.ToString())
+                        hoaDons.Add(new HoaDon(i));
                 }
-            }
+            else if (id_table == "")
+                foreach (DataRow i in data.Rows)
+                {
+                    if (i[0].ToString().Trim() == id.ToUpper().Trim() && i[2].ToString() == s.ToString())
+                        hoaDons.Add(new HoaDon(i));
+                }
             return hoaDons;
         }
         public static DataTable capnhatHoaDon(HoaDon hoadon,int i)
@@ -56,7 +65,7 @@ namespace QuanLyQuanCafe.DAL
                     DataDanhThuDAL.XoaThongTinHoaDonTuHoaDon(hoadon.ID);
                     break;
                 case 3:
-                    query = "update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + ", ID_table = '"+ hoadon.ID_ban +"' where ID_Hoa= '" + hoadon.ID + "' ";
+                    query = "update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + " where ID_Hoa= '" + hoadon.ID + "' ";
                     break;
                 default:
                     break;
