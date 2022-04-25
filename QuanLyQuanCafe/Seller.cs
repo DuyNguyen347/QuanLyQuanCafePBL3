@@ -325,7 +325,7 @@ namespace QuanLyQuanCafe
         private void guna2ControlBox1_Click(object sender, EventArgs e)
         {
             this.Close();
-            //quit();
+            quit();
         }
 
 
@@ -502,12 +502,19 @@ namespace QuanLyQuanCafe
                     {
                         hoaDon = DataBillDAL.locdulieu("", i)[0];
                         foreach (string j in TB_IDban.Text.ToString().Split(','))
-                            if (j.Trim() != "") try
+                            if (j.Trim() != "" && j != i)
+                            {
+                                if (!DataTableDAL.locdulieu(j.Trim())[0].Status)
+                                {
+                                    DataBillDAL.capnhatHoaDon(new HoaDon(DataBillDAL.locdulieu("", j)[0].ID.Trim().ToUpper(), DataBillDAL.locdulieu("", j)[0].TimeCheckin, j.Trim().ToUpper(), DateTime.Now), 3);
+                                }
+                                try
                                 {
                                     DataBillDAL.capnhatHoaDon(new HoaDon(hoaDon.ID.Trim().ToUpper(), hoaDon.TimeCheckin, j.Trim()), 1);
                                     DataTableDAL.capnhatBan(new Table(j.Trim().ToUpper(), false), 3);
                                 }
                                 catch (Exception ex) { }
+                            }
                         TB_IDban.Clear();
                         foreach (HoaDon j in DataBillDAL.locdulieu(hoaDon.ID))
                         {
