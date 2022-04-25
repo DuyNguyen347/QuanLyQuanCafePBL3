@@ -47,7 +47,7 @@ namespace QuanLyQuanCafe.DAL
                 }
             return hoaDons;
         }
-        public static DataTable capnhatHoaDon(HoaDon hoadon,int i)
+        public static DataTable capnhatHoaDon(HoaDon hoadon,int i, String id_hd="")
         {
             string query = "";
             switch (i)
@@ -67,9 +67,21 @@ namespace QuanLyQuanCafe.DAL
                 case 3:
                     query = "update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + " where ID_Hoa= '" + hoadon.ID + "' ";
                     break;
+                case 4:
+                    query = "update HoaDon set ID_table = '" + hoadon.ID_ban + "' where ID_Hoa= '" + id_hd + "' ";
+                    break;
                 default:
                     break;
             }
+            DataTable data;
+            data = DataProvider.Instance.setdata(query);
+            return data;
+        }
+
+        public static DataTable Doi_IDBan_theoHoaDon(String id_ban, String id_hd)
+        {
+            String query = "";
+            query = "update HoaDon set ID_table = '" + id_ban + "' where ID_Hoa= '" + id_hd + "' ";
             DataTable data;
             data = DataProvider.Instance.setdata(query);
             return data;
