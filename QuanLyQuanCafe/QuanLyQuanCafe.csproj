@@ -160,9 +160,6 @@
     <EmbeddedResource Include="ReloadAccount.resx">
       <DependentUpon>ReloadAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Seller.resx">
-      <DependentUpon>Seller.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Mon.datasource" />
     <None Include="Properties\DataSources\QuanLyQuanCafe.Properties.Resources.datasource" />

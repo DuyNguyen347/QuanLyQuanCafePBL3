@@ -32,7 +32,7 @@ namespace QuanLyQuanCafe
         private void Seller_Load(object sender, EventArgs e)
         {
             refresh(false, true, false, true, true, true);
-            TB_nhanvien.Text = nv?.ID?.Trim() + " ( " + nv?.Name?.Trim() + " )";
+            TB_nhanvien.Text = nv.ID.Trim() + " ( " + nv.Name.Trim() + " )";
         }
         #region Tĩnh bàn
         string current_cbb = "Tất cả";
@@ -182,8 +182,6 @@ namespace QuanLyQuanCafe
             DGV_DaChon.Columns[4].Width = 25;
             DGV_DaChon.Columns[5].Width = 35;
             DGV_DaChon.ColumnHeadersHeight = 60;
-
-            tbGiamGia.Text = "10%";
         }
 
         private void Change_HeaderText()
@@ -198,30 +196,9 @@ namespace QuanLyQuanCafe
             int total_money = 0;
             foreach (DataGridViewRow dr in DGV_DaChon.Rows)
                 total_money += Convert.ToInt32(dr.Cells["GIá"].Value.ToString()) * Convert.ToInt32(dr.Cells["Số lượng"].Value.ToString());
-
             TB_Tongtien.Text = total_money.ToString();
-            if(total_money == 0) {
-                tbThanhTien.Text = "0";
-            }
-            Tinh_thanh_tien();
         }
 
-        private void Tinh_thanh_tien()
-        {
-            if (!string.IsNullOrWhiteSpace(TB_Tongtien.Text))
-            {
-                double tongTien = 0;
-                double.TryParse(TB_Tongtien.Text.Split('%')[0], out tongTien);
-                if(tongTien > 0)
-                {
-                    var totalSale = tongTien * 10 / 100;
-
-                    tbThanhTien.Text = (tongTien - totalSale).ToString();
-                }
-              
-            }
-            
-        }
         #endregion
 
         #region Tĩnh Món
