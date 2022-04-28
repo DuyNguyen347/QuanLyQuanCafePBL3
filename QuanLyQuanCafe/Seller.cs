@@ -27,12 +27,13 @@ namespace QuanLyQuanCafe
             TB_IDhoadon.Enabled = false;
             TB_Checkin.Enabled = false;
             TB_nhanvien.Enabled = false;
+            Add_CbbChonBan();            
         }
 
         private void Seller_Load(object sender, EventArgs e)
         {
             refresh(false, true, false, true, true, true);
-            TB_nhanvien.Text = nv.ID.Trim() + " ( " + nv.Name.Trim() + " )";
+            //TB_nhanvien.Text = nv.ID.Trim() + " ( " + nv.Name.Trim() + " )";
         }
         #region Tĩnh bàn
         string current_cbb = "Tất cả";
@@ -558,60 +559,78 @@ namespace QuanLyQuanCafe
         }
 
         HoaDon hd, hd1;
-        bool stat;
+        bool stat, stat1;
         String id_ban;
         private void btChuyenBan_Click(object sender, EventArgs e)
         {
+            LB_BanCanChuyen.Visible = !LB_BanCanChuyen.Visible;
+            LB_BanChuyenDen.Visible = !LB_BanChuyenDen.Visible;
             String tab = TB_IDban.Text;
-            String tab1 = cbbChonBan.SelectedItem.ToString();
-            foreach (Table i in DataTableDAL.locdulieu())
-            {
-                if (i.Id.Trim() == tab)
-                {
-                    hd = DataBillDAL.locdulieu("", i.Id)[0];
-                    tab = hd.ID;
-                }
-                if (i.Id.Trim() == tab1)
-                {
-                    if (i.Status)
-                    {
-                        stat = true;
-                        id_ban = i.Id;
-                    }
-                    else
-                    {
-                        stat = false;
-                        hd1 = DataBillDAL.locdulieu("", i.Id)[0];
-                        tab1 = hd1.ID;
-                    }
-                }
-            }
-
-            if (stat == false)
-            {
-                DataBillDAL.capnhatHoaDon(hd, 4, tab1);
-                DataBillDAL.capnhatHoaDon(hd1, 4, tab);
-                dt = DataInforBillDAL.LoadMonDaChon(hd1.ID);
-                DGV_DaChon.DataSource = dt;
-                TB_IDban.Text = hd.ID_ban;
-                TB_IDhoadon.Text = hd1.ID;
-                TB_Checkin.Text = hd1.TimeCheckin.ToString();
-                MessageBox.Show("Đã chuyển thành công giữa bàn " + hd.ID_ban + " và " + hd1.ID_ban);
+            String tab1 = cbbChonBan.Text; //.SelectedItem.ToString();
+            if (tab == "" || tab1 == "")
+            {                
+                    MessageBox.Show("Bạn cần chọn bàn !!!");                
             }
             else
             {
-                String id_bancu = hd.ID_ban;
-                DataTableDAL.capnhatBan(new Table(id_ban.Trim().ToUpper(), false), 3);
-                DataBillDAL.Doi_IDBan_theoHoaDon(id_ban, hd.ID);
-                DataTableDAL.capnhatBan(new Table(id_bancu.Trim().ToUpper(), true), 3);
-                dt = DataInforBillDAL.LoadMonDaChon(hd.ID);
-                refresh(false, false, false, false, true, false);
-                TB_IDban.Text = id_ban;
-                TB_IDhoadon.Text = hd.ID;
-                TB_Checkin.Text = hd.TimeCheckin.ToString();
-                MessageBox.Show("Đã chuyển thành công từ bàn " + id_bancu + " sang bàn " + id_ban);
-            }
-
+                foreach (Table i in DataTableDAL.locdulieu())
+                {
+                    if (i.Id.Trim() == tab)
+                    {
+                        if (i.Status)                        
+                            stat = true;                                                   
+                        else
+                        {
+                            stat = false;
+                            hd = DataBillDAL.locdulieu("", i.Id)[0];
+                            tab = hd.ID;
+                        }   
+                    }
+                    if (i.Id.Trim() == tab1)
+                    {
+                        if (i.Status)
+                        {
+                            stat1 = true;
+                            id_ban = i.Id;
+                        }
+                        else
+                        {
+                            stat1 = false;
+                            hd1 = DataBillDAL.locdulieu("", i.Id)[0];
+                            tab1 = hd1.ID;
+                        }
+                    }
+                }
+                if (stat)
+                    MessageBox.Show("Bàn " + tab + " bạn cần chuyển không có gì để chuyển!");
+                else
+                {
+                    if (stat1 == false)
+                    {
+                        DataBillDAL.capnhatHoaDon(hd, 4, tab1);
+                        DataBillDAL.capnhatHoaDon(hd1, 4, tab);
+                        dt = DataInforBillDAL.LoadMonDaChon(hd1.ID);
+                        DGV_DaChon.DataSource = dt;
+                        TB_IDban.Text = hd.ID_ban;
+                        TB_IDhoadon.Text = hd1.ID;
+                        TB_Checkin.Text = hd1.TimeCheckin.ToString();
+                        MessageBox.Show("Đã chuyển thành công giữa bàn " + hd.ID_ban + " và " + hd1.ID_ban);
+                    }
+                    else
+                    {
+                        String id_bancu = hd.ID_ban;
+                        DataTableDAL.capnhatBan(new Table(id_ban.Trim().ToUpper(), false), 3);
+                        DataBillDAL.Doi_IDBan_theoHoaDon(id_ban, hd.ID);
+                        DataTableDAL.capnhatBan(new Table(id_bancu.Trim().ToUpper(), true), 3);
+                        dt = DataInforBillDAL.LoadMonDaChon(hd.ID);
+                        refresh(false, false, false, false, true, false);
+                        TB_IDban.Text = id_ban;
+                        TB_IDhoadon.Text = hd.ID;
+                        TB_Checkin.Text = hd.TimeCheckin.ToString();
+                        MessageBox.Show("Đã chuyển thành công từ bàn " + id_bancu + " sang bàn " + id_ban);
+                    }
+                }                
+            }      
         }
 
         #endregion     
