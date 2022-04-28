@@ -562,14 +562,15 @@ namespace QuanLyQuanCafe
         bool stat, stat1;
         String id_ban;
         private void btChuyenBan_Click(object sender, EventArgs e)
-        {
-            LB_BanCanChuyen.Visible = !LB_BanCanChuyen.Visible;
-            LB_BanChuyenDen.Visible = !LB_BanChuyenDen.Visible;
+        {            
             String tab = TB_IDban.Text;
             String tab1 = cbbChonBan.Text; //.SelectedItem.ToString();
             if (tab == "" || tab1 == "")
             {                
-                    MessageBox.Show("Bạn cần chọn bàn !!!");                
+                MessageBox.Show("Bạn cần chọn bàn !!!");
+                LB_BanCanChuyen.Visible = !LB_BanCanChuyen.Visible;
+                LB_BanChuyenDen.Visible = !LB_BanChuyenDen.Visible;
+                LB_banNow.Visible = !LB_banNow.Visible;
             }
             else
             {
@@ -609,12 +610,10 @@ namespace QuanLyQuanCafe
                     {
                         DataBillDAL.capnhatHoaDon(hd, 4, tab1);
                         DataBillDAL.capnhatHoaDon(hd1, 4, tab);
-                        dt = DataInforBillDAL.LoadMonDaChon(hd1.ID);
-                        DGV_DaChon.DataSource = dt;
-                        TB_IDban.Text = hd.ID_ban;
-                        TB_IDhoadon.Text = hd1.ID;
-                        TB_Checkin.Text = hd1.TimeCheckin.ToString();
+                        dt.Clear();
+                        refresh(true, false, false, false, true, false);
                         MessageBox.Show("Đã chuyển thành công giữa bàn " + hd.ID_ban + " và " + hd1.ID_ban);
+                        //TB_IDban.Clear();
                     }
                     else
                     {
@@ -622,12 +621,9 @@ namespace QuanLyQuanCafe
                         DataTableDAL.capnhatBan(new Table(id_ban.Trim().ToUpper(), false), 3);
                         DataBillDAL.Doi_IDBan_theoHoaDon(id_ban, hd.ID);
                         DataTableDAL.capnhatBan(new Table(id_bancu.Trim().ToUpper(), true), 3);
-                        dt = DataInforBillDAL.LoadMonDaChon(hd.ID);
-                        refresh(false, false, false, false, true, false);
-                        TB_IDban.Text = id_ban;
-                        TB_IDhoadon.Text = hd.ID;
-                        TB_Checkin.Text = hd.TimeCheckin.ToString();
-                        MessageBox.Show("Đã chuyển thành công từ bàn " + id_bancu + " sang bàn " + id_ban);
+                        dt.Clear();                        
+                        refresh(true, false, false, false, true, false);                        
+                        MessageBox.Show("Đã chuyển thành công từ bàn " + id_bancu + " sang bàn " + id_ban);                       
                     }
                 }                
             }      

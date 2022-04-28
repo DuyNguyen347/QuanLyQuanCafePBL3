@@ -42,6 +42,8 @@
             this.guna2ControlBox2 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.guna2CustomGradientPanel1 = new Guna.UI2.WinForms.Guna2CustomGradientPanel();
+            this.LB_BanCanChuyen = new System.Windows.Forms.Label();
+            this.LB_BanChuyenDen = new System.Windows.Forms.Label();
             this.LB_Gopban = new System.Windows.Forms.Label();
             this.cbbChonBan = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btGopban = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -73,8 +75,7 @@
             this.DGV_Mon = new Guna.UI2.WinForms.Guna2DataGridView();
             this.DGV_DaChon = new Guna.UI2.WinForms.Guna2DataGridView();
             this.btAccount = new Guna.UI2.WinForms.Guna2GradientButton();
-            this.LB_BanChuyenDen = new System.Windows.Forms.Label();
-            this.LB_BanCanChuyen = new System.Windows.Forms.Label();
+            this.LB_banNow = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.guna2CustomGradientPanel1.SuspendLayout();
             this.Panel_DoiBan.SuspendLayout();
@@ -119,6 +120,7 @@
             // guna2CustomGradientPanel1
             // 
             this.guna2CustomGradientPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CustomGradientPanel1.Controls.Add(this.LB_banNow);
             this.guna2CustomGradientPanel1.Controls.Add(this.LB_BanCanChuyen);
             this.guna2CustomGradientPanel1.Controls.Add(this.LB_BanChuyenDen);
             this.guna2CustomGradientPanel1.Controls.Add(this.LB_Gopban);
@@ -158,6 +160,30 @@
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(1141, 653);
             this.guna2CustomGradientPanel1.TabIndex = 3;
+            // 
+            // LB_BanCanChuyen
+            // 
+            this.LB_BanCanChuyen.AutoSize = true;
+            this.LB_BanCanChuyen.BackColor = System.Drawing.Color.Salmon;
+            this.LB_BanCanChuyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_BanCanChuyen.Location = new System.Drawing.Point(27, 37);
+            this.LB_BanCanChuyen.Name = "LB_BanCanChuyen";
+            this.LB_BanCanChuyen.Size = new System.Drawing.Size(106, 32);
+            this.LB_BanCanChuyen.TabIndex = 1038;
+            this.LB_BanCanChuyen.Text = "Chọn bàn bạn \r\n   cần chuyển";
+            this.LB_BanCanChuyen.Visible = false;
+            // 
+            // LB_BanChuyenDen
+            // 
+            this.LB_BanChuyenDen.AutoSize = true;
+            this.LB_BanChuyenDen.BackColor = System.Drawing.Color.Salmon;
+            this.LB_BanChuyenDen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_BanChuyenDen.Location = new System.Drawing.Point(190, 583);
+            this.LB_BanChuyenDen.Name = "LB_BanChuyenDen";
+            this.LB_BanChuyenDen.Size = new System.Drawing.Size(140, 30);
+            this.LB_BanChuyenDen.TabIndex = 0;
+            this.LB_BanChuyenDen.Text = "Chọn bàn bạn muốn \r\n      chuyển đến";
+            this.LB_BanChuyenDen.Visible = false;
             // 
             // LB_Gopban
             // 
@@ -292,7 +318,7 @@
             this.Panel_DoiBan.BorderColor = System.Drawing.Color.Transparent;
             this.Panel_DoiBan.Controls.Add(this.BT_Checkout);
             this.Panel_DoiBan.Location = new System.Drawing.Point(767, 497);
-            this.Panel_DoiBan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Panel_DoiBan.Margin = new System.Windows.Forms.Padding(2);
             this.Panel_DoiBan.Name = "Panel_DoiBan";
             this.Panel_DoiBan.Size = new System.Drawing.Size(338, 22);
             this.Panel_DoiBan.TabIndex = 5;
@@ -311,7 +337,7 @@
             this.BT_Checkout.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Checkout.ForeColor = System.Drawing.Color.White;
             this.BT_Checkout.Location = new System.Drawing.Point(117, -2);
-            this.BT_Checkout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BT_Checkout.Margin = new System.Windows.Forms.Padding(2);
             this.BT_Checkout.Name = "BT_Checkout";
             this.BT_Checkout.Size = new System.Drawing.Size(121, 24);
             this.BT_Checkout.TabIndex = 0;
@@ -323,7 +349,7 @@
             // 
             this.FLP_table.BackColor = System.Drawing.Color.White;
             this.FLP_table.Location = new System.Drawing.Point(15, 61);
-            this.FLP_table.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.FLP_table.Margin = new System.Windows.Forms.Padding(2);
             this.FLP_table.Name = "FLP_table";
             this.FLP_table.Size = new System.Drawing.Size(305, 520);
             this.FLP_table.TabIndex = 1029;
@@ -800,29 +826,17 @@
             this.btAccount.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             this.btAccount.Click += new System.EventHandler(this.btAccount_Click);
             // 
-            // LB_BanChuyenDen
+            // LB_banNow
             // 
-            this.LB_BanChuyenDen.AutoSize = true;
-            this.LB_BanChuyenDen.BackColor = System.Drawing.Color.Salmon;
-            this.LB_BanChuyenDen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_BanChuyenDen.Location = new System.Drawing.Point(190, 583);
-            this.LB_BanChuyenDen.Name = "LB_BanChuyenDen";
-            this.LB_BanChuyenDen.Size = new System.Drawing.Size(140, 30);
-            this.LB_BanChuyenDen.TabIndex = 0;
-            this.LB_BanChuyenDen.Text = "Chọn bàn bạn muốn \r\n      chuyển đến";
-            this.LB_BanChuyenDen.Visible = false;
-            // 
-            // LB_BanCanChuyen
-            // 
-            this.LB_BanCanChuyen.AutoSize = true;
-            this.LB_BanCanChuyen.BackColor = System.Drawing.Color.Salmon;
-            this.LB_BanCanChuyen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LB_BanCanChuyen.Location = new System.Drawing.Point(27, 37);
-            this.LB_BanCanChuyen.Name = "LB_BanCanChuyen";
-            this.LB_BanCanChuyen.Size = new System.Drawing.Size(106, 32);
-            this.LB_BanCanChuyen.TabIndex = 1038;
-            this.LB_BanCanChuyen.Text = "Chọn bàn bạn \r\n   cần chuyển";
-            this.LB_BanCanChuyen.Visible = false;
+            this.LB_banNow.AutoSize = true;
+            this.LB_banNow.BackColor = System.Drawing.Color.Salmon;
+            this.LB_banNow.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_banNow.Location = new System.Drawing.Point(805, 0);
+            this.LB_banNow.Name = "LB_banNow";
+            this.LB_banNow.Size = new System.Drawing.Size(190, 20);
+            this.LB_banNow.TabIndex = 1039;
+            this.LB_banNow.Text = "Đây là bàn cần chuyển";
+            this.LB_banNow.Visible = false;
             // 
             // Seller
             // 
@@ -893,5 +907,6 @@
         private System.Windows.Forms.Label LB_Gopban;
         private System.Windows.Forms.Label LB_BanChuyenDen;
         private System.Windows.Forms.Label LB_BanCanChuyen;
+        private System.Windows.Forms.Label LB_banNow;
     }
 }
