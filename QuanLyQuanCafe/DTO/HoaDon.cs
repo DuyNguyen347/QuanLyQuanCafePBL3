@@ -14,27 +14,34 @@ namespace QuanLyQuanCafe.DTO
         public DateTime TimeCheckin { get; set; }
         public DateTime TimeCheckout { get; set; }
         public string ID_ban { get; set; }
-
-        public HoaDon(string id, DateTime timecheckin, string idban)
+        public int Tongtinh { get; set; }
+        public int Dathu { get; set; }
+        public HoaDon(string id, DateTime timecheckin, string idban, int tongtinh, int dathu)
         {
             ID = id;
             TimeCheckin = timecheckin;
             ID_ban = idban;
             TimeCheckout = new DateTime();
+            Tongtinh = tongtinh;
+            Dathu = dathu;
         }
-        public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout)
+        public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout,int tongtinh,int dathu)
         {
             ID = id;
             TimeCheckin = timecheckin;
             ID_ban = idban;
             TimeCheckout = timecheckout;
+            Tongtinh = tongtinh;
+            Dathu = dathu;
         }
         public HoaDon(DataRow row)
         {
             ID = row[0].ToString().Trim();
             TimeCheckin = Convert.ToDateTime(row[1].ToString());
-            ID_ban = row[3].ToString().Trim();
             TimeCheckout =Convert.ToDateTime(row[2].ToString().Trim());
+            ID_ban = row[3].ToString().Trim();
+            Tongtinh = Convert.ToInt32(row[4].ToString());
+            Dathu = Convert.ToInt32(row[5].ToString());
         }
     }
 }

@@ -9,7 +9,6 @@ namespace QuanLyQuanCafe.DTO
 {
     public class InforBill
     {
-        public string ID { get; set; }
         public string ID_Bill { get; set; }
         public string ID_Mon { get; set; }
         public int Soluong { get; set; }
@@ -21,10 +20,9 @@ namespace QuanLyQuanCafe.DTO
         }
         public InforBill(DataRow dataRow)
         {
-            ID = dataRow[0].ToString().Trim();
-            ID_Bill = dataRow[1].ToString().Trim();
-            ID_Mon = dataRow[2].ToString().Trim();
-            Soluong =Convert.ToInt32(dataRow[3].ToString());
+            ID_Bill = dataRow[0].ToString().Trim();
+            ID_Mon = dataRow[1].ToString().Trim();
+            Soluong =Convert.ToInt32(dataRow[2].ToString());
         }
         
     }

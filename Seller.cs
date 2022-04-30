@@ -183,7 +183,7 @@ namespace QuanLyQuanCafe
             DGV_DaChon.Columns[5].Width = 35;
             DGV_DaChon.ColumnHeadersHeight = 60;
 
-            //tbGiamGia.Text = "10%";
+            tbGiamGia.Text = "10%";
         }
 
         private void Change_HeaderText()
@@ -193,44 +193,34 @@ namespace QuanLyQuanCafe
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
             DGV_Mon.Columns[3].HeaderText = "Giá";
         }
-        private void Tinh_tong_tien(string valueGiamGia = null)
+        private void Tinh_tong_tien()
         {
             int total_money = 0;
             foreach (DataGridViewRow dr in DGV_DaChon.Rows)
                 total_money += Convert.ToInt32(dr.Cells["GIá"].Value.ToString()) * Convert.ToInt32(dr.Cells["Số lượng"].Value.ToString());
 
             TB_Tongtien.Text = total_money.ToString();
-            if (total_money == 0)
-            {
+            if(total_money == 0) {
                 tbThanhTien.Text = "0";
             }
-            Tinh_thanh_tien(valueGiamGia);
+            Tinh_thanh_tien();
         }
 
-        private void Tinh_thanh_tien(string valueGiamGia = null)
+        private void Tinh_thanh_tien()
         {
             if (!string.IsNullOrWhiteSpace(TB_Tongtien.Text))
             {
-                double giamGia = 0;
                 double tongTien = 0;
-                double.TryParse(TB_Tongtien.Text, out tongTien);
-                if (valueGiamGia != null)
+                double.TryParse(TB_Tongtien.Text.Split('%')[0], out tongTien);
+                if(tongTien > 0)
                 {
-                    double.TryParse(valueGiamGia, out giamGia);
-                }
-                else
-                {
-                    double.TryParse(tbGiamGia.Text, out giamGia);
-                }
-                if (tongTien > 0)
-                {
-                    var total = giamGia == 0 ? tongTien : (tongTien - tongTien * giamGia / 100);
+                    var totalSale = tongTien * 10 / 100;
 
-                    tbThanhTien.Text = total.ToString();
+                    tbThanhTien.Text = (tongTien - totalSale).ToString();
                 }
-
+              
             }
-
+            
         }
         #endregion
 
@@ -593,17 +583,6 @@ namespace QuanLyQuanCafe
         HoaDon hd, hd1;
         bool stat;
         String id_ban;
-
-        private void tbGiamGia_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbGiamGia_ValueChanged_1(object sender, EventArgs e)
-        {
-            Tinh_tong_tien(tbGiamGia.Value.ToString());
-        }
-
         private void btChuyenBan_Click(object sender, EventArgs e)
         {
             String tab = TB_IDban.Text;

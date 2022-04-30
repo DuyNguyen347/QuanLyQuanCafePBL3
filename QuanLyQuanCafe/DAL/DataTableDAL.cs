@@ -34,7 +34,7 @@ namespace QuanLyQuanCafe.DAL
                     break;
                 case 2:
                     query = "delete from BanAn where ID = '" +table.Id + "'";
-                    DataDanhThuDAL.XoaHoaDonTuBan(table.Id);
+                    //DataDanhThuDAL.XoaHoaDonTuBan(table.Id);
                     break;
                 case 3:
                     query = "update BanAn set Status = '"+table.Status.ToString()+"'  where ID = '" + table.Id + "'";
@@ -46,13 +46,29 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.setdata(query);
             return data;
         }
+        #region NQT_update 30/4
         public static List<Table> locdulieu(string id = "",string trangthai = "")
         {
             List<Table> tables = new List<Table>();
-            foreach (DataRow row in data().Rows)
-                if (row[0].ToString().ToUpper().Contains(id.ToUpper()) && row[1].ToString().ToUpper().Contains(trangthai.ToUpper()))
-                    tables.Add(new Table(row));
+            if (id == "" && trangthai == "")
+            {
+                foreach (DataRow row in data().Rows)
+                        tables.Add(new Table(row));
+            }
+            else if (id == "")
+            {
+                foreach (DataRow row in data().Rows)
+                    if (row[1].ToString().ToUpper().Trim()==trangthai.ToUpper().Trim())
+                        tables.Add(new Table(row));
+            }
+            else if (trangthai == "")
+            {
+                foreach (DataRow row in data().Rows)
+                    if (row[0].ToString().ToUpper().Trim() == id.ToUpper().Trim())
+                        tables.Add(new Table(row));
+            }
             return tables;
         }
+        #endregion
     }
 }

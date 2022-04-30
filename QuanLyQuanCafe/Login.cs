@@ -22,40 +22,6 @@ namespace QuanLyQuanCafe
         }
         private void BtLogin_Click_1(object sender, EventArgs e)
         {
-            //if (tbUserName.Text == "" && tbPassword.Text == "")
-            //{
-            //    MessageBox.Show("Vui lòng nhập UserName và PassWord");
-            //}
-            //else if (tbUserName.Text == username_admin && tbPassword.Text == password_admin)
-            //{
-            //    Dashboard ds = new Dashboard();
-            //    ds.Show();
-            //    ds.login_show = new Login_show(this.Show);
-            //    LB_Clear_Click(new object(),new EventArgs());
-            //    this.Hide();
-            //}
-            //else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text) == "Admin")
-            ////if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
-            //{
-            //    Dashboard ds = new Dashboard();
-            //    ds.Show();
-            //    ds.login_show = new Login_show(this.Show);
-            //    LB_Clear_Click(new object(), new EventArgs());
-            //    this.Hide();
-            //}
-            //else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text) != "Admin")
-            //{
-            //    Seller sl = new Seller();
-            //    sl.Show();
-            //    sl.login_Show = new Login_show(this.Show);
-            //    LB_Clear_Click(new object(), new EventArgs());
-            //    this.Hide();
-            //}
-            //else
-            //{
-            //    MessageBox.Show("UserName và Password không đúng! ");
-            //    LB_Clear_Click(new object(), new EventArgs());
-            //}
             if (tbUserName.Text == "" && tbPassword.Text == "")
             {
                 MessageBox.Show("Vui lòng nhập UserName và PassWord");
@@ -72,7 +38,6 @@ namespace QuanLyQuanCafe
                     this.Hide();
                 }
                 else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
-                //if(tbUserName.Text == "Admin" && tbPassword.Text == "12345")
                 {
                     Dashboard ds = new Dashboard();
                     ds.Show();

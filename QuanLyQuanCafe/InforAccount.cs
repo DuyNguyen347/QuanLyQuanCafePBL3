@@ -16,7 +16,7 @@ namespace QuanLyQuanCafe
         NhanVien nv;
         public InforAccount(NhanVien s)
         {
-            nv = s;
+            nv = DataNhanVienDAL.getNVbyID(s.ID);
             InitializeComponent();
             GUI();
         }
@@ -49,27 +49,49 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                    if(oldpass != DataNhanVienDAL.Instance.getPassNV(nv.ID).Replace(" ",""))
-                    { 
-                        MessageBox.Show("Vui lòng nhập đúng  mật khẩu cũ","Xác nhận mật khẩu",MessageBoxButtons.OK,MessageBoxIcon.Warning );
-                    }
-                    else if(newpass == null || newpass == "")
+                if (oldpass != DataNhanVienDAL.Instance.getPassNV(nv.ID).Replace(" ", ""))
+                {
+                    MessageBox.Show("Vui lòng nhập đúng  mật khẩu cũ", "Xác nhận mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else if (newpass == null || newpass == "")
+                {
+                    try
                     {
+                        string username_ = nv.Username;
+                        DataProvider.Instance.setdata("insert into TaiKhoan values('" + tbUserName.Text + "','" + nv.PassWord + "')");
                         string query = "update Nhanvien set UserName = '" + tbUserName.Text + "' where UserName = '" + nv.Username + "'";
                         if (DataProvider.Instance.executeDB(query))
                         {
+                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + username_ + "'");
                             MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Dispose();
                         }
-                    }
-                    else
+                        else
+                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
+                    }catch(Exception ex) { }
+                }
+                else
+                {
+                    try
                     {
-                        string query2 = "update Nhanvien set UserName = '" + tbUserName.Text + "' , PassWord = '" + newpass +  "' where UserName = '" + nv.Username + "'";
+                        string username_ = nv.Username;
+                        DataProvider.Instance.setdata("insert into TaiKhoan values('" + tbUserName.Text + "','" + newpass + "')");
+                        string query2 = "update Nhanvien set UserName = '" + tbUserName.Text + "' , PassWord = '" + newpass + "' where UserName = '" + nv.Username + "'";
                         if (DataProvider.Instance.executeDB(query2))
                         {
-                            MessageBox.Show("Cap nhat thanh cong"," ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + username_ + "'");
+                            MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Dispose();
                         }
-                    }
+                        else DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
+                    }catch(Exception ex) { }
+                }
             }
+        }
+
+        private void InforAccount_Load(object sender, EventArgs e)
+        {
+            nv = DataNhanVienDAL.getNVbyID(nv.ID);
         }
     }
 }

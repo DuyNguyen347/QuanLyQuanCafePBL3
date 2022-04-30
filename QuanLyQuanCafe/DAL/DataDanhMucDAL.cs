@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 namespace QuanLyQuanCafe.DAL
@@ -23,21 +24,27 @@ namespace QuanLyQuanCafe.DAL
                         if (row[0].ToString() == danhMuc.ID)
                             dem++;
                     if (dem == 0)
-                        query = "insert into DanhMuc values('" + danhMuc.ID + "',N'" + danhMuc.Name + "')";
+                        try
+                        {
+                            DataProvider.Instance.setdata("insert into DanhMuc values('" + danhMuc.ID + "',N'" + danhMuc.Name + "')");
+                        }
+                        catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
                     break;
                 case 2:
-                    query = "delete from DanhMuc where ID = '" + danhMuc.ID + "'";
-                    DataMonDAL.XoaTuDanhMuc(danhMuc.ID);
+                    try
+                    {
+                        DataProvider.Instance.setdata("update Mon set ID_category = null where ID_category = '" + danhMuc.ID + "'");
+                        DataProvider.Instance.setdata("delete from DanhMuc where ID = '" + danhMuc.ID + "'");
+                    }
+                    catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
                     break;
                 case 3:
-                    query = "update DanhMuc set Ten_Category = N'" + danhMuc.Name + "'where ID= '" + danhMuc.ID + "' ";
+                    DataProvider.Instance.setdata("update DanhMuc set Ten_Category = N'" + danhMuc.Name + "'where ID= '" + danhMuc.ID + "' ");
                     break;
                 default:
                     break;
             }
-            DataTable data;
-            data = DataProvider.Instance.setdata(query);
-            return data;
+            return null;
         }
         public static List<DanhMuc> locdulieu(string ten="")
         {

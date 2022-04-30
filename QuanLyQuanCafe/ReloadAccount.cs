@@ -58,7 +58,7 @@ namespace QuanLyQuanCafe
             {
                 if (tbCode.Text == s)
                 {
-                    string query = "select UserName , PassWord from NhanVien  where Email = '" + tbEmail.Text + "'";
+                    string query = "select UserName , PassWord from TaiKhoan  where Email = '" + tbEmail.Text + "'";
                     //MessageBox.Show("Lấy mã thành công!");
                     DataTable dt = DataProvider.Instance.GetRecords(query);
                     DataRow dr = dt.Rows[0];

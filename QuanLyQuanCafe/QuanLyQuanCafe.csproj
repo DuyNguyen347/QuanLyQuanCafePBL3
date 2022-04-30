@@ -83,6 +83,7 @@
     </Compile>
     <Compile Include="DAL\CheckEmail.cs" />
     <Compile Include="DAL\DataBillDAL.cs" />
+    <Compile Include="DAL\DataChucVuDAL.cs" />
     <Compile Include="DAL\DataDanhMucDAL.cs" />
     <Compile Include="DAL\DataDanhThuDAL.cs" />
     <Compile Include="DAL\DataInforBillDAL.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="DTO\ChucVu.cs" />
     <Compile Include="DTO\DanhMuc.cs" />
     <Compile Include="DTO\HoaDon.cs" />
     <Compile Include="DTO\InforBill.cs" />
@@ -159,6 +161,9 @@
     </Compile>
     <EmbeddedResource Include="ReloadAccount.resx">
       <DependentUpon>ReloadAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Seller.resx">
+      <DependentUpon>Seller.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Mon.datasource" />

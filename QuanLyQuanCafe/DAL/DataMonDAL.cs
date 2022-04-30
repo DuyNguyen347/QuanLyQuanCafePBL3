@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -6,13 +7,15 @@ namespace QuanLyQuanCafe.DAL
 {
     internal class DataMonDAL
     {
-       public static DataTable data()
+        #region NQT_Update 30/4
+        public static DataTable data()
         {
             DataTable data;
-            string query = "select mon.ID,TenMon,Ten_Category,Gia  from Mon inner join DanhMuc on Mon.ID_category = DanhMuc.ID  ";
+            string query = "select *  from View_Mon  ";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
+        #endregion
         public static DataTable capnhatMon(Mon mon, int i)
         {
             string ID_category = "";
@@ -28,21 +31,28 @@ namespace QuanLyQuanCafe.DAL
                         if (row[0].ToString() == mon.ID)
                             dem++;
                     if (dem == 0)
-                        query = "insert into Mon values('" + mon.ID + "',N'" + mon.Name + "','"+ID_category+"',"+mon.Gia+")";
+                        try
+                        {
+                            DataProvider.Instance.setdata("insert into Mon values('" + mon.ID + "',N'" + mon.Name + "','" + ID_category + "'," + mon.Gia + ")");
+                        }catch(Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
                     break;
                 case 2:
-                    query = "delete from Mon where ID = '" + mon.ID + "'";
-                    DataDanhThuDAL.XoaThongTinHoaDonTuMon(mon.ID);
+                    try
+                    {
+                        DataProvider.Instance.setdata("delete ThongTinHoaDon where ID_Mon = '" + mon.ID + "'");
+                        DataProvider.Instance.setdata("delete from Mon where ID = '" + mon.ID + "'");
+                    }catch(Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
                     break;
                 case 3:
-                    query = "update Mon set TenMon = N'" + mon.Name + "', ID_category = '"+ID_category+"',Gia ="+mon.Gia+"where ID= '" + mon.ID + "' ";
-                    break;
+                    try
+                    {
+                        DataProvider.Instance.setdata("update Mon set TenMon = N'" + mon.Name + "', ID_category = '" + ID_category + "',Gia =" + mon.Gia + "where ID= '" + mon.ID + "' ");
+                    }catch(Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
+                        break;
                 default:
                     break;
             }
-            DataTable data;
-            data = DataProvider.Instance.setdata(query);
-            return data;
+            return null;
         }
         public static void XoaTuDanhMuc(string ID)
         {
