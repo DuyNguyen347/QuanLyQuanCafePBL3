@@ -27,7 +27,7 @@ namespace QuanLyQuanCafe
             TB_IDhoadon.Enabled = false;
             TB_Checkin.Enabled = false;
             TB_nhanvien.Enabled = false;
-            Add_CbbChonBan();            
+            Add_CbbChonBan();
         }
 
         private void Seller_Load(object sender, EventArgs e)
@@ -631,14 +631,15 @@ namespace QuanLyQuanCafe
             if (TB_Tongtien.Text == "")
             {
                 TB_Tongtien.Text = "0";
-                TB_giamgia.Text = "0";
+                NumericGiamGia.Value = 0;
                 TB_thanhtien.Text = "0";
             }
             try
             {
                 int a = Convert.ToInt32(TB_Tongtien.Text);
                 TB_Tongtien.Text = a.ToString();
-                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - Convert.ToInt32(TB_giamgia.Text)).ToString();
+                int b = Convert.ToInt32(NumericGiamGia.Value);
+                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - (Convert.ToInt32(TB_Tongtien.Text) * b / 100)).ToString();
             }
             catch (Exception ex)
             {
@@ -646,23 +647,19 @@ namespace QuanLyQuanCafe
             }
         }
 
-        private void TB_giamgia_TextChanged(object sender, EventArgs e)
+        private void NumericGiamGia_ValueChanged(object sender, EventArgs e)
         {
-            if (TB_giamgia.Text == "")
-            {
-                TB_giamgia.Text = "0";
-            }
             try
             {
-                int a = Convert.ToInt32(TB_giamgia.Text);
-                TB_giamgia.Text = a.ToString();
-                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - Convert.ToInt32(TB_giamgia.Text)).ToString();
+                int a = Convert.ToInt32(NumericGiamGia.Value);
+                //NumericGiamGia.Value = a;
+                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - (Convert.ToInt32(TB_Tongtien.Text)*a/100)).ToString();
             }
             catch (Exception ex)
             {
-
             }
         }
+
 
         #endregion
     }

@@ -66,25 +66,45 @@ namespace QuanLyQuanCafe
                             MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Dispose();
                         }
-                        else
-                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
+                        else DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
                     }catch(Exception ex) { }
                 }
                 else
                 {
-                    try
+                    //string un = tbUserName.Text;
+                    if(tbUserName.Text == nv.Username)
                     {
-                        string username_ = nv.Username;
-                        DataProvider.Instance.setdata("insert into TaiKhoan values('" + tbUserName.Text + "','" + newpass + "')");
-                        string query2 = "update Nhanvien set UserName = '" + tbUserName.Text + "' , PassWord = '" + newpass + "' where UserName = '" + nv.Username + "'";
-                        if (DataProvider.Instance.executeDB(query2))
+                        string query = "update TaiKhoan set PassWord = '" + newpass +"' where UserName = '" + nv.Username + "'";
+                        if(DataProvider.Instance.executeDB(query))
                         {
-                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + username_ + "'");
-                            MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Dispose();
+                            MessageBox.Show("Cap nhat thanh cong");
+                            this.Close();
                         }
-                        else DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
-                    }catch(Exception ex) { }
+                    }   
+                    else if(tbUserName.Text != nv.Username)
+                    {
+                        string query1 = "insert into TaiKhoan values('" + tbUserName.Text + "','" + newpass + "')";
+                        DataProvider.Instance.executeDB(query1);
+                        string query11 = "update NhanVien set UserName = '" + tbUserName.Text + "' where ID = '" + nv.ID + "'";
+                        if(DataProvider.Instance.executeDB(query11))
+                        {
+                            DataProvider.Instance.executeDB("delete TaiKhoan where UserName = '" + nv.Username + "'");
+                            MessageBox.Show("Cap nhat thanh cong!");
+                        }
+                    }
+                    //try
+                    //{
+                    //    string username_ = nv.Username;
+                    //    DataProvider.Instance.executeDB("insert into TaiKhoan values('" + tbUserName.Text + "','" + newpass + "')");
+                    //    string query2 = "update NhanVien set UserName = '" + tbUserName.Text + "' where UserName = '" + username_ + "'";
+                    //    if (DataProvider.Instance.executeDB(query2))
+                    //    {
+                    //        DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + username_ + "'");
+                    //        MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //        this.Dispose();
+                    //    }
+                    //    else DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
+                    //}catch(Exception ex) { }
                 }
             }
         }
