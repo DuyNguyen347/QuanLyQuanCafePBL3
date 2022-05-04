@@ -151,30 +151,43 @@ namespace QuanLyQuanCafe.DAL
             string id = "";
             int n = GetCountNumOfOrderInDate();
             string m = "";
+            string d = "";
             if (DateTime.Now.Month < 10)
             {
                 m = "0" + DateTime.Now.Month.ToString();
             }
-            else m = DateTime.Now.Month.ToString();
-            if (n < 10)
+            if (DateTime.Now.Day < 10)
             {
-                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2)+m + DateTime.Now.Day.ToString() +  "00" + (n + 1).ToString();
+                d = "0" + DateTime.Now.Day.ToString();
             }
-            else if (n >=10 && n < 100)
+            else m = DateTime.Now.Month.ToString();
+            if (n < 9)
             {
-                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + DateTime.Now.Day.ToString() + "0" + (n + 1).ToString();
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2)+m + d +  "00" + (n + 1).ToString();
+            }
+            else if (n >=9 && n < 99)
+            {
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + d + "0" + (n + 1).ToString();
             }
             else
             {
-                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + DateTime.Now.Day.ToString() + (n + 1).ToString();
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + d + (n + 1).ToString();
             }
             return id;
         }
         public static int GetCountNumOfOrderInDate()
         {
-            string sql = "select * from HoaDon where convert(nvarchar(10),TimeCheckIn,103) = convert(nvarchar(10),getdate(),103)";
+            string sql = "select top 1 * from HoaDon  where convert(nvarchar(10),TimeCheckIn,103) = convert(nvarchar(10),getdate(),103) order by ID_HoaDon desc";
             DataTable dt = DataProvider.Instance.GetRecords(sql);
-            return dt.Rows.Count;
+            if(dt.Rows.Count == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                string temp = dt.Rows[0]["ID_HoaDon"].ToString();
+                return Convert.ToInt32(temp.Substring(8, 3).ToString());
+            }          
         }
     }
 }
