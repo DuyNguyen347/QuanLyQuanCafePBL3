@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyQuanCafe.DAL;
 using QuanLyQuanCafe.DTO;
+using QuanLyQuanCafe.Report;
+
 namespace QuanLyQuanCafe
 {
     public partial class Seller : Form
@@ -442,8 +444,15 @@ namespace QuanLyQuanCafe
                 foreach (HoaDon i in DataBillDAL.locdulieu(TB_IDhoadon.Text.Trim(), ""))
                     DataTableDAL.capnhatBan(new Table(i.ID_ban.Trim().ToUpper(), true), 3);
                 DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim(), DateTime.Now, Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text)), 3);
-                MessageBox.Show("Checkout thành công!");
+                DialogResult d =  MessageBox.Show("Checkout thành công!.Bạn có muốn in hoá đơn không ?","In hoá đơn",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if(d == DialogResult.Yes)
+                {
+                    string giamgia = NumericGiamGia.Value.ToString() + "%";
+                    PrintInvoice p = new PrintInvoice(TB_IDhoadon.Text,TB_nhanvien.Text,TB_IDban.Text,giamgia);
+                    p.Show();
+                }
                 refresh(true, false, true, false, true, false);
+                NumericGiamGia.Value = 0;
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

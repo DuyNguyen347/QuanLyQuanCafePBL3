@@ -126,5 +126,9 @@ namespace QuanLyQuanCafe.DAL
             //    return null;
             //}
         }
+        public string getConnectionString()
+        {
+            return s;
+        }
     }
 }

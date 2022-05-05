@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using QuanLyQuanCafe.DTO;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace QuanLyQuanCafe.DAL
 {
@@ -188,6 +189,15 @@ namespace QuanLyQuanCafe.DAL
                 string temp = dt.Rows[0]["ID_HoaDon"].ToString();
                 return Convert.ToInt32(temp.Substring(8, 3).ToString());
             }          
+        }
+        public static void InHoaDon(string maHoaDon)
+        {
+            string s = DataProvider.Instance.getConnectionString();
+            SqlConnection con = new SqlConnection(s);
+            string query = "select * from View_All_Bill4 where ID_HoaDon = '" + maHoaDon + "'";
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+
+
         }
     }
 }
