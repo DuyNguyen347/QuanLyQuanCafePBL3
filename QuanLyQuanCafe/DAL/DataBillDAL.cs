@@ -154,7 +154,7 @@ namespace QuanLyQuanCafe.DAL
         public static string FormatDatetimeShort(DateTime dateTime)
         {
             string s = "";
-            s = dateTime.Year + "/" + dateTime.Month + "/" + dateTime.Day;
+            s = dateTime.Year + "/" +  dateTime.Day + "/" + dateTime.Month;
             return s;
         }
         public static string CapIdHoaDon()

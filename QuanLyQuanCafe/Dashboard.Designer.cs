@@ -64,6 +64,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.tabPageLichSu = new System.Windows.Forms.TabPage();
+            this.detail_Bill1 = new QuanLyQuanCafe.Detail_Bill();
             this.DT_List_Bill = new Guna.UI2.WinForms.Guna2GradientButton();
             this.DT_Bill_End = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.DT_Bill_Begin = new Guna.UI2.WinForms.Guna2DateTimePicker();
@@ -154,7 +155,6 @@
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btLogOut = new System.Windows.Forms.PictureBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.detail_Bill1 = new QuanLyQuanCafe.Detail_Bill();
             this.guna2TabControl1.SuspendLayout();
             this.tabPageBan.SuspendLayout();
             this.guna2Panel4.SuspendLayout();
@@ -196,7 +196,7 @@
             this.guna2TabControl1.ImageList = this.imageList1;
             this.guna2TabControl1.ItemSize = new System.Drawing.Size(130, 60);
             this.guna2TabControl1.Location = new System.Drawing.Point(36, 36);
-            this.guna2TabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2TabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2TabControl1.Name = "guna2TabControl1";
             this.guna2TabControl1.SelectedIndex = 0;
             this.guna2TabControl1.Size = new System.Drawing.Size(1165, 581);
@@ -233,9 +233,9 @@
             this.tabPageBan.Controls.Add(this.guna2CustomGradientPanel4);
             this.tabPageBan.ImageIndex = 13;
             this.tabPageBan.Location = new System.Drawing.Point(134, 4);
-            this.tabPageBan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageBan.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageBan.Name = "tabPageBan";
-            this.tabPageBan.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageBan.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageBan.Size = new System.Drawing.Size(1027, 573);
             this.tabPageBan.TabIndex = 3;
             this.tabPageBan.Text = "DSach Bàn";
@@ -245,7 +245,7 @@
             // 
             this.FLP_Ban.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FLP_Ban.Location = new System.Drawing.Point(436, 64);
-            this.FLP_Ban.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FLP_Ban.Margin = new System.Windows.Forms.Padding(4);
             this.FLP_Ban.Name = "FLP_Ban";
             this.FLP_Ban.Size = new System.Drawing.Size(533, 485);
             this.FLP_Ban.TabIndex = 17;
@@ -262,7 +262,7 @@
             this.BT_Refresh_Ban.ImageRotate = 0F;
             this.BT_Refresh_Ban.ImageSize = new System.Drawing.Size(20, 20);
             this.BT_Refresh_Ban.Location = new System.Drawing.Point(824, 16);
-            this.BT_Refresh_Ban.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Refresh_Ban.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Refresh_Ban.Name = "BT_Refresh_Ban";
             this.BT_Refresh_Ban.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_Refresh_Ban.Size = new System.Drawing.Size(40, 37);
@@ -281,7 +281,7 @@
             this.BT_Xoa4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Xoa4.ForeColor = System.Drawing.Color.White;
             this.BT_Xoa4.Location = new System.Drawing.Point(297, 523);
-            this.BT_Xoa4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Xoa4.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Xoa4.Name = "BT_Xoa4";
             this.BT_Xoa4.Size = new System.Drawing.Size(80, 37);
             this.BT_Xoa4.TabIndex = 4;
@@ -300,7 +300,7 @@
             this.BT_Them4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Them4.ForeColor = System.Drawing.Color.White;
             this.BT_Them4.Location = new System.Drawing.Point(44, 523);
-            this.BT_Them4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Them4.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Them4.Name = "BT_Them4";
             this.BT_Them4.Size = new System.Drawing.Size(80, 37);
             this.BT_Them4.TabIndex = 3;
@@ -324,7 +324,7 @@
             "Thu ngân",
             "Phục vụ"});
             this.cbB_TrangThai.Location = new System.Drawing.Point(536, 12);
-            this.cbB_TrangThai.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbB_TrangThai.Margin = new System.Windows.Forms.Padding(4);
             this.cbB_TrangThai.Name = "cbB_TrangThai";
             this.cbB_TrangThai.Size = new System.Drawing.Size(259, 36);
             this.cbB_TrangThai.TabIndex = 5004;
@@ -335,7 +335,7 @@
             this.guna2Panel4.Controls.Add(this.label10);
             this.guna2Panel4.Controls.Add(this.TB_TimBan);
             this.guna2Panel4.Location = new System.Drawing.Point(44, 12);
-            this.guna2Panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel4.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel4.Name = "guna2Panel4";
             this.guna2Panel4.Size = new System.Drawing.Size(333, 49);
             this.guna2Panel4.TabIndex = 16;
@@ -366,7 +366,7 @@
             this.TB_TimBan.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimBan.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimBan.Location = new System.Drawing.Point(128, 6);
-            this.TB_TimBan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TimBan.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TimBan.Name = "TB_TimBan";
             this.TB_TimBan.PasswordChar = '\0';
             this.TB_TimBan.PlaceholderText = "Nhập ID bàn";
@@ -385,7 +385,7 @@
             this.guna2CustomGradientPanel4.Controls.Add(this.label14);
             this.guna2CustomGradientPanel4.Controls.Add(this.label21);
             this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(11, 65);
-            this.guna2CustomGradientPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(400, 450);
             this.guna2CustomGradientPanel4.TabIndex = 15;
@@ -403,7 +403,7 @@
             this.TB_BanStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_BanStatus.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_BanStatus.Location = new System.Drawing.Point(144, 198);
-            this.TB_BanStatus.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_BanStatus.Margin = new System.Windows.Forms.Padding(4);
             this.TB_BanStatus.Name = "TB_BanStatus";
             this.TB_BanStatus.PasswordChar = '\0';
             this.TB_BanStatus.PlaceholderText = "";
@@ -424,7 +424,7 @@
             this.TB_IDban.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_IDban.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_IDban.Location = new System.Drawing.Point(144, 25);
-            this.TB_IDban.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_IDban.Margin = new System.Windows.Forms.Padding(4);
             this.TB_IDban.Name = "TB_IDban";
             this.TB_IDban.PasswordChar = '\0';
             this.TB_IDban.PlaceholderText = "";
@@ -463,13 +463,21 @@
             this.tabPageLichSu.Controls.Add(this.DGV_Bill);
             this.tabPageLichSu.ImageIndex = 14;
             this.tabPageLichSu.Location = new System.Drawing.Point(134, 4);
-            this.tabPageLichSu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageLichSu.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageLichSu.Name = "tabPageLichSu";
-            this.tabPageLichSu.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageLichSu.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageLichSu.Size = new System.Drawing.Size(1027, 573);
             this.tabPageLichSu.TabIndex = 5;
             this.tabPageLichSu.Text = "Lịch sử";
             this.tabPageLichSu.UseVisualStyleBackColor = true;
+            // 
+            // detail_Bill1
+            // 
+            this.detail_Bill1.Location = new System.Drawing.Point(0, -4);
+            this.detail_Bill1.Name = "detail_Bill1";
+            this.detail_Bill1.Size = new System.Drawing.Size(131, 44);
+            this.detail_Bill1.TabIndex = 21;
+            this.detail_Bill1.Visible = false;
             // 
             // DT_List_Bill
             // 
@@ -483,7 +491,7 @@
             this.DT_List_Bill.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_List_Bill.ForeColor = System.Drawing.Color.White;
             this.DT_List_Bill.Location = new System.Drawing.Point(453, 31);
-            this.DT_List_Bill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_List_Bill.Margin = new System.Windows.Forms.Padding(4);
             this.DT_List_Bill.Name = "DT_List_Bill";
             this.DT_List_Bill.Size = new System.Drawing.Size(80, 37);
             this.DT_List_Bill.TabIndex = 20;
@@ -499,7 +507,7 @@
             this.DT_Bill_End.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_Bill_End.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DT_Bill_End.Location = new System.Drawing.Point(647, 31);
-            this.DT_Bill_End.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_Bill_End.Margin = new System.Windows.Forms.Padding(4);
             this.DT_Bill_End.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_Bill_End.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_Bill_End.Name = "DT_Bill_End";
@@ -516,7 +524,7 @@
             this.DT_Bill_Begin.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_Bill_Begin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DT_Bill_Begin.Location = new System.Drawing.Point(172, 31);
-            this.DT_Bill_Begin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_Bill_Begin.Margin = new System.Windows.Forms.Padding(4);
             this.DT_Bill_Begin.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_Bill_Begin.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_Bill_Begin.Name = "DT_Bill_Begin";
@@ -559,7 +567,7 @@
             this.DGV_Bill.EnableHeadersVisualStyles = false;
             this.DGV_Bill.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_Bill.Location = new System.Drawing.Point(36, 92);
-            this.DGV_Bill.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_Bill.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_Bill.Name = "DGV_Bill";
             this.DGV_Bill.ReadOnly = true;
             this.DGV_Bill.RowHeadersVisible = false;
@@ -600,9 +608,9 @@
             this.tabPageDanhThu.Controls.Add(this.DGV_DoanhThu);
             this.tabPageDanhThu.ImageIndex = 12;
             this.tabPageDanhThu.Location = new System.Drawing.Point(134, 4);
-            this.tabPageDanhThu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageDanhThu.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageDanhThu.Name = "tabPageDanhThu";
-            this.tabPageDanhThu.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageDanhThu.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageDanhThu.Size = new System.Drawing.Size(1027, 573);
             this.tabPageDanhThu.TabIndex = 4;
             this.tabPageDanhThu.Text = "Doanh thu";
@@ -620,7 +628,7 @@
             this.BT_List_Danhthu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_List_Danhthu.ForeColor = System.Drawing.Color.White;
             this.BT_List_Danhthu.Location = new System.Drawing.Point(453, 31);
-            this.BT_List_Danhthu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_List_Danhthu.Margin = new System.Windows.Forms.Padding(4);
             this.BT_List_Danhthu.Name = "BT_List_Danhthu";
             this.BT_List_Danhthu.Size = new System.Drawing.Size(80, 37);
             this.BT_List_Danhthu.TabIndex = 16;
@@ -636,7 +644,7 @@
             this.DT_Danhthu_End.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_Danhthu_End.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DT_Danhthu_End.Location = new System.Drawing.Point(647, 31);
-            this.DT_Danhthu_End.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_Danhthu_End.Margin = new System.Windows.Forms.Padding(4);
             this.DT_Danhthu_End.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_Danhthu_End.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_Danhthu_End.Name = "DT_Danhthu_End";
@@ -653,7 +661,7 @@
             this.DT_Danhthu_Begin.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_Danhthu_Begin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DT_Danhthu_Begin.Location = new System.Drawing.Point(172, 31);
-            this.DT_Danhthu_Begin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_Danhthu_Begin.Margin = new System.Windows.Forms.Padding(4);
             this.DT_Danhthu_Begin.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_Danhthu_Begin.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_Danhthu_Begin.Name = "DT_Danhthu_Begin";
@@ -696,7 +704,7 @@
             this.DGV_DoanhThu.EnableHeadersVisualStyles = false;
             this.DGV_DoanhThu.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_DoanhThu.Location = new System.Drawing.Point(36, 92);
-            this.DGV_DoanhThu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_DoanhThu.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_DoanhThu.Name = "DGV_DoanhThu";
             this.DGV_DoanhThu.ReadOnly = true;
             this.DGV_DoanhThu.RowHeadersVisible = false;
@@ -740,9 +748,9 @@
             this.tabPageDanhMuc.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPageDanhMuc.ImageIndex = 14;
             this.tabPageDanhMuc.Location = new System.Drawing.Point(134, 4);
-            this.tabPageDanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageDanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageDanhMuc.Name = "tabPageDanhMuc";
-            this.tabPageDanhMuc.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageDanhMuc.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageDanhMuc.Size = new System.Drawing.Size(1027, 573);
             this.tabPageDanhMuc.TabIndex = 2;
             this.tabPageDanhMuc.Text = "Danh mục";
@@ -760,7 +768,7 @@
             this.BT_refresh_DanhMuc.ImageRotate = 0F;
             this.BT_refresh_DanhMuc.ImageSize = new System.Drawing.Size(20, 20);
             this.BT_refresh_DanhMuc.Location = new System.Drawing.Point(380, 21);
-            this.BT_refresh_DanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_refresh_DanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.BT_refresh_DanhMuc.Name = "BT_refresh_DanhMuc";
             this.BT_refresh_DanhMuc.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_refresh_DanhMuc.Size = new System.Drawing.Size(40, 37);
@@ -779,7 +787,7 @@
             this.BT_Xoa3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Xoa3.ForeColor = System.Drawing.Color.White;
             this.BT_Xoa3.Location = new System.Drawing.Point(297, 523);
-            this.BT_Xoa3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Xoa3.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Xoa3.Name = "BT_Xoa3";
             this.BT_Xoa3.Size = new System.Drawing.Size(80, 37);
             this.BT_Xoa3.TabIndex = 5;
@@ -798,7 +806,7 @@
             this.BT_Sua3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Sua3.ForeColor = System.Drawing.Color.White;
             this.BT_Sua3.Location = new System.Drawing.Point(172, 523);
-            this.BT_Sua3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Sua3.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Sua3.Name = "BT_Sua3";
             this.BT_Sua3.Size = new System.Drawing.Size(80, 37);
             this.BT_Sua3.TabIndex = 4;
@@ -817,7 +825,7 @@
             this.BT_Them3.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Them3.ForeColor = System.Drawing.Color.White;
             this.BT_Them3.Location = new System.Drawing.Point(44, 523);
-            this.BT_Them3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Them3.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Them3.Name = "BT_Them3";
             this.BT_Them3.Size = new System.Drawing.Size(80, 37);
             this.BT_Them3.TabIndex = 3;
@@ -859,7 +867,7 @@
             this.DGV_DanhMuc.EnableHeadersVisualStyles = false;
             this.DGV_DanhMuc.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_DanhMuc.Location = new System.Drawing.Point(436, 18);
-            this.DGV_DanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_DanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_DanhMuc.Name = "DGV_DanhMuc";
             this.DGV_DanhMuc.ReadOnly = true;
             this.DGV_DanhMuc.RowHeadersVisible = false;
@@ -896,7 +904,7 @@
             this.guna2Panel3.Controls.Add(this.label3);
             this.guna2Panel3.Controls.Add(this.TB_TimDM);
             this.guna2Panel3.Location = new System.Drawing.Point(44, 12);
-            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel3.Name = "guna2Panel3";
             this.guna2Panel3.Size = new System.Drawing.Size(333, 49);
             this.guna2Panel3.TabIndex = 16;
@@ -927,7 +935,7 @@
             this.TB_TimDM.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimDM.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimDM.Location = new System.Drawing.Point(128, 6);
-            this.TB_TimDM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TimDM.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TimDM.Name = "TB_TimDM";
             this.TB_TimDM.PasswordChar = '\0';
             this.TB_TimDM.PlaceholderText = "Nhập danh mục";
@@ -946,7 +954,7 @@
             this.guna2CustomGradientPanel3.Controls.Add(this.label20);
             this.guna2CustomGradientPanel3.Controls.Add(this.label22);
             this.guna2CustomGradientPanel3.Location = new System.Drawing.Point(11, 65);
-            this.guna2CustomGradientPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel3.Name = "guna2CustomGradientPanel3";
             this.guna2CustomGradientPanel3.Size = new System.Drawing.Size(400, 450);
             this.guna2CustomGradientPanel3.TabIndex = 15;
@@ -964,7 +972,7 @@
             this.TB_NhapDanhMuc.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_NhapDanhMuc.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_NhapDanhMuc.Location = new System.Drawing.Point(144, 198);
-            this.TB_NhapDanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_NhapDanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.TB_NhapDanhMuc.Name = "TB_NhapDanhMuc";
             this.TB_NhapDanhMuc.PasswordChar = '\0';
             this.TB_NhapDanhMuc.PlaceholderText = "";
@@ -985,7 +993,7 @@
             this.TB_ID_DM.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_ID_DM.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_ID_DM.Location = new System.Drawing.Point(144, 25);
-            this.TB_ID_DM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_ID_DM.Margin = new System.Windows.Forms.Padding(4);
             this.TB_ID_DM.Name = "TB_ID_DM";
             this.TB_ID_DM.PasswordChar = '\0';
             this.TB_ID_DM.PlaceholderText = "";
@@ -1029,9 +1037,9 @@
             this.tabPage_ThucDon.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage_ThucDon.ImageIndex = 6;
             this.tabPage_ThucDon.Location = new System.Drawing.Point(134, 4);
-            this.tabPage_ThucDon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage_ThucDon.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage_ThucDon.Name = "tabPage_ThucDon";
-            this.tabPage_ThucDon.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage_ThucDon.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage_ThucDon.Size = new System.Drawing.Size(1027, 573);
             this.tabPage_ThucDon.TabIndex = 1;
             this.tabPage_ThucDon.Text = "Thực đơn";
@@ -1048,7 +1056,7 @@
             this.BT_Refresh2.ImageRotate = 0F;
             this.BT_Refresh2.ImageSize = new System.Drawing.Size(20, 20);
             this.BT_Refresh2.Location = new System.Drawing.Point(824, 16);
-            this.BT_Refresh2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Refresh2.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Refresh2.Name = "BT_Refresh2";
             this.BT_Refresh2.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_Refresh2.Size = new System.Drawing.Size(40, 37);
@@ -1067,7 +1075,7 @@
             this.BT_Xoa2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Xoa2.ForeColor = System.Drawing.Color.White;
             this.BT_Xoa2.Location = new System.Drawing.Point(297, 523);
-            this.BT_Xoa2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Xoa2.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Xoa2.Name = "BT_Xoa2";
             this.BT_Xoa2.Size = new System.Drawing.Size(80, 37);
             this.BT_Xoa2.TabIndex = 7;
@@ -1086,7 +1094,7 @@
             this.BT_Sua2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Sua2.ForeColor = System.Drawing.Color.White;
             this.BT_Sua2.Location = new System.Drawing.Point(172, 523);
-            this.BT_Sua2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Sua2.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Sua2.Name = "BT_Sua2";
             this.BT_Sua2.Size = new System.Drawing.Size(80, 37);
             this.BT_Sua2.TabIndex = 6;
@@ -1105,7 +1113,7 @@
             this.BT_Them2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Them2.ForeColor = System.Drawing.Color.White;
             this.BT_Them2.Location = new System.Drawing.Point(44, 523);
-            this.BT_Them2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Them2.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Them2.Name = "BT_Them2";
             this.BT_Them2.Size = new System.Drawing.Size(80, 37);
             this.BT_Them2.TabIndex = 5;
@@ -1129,7 +1137,7 @@
             "Thu ngân",
             "Phục vụ"});
             this.CBB_DanhMuc.Location = new System.Drawing.Point(536, 12);
-            this.CBB_DanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CBB_DanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.CBB_DanhMuc.Name = "CBB_DanhMuc";
             this.CBB_DanhMuc.Size = new System.Drawing.Size(259, 36);
             this.CBB_DanhMuc.TabIndex = 3006;
@@ -1170,7 +1178,7 @@
             this.DGV_Mon.EnableHeadersVisualStyles = false;
             this.DGV_Mon.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_Mon.Location = new System.Drawing.Point(436, 64);
-            this.DGV_Mon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_Mon.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_Mon.Name = "DGV_Mon";
             this.DGV_Mon.ReadOnly = true;
             this.DGV_Mon.RowHeadersVisible = false;
@@ -1207,7 +1215,7 @@
             this.guna2Panel1.Controls.Add(this.label2);
             this.guna2Panel1.Controls.Add(this.TB_TimMon);
             this.guna2Panel1.Location = new System.Drawing.Point(44, 12);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(333, 49);
             this.guna2Panel1.TabIndex = 16;
@@ -1238,7 +1246,7 @@
             this.TB_TimMon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimMon.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimMon.Location = new System.Drawing.Point(128, 6);
-            this.TB_TimMon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TimMon.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TimMon.Name = "TB_TimMon";
             this.TB_TimMon.PasswordChar = '\0';
             this.TB_TimMon.PlaceholderText = "Nhập tên món";
@@ -1261,7 +1269,7 @@
             this.guna2CustomGradientPanel1.Controls.Add(this.label18);
             this.guna2CustomGradientPanel1.Controls.Add(this.label19);
             this.guna2CustomGradientPanel1.Location = new System.Drawing.Point(11, 65);
-            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel1.Name = "guna2CustomGradientPanel1";
             this.guna2CustomGradientPanel1.Size = new System.Drawing.Size(400, 450);
             this.guna2CustomGradientPanel1.TabIndex = 15;
@@ -1279,7 +1287,7 @@
             this.CBB_ChonDanhMuc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.CBB_ChonDanhMuc.ItemHeight = 30;
             this.CBB_ChonDanhMuc.Location = new System.Drawing.Point(144, 142);
-            this.CBB_ChonDanhMuc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CBB_ChonDanhMuc.Margin = new System.Windows.Forms.Padding(4);
             this.CBB_ChonDanhMuc.Name = "CBB_ChonDanhMuc";
             this.CBB_ChonDanhMuc.Size = new System.Drawing.Size(240, 36);
             this.CBB_ChonDanhMuc.TabIndex = 3003;
@@ -1297,7 +1305,7 @@
             this.TB_Gia.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_Gia.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_Gia.Location = new System.Drawing.Point(144, 198);
-            this.TB_Gia.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_Gia.Margin = new System.Windows.Forms.Padding(4);
             this.TB_Gia.Name = "TB_Gia";
             this.TB_Gia.PasswordChar = '\0';
             this.TB_Gia.PlaceholderText = "";
@@ -1318,7 +1326,7 @@
             this.TB_TenM0n.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TenM0n.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TenM0n.Location = new System.Drawing.Point(144, 82);
-            this.TB_TenM0n.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TenM0n.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TenM0n.Name = "TB_TenM0n";
             this.TB_TenM0n.PasswordChar = '\0';
             this.TB_TenM0n.PlaceholderText = "";
@@ -1339,7 +1347,7 @@
             this.TB_IDmon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_IDmon.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_IDmon.Location = new System.Drawing.Point(144, 25);
-            this.TB_IDmon.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_IDmon.Margin = new System.Windows.Forms.Padding(4);
             this.TB_IDmon.Name = "TB_IDmon";
             this.TB_IDmon.PasswordChar = '\0';
             this.TB_IDmon.PlaceholderText = "";
@@ -1422,7 +1430,7 @@
             this.BT_ResetChucVu.ImageRotate = 0F;
             this.BT_ResetChucVu.ImageSize = new System.Drawing.Size(20, 20);
             this.BT_ResetChucVu.Location = new System.Drawing.Point(380, 21);
-            this.BT_ResetChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_ResetChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.BT_ResetChucVu.Name = "BT_ResetChucVu";
             this.BT_ResetChucVu.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_ResetChucVu.Size = new System.Drawing.Size(40, 37);
@@ -1441,7 +1449,7 @@
             this.BT_Xoachucvu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Xoachucvu.ForeColor = System.Drawing.Color.White;
             this.BT_Xoachucvu.Location = new System.Drawing.Point(297, 523);
-            this.BT_Xoachucvu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Xoachucvu.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Xoachucvu.Name = "BT_Xoachucvu";
             this.BT_Xoachucvu.Size = new System.Drawing.Size(80, 37);
             this.BT_Xoachucvu.TabIndex = 20;
@@ -1460,7 +1468,7 @@
             this.BT_suaChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_suaChucVu.ForeColor = System.Drawing.Color.White;
             this.BT_suaChucVu.Location = new System.Drawing.Point(172, 523);
-            this.BT_suaChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_suaChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.BT_suaChucVu.Name = "BT_suaChucVu";
             this.BT_suaChucVu.Size = new System.Drawing.Size(80, 37);
             this.BT_suaChucVu.TabIndex = 19;
@@ -1479,7 +1487,7 @@
             this.BT_themChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_themChucVu.ForeColor = System.Drawing.Color.White;
             this.BT_themChucVu.Location = new System.Drawing.Point(44, 523);
-            this.BT_themChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_themChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.BT_themChucVu.Name = "BT_themChucVu";
             this.BT_themChucVu.Size = new System.Drawing.Size(80, 37);
             this.BT_themChucVu.TabIndex = 18;
@@ -1521,7 +1529,7 @@
             this.DGV_ChucVu.EnableHeadersVisualStyles = false;
             this.DGV_ChucVu.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_ChucVu.Location = new System.Drawing.Point(436, 18);
-            this.DGV_ChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_ChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_ChucVu.Name = "DGV_ChucVu";
             this.DGV_ChucVu.ReadOnly = true;
             this.DGV_ChucVu.RowHeadersVisible = false;
@@ -1558,7 +1566,7 @@
             this.guna2Panel5.Controls.Add(this.label9);
             this.guna2Panel5.Controls.Add(this.TB_TimChucVu);
             this.guna2Panel5.Location = new System.Drawing.Point(44, 12);
-            this.guna2Panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel5.Name = "guna2Panel5";
             this.guna2Panel5.Size = new System.Drawing.Size(333, 49);
             this.guna2Panel5.TabIndex = 23;
@@ -1589,7 +1597,7 @@
             this.TB_TimChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimChucVu.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimChucVu.Location = new System.Drawing.Point(128, 6);
-            this.TB_TimChucVu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TimChucVu.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TimChucVu.Name = "TB_TimChucVu";
             this.TB_TimChucVu.PasswordChar = '\0';
             this.TB_TimChucVu.PlaceholderText = "Nhập chức vụ";
@@ -1608,7 +1616,7 @@
             this.guna2CustomGradientPanel5.Controls.Add(this.label13);
             this.guna2CustomGradientPanel5.Controls.Add(this.label15);
             this.guna2CustomGradientPanel5.Location = new System.Drawing.Point(11, 65);
-            this.guna2CustomGradientPanel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel5.Name = "guna2CustomGradientPanel5";
             this.guna2CustomGradientPanel5.Size = new System.Drawing.Size(400, 450);
             this.guna2CustomGradientPanel5.TabIndex = 22;
@@ -1626,7 +1634,7 @@
             this.TB_Luong.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_Luong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_Luong.Location = new System.Drawing.Point(144, 198);
-            this.TB_Luong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_Luong.Margin = new System.Windows.Forms.Padding(4);
             this.TB_Luong.Name = "TB_Luong";
             this.TB_Luong.PasswordChar = '\0';
             this.TB_Luong.PlaceholderText = "";
@@ -1647,7 +1655,7 @@
             this.TB_Chucvuv.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_Chucvuv.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_Chucvuv.Location = new System.Drawing.Point(144, 25);
-            this.TB_Chucvuv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_Chucvuv.Margin = new System.Windows.Forms.Padding(4);
             this.TB_Chucvuv.Name = "TB_Chucvuv";
             this.TB_Chucvuv.PasswordChar = '\0';
             this.TB_Chucvuv.PlaceholderText = "";
@@ -1689,9 +1697,9 @@
             this.tabPageNhanVien.Controls.Add(this.guna2CustomGradientPanel2);
             this.tabPageNhanVien.ImageIndex = 3;
             this.tabPageNhanVien.Location = new System.Drawing.Point(134, 4);
-            this.tabPageNhanVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageNhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageNhanVien.Name = "tabPageNhanVien";
-            this.tabPageNhanVien.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageNhanVien.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageNhanVien.Size = new System.Drawing.Size(1027, 573);
             this.tabPageNhanVien.TabIndex = 0;
             this.tabPageNhanVien.Text = "Nhân viên";
@@ -1714,7 +1722,7 @@
             "Thu ngân",
             "Phục vụ"});
             this.cbB_ChucVuNV.Location = new System.Drawing.Point(103, 284);
-            this.cbB_ChucVuNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbB_ChucVuNV.Margin = new System.Windows.Forms.Padding(4);
             this.cbB_ChucVuNV.Name = "cbB_ChucVuNV";
             this.cbB_ChucVuNV.Size = new System.Drawing.Size(259, 36);
             this.cbB_ChucVuNV.TabIndex = 15;
@@ -1732,7 +1740,7 @@
             this.BT_Refresh.ImageRotate = 0F;
             this.BT_Refresh.ImageSize = new System.Drawing.Size(20, 20);
             this.BT_Refresh.Location = new System.Drawing.Point(391, 286);
-            this.BT_Refresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Refresh.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Refresh.Name = "BT_Refresh";
             this.BT_Refresh.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_Refresh.Size = new System.Drawing.Size(40, 37);
@@ -1754,7 +1762,7 @@
             this.BT_Xoa1.ForeColor = System.Drawing.Color.White;
             this.BT_Xoa1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             this.BT_Xoa1.Location = new System.Drawing.Point(815, 293);
-            this.BT_Xoa1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Xoa1.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Xoa1.Name = "BT_Xoa1";
             this.BT_Xoa1.Size = new System.Drawing.Size(117, 37);
             this.BT_Xoa1.TabIndex = 12;
@@ -1776,7 +1784,7 @@
             this.BT_Sua1.ForeColor = System.Drawing.Color.White;
             this.BT_Sua1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
             this.BT_Sua1.Location = new System.Drawing.Point(653, 293);
-            this.BT_Sua1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Sua1.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Sua1.Name = "BT_Sua1";
             this.BT_Sua1.Size = new System.Drawing.Size(120, 37);
             this.BT_Sua1.TabIndex = 11;
@@ -1798,7 +1806,7 @@
             this.BT_Them1.ForeColor = System.Drawing.Color.White;
             this.BT_Them1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.ForwardDiagonal;
             this.BT_Them1.Location = new System.Drawing.Point(481, 293);
-            this.BT_Them1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.BT_Them1.Margin = new System.Windows.Forms.Padding(4);
             this.BT_Them1.Name = "BT_Them1";
             this.BT_Them1.Size = new System.Drawing.Size(120, 37);
             this.BT_Them1.TabIndex = 10;
@@ -1840,7 +1848,7 @@
             this.DGV_NhanVien.EnableHeadersVisualStyles = false;
             this.DGV_NhanVien.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.DGV_NhanVien.Location = new System.Drawing.Point(11, 338);
-            this.DGV_NhanVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_NhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.DGV_NhanVien.Name = "DGV_NhanVien";
             this.DGV_NhanVien.ReadOnly = true;
             this.DGV_NhanVien.RowHeadersVisible = false;
@@ -1877,7 +1885,7 @@
             this.guna2Panel2.Controls.Add(this.label7);
             this.guna2Panel2.Controls.Add(this.TB_TimNhanVien);
             this.guna2Panel2.Location = new System.Drawing.Point(44, 4);
-            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2Panel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel2.Name = "guna2Panel2";
             this.guna2Panel2.Size = new System.Drawing.Size(351, 49);
             this.guna2Panel2.TabIndex = 5;
@@ -1908,7 +1916,7 @@
             this.TB_TimNhanVien.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TimNhanVien.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TimNhanVien.Location = new System.Drawing.Point(128, 6);
-            this.TB_TimNhanVien.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TimNhanVien.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TimNhanVien.Name = "TB_TimNhanVien";
             this.TB_TimNhanVien.PasswordChar = '\0';
             this.TB_TimNhanVien.PlaceholderText = "Nhập nhân viên.";
@@ -1939,7 +1947,7 @@
             this.guna2CustomGradientPanel2.Controls.Add(this.label5);
             this.guna2CustomGradientPanel2.Controls.Add(this.label6);
             this.guna2CustomGradientPanel2.Location = new System.Drawing.Point(11, 63);
-            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2CustomGradientPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.guna2CustomGradientPanel2.Name = "guna2CustomGradientPanel2";
             this.guna2CustomGradientPanel2.Size = new System.Drawing.Size(953, 212);
             this.guna2CustomGradientPanel2.TabIndex = 4;
@@ -1975,7 +1983,7 @@
             this.TB_LuongNV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_LuongNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_LuongNV.Location = new System.Drawing.Point(579, 158);
-            this.TB_LuongNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_LuongNV.Margin = new System.Windows.Forms.Padding(4);
             this.TB_LuongNV.Name = "TB_LuongNV";
             this.TB_LuongNV.PasswordChar = '\0';
             this.TB_LuongNV.PlaceholderText = "";
@@ -2018,7 +2026,7 @@
             this.TB_SDT.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_SDT.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_SDT.Location = new System.Drawing.Point(144, 113);
-            this.TB_SDT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_SDT.Margin = new System.Windows.Forms.Padding(4);
             this.TB_SDT.Name = "TB_SDT";
             this.TB_SDT.PasswordChar = '\0';
             this.TB_SDT.PlaceholderText = "";
@@ -2039,7 +2047,7 @@
             this.TB_emailNV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_emailNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_emailNV.Location = new System.Drawing.Point(579, 113);
-            this.TB_emailNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_emailNV.Margin = new System.Windows.Forms.Padding(4);
             this.TB_emailNV.Name = "TB_emailNV";
             this.TB_emailNV.PasswordChar = '\0';
             this.TB_emailNV.PlaceholderText = "";
@@ -2071,7 +2079,7 @@
             this.TB_UserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_UserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_UserName.Location = new System.Drawing.Point(144, 158);
-            this.TB_UserName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_UserName.Margin = new System.Windows.Forms.Padding(4);
             this.TB_UserName.Name = "TB_UserName";
             this.TB_UserName.PasswordChar = '\0';
             this.TB_UserName.PlaceholderText = "";
@@ -2092,7 +2100,7 @@
             this.TB_TenNV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_TenNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_TenNV.Location = new System.Drawing.Point(144, 69);
-            this.TB_TenNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_TenNV.Margin = new System.Windows.Forms.Padding(4);
             this.TB_TenNV.Name = "TB_TenNV";
             this.TB_TenNV.PasswordChar = '\0';
             this.TB_TenNV.PlaceholderText = "";
@@ -2113,7 +2121,7 @@
             this.TB_IDNV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_IDNV.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_IDNV.Location = new System.Drawing.Point(144, 25);
-            this.TB_IDNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TB_IDNV.Margin = new System.Windows.Forms.Padding(4);
             this.TB_IDNV.Name = "TB_IDNV";
             this.TB_IDNV.PasswordChar = '\0';
             this.TB_IDNV.PlaceholderText = "";
@@ -2129,7 +2137,7 @@
             this.DT_NSNV.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.DT_NSNV.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.DT_NSNV.Location = new System.Drawing.Point(579, 21);
-            this.DT_NSNV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DT_NSNV.Margin = new System.Windows.Forms.Padding(4);
             this.DT_NSNV.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
             this.DT_NSNV.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.DT_NSNV.Name = "DT_NSNV";
@@ -2220,7 +2228,7 @@
             this.guna2ControlBox1.FillColor = System.Drawing.Color.SaddleBrown;
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox1.Location = new System.Drawing.Point(1187, 5);
-            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2ControlBox1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(35, 23);
             this.guna2ControlBox1.TabIndex = 1;
@@ -2243,7 +2251,7 @@
             this.guna2ControlBox3.FillColor = System.Drawing.Color.Firebrick;
             this.guna2ControlBox3.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox3.Location = new System.Drawing.Point(1136, 5);
-            this.guna2ControlBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.guna2ControlBox3.Margin = new System.Windows.Forms.Padding(4);
             this.guna2ControlBox3.Name = "guna2ControlBox3";
             this.guna2ControlBox3.Size = new System.Drawing.Size(43, 23);
             this.guna2ControlBox3.TabIndex = 3;
@@ -2252,20 +2260,12 @@
             // 
             this.btLogOut.Image = ((System.Drawing.Image)(resources.GetObject("btLogOut.Image")));
             this.btLogOut.Location = new System.Drawing.Point(36, 5);
-            this.btLogOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btLogOut.Margin = new System.Windows.Forms.Padding(4);
             this.btLogOut.Name = "btLogOut";
             this.btLogOut.Size = new System.Drawing.Size(31, 31);
             this.btLogOut.TabIndex = 1;
             this.btLogOut.TabStop = false;
             this.btLogOut.Click += new System.EventHandler(this.btLogOut_Click);
-            // 
-            // detail_Bill1
-            // 
-            this.detail_Bill1.Location = new System.Drawing.Point(0, -4);
-            this.detail_Bill1.Name = "detail_Bill1";
-            this.detail_Bill1.Size = new System.Drawing.Size(64, 110);
-            this.detail_Bill1.TabIndex = 21;
-            this.detail_Bill1.Visible = false;
             // 
             // Dashboard
             // 
@@ -2279,7 +2279,7 @@
             this.Controls.Add(this.guna2ControlBox1);
             this.Controls.Add(this.guna2TabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dashboard";

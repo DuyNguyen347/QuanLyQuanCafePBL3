@@ -1,0 +1,102 @@
+Create database QL_cafe
+go
+use QL_cafe
+create table ChucVu(
+	ChucVu nvarchar(20) not null primary key,
+	Luong int,	
+)
+create table TaiKhoan(
+	UserName varchar(30) not null primary key,
+	PassWord varchar(30)
+	)
+CREATE TABLE NhanVien (
+    ID varchar(10) not null Primary key,
+    Name nvarchar(40),
+    NgaySinh datetime,
+    Email varchar(40),
+	Phone varchar(10),
+    ChucVu nvarchar(20) constraint FK_ChucVu FOREIGN KEY REFERENCES dbo.ChucVu(ChucVu),
+	UserName varchar(30) unique constraint FK_TaiKhoan foreign key references dbo.TaiKhoan(UserName)
+);
+create table DanhMuc(
+	ID varchar(10) not null primary key,
+	Ten_Category nvarchar(40)
+)
+create table Mon(
+	ID varchar(10) not null primary key,
+	TenMon nvarchar(40),
+	ID_category varchar(10) constraint FK_DanhMuc_Mon foreign key references dbo.DanhMuc(ID),
+	Gia int
+)
+create table BanAn(
+	ID varchar(10) not null primary key,
+	Status varchar(10)
+)
+create table HoaDon(
+	ID_HoaDon varchar(12) not null primary key,
+	TimeCheckin datetime,
+	TimeCheckout datetime,
+	TongTinh int,
+	DaThu int
+)
+create table HoaDon_Ban(
+	ID_HoaDon varchar(12) constraint FK_HoaDon_Ban foreign key references dbo.HoaDon(ID_HoaDon),
+	ID_table varchar(10) constraint FK_Ban_HoaDoon foreign key references dbo.BanAn(ID),
+	CONSTRAINT PK_HoaDon_Ban PRIMARY KEY (ID_HoaDon,ID_table)
+)
+create table ThongTinHoaDon(
+	ID_HoaDon varchar(12) constraint FK_HoaDon_Mon foreign key references dbo.HoaDon(ID_HoaDon),
+	ID_Mon varchar(10) constraint FK_Mon_HoaDoon foreign key references dbo.Mon(ID),
+	Soluong int,
+	CONSTRAINT PK_HoaDon_Mon PRIMARY KEY (ID_HoaDon,ID_Mon)
+)
+go
+create view View_NhanVien as
+select ID,Name,NgaySinh,NhanVien.ChucVu,UserName,Email,Luong,Phone from NhanVien left join ChucVu on NhanVien.ChucVu = dbo.ChucVu.ChucVu
+go
+create view View_Mon as
+select Mon.ID,TenMon,Ten_Category,Gia from Mon Left join DanhMuc on Mon.ID_category = DanhMuc.ID
+go
+create view View_LichSu as
+select HoaDon.ID_HoaDon,TimeCheckin,TimeCheckout,ID_table,TongTinh,DaThu from HoaDon inner join HoaDon_Ban on HoaDon.ID_HoaDon =HoaDon_Ban.ID_HoaDon
+go
+create view View_Login as
+select ChucVu,NhanVien.UserName,PassWord from NhanVien inner join TaiKhoan on NhanVien.UserName =TaiKhoan.UserName
+go
+create view View_InforBill as
+select ID_Mon,TenMon,Ten_Category,Gia,Soluong,ID_HoaDon from ThongTinHoaDon inner join View_Mon on ThongTinHoaDon.ID_Mon=View_Mon.ID
+go
+create view View_HienTai as
+SELECT ID_table, TimeCheckin,ID_HoaDon,TongTinh,DaThu
+FROM     dbo.View_LichSu
+WHERE  (TimeCheckout = '2001-01-01')
+
+go
+create view View_table as
+SELECT BanAn.ID, BanAn.Status,View_HienTai.TimeCheckin
+FROM BanAn LEFT JOIN View_HienTai ON dbo.BanAn.ID = dbo.View_HienTai.ID_table
+go
+create view View_DanhThuNgay(TimeCheckout,Total,TongTinh,DaThu) as
+select CONVERT(Datetime,CONVERT(VARCHAR, TimeCheckout, 103), 120),COUNT(*),Sum(TongTinh),Sum(DaThu) from HoaDon group by CONVERT(VARCHAR, TimeCheckout, 103)
+
+create view View_DanhThuThang(DateCheckin,Total,TongTinh,DaThu) as
+select FORMAT( TimeCheckout, 'MM/yy'),COUNT(*),Sum(TongTinh),Sum(DaThu) from HoaDon group by FORMAT( TimeCheckout, 'MM/yy')
+
+go
+drop table NhanVien
+drop table HoaDon_Ban
+drop table ThongTinHoaDon
+drop table TaiKhoan
+drop table ChucVu
+drop table BanAn
+drop table Mon
+drop table DanhMuc
+drop table HoaDon
+drop view View_NhanVien
+drop view View_Mon
+drop view View_LichSu
+drop view View_Login
+drop view View_InforBill
+drop view View_HienTai
+drop view View_DanhThuNgay
+drop view View_DanhThuThang

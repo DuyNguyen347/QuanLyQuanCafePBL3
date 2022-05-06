@@ -342,7 +342,8 @@ namespace QuanLyQuanCafe
             DGV_DoanhThu.DataSource = DataDanhThuDAL.data(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
             DGV_DoanhThu.Columns[0].HeaderText = "Ngày";
             DGV_DoanhThu.Columns[1].HeaderText = "Số đơn";
-            DGV_DoanhThu.Columns[2].HeaderText = "Tổng danh thu";
+            DGV_DoanhThu.Columns[2].HeaderText = "Đã tính";
+            DGV_DoanhThu.Columns[3].HeaderText = "Tổng danh thu";
 
         }
         private void BT_List_Bill_Click(object sender, EventArgs e)
@@ -429,11 +430,12 @@ namespace QuanLyQuanCafe
                 detail_Bill1.BringToFront();
                 detail_Bill1.AutoSize = true;
                 List<string> a = DataBillDAL.dataHoaDon_Ban(DGV_Bill.Rows[e.RowIndex].Cells["ID_HoaDon"].Value.ToString());
-                string str = "Bàn:"+'\n';
+                string str = "Bàn:"+"\n";
                 foreach (string i in a)
                 {
-                    str += (i + '\n');
+                    str += (i + ",\n");
                 }
+                str = str.Substring(0, str.Length - 2);
                 detail_Bill1.settext(str);
             }
         }
