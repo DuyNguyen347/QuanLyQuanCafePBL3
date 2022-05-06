@@ -117,6 +117,12 @@
     <Compile Include="Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Detail_Bill.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Detail_Bill.Designer.cs">
+      <DependentUpon>Detail_Bill.cs</DependentUpon>
+    </Compile>
     <Compile Include="DTO\ChucVu.cs" />
     <Compile Include="DTO\DanhMuc.cs" />
     <Compile Include="DTO\HoaDon.cs" />
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Detail_Bill.resx">
+      <DependentUpon>Detail_Bill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InforAccount.resx">
       <DependentUpon>InforAccount.cs</DependentUpon>

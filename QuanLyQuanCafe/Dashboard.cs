@@ -420,6 +420,27 @@ namespace QuanLyQuanCafe
             TB_Luong.Text = DGV_ChucVu.CurrentRow.Cells[1].Value.ToString().Trim();
         }
 
-        
+        private void DGV_Bill_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex != -1)
+            {
+                detail_Bill1.Visible = true;
+                detail_Bill1.Location = new Point(MousePosition.X - 450, MousePosition.Y - 180);
+                detail_Bill1.BringToFront();
+                detail_Bill1.AutoSize = true;
+                List<string> a = DataBillDAL.dataHoaDon_Ban(DGV_Bill.Rows[e.RowIndex].Cells["ID_HoaDon"].Value.ToString());
+                string str = "Bàn:"+'\n';
+                foreach (string i in a)
+                {
+                    str += (i + '\n');
+                }
+                detail_Bill1.settext(str);
+            }
+        }
+
+        private void DGV_Bill_MouseLeave(object sender, EventArgs e)
+        {
+            detail_Bill1.Visible = false;
+        }
     }
 }

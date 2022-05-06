@@ -14,7 +14,7 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable locdata(DateTime datebegin,DateTime dateend)
         {
             DataTable data;
-            string query = " select * from View_LichSu" +
+            string query = " select * from HoaDon" +
                            " where TimeCheckout >= '" +FormatDatetimeShort(datebegin)+ "' and TimeCheckout <= '"+ FormatDatetimeShort(dateend) +"' order by TimeCheckout asc";
             data = DataProvider.Instance.GetRecords(query);
             return data;
@@ -79,6 +79,16 @@ namespace QuanLyQuanCafe.DAL
                     break;
             }
             return null;
+        }
+        public static List<string> dataHoaDon_Ban(string id_hoadon)
+        {
+            List<string> bans = new List<string>();
+            DataTable data;
+            string query = " select * from HoaDon_Ban where ID_HoaDon = '" + id_hoadon + "'";
+            data = DataProvider.Instance.GetRecords(query);
+            foreach (DataRow i in data.Rows)
+                bans.Add(i["ID_table"].ToString());
+            return bans;
         }
         public static void capnhatHoaDon_Ban(string id_hoadon,string id_ban,int option)
         {
