@@ -444,5 +444,7 @@ namespace QuanLyQuanCafe
         {
             detail_Bill1.Visible = false;
         }
+
+        
     }
 }
