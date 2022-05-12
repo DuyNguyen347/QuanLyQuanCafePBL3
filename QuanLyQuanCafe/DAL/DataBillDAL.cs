@@ -167,11 +167,12 @@ namespace QuanLyQuanCafe.DAL
             {
                 m = "0" + DateTime.Now.Month.ToString();
             }
+            else m = DateTime.Now.Month.ToString();
             if (DateTime.Now.Day < 10)
             {
                 d = "0" + DateTime.Now.Day.ToString();
             }
-            else m = DateTime.Now.Month.ToString();
+            else d = DateTime.Now.Day.ToString();
             if (n < 9)
             {
                 id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2)+m + d +  "00" + (n + 1).ToString();
