@@ -14,8 +14,7 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable locdata(DateTime datebegin,DateTime dateend)
         {
             DataTable data;
-            string query = " select * from HoaDon" +
-                           " where TimeCheckout >= '" +FormatDatetimeShort(datebegin)+ "' and TimeCheckout <= '"+ FormatDatetimeShort(dateend) +"' order by TimeCheckout asc";
+            string query = " select * from HoaDon where LEN(ID_HoaDon) <12 and TimeCheckout between '" + FormatDatetimeShort(datebegin) + "' and '"+ FormatDatetimeShort(dateend) + "'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
@@ -154,7 +153,7 @@ namespace QuanLyQuanCafe.DAL
         public static string FormatDatetimeShort(DateTime dateTime)
         {
             string s = "";
-            s = dateTime.Year + "/" +  dateTime.Day + "/" + dateTime.Month;
+            s = dateTime.Year + "/" + dateTime.Month + "/" + dateTime.Day;
             return s;
         }
         public static string CapIdHoaDon()

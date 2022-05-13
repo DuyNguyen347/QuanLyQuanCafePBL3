@@ -77,7 +77,7 @@ SELECT BanAn.ID, BanAn.Status,View_HienTai.TimeCheckin
 FROM BanAn LEFT JOIN View_HienTai ON dbo.BanAn.ID = dbo.View_HienTai.ID_table
 go
 create view View_DanhThuNgay(TimeCheckout,Total,TongTinh,DaThu) as
-select CONVERT(Datetime,CONVERT(VARCHAR, TimeCheckout, 103), 120),COUNT(*),Sum(TongTinh),Sum(DaThu) from HoaDon group by CONVERT(VARCHAR, TimeCheckout, 103)
+select CONVERT(Datetime,CONVERT(VARCHAR, TimeCheckout, 102), 120),COUNT(*),Sum(TongTinh),Sum(DaThu) from HoaDon group by CONVERT(VARCHAR, TimeCheckout, 102)
 
 create view View_DanhThuThang(DateCheckin,Total,TongTinh,DaThu) as
 select FORMAT( TimeCheckout, 'MM/yy'),COUNT(*),Sum(TongTinh),Sum(DaThu) from HoaDon group by FORMAT( TimeCheckout, 'MM/yy')
