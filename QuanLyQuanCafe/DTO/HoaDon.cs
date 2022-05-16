@@ -40,8 +40,8 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckin = Convert.ToDateTime(row[1].ToString());
             TimeCheckout =Convert.ToDateTime(row[2].ToString().Trim());
             ID_ban = row[3].ToString().Trim();
-            Tongtinh = Convert.ToInt32(row[4].ToString());
-            Dathu = Convert.ToInt32(row[5].ToString());
+            Tongtinh = Convert.ToInt32(row["TongTinh"].ToString());
+            Dathu = Convert.ToInt32(row["DaThu"].ToString());
         }
     }
 }

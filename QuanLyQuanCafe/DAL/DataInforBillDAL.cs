@@ -95,7 +95,35 @@ namespace QuanLyQuanCafe.DAL
                 {
                     DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon ='" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'and ID_Mon = '" + i.ID_Mon + "'");
                 }
-
+        }
+        public static void dongbohoadonchinh(string id_hoadonchinh)
+        {
+            int tongtinh = 0, dathu = 0;
+            capnhatInforHoaDon(new InforBill(id_hoadonchinh, default, default), 2);
+            foreach (HoaDon j in DataBillDAL.locdulieu(id_hoadonchinh))
+            {
+                foreach (InforBill i in locdulieu(j.ID))
+                    try
+                    {
+                        DataProvider.Instance.GetRecords("select Soluong from ThongTinHoaDon where ID_HoaDon ='" + id_hoadonchinh + "' and ID_Mon = '" + i.ID_Mon + "'").Rows[0].ToString();
+                        DataProvider.Instance.setdata("update ThongTinHoaDon set  Soluong = " +
+                            "(select Soluong from ThongTinHoaDon where ID_HoaDon ='" + id_hoadonchinh + "' and ID_Mon = '" + i.ID_Mon + "')+" + i.Soluong +
+                            "where ID_HoaDon ='" + id_hoadonchinh + "' and ID_Mon = '" + i.ID_Mon + "'");
+                    }
+                    catch (Exception e)
+                    {
+                        DataProvider.Instance.setdata("insert into ThongTinHoaDon values('" + id_hoadonchinh + "','" + i.ID_Mon + "'," + i.Soluong + ")");
+                    }
+                tongtinh += j.Tongtinh;
+                dathu += j.Dathu;
+            }
+            //MessageBox.Show("update HoaDon set TongTinh =" + tongtinh + " ,DaThu =" + dathu + " where ID_HoaDon = '" + id_hoadonchinh + "'");
+            DataProvider.Instance.setdata("update HoaDon set TongTinh =" + tongtinh + " ,DaThu =" + dathu + " where ID_HoaDon = '" + id_hoadonchinh + "'");
+        }
+        public static void doiidhoadon(string id_truoc, string id_sau)
+        {
+            DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'");
+            //MessageBox.Show("update ThongTinHoaDon set ID_HoaDon = '" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'");
         }
     }
 }

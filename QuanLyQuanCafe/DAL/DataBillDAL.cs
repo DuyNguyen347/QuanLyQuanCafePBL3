@@ -42,12 +42,24 @@ namespace QuanLyQuanCafe.DAL
             else if (id_table == "")
                 foreach (DataRow i in data.Rows)
                 {
-                    if (i[0].ToString().Trim() == id.ToUpper().Trim() && i[2].ToString() == s.ToString())
+                    if (i[0].ToString().Substring(0, 11) == id.ToUpper().Substring(0, 11) && i[2].ToString() == s.ToString())
                         hoaDons.Add(new HoaDon(i));
                 }
             return hoaDons;
         }
-        public static DataTable capnhatHoaDon(HoaDon hoadon,int i, String id_hd="")
+        public static List<HoaDon> locdulieu_(string id)
+        {
+            DataTable data;
+            string query = " select * from HoaDon where ID_HoaDon = '" + id + "'";
+            data = DataProvider.Instance.GetRecords(query);
+            List<HoaDon> hoaDons = new List<HoaDon>();
+            foreach (DataRow i in data.Rows)
+            {
+                hoaDons.Add(new HoaDon(i));
+            }
+            return hoaDons;
+        }
+        public static DataTable capnhatHoaDon(HoaDon hoadon, int i, String id_hd = "")
         {
             string query = "";
             switch (i)
@@ -55,9 +67,10 @@ namespace QuanLyQuanCafe.DAL
                 case 1:
                     try
                     {
-                        DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout)+","
-                                                                                    + hoadon.Tongtinh+","+hoadon.Dathu+ ")");
-                    }catch(Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
+                        DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout) + ","
+                                                                                    + hoadon.Tongtinh + "," + hoadon.Dathu + ")");
+                    }
+                    catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
                     break;
                 case 2:
                     try
@@ -70,14 +83,28 @@ namespace QuanLyQuanCafe.DAL
                 case 3:
                     try
                     {
-                        DataProvider.Instance.setdata("update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout)+",TongTinh = "+hoadon.Tongtinh+
-                                                    ",DaThu ="+hoadon.Dathu+ " where ID_HoaDon= '" + hoadon.ID + "' ");
-                    }catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
+                        DataProvider.Instance.setdata("update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + ",TongTinh = " + hoadon.Tongtinh +
+                                                    ",DaThu =" + hoadon.Dathu + " where ID_HoaDon like '" + hoadon.ID + "%' ");
+                    }
+                    catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
+                    break;
+                case 4:
+                    try
+                    {
+                        DataProvider.Instance.setdata("update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + " where ID_HoaDon like '" + hoadon.ID + "%' ");
+                    }
+                    catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
                     break;
                 default:
                     break;
             }
             return null;
+        }
+        public static void capnhatHoaDon_(HoaDon hoadon, int i, String id_hd = "")
+        {
+            string query = "";
+            DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout) + ","
+                                                                        + hoadon.Tongtinh + "," + hoadon.Dathu + ")");
         }
         public static List<string> dataHoaDon_Ban(string id_hoadon)
         {
@@ -109,10 +136,13 @@ namespace QuanLyQuanCafe.DAL
                     string hoadon_truoc = locdulieu("", id_ban)[0].ID;
                     DataProvider.Instance.setdata("update HoaDon_Ban set ID_HoaDon = '" + id_hoadon + "' where ID_HoaDon = '"+hoadon_truoc+"'");
                     break;
-  
                 default:
                     break;
             }    
+        }
+        public static void capnhatHoaDon_Ban_(string id_hoadontruoc, string id_hoadonsau, string id_ban)
+        {
+            DataProvider.Instance.setdata("update HoaDon_Ban set ID_HoaDon = '" + id_hoadonsau + "' where ID_HoaDon = '" + id_hoadontruoc + "' and ID_table = '" + id_ban + "'");
         }
         public static void Doi_IDBan_ChoNhau(String id_bantruoc, String id_bansau,int option)
         {
