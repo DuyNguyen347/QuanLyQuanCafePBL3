@@ -114,6 +114,7 @@
     <Compile Include="DAL\DataTableDAL.cs" />
     <Compile Include="DAL\LoginDAL.cs" />
     <Compile Include="DAL\ReloadAccountDAL.cs" />
+    <Compile Include="DAL\ThongKeDAL.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +132,7 @@
     <Compile Include="DTO\HoaDon.cs" />
     <Compile Include="DTO\InforBill.cs" />
     <Compile Include="DTO\Mon.cs" />
+    <Compile Include="DTO\RevenueByDate.cs" />
     <Compile Include="Gop_Ban_Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +274,10 @@
     </Content>
     <None Include="Resources\bill.png" />
     <None Include="Resources\dollar coin.png" />
+    <None Include="Resources\order.png" />
+    <None Include="Resources\checkout.png" />
+    <None Include="Resources\money.png" />
+    <None Include="Resources\money %281%29.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

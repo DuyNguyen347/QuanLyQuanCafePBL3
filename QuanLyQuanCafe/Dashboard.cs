@@ -339,12 +339,7 @@ namespace QuanLyQuanCafe
         }
         private void BT_List_Danhthu_Click(object sender, EventArgs e)
         {
-            DGV_DoanhThu.DataSource = DataDanhThuDAL.data(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
-            DGV_DoanhThu.Columns[0].HeaderText = "Ngày";
-            DGV_DoanhThu.Columns[1].HeaderText = "Số đơn";
-            DGV_DoanhThu.Columns[2].HeaderText = "Đã tính";
-            DGV_DoanhThu.Columns[3].HeaderText = "Tổng danh thu";
-
+            LoadData();
         }
         private void BT_List_Bill_Click(object sender, EventArgs e)
         {
@@ -445,6 +440,85 @@ namespace QuanLyQuanCafe
             detail_Bill1.Visible = false;
         }
 
-        
+        private void btCustom_Click(object sender, EventArgs e)
+        {
+            DT_Danhthu_Begin.Enabled = true;
+            DT_Danhthu_End.Enabled = true;
+            BT_List_Danhthu.Visible = true;
+        }
+
+        private void Day_Click(object sender, EventArgs e)
+        {
+            DT_Danhthu_Begin.Value = DateTime.Today.AddDays(-7);
+            DT_Danhthu_End.Value = DateTime.Now;
+            LoadData();
+            DisableCustomDates();
+        }
+
+        private void OneMonth_Click(object sender, EventArgs e)
+        {
+            DT_Danhthu_Begin.Value = DateTime.Today.AddDays(-30);
+            DT_Danhthu_End.Value = DateTime.Now;
+            LoadData();
+            DisableCustomDates();
+        }
+        private void LoadData()
+        {
+            bool refreshData = ThongKeDAL.Instance.LoadData(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
+            if (refreshData == true)
+            {
+
+                chart1.DataSource = ThongKeDAL.Instance.GrossRevenueList;
+                chart1.Series[0].XValueMember = "Date";
+                chart1.Series[0].YValueMembers = "TotalAmount";
+                chart1.DataBind();
+                chartTopProducts.DataSource = ThongKeDAL.Instance.TopProductsList;
+                chartTopProducts.Series[0].XValueMember = "Key";
+                chartTopProducts.Series[0].YValueMembers = "Value";
+                chartTopProducts.DataBind();
+                lbSoHD.Text = ThongKeDAL.Instance.NumOrders.ToString();
+                lbTongThu.Text = ThongKeDAL.Instance.TotalRevenue.ToString() + "đ";
+                DGV_DoanhThu.DataSource = DataDanhThuDAL.data(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
+                DGV_DoanhThu.Columns[0].HeaderText = "Ngày";
+                DGV_DoanhThu.Columns[1].HeaderText = "Số đơn";
+                DGV_DoanhThu.Columns[2].HeaderText = "Đã tính";
+                DGV_DoanhThu.Columns[3].HeaderText = "Tổng danh thu";
+                Console.WriteLine("Loaded view :)");
+            }
+            else Console.WriteLine("View not loaded, same query");
+        }
+        private void DisableCustomDates()
+        {
+            DT_Danhthu_Begin.Enabled = false;
+            DT_Danhthu_End.Enabled = false;
+            BT_List_Danhthu.Visible = false;
+        }
+
+        private void ThisMonth_Click(object sender, EventArgs e)
+        {
+            DT_Danhthu_Begin.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            DT_Danhthu_End.Value = DateTime.Now;
+            LoadData();
+            DisableCustomDates();
+        }
+
+        private void Dashboard_Load(object sender, EventArgs e)
+        {
+            DT_Danhthu_Begin.Value = DateTime.Today.AddDays(-7);
+            DT_Danhthu_End.Value = DateTime.Now;
+            Day.Select();
+            DisableCustomDates();
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            chart1.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
+            chart1.Series["Series1"]["DrawingStyle"] = "Cylinder";
+        }
     }
 }

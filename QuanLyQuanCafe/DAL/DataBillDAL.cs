@@ -93,7 +93,8 @@ namespace QuanLyQuanCafe.DAL
                     {
                         DataProvider.Instance.setdata("update HoaDon set TimeCheckout = " + FormatDatetimetoSQL(hoadon.TimeCheckout) + " where ID_HoaDon like '" + hoadon.ID + "%' ");
                     }
-                    catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
+                    catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message);
+                    }
                     break;
                 default:
                     break;
@@ -236,8 +237,6 @@ namespace QuanLyQuanCafe.DAL
             SqlConnection con = new SqlConnection(s);
             string query = "select * from View_All_Bill4 where ID_HoaDon = '" + maHoaDon + "'";
             SqlDataAdapter da = new SqlDataAdapter(query, con);
-
-
         }
     }
 }
