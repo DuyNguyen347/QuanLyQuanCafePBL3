@@ -173,11 +173,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Report\DataSetThongKe.cs">
+      <DependentUpon>DataSetThongKe.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Report\DataSetThongKe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetThongKe.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Report\PrintInvoice.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Report\PrintInvoice.Designer.cs">
       <DependentUpon>PrintInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Report\PrintThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Report\PrintThongKe.Designer.cs">
+      <DependentUpon>PrintThongKe.cs</DependentUpon>
     </Compile>
     <Compile Include="Seller.cs">
       <SubType>Form</SubType>
@@ -218,7 +232,11 @@
     <EmbeddedResource Include="Report\PrintInvoice.resx">
       <DependentUpon>PrintInvoice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Report\PrintThongKe.resx">
+      <DependentUpon>PrintThongKe.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\Report1.rdlc" />
+    <EmbeddedResource Include="Report\Report2.rdlc" />
     <EmbeddedResource Include="Seller.resx">
       <DependentUpon>Seller.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +279,17 @@
     </None>
     <None Include="Report\DataSet1.xss">
       <DependentUpon>DataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSetThongKe.xsc">
+      <DependentUpon>DataSetThongKe.xsd</DependentUpon>
+    </None>
+    <None Include="Report\DataSetThongKe.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetThongKe.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Report\DataSetThongKe.xss">
+      <DependentUpon>DataSetThongKe.xsd</DependentUpon>
     </None>
     <None Include="Resources\coffee_foam_cup_140184_3840x2160.jpg" />
   </ItemGroup>

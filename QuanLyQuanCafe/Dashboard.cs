@@ -1,4 +1,5 @@
 ﻿using QuanLyQuanCafe.DAL;
+using QuanLyQuanCafe.Report;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -467,7 +468,6 @@ namespace QuanLyQuanCafe
             bool refreshData = ThongKeDAL.Instance.LoadData(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
             if (refreshData == true)
             {
-
                 chart1.DataSource = ThongKeDAL.Instance.GrossRevenueList;
                 chart1.Series[0].XValueMember = "Date";
                 chart1.Series[0].YValueMembers = "TotalAmount";
@@ -519,6 +519,12 @@ namespace QuanLyQuanCafe
         {
             chart1.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Column;
             chart1.Series["Series1"]["DrawingStyle"] = "Cylinder";
+        }
+
+        private void btInThongKe_Click(object sender, EventArgs e)
+        {
+            PrintThongKe tk = new PrintThongKe(lbSoHD.Text,lbTongThu.Text, DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
+            tk.Show();
         }
     }
 }
