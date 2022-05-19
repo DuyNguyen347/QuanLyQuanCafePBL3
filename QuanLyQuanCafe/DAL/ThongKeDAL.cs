@@ -34,7 +34,7 @@ namespace QuanLyQuanCafe.DAL
         public void SoDon()
         {
             string query = " select count (*) as Tong from HoaDon" +
-                           " where LEN(ID_HoaDon) < 12 and TimeCheckout between '" + startDate + "' and '" + endDate + "'";
+                           " where LEN(ID_HoaDon) < 12 and TimeCheckout between '" + DataBillDAL.FormatDatetimeShort(startDate) + "' and '" + DataBillDAL.FormatDatetimeShort(endDate) + "'";
             NumOrders = Convert.ToInt32(DataProvider.Instance.GetRecords(query).Rows[0]["Tong"].ToString());
         }
         private void GetOrderAnalisys()

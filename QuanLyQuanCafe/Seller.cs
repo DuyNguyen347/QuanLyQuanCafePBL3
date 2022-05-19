@@ -721,6 +721,7 @@ namespace QuanLyQuanCafe
                     if (DataTableDAL.locdulieu(tab)[0].Status)///// tab1 có người, tab trống
                     {
                         DataBillDAL.Doi_IDBan_ChoNhau(tab1, tab, 1);
+                        DataBillDAL.CapNhatIDHoadon_ForBan(tab);
                         ///// tab có người, tab1 trống
                         DataTableDAL.capnhatBan(new Table(tab, false), 3);
                         DataTableDAL.capnhatBan(new Table(tab1, true), 3);
@@ -728,6 +729,7 @@ namespace QuanLyQuanCafe
                     else if (DataTableDAL.locdulieu(tab1)[0].Status) ///// tab có người, tab1 trống
                     {
                         DataBillDAL.Doi_IDBan_ChoNhau(tab, tab1, 1);
+                        DataBillDAL.CapNhatIDHoadon_ForBan(tab1);
                         ///// tab1 có người, tab trống
                         DataTableDAL.capnhatBan(new Table(tab1, false), 3);
                         DataTableDAL.capnhatBan(new Table(tab, true), 3);

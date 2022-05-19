@@ -101,9 +101,8 @@ namespace QuanLyQuanCafe.DAL
             }
             return null;
         }
-        public static void capnhatHoaDon_(HoaDon hoadon, int i, String id_hd = "")
+        public static void capnhatHoaDon_(HoaDon hoadon, int i)
         {
-            string query = "";
             DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout) + ","
                                                                         + hoadon.Tongtinh + "," + hoadon.Dathu + ")");
         }
@@ -155,16 +154,48 @@ namespace QuanLyQuanCafe.DAL
                     break;
                 case 2://////Bàn bỏ id bàn sau vào hóa đơn bàn trước, sau đó bỏ hóa đơn bàn trước vào bàn sau
                     string id_hoadonsau = locdulieu("", id_bansau)[0].ID;
-                    DataProvider.Instance.setdata("update HoaDon_Ban set ID_table = '" + id_bansau + "' where ID_HoaDon = '" +
-                                                        locdulieu("", id_bantruoc)[0].ID + "' and ID_table = '" + id_bantruoc + "'");
-                    DataProvider.Instance.setdata("update HoaDon_Ban set ID_table = '" + id_bantruoc + "' where ID_HoaDon = '" +
-                                                        id_hoadonsau + "' and ID_table = '" + id_bansau + "'");
+                    string id_hoadontruoc = locdulieu("", id_bantruoc)[0].ID;
+                    if (id_hoadontruoc.Substring(0, 11) != id_hoadonsau.Substring(0, 11))
+                    {
+                        DataProvider.Instance.setdata("update HoaDon_Ban set ID_table = '" + id_bansau + "' where ID_HoaDon = '" +
+                                                            id_hoadontruoc + "' and ID_table = '" + id_bantruoc + "'");
+                        DataProvider.Instance.setdata("update HoaDon_Ban set ID_table = '" + id_bantruoc + "' where ID_HoaDon = '" +
+                                                            id_hoadonsau + "' and ID_table = '" + id_bansau + "'");
+                    }
+                    else
+                    {
+                        DataBillDAL.capnhatHoaDon_(new HoaDon("NQTdacomat",default,default,default,default), 1);
+                        DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + "NQTdacomat" + "' where ID_HoaDon = '" + id_hoadontruoc+ "'");
+                        DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadontruoc + "' where ID_HoaDon = '" + id_hoadonsau + "'");
+                        DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadonsau + "' where ID_HoaDon = '" + "NQTdacomat" + "'");
+                        DataBillDAL.capnhatHoaDon(new HoaDon("NQTdacomat", default, default, default, default), 2);
+                    }
                     break;
                 default:
                     break;
+            }        
+        }
+        public static void CapNhatIDHoadon_ForBan(string id_ban)
+        {
+            DataTable data;
+            string query = " select * from View_HienTai where ID_table = '" + id_ban + "'";
+            data = DataProvider.Instance.GetRecords(query);
+            string id_hoadon = data.Rows[0]["ID_HoaDon"].ToString();
+            if ( id_hoadon.Length> 11)
+            {
+                if (id_hoadon.Substring(11, 1) != id_ban)
+                {
+                    DateTime timecheckin = Convert.ToDateTime(data.Rows[0]["TimeCheckin"].ToString());
+                    int tongtinh = Convert.ToInt32(data.Rows[0]["TongTinh"].ToString());
+                    int dathu = Convert.ToInt32(data.Rows[0]["DaThu"].ToString());
+                    DataBillDAL.capnhatHoaDon_(new HoaDon(id_hoadon.Substring(0, 11) + id_ban, timecheckin, id_ban, tongtinh, dathu), 1);
+                    DataProvider.Instance.setdata("update HoaDon_Ban set ID_HoaDon = '" + id_hoadon.Substring(0, 11) + id_ban + "' " +
+                                                    "where ID_HoaDon = '"+id_hoadon+"'");
+                    DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadon.Substring(0, 11) + id_ban + "' " +
+                                                    "where ID_HoaDon = '" + id_hoadon + "'");
+                    DataProvider.Instance.setdata("delete HoaDon where ID_HoaDon = '" + id_hoadon + "'");
+                }
             }
-                
-            
         }
         public static DataTable Doi_IDBan_theoHoaDon(String id_ban, String id_hd)
         {
@@ -231,12 +262,6 @@ namespace QuanLyQuanCafe.DAL
                 return Convert.ToInt32(temp.Substring(8, 3).ToString());
             }          
         }
-        public static void InHoaDon(string maHoaDon)
-        {
-            string s = DataProvider.Instance.getConnectionString();
-            SqlConnection con = new SqlConnection(s);
-            string query = "select * from View_All_Bill4 where ID_HoaDon = '" + maHoaDon + "'";
-            SqlDataAdapter da = new SqlDataAdapter(query, con);
-        }
+        
     }
 }
