@@ -361,7 +361,7 @@ namespace QuanLyQuanCafe
                     try
                     {
                         HoaDon hoadon = new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), "",
-                                                   Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text));
+                                       Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text),nv.ID);
                         DataBillDAL.capnhatHoaDon(hoadon, 1);
                         foreach (string i in TB_IDban.Text.Split(','))
                         {
@@ -413,7 +413,7 @@ namespace QuanLyQuanCafe
                         TB_Checkin.Text = DateTime.Now.ToString();
                         TB_IDhoadon.Text = DataBillDAL.CapIdHoaDon();
                         DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper(), Convert.ToDateTime(TB_Checkin.Text), "",
-                                                            Convert.ToDateTime(TB_Checkin.Text), Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text)), 1);
+                                                            Convert.ToDateTime(TB_Checkin.Text), Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text),nv.ID), 1);
                         foreach (DataGridViewRow i in DGV_DaChon.Rows)
                             DataInforBillDAL.capnhatInforHoaDon(new InforBill(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())), 1);
                         MessageBox.Show("Đã thanh toán!");
@@ -435,7 +435,7 @@ namespace QuanLyQuanCafe
 
                 Tinh_tong_tien();
                 DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text), "",
-                                                       Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text)), 3);
+                                                       Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text),nv.ID), 3);
                 MessageBox.Show("Thanh toán thành công!");
                 if (TB_IDhoadon.Text.Trim().Length > 11)
                     DataInforBillDAL.dongbohoadonchinh(TB_IDhoadon.Text.Substring(0, 11));
@@ -460,7 +460,7 @@ namespace QuanLyQuanCafe
             {
                 foreach (HoaDon i in DataBillDAL.locdulieu(TB_IDhoadon.Text.Substring(0, 11), ""))
                     DataTableDAL.capnhatBan(new Table(i.ID_ban.Trim().ToUpper(), true), 3);
-                DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim(), DateTime.Now, Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text)), 4);
+                DataBillDAL.capnhatHoaDon(new HoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper(), Convert.ToDateTime(TB_Checkin.Text), TB_IDban.Text.Trim(), DateTime.Now, Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text),nv.ID), 4);
                 DialogResult d = MessageBox.Show("Checkout thành công!.Bạn có muốn in hoá đơn không ?", "In hoá đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (d == DialogResult.Yes)
                 {
@@ -616,7 +616,7 @@ namespace QuanLyQuanCafe
                                         try
                                         {
                                             DataBillDAL.capnhatHoaDon_(new HoaDon(hoaDon.ID.Substring(0, 11) + (j), hoaDon.TimeCheckin, j,
-                                            hoaDon.Tongtinh, hoaDon.Dathu), 1);
+                                            hoaDon.Tongtinh, hoaDon.Dathu,nv.ID), 1);
                                         }
                                         catch (Exception ex) { }
                                         DataBillDAL.capnhatHoaDon_Ban_(hoadon_truoc, hoadon_truoc + j, i);
@@ -631,19 +631,19 @@ namespace QuanLyQuanCafe
                                             try
                                             {
                                                 DataBillDAL.capnhatHoaDon_(new HoaDon(hoaDon.ID.Substring(0, 11) + (j), hoaDon.TimeCheckin, j,
-                                                hoadon_truoc.Dathu, hoadon_truoc.Tongtinh), 1);
+                                                hoadon_truoc.Dathu, hoadon_truoc.Tongtinh,hoadon_truoc.ID_NhanVien), 1);
                                             }
                                             catch (Exception ex) { }
                                             DataBillDAL.capnhatHoaDon_Ban_(hoadon_truoc.ID, hoaDon.ID.Substring(0, 11) + (j), j);               ///// cập nhật lại hóa đơn cho mấy bàn đã gộp
                                             DataInforBillDAL.doiidhoadon(hoadon_truoc.ID, hoaDon.ID.Substring(0, 11) + (j));
-                                            DataBillDAL.capnhatHoaDon(new HoaDon(hoadon_truoc.ID, default, default, default, default), 2);
+                                            DataBillDAL.capnhatHoaDon(new HoaDon(hoadon_truoc.ID, default, default, default, default,default), 2);
                                             DataTableDAL.capnhatBan(new Table(j.Trim().ToUpper(), false), 3);
                                         }
                                     }
                                     else
                                         try
                                         {
-                                            DataBillDAL.capnhatHoaDon_(new HoaDon(hoaDon.ID.Substring(0, 11) + (j), hoaDon.TimeCheckin, j, 0, 0), 1);
+                                            DataBillDAL.capnhatHoaDon_(new HoaDon(hoaDon.ID.Substring(0, 11) + (j), hoaDon.TimeCheckin, j, 0, 0,nv.ID), 1);
                                             DataBillDAL.capnhatHoaDon_Ban(hoaDon.ID.Substring(0, 11) + (j), j, 1);         //////////// thêm bàn vào hóa đơn
                                             DataTableDAL.capnhatBan(new Table(j.Trim().ToUpper(), false), 3); /////////// chỉnh lại trạng thái bàn
                                         }
