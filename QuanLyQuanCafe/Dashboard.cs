@@ -94,7 +94,7 @@ namespace QuanLyQuanCafe
                 //{
                     string password = ReloadAccount.sendcode(TB_emailNV.Text, 1);
                     DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                           cbB_ChucVu.Text, TB_UserName.Text, password, TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
+                                                           cbB_ChucVu.Text, TB_UserName.Text,LoginDAL.Instance.EncodePass(password), TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                 //}
                 //else MessageBox.Show("Có lỗi trong quá trình kiểm tra email. Vui lòng thực hiện lại!!");

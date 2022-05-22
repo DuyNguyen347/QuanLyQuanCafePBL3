@@ -77,6 +77,7 @@
             this.DT_Bill_Begin = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.DGV_Bill = new Guna.UI2.WinForms.Guna2DataGridView();
             this.tabPageDanhThu = new System.Windows.Forms.TabPage();
+            this.btInThongKe = new Guna.UI2.WinForms.Guna2GradientButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -181,7 +182,6 @@
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.detail_Bill1 = new QuanLyQuanCafe.Detail_Bill();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btInThongKe = new Guna.UI2.WinForms.Guna2GradientButton();
             this.guna2TabControl1.SuspendLayout();
             this.tabPageBan.SuspendLayout();
             this.guna2Panel4.SuspendLayout();
@@ -630,6 +630,22 @@
             this.tabPageDanhThu.Text = "Doanh thu";
             this.tabPageDanhThu.UseVisualStyleBackColor = true;
             // 
+            // btInThongKe
+            // 
+            this.btInThongKe.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btInThongKe.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btInThongKe.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btInThongKe.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btInThongKe.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btInThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btInThongKe.ForeColor = System.Drawing.Color.White;
+            this.btInThongKe.Location = new System.Drawing.Point(35, 162);
+            this.btInThongKe.Name = "btInThongKe";
+            this.btInThongKe.Size = new System.Drawing.Size(200, 24);
+            this.btInThongKe.TabIndex = 38;
+            this.btInThongKe.Text = "In báo cáo thống kê";
+            this.btInThongKe.Click += new System.EventHandler(this.btInThongKe_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.radioButton2);
@@ -969,7 +985,7 @@
             this.DGV_DoanhThu.RowHeadersWidth = 51;
             this.DGV_DoanhThu.RowTemplate.Height = 25;
             this.DGV_DoanhThu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_DoanhThu.Size = new System.Drawing.Size(449, 163);
+            this.DGV_DoanhThu.Size = new System.Drawing.Size(449, 125);
             this.DGV_DoanhThu.TabIndex = 11;
             this.DGV_DoanhThu.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.DGV_DoanhThu.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -2458,22 +2474,6 @@
             this.detail_Bill1.Size = new System.Drawing.Size(131, 44);
             this.detail_Bill1.TabIndex = 21;
             this.detail_Bill1.Visible = false;
-            // 
-            // btInThongKe
-            // 
-            this.btInThongKe.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btInThongKe.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btInThongKe.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btInThongKe.DisabledState.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btInThongKe.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btInThongKe.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btInThongKe.ForeColor = System.Drawing.Color.White;
-            this.btInThongKe.Location = new System.Drawing.Point(35, 162);
-            this.btInThongKe.Name = "btInThongKe";
-            this.btInThongKe.Size = new System.Drawing.Size(200, 24);
-            this.btInThongKe.TabIndex = 38;
-            this.btInThongKe.Text = "In báo cáo thống kê";
-            this.btInThongKe.Click += new System.EventHandler(this.btInThongKe_Click);
             // 
             // Dashboard
             // 

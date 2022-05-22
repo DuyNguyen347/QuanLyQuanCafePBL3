@@ -37,7 +37,7 @@ namespace QuanLyQuanCafe
                     ds.quit = new Quit(this.Close);
                     this.Hide();
                 }
-                else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
+                else if (LoginDAL.Instance.Login(tbUserName.Text,LoginDAL.Instance.EncodePass(tbPassword.Text),'\0'))
                 {
                     Dashboard ds = new Dashboard();
                     ds.Show();
@@ -45,7 +45,7 @@ namespace QuanLyQuanCafe
                     ds.quit = new Quit(this.Close);
                     this.Hide();
                 }
-                else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'!'))
+                else if (LoginDAL.Instance.Login(tbUserName.Text, LoginDAL.Instance.EncodePass(tbPassword.Text), '!'))
                 {
 
                     Seller sl = new Seller();

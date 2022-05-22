@@ -44,6 +44,7 @@ namespace QuanLyQuanCafe.Report
                 new ReportParameter("TimeEnd", end.ToString()),
                 new ReportParameter("SoHoaDon", soHD),
                 new ReportParameter("TongTien", tong),
+                 new ReportParameter("NgayIn", DateTime.Now.ToString()),
         };
             this.reportViewer1.LocalReport.SetParameters(para);
             this.reportViewer1.RefreshReport();

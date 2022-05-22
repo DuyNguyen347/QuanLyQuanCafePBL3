@@ -49,7 +49,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                if (oldpass != DataNhanVienDAL.Instance.getPassNV(nv.ID).Replace(" ", ""))
+                if (LoginDAL.Instance.EncodePass(oldpass) != DataNhanVienDAL.Instance.getPassNV(nv.ID).Replace(" ", ""))
                 {
                     MessageBox.Show("Vui lòng nhập đúng  mật khẩu cũ", "Xác nhận mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -74,7 +74,7 @@ namespace QuanLyQuanCafe
                     //string un = tbUserName.Text;
                     if(tbUserName.Text == nv.Username)
                     {
-                        string query = "update TaiKhoan set PassWord = '" + newpass +"' where UserName = '" + nv.Username + "'";
+                        string query = "update TaiKhoan set PassWord = '" + LoginDAL.Instance.EncodePass(newpass) + "' where UserName = '" + nv.Username + "'";
                         if(DataProvider.Instance.executeDB(query))
                         {
                             MessageBox.Show("Cap nhat thanh cong");
@@ -83,7 +83,7 @@ namespace QuanLyQuanCafe
                     }   
                     else if(tbUserName.Text != nv.Username)
                     {
-                        string query1 = "insert into TaiKhoan values('" + tbUserName.Text + "','" + newpass + "')";
+                        string query1 = "insert into TaiKhoan values('" + tbUserName.Text + "','" + LoginDAL.Instance.EncodePass(newpass) + "')";
                         DataProvider.Instance.executeDB(query1);
                         string query11 = "update NhanVien set UserName = '" + tbUserName.Text + "' where ID = '" + nv.ID + "'";
                         if(DataProvider.Instance.executeDB(query11))

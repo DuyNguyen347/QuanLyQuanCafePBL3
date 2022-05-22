@@ -91,7 +91,7 @@ namespace QuanLyQuanCafe.DAL
         public NhanVien getNVbyUserNameAndPassWork(string username,string password)
         {
             NhanVien nhanVien = new NhanVien();
-            string query = "select * from View_Nhanvien inner join TaiKhoan on View_NhanVien.UserName =TaiKhoan.UserName where TaiKhoan.UserName = '" + username + "' and PassWord = '" + password + "'";
+            string query = "select * from View_Nhanvien inner join TaiKhoan on View_NhanVien.UserName =TaiKhoan.UserName where TaiKhoan.UserName = '" + username + "' and PassWord = '" + LoginDAL.Instance.EncodePass(password) + "'";
             DataTable data = DataProvider.Instance.GetRecords(query);
             nhanVien.ID = data.Rows[0]["ID"].ToString();
             nhanVien.Name = data.Rows[0]["Name"].ToString();
@@ -123,7 +123,7 @@ namespace QuanLyQuanCafe.DAL
         public string getNameNV(string username,string pass)
         {
             string name;
-            string query = "select * from View_Nhanvien inner join TaiKhoan on View_NhanVien.UserName =TaiKhoan.UserName where TaiKhoan.UserName = '" + username + "' and PassWord = '" + pass + "'";
+            string query = "select * from View_Nhanvien inner join TaiKhoan on View_NhanVien.UserName =TaiKhoan.UserName where TaiKhoan.UserName = '" + username + "' and PassWord = '" + LoginDAL.Instance.EncodePass(pass) + "'";
             DataTable data = DataProvider.Instance.GetRecords(query);
             name = data.Rows[0]["Name"].ToString();
             return name;

@@ -31,7 +31,6 @@ namespace QuanLyQuanCafe
                 {
                     tbCode.Visible = true;
                     btOk.Visible = true;
-                    btCancel.Visible = true;
                     s = sendcode(tbEmail.Text,0);
                     if (s!=null)
                         lbInfor.Visible = false;
@@ -58,14 +57,10 @@ namespace QuanLyQuanCafe
             {
                 if (tbCode.Text == s)
                 {
-                    string query = "select UserName , PassWord from TaiKhoan  where Email = '" + tbEmail.Text + "'";
-                    //MessageBox.Show("Lấy mã thành công!");
-                    DataTable dt = DataProvider.Instance.GetRecords(query);
-                    DataRow dr = dt.Rows[0];
-                    string username = dr["UserName"].ToString();
-                    string password = dr["password"].ToString();
-                    string infor = "Tài khoản của bạn là : \n UserName = " + username + "\nPassWord = " + password;
-                    MessageBox.Show(infor);
+                    lbInfor.Visible = false;
+                    tbNewPass.Visible = true;
+                    tbCheckPass.Visible = true;
+                    btDoiMatKhau.Visible = true;
                 }
                 else
                 {
@@ -87,6 +82,28 @@ namespace QuanLyQuanCafe
             else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
             return str;
         }
-       
+
+        private void btDoiMatKhau_Click(object sender, EventArgs e)
+        {
+            if(tbNewPass.Text == "" && tbCheckPass.Text == "" )
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu mới");
+            }
+            else if(tbNewPass.Text != tbCheckPass.Text)
+            {
+                MessageBox.Show("Các mật khẩu đã nhập không khớp. Vui lòng thử lại!");
+            }
+            else
+            {
+                string query = "update TaiKhoan set PassWord = '" + LoginDAL.Instance.EncodePass(tbCheckPass.Text)
+                    + "' from TaiKhoan tk inner join NhanVien nv on tk.UserName = nv.UserName where nv.Email = '" + tbEmail.Text + "'";
+                if (DataProvider.Instance.executeDB(query))
+                {
+                    MessageBox.Show("Đổi mật khẩu thành công");
+                    this.Close();
+                }
+                else MessageBox.Show("Error");
+            }
+        }
     }
 }
