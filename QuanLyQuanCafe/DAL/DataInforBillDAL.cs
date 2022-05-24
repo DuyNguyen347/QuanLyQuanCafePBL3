@@ -95,6 +95,9 @@ namespace QuanLyQuanCafe.DAL
                 {
                     DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon ='" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'and ID_Mon = '" + i.ID_Mon + "'");
                 }
+            DataProvider.Instance.setdata("update HoaDon set TongTinh = TongTinh + (select TongTinh from HoaDon where ID_HoaDon = '" + id_truoc + "')," +
+                                                            "DaThu = DaThu + (select DaThu from HoaDon where ID_HoaDon = '" + id_truoc + "')" +
+                                            "where ID_HoaDon = '" + id_sau + "'");
         }
         public static void dongbohoadonchinh(string id_hoadonchinh)
         {

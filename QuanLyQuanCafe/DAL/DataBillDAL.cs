@@ -68,7 +68,7 @@ namespace QuanLyQuanCafe.DAL
                     try
                     {
                         DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout) + ","
-                                                                                    + hoadon.Tongtinh + "," + hoadon.Dathu + ")");
+                                                                                    + hoadon.Tongtinh + "," + hoadon.Dathu + ",'" + hoadon.ID_NhanVien + "')");
                     }
                     catch (Exception e) { MessageBox.Show("Không thực hiện được!\n" + e.Message); }
                     break;
@@ -104,7 +104,7 @@ namespace QuanLyQuanCafe.DAL
         public static void capnhatHoaDon_(HoaDon hoadon, int i)
         {
             DataProvider.Instance.setdata("insert into HoaDon values('" + hoadon.ID + "'," + FormatDatetimetoSQL(hoadon.TimeCheckin) + "," + FormatDatetimetoSQL(hoadon.TimeCheckout) + ","
-                                                                        + hoadon.Tongtinh + "," + hoadon.Dathu + ")");
+                                                                        + hoadon.Tongtinh + "," + hoadon.Dathu + ",'" + hoadon.ID_NhanVien + "')");
         }
         public static List<string> dataHoaDon_Ban(string id_hoadon)
         {
@@ -164,11 +164,11 @@ namespace QuanLyQuanCafe.DAL
                     }
                     else
                     {
-                        DataBillDAL.capnhatHoaDon_(new HoaDon("NQTdacomat",default,default,default,default), 1);
+                        DataBillDAL.capnhatHoaDon_(new HoaDon("NQTdacomat",default,default,default,default,default), 1);
                         DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + "NQTdacomat" + "' where ID_HoaDon = '" + id_hoadontruoc+ "'");
                         DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadontruoc + "' where ID_HoaDon = '" + id_hoadonsau + "'");
                         DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadonsau + "' where ID_HoaDon = '" + "NQTdacomat" + "'");
-                        DataBillDAL.capnhatHoaDon(new HoaDon("NQTdacomat", default, default, default, default), 2);
+                        DataBillDAL.capnhatHoaDon(new HoaDon("NQTdacomat", default, default, default, default,default), 2);
                     }
                     break;
                 default:
@@ -188,7 +188,8 @@ namespace QuanLyQuanCafe.DAL
                     DateTime timecheckin = Convert.ToDateTime(data.Rows[0]["TimeCheckin"].ToString());
                     int tongtinh = Convert.ToInt32(data.Rows[0]["TongTinh"].ToString());
                     int dathu = Convert.ToInt32(data.Rows[0]["DaThu"].ToString());
-                    DataBillDAL.capnhatHoaDon_(new HoaDon(id_hoadon.Substring(0, 11) + id_ban, timecheckin, id_ban, tongtinh, dathu), 1);
+                    string id_nhanvien = data.Rows[0]["ID_NhanVien"].ToString();
+                    DataBillDAL.capnhatHoaDon_(new HoaDon(id_hoadon.Substring(0, 11) + id_ban, timecheckin, id_ban, tongtinh, dathu,id_nhanvien), 1);
                     DataProvider.Instance.setdata("update HoaDon_Ban set ID_HoaDon = '" + id_hoadon.Substring(0, 11) + id_ban + "' " +
                                                     "where ID_HoaDon = '"+id_hoadon+"'");
                     DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_hoadon.Substring(0, 11) + id_ban + "' " +

@@ -16,7 +16,8 @@ namespace QuanLyQuanCafe.DTO
         public string ID_ban { get; set; }
         public int Tongtinh { get; set; }
         public int Dathu { get; set; }
-        public HoaDon(string id, DateTime timecheckin, string idban, int tongtinh, int dathu)
+        public string ID_NhanVien { get; set; }
+        public HoaDon(string id, DateTime timecheckin, string idban, int tongtinh, int dathu,string id_nhanvien)
         {
             ID = id;
             TimeCheckin = timecheckin;
@@ -24,8 +25,9 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckout = new DateTime();
             Tongtinh = tongtinh;
             Dathu = dathu;
+            ID_NhanVien = id_nhanvien;
         }
-        public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout,int tongtinh,int dathu)
+        public HoaDon(string id, DateTime timecheckin, string idban,DateTime timecheckout,int tongtinh,int dathu,string id_nhanvien)
         {
             ID = id;
             TimeCheckin = timecheckin;
@@ -33,6 +35,7 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckout = timecheckout;
             Tongtinh = tongtinh;
             Dathu = dathu;
+            ID_NhanVien = id_nhanvien;
         }
         public HoaDon(DataRow row)
         {

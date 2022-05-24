@@ -38,6 +38,7 @@ create table HoaDon(
 	TimeCheckout datetime,
 	TongTinh int,
 	DaThu int
+	ID_NhanVien varchar(10) constraint FK_HoaDon_NhanVien foreign key references dbo.NhanVien(ID),
 )
 create table HoaDon_Ban(
 	ID_HoaDon varchar(12) constraint FK_HoaDon_Ban foreign key references dbo.HoaDon(ID_HoaDon),
