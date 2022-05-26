@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -30,7 +32,6 @@ namespace QuanLyQuanCafe.DAL
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        
         #endregion
         public static DataTable capnhatNV(NhanVien nhanVien,int i)
         {
@@ -46,9 +47,20 @@ namespace QuanLyQuanCafe.DAL
                     {
                         try
                         {
+                            string query2 = "";
                             DataProvider.Instance.setdata("insert into TaiKhoan values(N'" + nhanVien.Username + "','" + nhanVien.PassWord + "')");
-                            DataProvider.Instance.setdata("insert into NhanVien values('" + nhanVien.ID + "',N'" + nhanVien.Name + "','" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "','" + nhanVien.Email + "','" + nhanVien.SDT + "' ,N'" + nhanVien.ChucVu + "','" + nhanVien.Username + "')");
-                        }catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
+                            if (nhanVien.AnhNV == null)
+                            {
+                                query2 = "insert into NhanVien values('" + nhanVien.ID + "',N'" + nhanVien.Name + "','" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "','" + nhanVien.Email + "','" + nhanVien.SDT + "' ,N'" + nhanVien.ChucVu + "','" + nhanVien.Username + "', null)";
+                                DataProvider.Instance.Execute(query2);
+                            }
+                            else
+                            {
+                                query2 = "insert into NhanVien values('" + nhanVien.ID + "',N'" + nhanVien.Name + "','" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "','" + nhanVien.Email + "','" + nhanVien.SDT + "' ,N'" + nhanVien.ChucVu + "','" + nhanVien.Username + "', @data)";
+                                DataProvider.Instance.Execute(query2, ImageToByteArray(nhanVien.AnhNV));
+                            }
+                        }
+                        catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này \n" + ex.ToString()); }
                     }
                     break;
                 case 2:
@@ -62,12 +74,23 @@ namespace QuanLyQuanCafe.DAL
                 case 3:
                     try
                     {
-                        DataProvider.Instance.setdata("update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "',ChucVu = N'" + nhanVien.ChucVu + "',Email='" + nhanVien.Email + "', Phone = '" + nhanVien.SDT + "' where ID= '" + nhanVien.ID + "'");
-                    }catch(Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này\n"+ex.Message);}
+                        string query3 = "";
+                        if(nhanVien.AnhNV == null)
+                        {
+                            query3 = "update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "',ChucVu = N'" + nhanVien.ChucVu + "',Email='" + nhanVien.Email + "', Phone = '" + nhanVien.SDT + "',Anh = null where ID= '" + nhanVien.ID + "'";
+                            DataProvider.Instance.Execute(query3);
+                        }
+                        else
+                        {
+                            query3 = "update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "',ChucVu = N'" + nhanVien.ChucVu + "',Email='" + nhanVien.Email + "', Phone = '" + nhanVien.SDT + "',Anh = @data where ID= '" + nhanVien.ID + "'";
+                            DataProvider.Instance.Execute(query3,ImageToByteArray(nhanVien.AnhNV));
+                        }
+                        //DataProvider.Instance.setdata("update NhanVien set Name = N'" + nhanVien.Name + "',NgaySinh = '" + DataBillDAL.FormatDatetimeShort(Convert.ToDateTime(nhanVien.NgaySinh)) + "',ChucVu = N'" + nhanVien.ChucVu + "',Email='" + nhanVien.Email + "', Phone = '" + nhanVien.SDT + "' where ID= '" + nhanVien.ID + "'");
+                    }
+                    catch(Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này\n"+ex.Message);}
                         break;
                 default:
                     break;
-
             }
             return null;
         }
@@ -135,6 +158,20 @@ namespace QuanLyQuanCafe.DAL
             DataTable data = DataProvider.Instance.GetRecords(query);
             pass = data.Rows[0]["PassWord"].ToString();
             return pass;
+        }
+        // chuyển từ Image sang Byte
+        public static byte[] ImageToByteArray(Image img)
+        {
+            if(img == null) return null;
+            MemoryStream m = new MemoryStream();
+            img.Save(m,System.Drawing.Imaging.ImageFormat.Png);
+            return m.ToArray();
+        }
+        // chuyển từ Byte sang Image
+         public Image ByteArrayToImage(byte[] b)
+        {
+            MemoryStream ms = new MemoryStream(b);
+            return Image.FromStream(ms);
         }
     }
 }

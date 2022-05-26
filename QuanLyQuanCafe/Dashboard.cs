@@ -78,14 +78,19 @@ namespace QuanLyQuanCafe
             TB_emailNV.Text = DGV_NhanVien.CurrentRow.Cells[5].Value.ToString().Trim();
             TB_LuongNV.Text = DGV_NhanVien.CurrentRow.Cells[6].Value.ToString().Trim();
             TB_SDT.Text = DGV_NhanVien.CurrentRow.Cells[7].Value.ToString().Trim();
-
+            if (DGV_NhanVien.CurrentRow.Cells[8].Value.ToString() == "") pbAnhNV.Image = null;
+            else
+            {
+                byte[] b = (byte[])DGV_NhanVien.CurrentRow.Cells[8].Value;
+                pbAnhNV.Image = DataNhanVienDAL.Instance.ByteArrayToImage(b);
+            }   
         }
         private void BT_Them1_Click(object sender, EventArgs e)
         {
             if (TB_emailNV.Text == "")
             {
                 DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                   cbB_ChucVu.Text, "", "", TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
+                                                   cbB_ChucVu.Text, "", "", TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text,pbAnhNV.Image), 1);
                 BT_Refresh_Click_NhanVien(new object(), new EventArgs());
             }
             else
@@ -94,7 +99,7 @@ namespace QuanLyQuanCafe
                 //{
                     string password = ReloadAccount.sendcode(TB_emailNV.Text, 1);
                     DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                           cbB_ChucVu.Text, TB_UserName.Text,LoginDAL.Instance.EncodePass(password), TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 1);
+                                                           cbB_ChucVu.Text, TB_UserName.Text,LoginDAL.Instance.EncodePass(password), TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text,pbAnhNV.Image), 1);
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                 //}
                 //else MessageBox.Show("Có lỗi trong quá trình kiểm tra email. Vui lòng thực hiện lại!!");
@@ -102,13 +107,13 @@ namespace QuanLyQuanCafe
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
         {
-            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), "", "", "", "", "", "", "", ""), 2);
+            DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), "", "", "", "", "", "", "", "",null), 2);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void BT_Sua1_Click(object sender, EventArgs e)
         {
             DataNhanVienDAL.capnhatNV(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
-                                                   cbB_ChucVu.Text, TB_UserName.Text, "", TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text), 3);
+                                                   cbB_ChucVu.Text, TB_UserName.Text, "", TB_LuongNV.Text, TB_emailNV.Text, TB_SDT.Text,pbAnhNV.Image), 3);
             BT_Refresh_Click_NhanVien(new object(), new EventArgs());
         }
         private void cbB_ChucVu_SelectedIndexChanged(object sender, EventArgs e)
@@ -149,6 +154,8 @@ namespace QuanLyQuanCafe
             DGV_NhanVien.Columns[5].HeaderText = "Email";
             DGV_NhanVien.Columns[6].HeaderText = "Lương";
             DGV_NhanVien.Columns[7].HeaderText = "SĐT";
+            DGV_NhanVien.Columns[8].HeaderText = "Anh";
+            //DGV_NhanVien.Columns[8].ValueType = typeof(String);
             load_cbb_chucvu();
             TB_TimNhanVien.Text = "";
             TB_TenNV.Text = "";
@@ -158,6 +165,7 @@ namespace QuanLyQuanCafe
             TB_UserName.Text = "";
             TB_LuongNV.Text = "";
             TB_SDT.Text = "";
+            pbAnhNV.Image = null;
         }
 
         #endregion
@@ -526,5 +534,22 @@ namespace QuanLyQuanCafe
             PrintThongKe tk = new PrintThongKe(lbSoHD.Text,lbTongThu.Text, DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
             tk.Show();
         }
+
+        private void btUploadImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                openFileAnh.ShowDialog();
+                string nameFile = openFileAnh.FileName;
+                if (string.IsNullOrEmpty(nameFile)) return;
+                Image image = Image.FromFile(nameFile);
+                pbAnhNV.Image = image;
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        
     }
 }
