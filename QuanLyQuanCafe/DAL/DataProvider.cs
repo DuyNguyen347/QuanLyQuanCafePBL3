@@ -31,13 +31,13 @@ namespace QuanLyQuanCafe.DAL
         public DataProvider()
         {
             // ConnectionString of Tinh 
-            s = @"Data Source = 192.168.1.100,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
+            //s = @"Data Source = 192.168.1.100,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
             // ConnectionString of Duy
             //s = ConfigurationManager.ConnectionStrings["QuanLyQuanCafeConnectionString"].ConnectionString;
             //s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QL_cafe;Integrated Security=True";
             //connect to tĩnh network
             // Đà Nẵng
-            //s = @"Data Source = 116.105.164.50,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
+            s = @"Data Source = 116.105.164.50,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
             //s = @"Data Source = 14.165.149.140,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
         }
         public bool executeDB(string query, object[] parameter = null)
@@ -69,6 +69,25 @@ namespace QuanLyQuanCafe.DAL
             catch (Exception)
             {
                 MessageBox.Show("Lỗi!");
+                return false;
+            }
+        }
+        public bool Execute(string query, byte[] byteData = null)
+        {
+            try
+            {
+                using(SqlConnection cnn = new SqlConnection(s))
+                {
+                    cnn.Open();
+                    SqlCommand cmd = new SqlCommand(query,cnn);
+                    if(byteData != null) cmd.Parameters.Add("@data",SqlDbType.VarBinary,byteData.Length).Value = byteData;
+                    cmd.ExecuteNonQuery();
+                    cnn.Close();
+                    return true;
+                }
+            }
+            catch(Exception e)
+            {
                 return false;
             }
         }

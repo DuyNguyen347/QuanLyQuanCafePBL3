@@ -16,6 +16,7 @@ namespace QuanLyQuanCafe
         public bool CheckPass = true;
         string username_admin = "admin";
         string password_admin = "admin";
+        string s = "";
         public Login()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace QuanLyQuanCafe
                     ds.quit = new Quit(this.Close);
                     this.Hide();
                 }
-                else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'\0'))
+                else if (LoginDAL.Instance.Login(tbUserName.Text,LoginDAL.Instance.EncodePass(tbPassword.Text),'\0'))
                 {
                     Dashboard ds = new Dashboard();
                     ds.Show();
@@ -45,7 +46,7 @@ namespace QuanLyQuanCafe
                     ds.quit = new Quit(this.Close);
                     this.Hide();
                 }
-                else if (LoginDAL.Instance.Login(tbUserName.Text, tbPassword.Text,'!'))
+                else if (LoginDAL.Instance.Login(tbUserName.Text, LoginDAL.Instance.EncodePass(tbPassword.Text), '!'))
                 {
 
                     Seller sl = new Seller();
@@ -96,10 +97,95 @@ namespace QuanLyQuanCafe
 
         private void ReloadAccount_Click(object sender, EventArgs e)
         {
-            ReloadAccount rl = new ReloadAccount();
-            rl.Show();
+            //ReloadAccount rl = new ReloadAccount();
+            //rl.Show();
+            panelLogin.Visible = false;
+            panelChangepass.Visible = true;
+            guna2Transition1.ShowSync(panelChangepass);
         }
 
-        
+        private void lbLogin_Click(object sender, EventArgs e)
+        {
+            panelLogin.Visible = true;
+            panelChangepass.Visible = false;
+            guna2Transition1.HideSync(panelChangepass);
+            setPanelChangePass();
+        }
+
+        private void tbGetCode_Click(object sender, EventArgs e)
+        {
+            if (tbEmail.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập email");
+            }
+            else
+            {
+                if (ReloadAccountDAL.Instance.Reload(tbEmail.Text))
+                {
+                    tbCode.Visible = true;
+                    btXacNhan.Visible = true;
+                    s = ReloadAccountDAL.Instance.sendcode(tbEmail.Text, 0);
+                }
+                else
+                {
+                    MessageBox.Show("Email khong đúng");
+                }
+            }
+        }
+
+        private void btXacNhan_Click(object sender, EventArgs e)
+        {
+            if (tbCode.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập mã CODE !");
+            }
+            else
+            {
+                if (tbCode.Text == s)
+                {
+                    tbNewPass.Visible = true;
+                    tbXacNhanPass.Visible = true;
+                    btDoiMatKhau.Visible = true;
+                }
+                else
+                {
+                    MessageBox.Show("Mã CODE không đúng !");
+                }
+            }
+        }
+
+        private void btDoiMatKhau_Click(object sender, EventArgs e)
+        {
+            if (tbNewPass.Text == "" && tbXacNhanPass.Text == "")
+            {
+                MessageBox.Show("Vui lòng nhập mật khẩu mới");
+            }
+            else if (tbNewPass.Text != tbXacNhanPass.Text)
+            {
+                MessageBox.Show("Các mật khẩu đã nhập không khớp. Vui lòng thử lại!");
+            }
+            else
+            {
+                string query = "update TaiKhoan set PassWord = '" + LoginDAL.Instance.EncodePass(tbXacNhanPass.Text)
+                    + "' from TaiKhoan tk inner join NhanVien nv on tk.UserName = nv.UserName where nv.Email = '" + tbEmail.Text + "'";
+                if (DataProvider.Instance.executeDB(query))
+                {
+                    MessageBox.Show("Đổi mật khẩu thành công");
+                }
+                else MessageBox.Show("Error");
+            }
+        }
+        public void setPanelChangePass()
+        {
+            tbEmail.Text = "";
+            tbCode.Text = "";
+            tbNewPass.Text = "";
+            tbXacNhanPass.Text = "";
+            tbCode.Visible = false;
+            tbNewPass.Visible = false;
+            tbXacNhanPass.Visible = false;
+            btDoiMatKhau.Visible = false;
+            btXacNhan.Visible = false;
+        }
     }
 }
