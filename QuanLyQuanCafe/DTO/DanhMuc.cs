@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 using System.Data;
 namespace QuanLyQuanCafe
 {
-    public class DanhMuc
+    public class DanhMuc : Object
     {
         public string ID { get; set; }
-        public string Name { get; set; }
+        public string Ten_Category { get; set; }
         public DanhMuc()
         {
         }
-        public DanhMuc(string id,string name)
+        public DanhMuc(string id,string ten_category)
         {
             ID = id;
-            Name = name;
+            Ten_Category = ten_category;
         }
         public DanhMuc(DataRow dataRow)
         {
-            ID=dataRow[0].ToString();
-            Name = dataRow[1].ToString();
+            ID=dataRow["ID"].ToString();
+            Ten_Category = dataRow["Ten_Category"].ToString();
+        }
+        public override string ToString()
+        {
+            return Ten_Category;
         }
     }
 }

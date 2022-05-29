@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Security.Cryptography;
 
 namespace QuanLyQuanCafe.DAL
 {
@@ -14,8 +15,6 @@ namespace QuanLyQuanCafe.DAL
     {
         private static DataProvider _Instance;
         private string s;
-
-
 
         public static DataProvider Instance {
             get
@@ -31,13 +30,13 @@ namespace QuanLyQuanCafe.DAL
         public DataProvider()
         {
             // ConnectionString of Tinh 
-            //s = @"Data Source = 192.168.1.100,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
+            s = @"Data Source = 192.168.1.100,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
             // ConnectionString of Duy
             //s = ConfigurationManager.ConnectionStrings["QuanLyQuanCafeConnectionString"].ConnectionString;
             //s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QL_cafe;Integrated Security=True";
             //connect to tĩnh network
             // Đà Nẵng
-            s = @"Data Source = 116.105.164.50,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
+            //s = @"Data Source = 116.105.164.50,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
             //s = @"Data Source = 14.165.149.140,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
         }
         public bool executeDB(string query, object[] parameter = null)
@@ -76,17 +75,17 @@ namespace QuanLyQuanCafe.DAL
         {
             try
             {
-                using(SqlConnection cnn = new SqlConnection(s))
+                using (SqlConnection cnn = new SqlConnection(s))
                 {
                     cnn.Open();
-                    SqlCommand cmd = new SqlCommand(query,cnn);
-                    if(byteData != null) cmd.Parameters.Add("@data",SqlDbType.VarBinary,byteData.Length).Value = byteData;
+                    SqlCommand cmd = new SqlCommand(query, cnn);
+                    if (byteData != null) cmd.Parameters.Add("@data", SqlDbType.VarBinary, byteData.Length).Value = byteData;
                     cmd.ExecuteNonQuery();
                     cnn.Close();
                     return true;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -125,7 +124,7 @@ namespace QuanLyQuanCafe.DAL
         //    return null;
         //}
  
-        public DataTable setdata(string query, object[] parameter = null)
+        public void setdata(string query, object[] parameter = null)
         {
             //try
             //{
@@ -135,8 +134,6 @@ namespace QuanLyQuanCafe.DAL
                     cnn.Open();
                     cmd.ExecuteNonQuery();
                     cnn.Close();
-
-                    return GetRecords("select * from NhanVien");
                 }
             //}
             //catch (Exception)
@@ -152,6 +149,117 @@ namespace QuanLyQuanCafe.DAL
         public SqlConnection GetConnection()
         {
             return new SqlConnection(s);
+        }
+        public static string FormatDatetimetoSQL(DateTime dateTime)
+        {
+            string s = "";
+            s += dateTime.Day.ToString() + "-" + dateTime.Month.ToString() + "-" + (dateTime.Year % 100).ToString() + " " +
+               dateTime.Hour.ToString() + ":" + dateTime.Minute.ToString() + ":" + dateTime.Second.ToString();
+            return "convert(datetime, '" + s + "', 5)";
+        }
+        public static string FormatDatetimeShort(DateTime dateTime)
+        {
+            string s = "";
+            s = dateTime.Year + "/" + dateTime.Month + "/" + dateTime.Day;
+            return s;
+        }
+        public static string CapIdHoaDon()
+        {
+            string id = "";
+            int n = GetCountNumOfOrderInDate();
+            string m = "";
+            string d = "";
+            if (DateTime.Now.Month < 10)
+            {
+                m = "0" + DateTime.Now.Month.ToString();
+            }
+            else m = DateTime.Now.Month.ToString();
+            if (DateTime.Now.Day < 10)
+            {
+                d = "0" + DateTime.Now.Day.ToString();
+            }
+            else d = DateTime.Now.Day.ToString();
+            if (n < 9)
+            {
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + d + "00" + (n + 1).ToString();
+            }
+            else if (n >= 9 && n < 99)
+            {
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + d + "0" + (n + 1).ToString();
+            }
+            else
+            {
+                id = "HD" + DateTime.Now.Year.ToString().Remove(0, 2) + m + d + (n + 1).ToString();
+            }
+            return id;
+        }
+        public static int GetCountNumOfOrderInDate()
+        {
+            string sql = "select top 1 * from HoaDon  where convert(nvarchar(10),TimeCheckIn,103) = convert(nvarchar(10),getdate(),103) order by ID_HoaDon desc";
+            DataTable dt = DataProvider.Instance.GetRecords(sql);
+            if (dt.Rows.Count == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                string temp = dt.Rows[0]["ID_HoaDon"].ToString();
+                return Convert.ToInt32(temp.Substring(8, 3).ToString());
+            }
+        }
+        public string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+
+        public string MD5Hash(string input)
+        {
+
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+            // x2 là định dạng hệ thập lục phân
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
+
+            ////Tạo MD5 
+            //MD5 mh = MD5.Create();
+            ////Chuyển kiểu chuổi thành kiểu byte
+            //byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes("Chuỗi cần mã hóa");
+            ////mã hóa chuỗi đã chuyển
+            //byte[] hash = mh.ComputeHash(inputBytes);
+            ////tạo đối tượng StringBuilder (làm việc với kiểu dữ liệu lớn)
+            //StringBuilder sb = new StringBuilder();
+
+            //for (int i = 0; i < hash.Length; i++)
+            //{
+            //    sb.Append(hash[i].ToString("X2"));
+            //}
+            //return sb.ToString();
+            //nếu bạn muốn các chữ cái in thường thay vì in hoa thì bạn thay chữ "X" in hoa 
+            //trong "X2" thành "x"
+        }
+        public string EncodePass(string pass)
+        {
+            return MD5Hash(Base64Encode(pass));
+        }
+        public static string sendcode(string gmail, int i)
+        {
+            string a;
+            if (i == 0) a = "Mã Code lấy tài khoản";
+            else a = "Mật khẩu của bạn là: ";
+            Random generator = new Random();
+            string str = generator.Next(0, 100000).ToString("D6");
+            if (ReloadAccountDAL.Instance.Send(gmail, a, str))
+            {
+                MessageBox.Show("Mã Code vừa được gửi đến Mail vừa nhập!");
+            }
+            else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
+            return str;
         }
     }
 }

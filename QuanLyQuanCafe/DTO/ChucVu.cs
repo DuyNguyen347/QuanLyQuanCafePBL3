@@ -22,5 +22,9 @@ namespace QuanLyQuanCafe.DTO
             TenChucVu = row[0].ToString();
             Luong = Convert.ToInt32(row[1].ToString());
         }
+        public override string ToString()
+        {
+            return TenChucVu;
+        }
     }
 }
