@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,13 @@ namespace QuanLyQuanCafe
             Email = row[5].ToString();
             Luong = Convert.ToDouble(row[6].ToString());
             SDT = row[7].ToString();
-            AnhNV = (Image)row[8];
+            if (row[8].ToString() == "") AnhNV = null;
+            else
+            {
+                byte[] b = (byte[])row[8];
+                MemoryStream ms = new MemoryStream(b);
+                AnhNV =  Image.FromStream(ms);
+            }
         }
     }
 }

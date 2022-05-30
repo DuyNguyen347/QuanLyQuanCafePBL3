@@ -58,6 +58,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2TabControl1 = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPageBan = new System.Windows.Forms.TabPage();
+            this.label25 = new System.Windows.Forms.Label();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.FLP_Ban = new System.Windows.Forms.FlowLayoutPanel();
             this.BT_Refresh_Ban = new Guna.UI2.WinForms.Guna2ImageButton();
             this.BT_Xoa4 = new Guna.UI2.WinForms.Guna2GradientButton();
@@ -187,6 +189,7 @@
             this.detail_Bill1 = new QuanLyQuanCafe.Detail_Bill();
             this.guna2TabControl1.SuspendLayout();
             this.tabPageBan.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.guna2Panel4.SuspendLayout();
             this.guna2CustomGradientPanel4.SuspendLayout();
             this.tabPageLichSu.SuspendLayout();
@@ -223,9 +226,9 @@
             // guna2TabControl1
             // 
             this.guna2TabControl1.Alignment = System.Windows.Forms.TabAlignment.Left;
-            this.guna2TabControl1.Controls.Add(this.tabPageBan);
-            this.guna2TabControl1.Controls.Add(this.tabPageLichSu);
             this.guna2TabControl1.Controls.Add(this.tabPageDanhThu);
+            this.guna2TabControl1.Controls.Add(this.tabPageLichSu);
+            this.guna2TabControl1.Controls.Add(this.tabPageBan);
             this.guna2TabControl1.Controls.Add(this.tabPageDanhMuc);
             this.guna2TabControl1.Controls.Add(this.tabPage_ThucDon);
             this.guna2TabControl1.Controls.Add(this.tabPageChucVu);
@@ -261,6 +264,8 @@
             // 
             // tabPageBan
             // 
+            this.tabPageBan.Controls.Add(this.label25);
+            this.tabPageBan.Controls.Add(this.pictureBox3);
             this.tabPageBan.Controls.Add(this.FLP_Ban);
             this.tabPageBan.Controls.Add(this.BT_Refresh_Ban);
             this.tabPageBan.Controls.Add(this.BT_Xoa4);
@@ -277,12 +282,33 @@
             this.tabPageBan.Text = "DSach Bàn";
             this.tabPageBan.UseVisualStyleBackColor = true;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.DarkRed;
+            this.label25.Location = new System.Drawing.Point(90, 20);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(211, 24);
+            this.label25.TabIndex = 5006;
+            this.label25.Text = "Quản lý danh sách bàn";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::QuanLyQuanCafe.Properties.Resources.Table;
+            this.pictureBox3.Location = new System.Drawing.Point(105, 56);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(176, 114);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 5005;
+            this.pictureBox3.TabStop = false;
+            // 
             // FLP_Ban
             // 
             this.FLP_Ban.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FLP_Ban.Location = new System.Drawing.Point(394, 52);
+            this.FLP_Ban.Location = new System.Drawing.Point(394, 108);
             this.FLP_Ban.Name = "FLP_Ban";
-            this.FLP_Ban.Size = new System.Drawing.Size(415, 394);
+            this.FLP_Ban.Size = new System.Drawing.Size(415, 338);
             this.FLP_Ban.TabIndex = 17;
             // 
             // BT_Refresh_Ban
@@ -296,7 +322,7 @@
             this.BT_Refresh_Ban.ImageOffset = new System.Drawing.Point(0, 0);
             this.BT_Refresh_Ban.ImageRotate = 0F;
             this.BT_Refresh_Ban.ImageSize = new System.Drawing.Size(20, 20);
-            this.BT_Refresh_Ban.Location = new System.Drawing.Point(777, 15);
+            this.BT_Refresh_Ban.Location = new System.Drawing.Point(776, 66);
             this.BT_Refresh_Ban.Name = "BT_Refresh_Ban";
             this.BT_Refresh_Ban.PressedState.ImageSize = new System.Drawing.Size(64, 64);
             this.BT_Refresh_Ban.Size = new System.Drawing.Size(30, 30);
@@ -314,7 +340,7 @@
             this.BT_Xoa4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.BT_Xoa4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Xoa4.ForeColor = System.Drawing.Color.White;
-            this.BT_Xoa4.Location = new System.Drawing.Point(213, 270);
+            this.BT_Xoa4.Location = new System.Drawing.Point(206, 358);
             this.BT_Xoa4.Name = "BT_Xoa4";
             this.BT_Xoa4.Size = new System.Drawing.Size(131, 30);
             this.BT_Xoa4.TabIndex = 4;
@@ -332,7 +358,7 @@
             this.BT_Them4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.BT_Them4.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.BT_Them4.ForeColor = System.Drawing.Color.White;
-            this.BT_Them4.Location = new System.Drawing.Point(35, 270);
+            this.BT_Them4.Location = new System.Drawing.Point(30, 358);
             this.BT_Them4.Name = "BT_Them4";
             this.BT_Them4.Size = new System.Drawing.Size(144, 30);
             this.BT_Them4.TabIndex = 3;
@@ -355,7 +381,7 @@
             "Pha chế",
             "Thu ngân",
             "Phục vụ"});
-            this.cbB_TrangThai.Location = new System.Drawing.Point(521, 10);
+            this.cbB_TrangThai.Location = new System.Drawing.Point(520, 66);
             this.cbB_TrangThai.Name = "cbB_TrangThai";
             this.cbB_TrangThai.Size = new System.Drawing.Size(250, 36);
             this.cbB_TrangThai.TabIndex = 5004;
@@ -365,7 +391,7 @@
             // 
             this.guna2Panel4.Controls.Add(this.label10);
             this.guna2Panel4.Controls.Add(this.TB_TimBan);
-            this.guna2Panel4.Location = new System.Drawing.Point(23, 15);
+            this.guna2Panel4.Location = new System.Drawing.Point(444, 20);
             this.guna2Panel4.Name = "guna2Panel4";
             this.guna2Panel4.Size = new System.Drawing.Size(365, 40);
             this.guna2Panel4.TabIndex = 16;
@@ -411,7 +437,7 @@
             this.guna2CustomGradientPanel4.Controls.Add(this.TB_IDban);
             this.guna2CustomGradientPanel4.Controls.Add(this.label14);
             this.guna2CustomGradientPanel4.Controls.Add(this.label21);
-            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(23, 137);
+            this.guna2CustomGradientPanel4.Location = new System.Drawing.Point(23, 190);
             this.guna2CustomGradientPanel4.Name = "guna2CustomGradientPanel4";
             this.guna2CustomGradientPanel4.Size = new System.Drawing.Size(365, 112);
             this.guna2CustomGradientPanel4.TabIndex = 15;
@@ -2518,6 +2544,8 @@
             this.Load += new System.EventHandler(this.Dashboard_Load);
             this.guna2TabControl1.ResumeLayout(false);
             this.tabPageBan.ResumeLayout(false);
+            this.tabPageBan.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.guna2Panel4.ResumeLayout(false);
             this.guna2Panel4.PerformLayout();
             this.guna2CustomGradientPanel4.ResumeLayout(false);
@@ -2697,5 +2725,7 @@
         private System.Windows.Forms.OpenFileDialog openFileAnh;
         private System.Windows.Forms.PictureBox pbAnhNV;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_NhanVien;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label label25;
     }
 }

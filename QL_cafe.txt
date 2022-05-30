@@ -16,7 +16,8 @@ CREATE TABLE NhanVien (
     Email varchar(40),
 	Phone varchar(10),
     ChucVu nvarchar(20) constraint FK_ChucVu FOREIGN KEY REFERENCES dbo.ChucVu(ChucVu),
-	UserName varchar(30) unique constraint FK_TaiKhoan foreign key references dbo.TaiKhoan(UserName)
+	UserName varchar(30) unique constraint FK_TaiKhoan foreign key references dbo.TaiKhoan(UserName),
+	Anh Image
 );
 create table DanhMuc(
 	ID varchar(10) not null primary key,
@@ -53,7 +54,7 @@ create table ThongTinHoaDon(
 )
 go
 create view View_NhanVien as
-select ID,Name,NgaySinh,NhanVien.ChucVu,UserName,Email,Luong,Phone from NhanVien left join ChucVu on NhanVien.ChucVu = dbo.ChucVu.ChucVu
+select ID,Name,NgaySinh,NhanVien.ChucVu,UserName,Email,Luong,Phone,Anh from NhanVien left join ChucVu on NhanVien.ChucVu = dbo.ChucVu.ChucVu
 go
 create view View_Mon as
 select Mon.ID,TenMon,Ten_Category,Gia from Mon Left join DanhMuc on Mon.ID_category = DanhMuc.ID
