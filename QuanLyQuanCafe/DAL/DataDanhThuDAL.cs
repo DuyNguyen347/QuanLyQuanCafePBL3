@@ -11,7 +11,7 @@ namespace QuanLyQuanCafe.DAL
         public static DataTable data(DateTime datebegin, DateTime dateend)
         {
             DataTable data;
-            string query = "select * from View_DanhThuNgay where TimeCheckout >= '"+DataBillDAL.FormatDatetimeShort(datebegin)+"' and TimeCheckout <= '"+DataBillDAL.FormatDatetimeShort(dateend)+"'";
+            string query = "select * from View_DanhThuNgay where TimeCheckout >= '"+DataProvider.FormatDatetimeShort(datebegin)+"' and TimeCheckout <= '"+DataProvider.FormatDatetimeShort(dateend)+"'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }

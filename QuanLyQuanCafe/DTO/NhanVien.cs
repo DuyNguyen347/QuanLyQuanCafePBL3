@@ -1,4 +1,5 @@
 ﻿using QuanLyQuanCafe.DAL;
+using QuanLyQuanCafe.DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,60 +18,74 @@ namespace QuanLyQuanCafe
         public string ID { get; set; }
         public string Name { get; set; }
         public string NgaySinh { get; set; }
-        public string ChucVu { get; set; }
-        public string Username { get; set; }
-        public string PassWord { get; set; }
-        public double Luong { get; set; }
+        public ChucVu ChucVu { get; set; }
+        public TaiKhoan TaiKhoan { get; set; }
         public string Email { get; set; }
+        public int Luong { get; private set; }
         public string SDT { get; set; }
-        public Image AnhNV { get; set; }
+        public Image Anh { get; set; }
         public NhanVien() {
         }
-        public NhanVien(string iD,string name,string ngaysinh, string chucvu,string username,string password,string luong,string email,string sdt,Image anh)
+        public NhanVien(string iD,string name,string ngaysinh, string chucvu,string username,string password,string email,string sdt,Image anh)
         {
             ID = iD;
             Name = name;
             NgaySinh = ngaysinh;
-            ChucVu = chucvu;
-            Username = username;
-            PassWord = password;
-            if(luong == "")
-            {
-                Luong = 0;
-            }
-            else
-            {
-                Luong = Convert.ToDouble(luong);
-            }
+            ChucVu = DataChucVuDAL.Instance.getChucVubyID(chucvu);
+            TaiKhoan = new TaiKhoan(username,password);
             Email = email;
+            Luong = ChucVu.Luong;
             SDT = sdt;
-            AnhNV = anh;
+            Anh = anh;
         }
         public NhanVien(NhanVien nhanVien)
         {
-            Luong = nhanVien.Luong;
             ID = nhanVien.ID;
             Name = nhanVien.Name;
             NgaySinh = nhanVien.NgaySinh;
             ChucVu = nhanVien.ChucVu;
-            Username = nhanVien.Username;
-            PassWord = nhanVien.PassWord;
+            TaiKhoan = nhanVien.TaiKhoan;
             Email = nhanVien.Email;
+            Luong = nhanVien.Luong;
             SDT = nhanVien.SDT;
-            AnhNV = nhanVien.AnhNV;
+            Anh = nhanVien.Anh;
         }
         
         public NhanVien(DataRow row)
         {
-            ID = row[0].ToString();
-            Name = row[1].ToString();
-            NgaySinh = row[2].ToString().Split(' ').First();
-            ChucVu = row[3].ToString();
-            Username = row[4].ToString();
-            Email = row[5].ToString();
-            Luong = Convert.ToDouble(row[6].ToString());
-            SDT = row[7].ToString();
-            AnhNV = (Image)row[8];
+            ID = row["ID"].ToString();
+            Name = row["Name"].ToString();
+            NgaySinh = row["NgaySinh"].ToString().Split(' ').First();
+            try
+            {
+                ChucVu = DataChucVuDAL.Instance.getChucVubyID(row["ChucVu"].ToString());
+                Luong = ChucVu.Luong;
+            }
+            catch (Exception ex)
+            {
+                ChucVu = new ChucVu("", 0);
+                Luong = ChucVu.Luong;
+            }
+            try
+            {
+                TaiKhoan = DataTaiKhoanDAL.Instance.getTaiKhoanbyUserName(row["UserName"].ToString());
+            }
+            catch (Exception ex)
+            {
+                TaiKhoan = new TaiKhoan("", "");
+            }
+            Email = row["Email"].ToString();
+            SDT = row["Phone"].ToString();
+            try
+            {
+                byte[] b = (byte[])row["Anh"]; ;
+                Anh = DataNhanVienDAL.Instance.ByteArrayToImage(b);
+            }
+            catch(Exception ex)
+            {
+                Anh = null;
+            }
+            
         }
     }
 }

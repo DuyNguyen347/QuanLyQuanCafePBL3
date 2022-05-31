@@ -96,75 +96,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChonBanForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChonBanForm.Designer.cs">
-      <DependentUpon>ChonBanForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="DAL\CheckEmail.cs" />
-    <Compile Include="DAL\DataBillDAL.cs" />
+    <Compile Include="DAL\DataBanAnDAL.cs" />
     <Compile Include="DAL\DataChucVuDAL.cs" />
     <Compile Include="DAL\DataDanhMucDAL.cs" />
     <Compile Include="DAL\DataDanhThuDAL.cs" />
-    <Compile Include="DAL\DataInforBillDAL.cs" />
+    <Compile Include="DAL\DataHoaDonDAL.cs" />
+    <Compile Include="DAL\DataHoaDon_BanDAL.cs" />
     <Compile Include="DAL\DataMonDAL.cs" />
     <Compile Include="DAL\DataNhanVienDAL.cs" />
     <Compile Include="DAL\DataProvider.cs" />
-    <Compile Include="DAL\DataTableDAL.cs" />
-    <Compile Include="DAL\LoginDAL.cs" />
+    <Compile Include="DAL\DataTaiKhoanDAL.cs" />
+    <Compile Include="DAL\DataThongTinHoaDonDAL.cs" />
     <Compile Include="DAL\ReloadAccountDAL.cs" />
     <Compile Include="DAL\ThongKeDAL.cs" />
-    <Compile Include="Dashboard.cs">
+    <Compile Include="views\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard.Designer.cs">
+    <Compile Include="views\Dashboard.Designer.cs">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
-    <Compile Include="Detail_Bill.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Detail_Bill.Designer.cs">
-      <DependentUpon>Detail_Bill.cs</DependentUpon>
-    </Compile>
+    <Compile Include="DTO\BanAn.cs" />
     <Compile Include="DTO\ChucVu.cs" />
     <Compile Include="DTO\DanhMuc.cs" />
     <Compile Include="DTO\HoaDon.cs" />
-    <Compile Include="DTO\InforBill.cs" />
+    <Compile Include="DTO\HoaDon_Ban.cs" />
     <Compile Include="DTO\Mon.cs" />
     <Compile Include="DTO\RevenueByDate.cs" />
-    <Compile Include="Gop_Ban_Form.cs">
+    <Compile Include="DTO\TaiKhoan.cs" />
+    <Compile Include="DTO\ThongTinHoaDon.cs" />
+    <Compile Include="views\InforAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Gop_Ban_Form.Designer.cs">
-      <DependentUpon>Gop_Ban_Form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InforAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InforAccount.Designer.cs">
+    <Compile Include="views\InforAccount.Designer.cs">
       <DependentUpon>InforAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="views\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="views\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="DTO\NhanVien.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QL_cafe2DataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QL_cafe2DataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="ReloadAccount.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ReloadAccount.Designer.cs">
-      <DependentUpon>ReloadAccount.cs</DependentUpon>
-    </Compile>
     <Compile Include="Report\DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
@@ -193,27 +168,20 @@
     <Compile Include="Report\PrintThongKe.Designer.cs">
       <DependentUpon>PrintThongKe.cs</DependentUpon>
     </Compile>
-    <Compile Include="Seller.cs">
+    <Compile Include="views\Seller.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Seller.Designer.cs">
+    <Compile Include="views\Seller.Designer.cs">
       <DependentUpon>Seller.cs</DependentUpon>
     </Compile>
-    <Compile Include="DTO\Table.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <EmbeddedResource Include="ChonBanForm.resx">
-      <DependentUpon>ChonBanForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
+    <EmbeddedResource Include="views\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Detail_Bill.resx">
-      <DependentUpon>Detail_Bill.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InforAccount.resx">
+    <EmbeddedResource Include="views\InforAccount.resx">
       <DependentUpon>InforAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="views\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -226,9 +194,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ReloadAccount.resx">
-      <DependentUpon>ReloadAccount.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Report\PrintInvoice.resx">
       <DependentUpon>PrintInvoice.cs</DependentUpon>
     </EmbeddedResource>
@@ -237,7 +202,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report\Report1.rdlc" />
     <EmbeddedResource Include="Report\Report2.rdlc" />
-    <EmbeddedResource Include="Seller.resx">
+    <EmbeddedResource Include="views\Seller.resx">
       <DependentUpon>Seller.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -258,17 +223,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="QL_cafe2DataSet.xsc">
-      <DependentUpon>QL_cafe2DataSet.xsd</DependentUpon>
-    </None>
-    <None Include="QL_cafe2DataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>QL_cafe2DataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="QL_cafe2DataSet.xss">
-      <DependentUpon>QL_cafe2DataSet.xsd</DependentUpon>
-    </None>
     <None Include="Report\DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -294,13 +248,6 @@
     <None Include="Resources\coffee_foam_cup_140184_3840x2160.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="QL_cafe2.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="QL_cafe2_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>QL_cafe2.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\bill.png" />
     <None Include="Resources\dollar coin.png" />
     <None Include="Resources\order.png" />

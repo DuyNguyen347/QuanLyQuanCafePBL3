@@ -65,19 +65,5 @@ namespace QuanLyQuanCafe.DAL
                 return false;
             }
         }
-        public string sendcode(string gmail, int i)
-        {
-            string a;
-            if (i == 0) a = "Mã Code lấy tài khoản";
-            else a = "Mật khẩu của bạn là: ";
-            Random generator = new Random();
-            string str = generator.Next(0, 100000).ToString("D6");
-            if (ReloadAccountDAL.Instance.Send(gmail, a, str))
-            {
-                MessageBox.Show("Mã Code vừa được gửi đến Mail vừa nhập!");
-            }
-            else MessageBox.Show("Có lỗi trong quá trình gửi mã CODE !");
-            return str;
-        }
     }
 }

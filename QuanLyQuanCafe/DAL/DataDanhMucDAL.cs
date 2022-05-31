@@ -6,53 +6,64 @@ namespace QuanLyQuanCafe.DAL
 {
     internal class DataDanhMucDAL
     {
-        public static DataTable data()
+        private static DataDanhMucDAL instance;
+        public static DataDanhMucDAL Instance
+        {
+            get
+            {
+                if(instance == null)
+                    instance = new DataDanhMucDAL();
+                return instance;
+            }
+            private set
+            {
+
+            }
+        }
+        public DataTable data()
         {
             DataTable data;
             string query = "select *  from DanhMuc";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public static DataTable capnhatDM(DanhMuc danhMuc, int i)
-        {
-            string query = "";
-            switch (i)
-            {
-                case 1:
-                    int dem = 0;
-                    foreach (DataRow row in DataDanhMucDAL.data().Rows)
-                        if (row[0].ToString() == danhMuc.ID)
-                            dem++;
-                    if (dem == 0)
-                        try
-                        {
-                            DataProvider.Instance.setdata("insert into DanhMuc values('" + danhMuc.ID + "',N'" + danhMuc.Name + "')");
-                        }
-                        catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
-                    break;
-                case 2:
-                    try
-                    {
-                        DataProvider.Instance.setdata("update Mon set ID_category = null where ID_category = '" + danhMuc.ID + "'");
-                        DataProvider.Instance.setdata("delete from DanhMuc where ID = '" + danhMuc.ID + "'");
-                    }
-                    catch (Exception ex) { MessageBox.Show("Không thể thực hiện thao tác này"); }
-                    break;
-                case 3:
-                    DataProvider.Instance.setdata("update DanhMuc set Ten_Category = N'" + danhMuc.Name + "'where ID= '" + danhMuc.ID + "' ");
-                    break;
-                default:
-                    break;
-            }
-            return null;
-        }
-        public static List<DanhMuc> locdulieu(string ten="")
+        public List<DanhMuc> locdulieu(string ten="")
         {
             List<DanhMuc> danhMucs = new List<DanhMuc>();
             foreach (DataRow i in data().Rows)
-                if ((i[1].ToString().ToUpper()).Contains(ten.ToUpper()))
+                if ((i["Ten_Category"].ToString().ToUpper()).Contains(ten.ToUpper()))
                     danhMucs.Add(new DanhMuc(i));
             return danhMucs;
         }
+        public DanhMuc getDanhMucbyID(string ID)
+        {
+            List<DanhMuc> danhMucs = new List<DanhMuc>();
+            foreach (DataRow i in data().Rows)
+                if (i["ID"].ToString().ToUpper().Trim().Equals(ID.ToUpper().Trim()))
+                    danhMucs.Add(new DanhMuc(i));
+            return danhMucs[0];
+        }
+        public DanhMuc getDanhMucbyTen(string Ten)
+        {
+            List<DanhMuc> danhMucs = new List<DanhMuc>();
+            foreach (DataRow i in data().Rows)
+                if (i["Ten_Category"].ToString().ToUpper().Trim().Equals(Ten.ToUpper().Trim()))
+                    danhMucs.Add(new DanhMuc(i));
+            return danhMucs[0];
+        }
+        public void addDanhMuc(DanhMuc danhmuc)
+        {
+            DataProvider.Instance.setdata("insert into DanhMuc values('" + danhmuc.ID + "',N'" + danhmuc.Ten_Category + "')");
+        }
+        public void deleteDanhMuc(String ID)
+        {
+            DataProvider.Instance.setdata("update Mon set ID_category = null where ID_category = '" + ID + "'");
+            DataProvider.Instance.setdata("delete from DanhMuc where ID = '" + ID + "'");
+        }
+        public void updateDanhMuc(DanhMuc danhmuc)
+        {
+            DataProvider.Instance.setdata("update DanhMuc set Ten_Category = N'" + danhmuc.Ten_Category + "'where ID= '" + danhmuc.ID + "' ");
+        }
+
     }
 }

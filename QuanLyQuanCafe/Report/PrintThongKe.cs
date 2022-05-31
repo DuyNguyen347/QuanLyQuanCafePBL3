@@ -30,7 +30,7 @@ namespace QuanLyQuanCafe.Report
         {
             string s = DataProvider.Instance.getConnectionString();
             SqlConnection con = new SqlConnection(s);
-            string query = "select convert(nvarchar(10),TimeCheckout,103) as TimeCheckout,Total,TongTinh,DaThu from View_DanhThuNgay where TimeCheckout between '" + DataBillDAL.FormatDatetimeShort(start) + "' and '" + DataBillDAL.FormatDatetimeShort(end) + "'";
+            string query = "select convert(nvarchar(10),TimeCheckout,103) as TimeCheckout,Total,TongTinh,DaThu from View_DanhThuNgay where TimeCheckout between '" + DataProvider.FormatDatetimeShort(start) + "' and '" + DataProvider.FormatDatetimeShort(end) + "'";
             SqlDataAdapter da = new SqlDataAdapter(query, con);
             DataSetThongKe ds = new DataSetThongKe();
             da.Fill(ds, "DataTableThongKe");
@@ -44,7 +44,6 @@ namespace QuanLyQuanCafe.Report
                 new ReportParameter("TimeEnd", end.ToString()),
                 new ReportParameter("SoHoaDon", soHD),
                 new ReportParameter("TongTien", tong),
-                 new ReportParameter("NgayIn", DateTime.Now.ToString()),
         };
             this.reportViewer1.LocalReport.SetParameters(para);
             this.reportViewer1.RefreshReport();

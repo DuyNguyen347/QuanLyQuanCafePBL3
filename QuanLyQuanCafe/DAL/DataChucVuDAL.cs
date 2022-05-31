@@ -11,14 +11,25 @@ namespace QuanLyQuanCafe.DAL
 {
     class DataChucVuDAL
     {
-        public static DataTable data()
+        private static DataChucVuDAL instance;
+        public static DataChucVuDAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new DataChucVuDAL();
+                return instance;
+            }
+            private set { }
+        }
+        public DataTable data()
         {
             DataTable data;
             string query = "select *  from dbo.ChucVu";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public static List<ChucVu> locdulieu(string chucvu)
+        public List<ChucVu> locdulieu(string chucvu)
         {
             List<ChucVu> chucVus = new List<ChucVu>();
             foreach (DataRow i in data().Rows)
@@ -26,41 +37,26 @@ namespace QuanLyQuanCafe.DAL
                     chucVus.Add(new ChucVu(i));
             return chucVus;
         }
-        public static DataTable capnhatChucvu(ChucVu chucVu, int i)
+        public ChucVu getChucVubyID(string chucvu)
         {
-            string query = "";
-            switch (i)
-            {
-                case 1:
-                    int dem = 0;
-                    foreach (DataRow row in DataChucVuDAL.data().Rows)
-                        if (row[0].ToString() == chucVu.TenChucVu)
-                            dem++;
-                    if (dem == 0)
-                        try
-                        {
-                            DataProvider.Instance.setdata("insert into ChucVu values(N'" + chucVu.TenChucVu + "'," + chucVu.Luong + ")");
-                        }catch(Exception ex) { MessageBox.Show(ex.Message); }
-                    break;
-                case 2:
-                    try
-                    {
-                        DataProvider.Instance.setdata("update NhanVien set ChucVu = null where ChucVu = N'" + chucVu.TenChucVu + "'");
-                        DataProvider.Instance.setdata("delete from ChucVu where ChucVu.ChucVu = N'" + chucVu.TenChucVu + "'");
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    break;
-                case 3:
-                    try
-                    {
-                        DataProvider.Instance.setdata("update ChucVu set Luong = " + chucVu.Luong + " where ChucVu.ChucVu = N'" + chucVu.TenChucVu + "' ");
-                    }
-                    catch (Exception ex) { MessageBox.Show(ex.Message); }
-                    break;
-                default:
-                    break;
-            }
-            return null;
+            List<ChucVu> chucVus = new List<ChucVu>();
+            foreach (DataRow i in data().Rows)
+                if (i[0].ToString().ToUpper().Equals(chucvu.Trim().ToUpper()))
+                    chucVus.Add(new ChucVu(i));
+            return chucVus[0];
+        }
+        public void addChucvu(ChucVu chucVu)
+        {
+            DataProvider.Instance.setdata("insert into ChucVu values(N'" + chucVu.TenChucVu + "'," + chucVu.Luong + ")");
+        }
+        public void deleteChucvu(String tenchucvu)
+        {
+            DataProvider.Instance.setdata("update NhanVien set ChucVu = null where ChucVu = N'" + tenchucvu + "'");
+            DataProvider.Instance.setdata("delete from ChucVu where ChucVu.ChucVu = N'" + tenchucvu + "'");
+        }
+        public void updateChucvu(ChucVu chucVu)
+        {
+            DataProvider.Instance.setdata("update ChucVu set Luong = " + chucVu.Luong + " where ChucVu.ChucVu = N'" + chucVu.TenChucVu + "' ");
         }
     }
 }
