@@ -205,6 +205,7 @@ namespace QuanLyQuanCafe
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
             DGV_Mon.Columns[3].HeaderText = "Giá";
+            DGV_Mon.Columns.Remove("DaXoa");
         }
         private void Tinh_tong_tien()
         {
