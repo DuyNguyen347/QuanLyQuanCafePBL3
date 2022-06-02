@@ -4,30 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using QuanLyQuanCafe.DAL;
+
 namespace QuanLyQuanCafe
 {
     public class Mon
     {
         public string ID { get; set; }
-        public string Name { get; set; }
-        public string DanhMuc { get; set; }
+        public string TenMon { get; set; }
+        public DanhMuc DanhMuc { get; set; }
         public int Gia { get; set; }
         public Mon()
         {
         }
-        public Mon(string id, string name,string danhmuc,int gia)
+        public Mon(string id, string tenmon,string ID_category,int gia)
         {
             ID = id;
-            Name = name;
-            DanhMuc = danhmuc;
+            TenMon = tenmon;
+            DanhMuc = DataDanhMucDAL.Instance.getDanhMucbyID(ID_category);
             Gia = gia;
         }
         public Mon(DataRow dataRow)
         {
-            ID = dataRow[0].ToString();
-            Name = dataRow[1].ToString();
-            DanhMuc = dataRow[2].ToString();
-            Gia = Convert.ToInt32(dataRow[3].ToString());
+            ID = dataRow["ID"].ToString();
+            TenMon = dataRow["TenMon"].ToString();
+            try
+            {
+                DanhMuc = DataDanhMucDAL.Instance.getDanhMucbyID(dataRow["ID_category"].ToString());
+            }
+            catch(Exception ex)
+            {
+                DanhMuc = new DanhMuc("","");
+            }
+            Gia = Convert.ToInt32(dataRow["Gia"].ToString());
         }
     }
 }
