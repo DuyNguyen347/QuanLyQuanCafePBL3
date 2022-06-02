@@ -1,6 +1,7 @@
 ﻿using QuanLyQuanCafe.DAL;
 using QuanLyQuanCafe.DTO;
 using QuanLyQuanCafe.Report;
+using QuanLyQuanCafe.views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -266,7 +267,7 @@ namespace QuanLyQuanCafe
         {
             try
             {
-                DataMonDAL.Instance.addMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),
+                DataMonDAL.Instance.addMon(new Mon(DataMonDAL.Instance.CapIDmon(), TB_TenM0n.Text.ToString().Trim(),
                     DataDanhMucDAL.Instance.getDanhMucbyTen(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
                 BT_Refresh2_Click(new object(), new EventArgs());
             }
@@ -581,6 +582,20 @@ namespace QuanLyQuanCafe
             btAccount.Visible = false;
         }
 
-        
+        private void BT_XemChiTiet_Click(object sender, EventArgs e)
+        {
+            Detail detail = new Detail();
+            detail.MaHD.Text = DGV_Bill.CurrentRow.Cells[0].Value.ToString();
+            detail.CheckIn.Text = DGV_Bill.CurrentRow.Cells[1].Value.ToString();
+            detail.CheckOut.Text = DGV_Bill.CurrentRow.Cells[2].Value.ToString();
+            detail.Table_Id.Text = "";
+            foreach (String i in DataHoaDon_BanDAL.Instance.data(detail.MaHD.Text))
+                detail.Table_Id.Text += i + "  ";
+            detail.Tong.Text = DGV_Bill.CurrentRow.Cells[3].Value.ToString();
+            detail.ThanhTien.Text = DGV_Bill.CurrentRow.Cells[4].Value.ToString();
+            detail.DGV_ListMon.DataSource = DataHoaDonDAL.Instance.LoadMonDaChon(detail.MaHD.Text);
+            detail.lbTenNV.Text = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+            detail.ShowDialog();
+        }
     }
 }

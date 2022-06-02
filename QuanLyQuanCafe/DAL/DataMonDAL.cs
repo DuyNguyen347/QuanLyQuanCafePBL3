@@ -76,5 +76,29 @@ namespace QuanLyQuanCafe.DAL
         {
             DataProvider.Instance.setdata("update Mon set TenMon = N'" + mon.TenMon + "', ID_category = '" + mon.DanhMuc.ID + "',Gia =" + mon.Gia + "where ID= '" + mon.ID + "' ");
         }
+        public string GetLastIdMon()
+        {
+            string query = "select top 1 * from Mon order by ID desc";
+            DataTable dt = DataProvider.Instance.GetRecords(query);
+            if (dt.Rows.Count == 0)
+            {
+                return "";
+            }
+            else
+            {
+                return dt.Rows[0]["ID"].ToString();
+            }
+        }
+        public string CapIDmon()
+        {
+            string kq = "";
+            int s = 0;
+            if (GetLastIdMon() == "") s = 1;
+            else s = Convert.ToInt32(GetLastIdMon()) + 1;
+            if (s < 10) kq = "00" + s.ToString();
+            else if (s < 99) kq = "0" + s.ToString();
+            else kq = s.ToString();
+            return kq;
+        }
     }
 }

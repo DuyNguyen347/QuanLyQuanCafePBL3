@@ -144,5 +144,19 @@ namespace QuanLyQuanCafe.DAL
         {
             DataProvider.Instance.setdata("update HoaDon set ID_table = '" + id_ban + "' where ID_Hoa= '" + id_hd + "' ");
         }
+        public DataTable LoadMonDaChon(string idbill)
+        {
+            DataTable dt = new DataTable();
+
+            string query = "select * from View_InforBill where ID_HoaDon ='" + idbill + "'";
+            dt = DataProvider.Instance.GetRecords(query);
+            dt.Columns[0].ColumnName = "Mã món";
+            dt.Columns[1].ColumnName = "Tên món";
+            dt.Columns[2].ColumnName = "Danh mục";
+            dt.Columns[3].ColumnName = "Giá";
+            dt.Columns[4].ColumnName = "Số lượng";
+            dt.Columns.RemoveAt(5);
+            return dt;
+        }
     }
 }

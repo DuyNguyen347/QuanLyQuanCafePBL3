@@ -126,6 +126,12 @@
     <Compile Include="DTO\RevenueByDate.cs" />
     <Compile Include="DTO\TaiKhoan.cs" />
     <Compile Include="DTO\ThongTinHoaDon.cs" />
+    <Compile Include="views\Detail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="views\Detail.Designer.cs">
+      <DependentUpon>Detail.cs</DependentUpon>
+    </Compile>
     <Compile Include="views\InforAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +185,9 @@
     <EmbeddedResource Include="views\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="views\Detail.resx">
+      <DependentUpon>Detail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="views\InforAccount.resx">
       <DependentUpon>InforAccount.cs</DependentUpon>
