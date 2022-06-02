@@ -28,6 +28,7 @@ create table Mon(
 	TenMon nvarchar(40),
 	ID_category varchar(10) constraint FK_DanhMuc_Mon foreign key references dbo.DanhMuc(ID),
 	Gia int
+	DaXoa bit default 0
 )
 create table BanAn(
 	ID varchar(10) not null primary key,

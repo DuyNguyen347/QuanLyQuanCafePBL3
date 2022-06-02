@@ -238,14 +238,16 @@ namespace QuanLyQuanCafe
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
             DGV_Mon.Columns[3].HeaderText = "Giá";
+            DGV_Mon.Columns.Remove("DaXoa");
         }
         private void BT_Refresh2_Click(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu();
+            DGV_Mon.DataSource = DataMonDAL.Instance.loctatcadulieu();
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
             DGV_Mon.Columns[3].HeaderText = "Giá";
+            DGV_Mon.Columns["DaXoa"].HeaderText = "Đã xóa"; ;
             TB_TimMon.Text = "";
             TB_IDmon.Text = "";
             TB_TenM0n.Text = "";
@@ -257,7 +259,7 @@ namespace QuanLyQuanCafe
         {
             TB_IDmon.Text = DGV_Mon.CurrentRow.Cells[0].Value.ToString().Trim();
             TB_TenM0n.Text = DGV_Mon.CurrentRow.Cells[1].Value.ToString().Trim(); ;
-            CBB_ChonDanhMuc.Text = DGV_Mon.CurrentRow.Cells[2].Value.ToString();
+            CBB_ChonDanhMuc.Text = DGV_Mon.CurrentRow.Cells[2].Value.ToString().Trim();
             TB_Gia.Text = DGV_Mon.CurrentRow.Cells[3].Value.ToString().Trim();
         }
         private void BT_Them2_Click(object sender, EventArgs e)

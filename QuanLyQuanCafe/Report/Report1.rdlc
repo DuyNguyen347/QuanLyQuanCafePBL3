@@ -360,7 +360,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Thành tiền</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -485,7 +485,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!Gia.Value * Fields!SoLuong.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -504,6 +504,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

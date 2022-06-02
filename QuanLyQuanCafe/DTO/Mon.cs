@@ -14,6 +14,7 @@ namespace QuanLyQuanCafe
         public string TenMon { get; set; }
         public DanhMuc DanhMuc { get; set; }
         public int Gia { get; set; }
+        public bool DaXoa { get; set; }
         public Mon()
         {
         }
@@ -23,6 +24,7 @@ namespace QuanLyQuanCafe
             TenMon = tenmon;
             DanhMuc = DataDanhMucDAL.Instance.getDanhMucbyID(ID_category);
             Gia = gia;
+            DaXoa = false;
         }
         public Mon(DataRow dataRow)
         {
@@ -37,6 +39,7 @@ namespace QuanLyQuanCafe
                 DanhMuc = new DanhMuc("","");
             }
             Gia = Convert.ToInt32(dataRow["Gia"].ToString());
+            DaXoa = Convert.ToBoolean(dataRow["DaXoa"].ToString());
         }
     }
 }

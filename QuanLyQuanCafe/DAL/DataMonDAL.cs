@@ -44,19 +44,33 @@ namespace QuanLyQuanCafe.DAL
             foreach (DataRow i in data().Rows)
             {
                 Mon mon = new Mon(i);
-                if (mon.TenMon.ToUpper().Contains(ten) && mon.DanhMuc.Ten_Category.ToUpper().Trim().Contains(danhmuc))
+                if (mon.TenMon.ToUpper().Contains(ten) && mon.DanhMuc.Ten_Category.ToUpper().Trim().Contains(danhmuc) && mon.DaXoa==false)
                     mons.Add(mon);
+            }
+            return mons;
+        }
+        public List<Mon> loctatcadulieu()
+        {
+            List<Mon> mons = new List<Mon>();
+            foreach (DataRow i in data().Rows)
+            {
+                mons.Add(new Mon(i));
             }
             return mons;
         }
         public void addMon(Mon mon)
         {
-            DataProvider.Instance.setdata("insert into Mon values('" + mon.ID + "',N'" + mon.TenMon + "','" + mon.DanhMuc.ID + "'," + mon.Gia + ")");
+            DataProvider.Instance.setdata("insert into Mon values('" + mon.ID + "',N'" + mon.TenMon + "','" + mon.DanhMuc.ID + "'," + mon.Gia + ",0)");
         }
         public void deleteMon(String ID)
         {
-            DataThongTinHoaDonDAL.Instance.deleteThongTinHoaDonbyIDMon(ID);
-            DataProvider.Instance.setdata("delete from Mon where ID = '" + ID + "'");
+            try
+            {
+                DataProvider.Instance.setdata("delete from Mon where ID = '" + ID + "'");
+            }catch(Exception ex)
+            {
+                DataProvider.Instance.setdata("update Mon set DaXoa = 1 where ID = '" + ID + "'");
+            }
         }
         public void updateMon(Mon mon)
         {
