@@ -60,7 +60,14 @@ namespace QuanLyQuanCafe.DAL
         }
         public void addMon(Mon mon)
         {
-            DataProvider.Instance.setdata("insert into Mon values('" + mon.ID + "',N'" + mon.TenMon + "','" + mon.DanhMuc.ID + "'," + mon.Gia + ",0)");
+            try
+            {
+                DataProvider.Instance.setdata("insert into Mon values('" + mon.ID + "',N'" + mon.TenMon + "','" + mon.DanhMuc.ID + "'," + mon.Gia + ",0)");
+            }
+            catch (Exception ex)
+            {
+                DataProvider.Instance.setdata("update Mon set DaXoa = 0 where ID = '" + mon.ID + "'");
+            }
         }
         public void deleteMon(String ID)
         {
@@ -86,7 +93,7 @@ namespace QuanLyQuanCafe.DAL
             }
             else
             {
-                return dt.Rows[0]["ID"].ToString();
+                return dt.Rows[0]["ID"].ToString().Substring(1);
             }
         }
         public string CapIDmon()

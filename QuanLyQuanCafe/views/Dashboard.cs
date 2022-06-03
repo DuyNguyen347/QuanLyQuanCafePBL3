@@ -594,7 +594,14 @@ namespace QuanLyQuanCafe
             detail.Tong.Text = DGV_Bill.CurrentRow.Cells[3].Value.ToString();
             detail.ThanhTien.Text = DGV_Bill.CurrentRow.Cells[4].Value.ToString();
             detail.DGV_ListMon.DataSource = DataHoaDonDAL.Instance.LoadMonDaChon(detail.MaHD.Text);
-            detail.lbTenNV.Text = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+            if (DGV_Bill.CurrentRow.Cells[5].Value.ToString().Trim() != "")
+            {
+                detail.lbTenNV.Text = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+            }
+            else
+            {
+                detail.lbTenNV.Text = "";
+            }
             detail.ShowDialog();
         }
     }
