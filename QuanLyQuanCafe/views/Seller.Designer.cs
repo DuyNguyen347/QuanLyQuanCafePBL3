@@ -237,9 +237,9 @@
             this.cbbChonBan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbbChonBan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cbbChonBan.ItemHeight = 30;
-            this.cbbChonBan.Location = new System.Drawing.Point(219, 618);
+            this.cbbChonBan.Location = new System.Drawing.Point(220, 616);
             this.cbbChonBan.Name = "cbbChonBan";
-            this.cbbChonBan.Size = new System.Drawing.Size(100, 36);
+            this.cbbChonBan.Size = new System.Drawing.Size(99, 36);
             this.cbbChonBan.TabIndex = 1036;
             // 
             // btGopban
@@ -251,9 +251,9 @@
             this.btGopban.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.btGopban.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btGopban.ForeColor = System.Drawing.Color.White;
-            this.btGopban.Location = new System.Drawing.Point(117, 617);
+            this.btGopban.Location = new System.Drawing.Point(119, 617);
             this.btGopban.Name = "btGopban";
-            this.btGopban.Size = new System.Drawing.Size(96, 35);
+            this.btGopban.Size = new System.Drawing.Size(95, 36);
             this.btGopban.TabIndex = 1035;
             this.btGopban.Text = "Gộp bàn";
             this.btGopban.Click += new System.EventHandler(this.btGopban_Click);
@@ -269,7 +269,7 @@
             this.btChuyenBan.ForeColor = System.Drawing.Color.White;
             this.btChuyenBan.Location = new System.Drawing.Point(15, 617);
             this.btChuyenBan.Name = "btChuyenBan";
-            this.btChuyenBan.Size = new System.Drawing.Size(96, 35);
+            this.btChuyenBan.Size = new System.Drawing.Size(98, 35);
             this.btChuyenBan.TabIndex = 1034;
             this.btChuyenBan.Text = "Chuyển Bàn";
             this.btChuyenBan.Click += new System.EventHandler(this.btChuyenBan_Click);
@@ -371,13 +371,13 @@
             this.TB_nhanvien.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_nhanvien.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_nhanvien.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TB_nhanvien.Location = new System.Drawing.Point(942, 109);
+            this.TB_nhanvien.Location = new System.Drawing.Point(884, 109);
             this.TB_nhanvien.Name = "TB_nhanvien";
             this.TB_nhanvien.PasswordChar = '\0';
             this.TB_nhanvien.PlaceholderText = "";
             this.TB_nhanvien.ReadOnly = true;
             this.TB_nhanvien.SelectedText = "";
-            this.TB_nhanvien.Size = new System.Drawing.Size(161, 21);
+            this.TB_nhanvien.Size = new System.Drawing.Size(219, 21);
             this.TB_nhanvien.TabIndex = 1028;
             // 
             // TB_Checkin
@@ -391,13 +391,13 @@
             this.TB_Checkin.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_Checkin.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_Checkin.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TB_Checkin.Location = new System.Drawing.Point(942, 79);
+            this.TB_Checkin.Location = new System.Drawing.Point(884, 79);
             this.TB_Checkin.Name = "TB_Checkin";
             this.TB_Checkin.PasswordChar = '\0';
             this.TB_Checkin.PlaceholderText = "";
             this.TB_Checkin.ReadOnly = true;
             this.TB_Checkin.SelectedText = "";
-            this.TB_Checkin.Size = new System.Drawing.Size(161, 21);
+            this.TB_Checkin.Size = new System.Drawing.Size(219, 21);
             this.TB_Checkin.TabIndex = 1027;
             // 
             // TB_IDhoadon
@@ -411,12 +411,12 @@
             this.TB_IDhoadon.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_IDhoadon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_IDhoadon.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TB_IDhoadon.Location = new System.Drawing.Point(942, 54);
+            this.TB_IDhoadon.Location = new System.Drawing.Point(884, 54);
             this.TB_IDhoadon.Name = "TB_IDhoadon";
             this.TB_IDhoadon.PasswordChar = '\0';
             this.TB_IDhoadon.PlaceholderText = "";
             this.TB_IDhoadon.SelectedText = "";
-            this.TB_IDhoadon.Size = new System.Drawing.Size(161, 21);
+            this.TB_IDhoadon.Size = new System.Drawing.Size(219, 21);
             this.TB_IDhoadon.TabIndex = 1026;
             // 
             // TB_IDban
@@ -430,13 +430,13 @@
             this.TB_IDban.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TB_IDban.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.TB_IDban.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TB_IDban.Location = new System.Drawing.Point(942, 24);
+            this.TB_IDban.Location = new System.Drawing.Point(884, 24);
             this.TB_IDban.Name = "TB_IDban";
             this.TB_IDban.PasswordChar = '\0';
             this.TB_IDban.PlaceholderText = "";
             this.TB_IDban.ReadOnly = true;
             this.TB_IDban.SelectedText = "";
-            this.TB_IDban.Size = new System.Drawing.Size(161, 21);
+            this.TB_IDban.Size = new System.Drawing.Size(219, 21);
             this.TB_IDban.TabIndex = 1025;
             // 
             // label5
@@ -590,7 +590,6 @@
             this.TB_Tongtien.Size = new System.Drawing.Size(215, 25);
             this.TB_Tongtien.TabIndex = 1010;
             this.TB_Tongtien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TB_Tongtien.TextChanged += new System.EventHandler(this.TB_Tongtien_TextChanged);
             // 
             // label1
             // 

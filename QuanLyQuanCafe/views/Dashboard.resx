@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="BT_Refresh2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="BT_Refresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAACutJREFUeF7t
         nWusXFUVx4FCacKjvIRCRJomgBYrJWg0goANxASrEcRABHkoEaI1BMW0QYl8wOALRVA0EBNFwgdINCHE
@@ -178,7 +178,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAABe
-        VgAAAk1TRnQBSQFMAgEBEAEAAdABAgHQAQIBFAEAARQBAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFQ
+        VgAAAk1TRnQBSQFMAgEBEAEAAfABAgHwAQIBFAEAARQBAAT/AREBAAj/AUIBTQE2BwABNgMAASgDAAFQ
         AwABZAMAAQEBAAEQBQABgAE+/wD/AP8A/wD/AP8A/wD/AP8A/wD/AP8AngABpwEUAacBFAGnARQBpwEU
         AacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEU
         AacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEUAacBFAGnARQBpwEU
@@ -653,7 +653,7 @@
         U6E3+L5hnB+HpLougu1bxdzyNg/CBNK9d9rp/zdMO/Pv3dGCAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="BT_ResetChucVu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="BT_Refresh2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAACutJREFUeF7t
         nWusXFUVx4FCacKjvIRCRJomgBYrJWg0goANxASrEcRABHkoEaI1BMW0QYl8wOALRVA0EBNFwgdINCHE
@@ -705,7 +705,7 @@
         U6E3+L5hnB+HpLougu1bxdzyNg/CBNK9d9rp/zdMO/Pv3dGCAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="BT_Refresh.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="BT_ResetChucVu.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABGdBTUEAALGPC/xhBQAACutJREFUeF7t
         nWusXFUVx4FCacKjvIRCRJomgBYrJWg0goANxASrEcRABHkoEaI1BMW0QYl8wOALRVA0EBNFwgdINCHE

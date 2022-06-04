@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using QuanLyQuanCafe.DAL;
 using QuanLyQuanCafe.DTO;
 using QuanLyQuanCafe.Report;
+using System.Globalization;
 
 namespace QuanLyQuanCafe
 {
@@ -20,6 +21,9 @@ namespace QuanLyQuanCafe
         public Quit quit;
         DataTable dt;
         NhanVien nv = new NhanVien();
+        CultureInfo culture = new CultureInfo("vi-VN");
+        int tongtien = 0;
+        int thanhtien = 0;
         public Seller()
         {
             InitializeComponent();
@@ -156,8 +160,14 @@ namespace QuanLyQuanCafe
                     HoaDon hoa_don = DataHoaDonDAL.Instance.getHoaDonHienTaibyID(TB_IDhoadon.Text.Substring(0, 11));
                     if (hoa_don != null)
                     {
-                        TB_Tongtien.Text = hoa_don.Tongtinh.ToString();
-                        TB_thanhtien.Text = hoa_don.Dathu.ToString();
+                        tongtien = hoa_don.Tongtinh;
+                        int tt = hoa_don.Tongtinh;
+                        TB_Tongtien.Text = tt.ToString("c", culture);
+                        //TB_Tongtien.Text = hoa_don.Tongtinh.ToString();
+                        thanhtien = hoa_don.Dathu;
+                        int dathu = hoa_don.Dathu;
+                        TB_thanhtien.Text = dathu.ToString("c",culture);
+                        //TB_thanhtien.Text = hoa_don.Dathu.ToString();
                         NumericGiamGia.Value = hoa_don.Tongtinh - hoa_don.Dathu;
                     }
                 }
@@ -212,7 +222,15 @@ namespace QuanLyQuanCafe
             int total_money = 0;
             foreach (DataGridViewRow dr in DGV_DaChon.Rows)
                 total_money += Convert.ToInt32(dr.Cells["GIá"].Value.ToString()) * Convert.ToInt32(dr.Cells["Số lượng"].Value.ToString());
-            TB_Tongtien.Text = total_money.ToString();
+            // chuyển sang định dạng tiếng Việt
+            //CultureInfo culture = new CultureInfo("vi-VN");
+            // nếu dùng : Thread.CurrentThread.CurrentCulture = culture thì chuyển định dạng ở hàm main - thread hiện tại
+            //c : currency
+            tongtien = total_money;
+            TB_Tongtien.Text = total_money.ToString("c",culture);
+            int b = Convert.ToInt32(NumericGiamGia.Value);
+            thanhtien = tongtien - (tongtien * b / 100);
+            TB_thanhtien.Text = thanhtien.ToString("c",culture);
         }
 
         #endregion
@@ -358,7 +376,7 @@ namespace QuanLyQuanCafe
                     try
                     {
                         HoaDon hoadon = new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text),
-                                       Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text), nv.ID);
+                                       tongtien, thanhtien, nv.ID);
                         DataHoaDonDAL.Instance.addHoaDon(hoadon);
                         foreach (string i in TB_IDban.Text.Split(','))
                         {
@@ -412,11 +430,17 @@ namespace QuanLyQuanCafe
                         TB_IDhoadon.Text = DataProvider.CapIdHoaDon();
                         DataHoaDonDAL.Instance.addHoaDon(
                             new HoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper(),Convert.ToDateTime(TB_Checkin.Text),
-                            Convert.ToDateTime(TB_Checkin.Text), Convert.ToInt32(TB_Tongtien.Text),Convert.ToInt32(TB_thanhtien.Text), nv.ID));
+                            Convert.ToDateTime(TB_Checkin.Text), tongtien,thanhtien, nv.ID));
                         foreach (DataGridViewRow i in DGV_DaChon.Rows)
                             DataThongTinHoaDonDAL.Instance.addThongTinHoaDon(new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(), 
                                 i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())));
-                        MessageBox.Show("Đã thanh toán!");
+                        DialogResult d = MessageBox.Show("Thanh toán thành công!.Bạn có muốn in hoá đơn không ?", "In hoá đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (d == DialogResult.Yes)
+                        {
+                            string giamgia = NumericGiamGia.Value.ToString() + "%";
+                            PrintInvoice p = new PrintInvoice(TB_IDhoadon.Text.Substring(0, 11), TB_nhanvien.Text,"Đơn mang đi", giamgia);
+                            p.Show();
+                        }
                         refresh(true, true, true, false, false, true);
                     }
                     catch (Exception ex) { MessageBox.Show("ID hóa đơn đã tồn tại"); }
@@ -436,7 +460,7 @@ namespace QuanLyQuanCafe
 
                 Tinh_tong_tien();
                 DataHoaDonDAL.Instance.updateHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text),
-                                                       Convert.ToInt32(TB_Tongtien.Text), Convert.ToInt32(TB_thanhtien.Text),nv.ID));
+                                                       tongtien,thanhtien,nv.ID));
                 MessageBox.Show("Thanh toán thành công!");
                 if (TB_IDhoadon.Text.Trim().Length > 11)
                     DataThongTinHoaDonDAL.Instance.dongbohoadonchinh(TB_IDhoadon.Text.Substring(0, 11));
@@ -662,26 +686,26 @@ namespace QuanLyQuanCafe
 
         #endregion
         #region giảm giá
-        private void TB_Tongtien_TextChanged(object sender, EventArgs e)
-        {
-            if (TB_Tongtien.Text == "")
-            {
-                TB_Tongtien.Text = "0";
-                NumericGiamGia.Value = 0;
-                TB_thanhtien.Text = "0";
-            }
-            try
-            {
-                int a = Convert.ToInt32(TB_Tongtien.Text);
-                TB_Tongtien.Text = a.ToString();
-                int b = Convert.ToInt32(NumericGiamGia.Value);
-                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - (Convert.ToInt32(TB_Tongtien.Text) * b / 100)).ToString();
-            }
-            catch (Exception ex)
-            {
+        //private void TB_Tongtien_TextChanged(object sender, EventArgs e)
+        //{
+        //    if (TB_Tongtien.Text == "")
+        //    {
+        //        TB_Tongtien.Text = "0";
+        //        NumericGiamGia.Value = 0;
+        //        TB_thanhtien.Text = "0";
+        //    }
+        //    try
+        //    {
+        //        int a = Convert.ToInt32(TB_Tongtien.Text);
+        //        TB_Tongtien.Text = a.ToString();
+        //        int b = Convert.ToInt32(NumericGiamGia.Value);
+        //        TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - (Convert.ToInt32(TB_Tongtien.Text) * b / 100)).ToString();
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
         private void NumericGiamGia_ValueChanged(object sender, EventArgs e)
         {
@@ -689,7 +713,8 @@ namespace QuanLyQuanCafe
             {
                 int a = Convert.ToInt32(NumericGiamGia.Value);
                 //NumericGiamGia.Value = a;
-                TB_thanhtien.Text = (Convert.ToInt32(TB_Tongtien.Text) - (Convert.ToInt32(TB_Tongtien.Text) * a / 100)).ToString();
+                thanhtien = tongtien - (tongtien * a / 100);
+                TB_thanhtien.Text = thanhtien.ToString("c",culture);
             }
             catch (Exception ex)
             {

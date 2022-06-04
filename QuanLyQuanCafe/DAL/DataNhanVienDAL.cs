@@ -172,5 +172,29 @@ namespace QuanLyQuanCafe.DAL
             MemoryStream ms = new MemoryStream(b);
             return Image.FromStream(ms);
         }
+        public string getLastNV()
+        {
+            string query = "select top 1 * from NhanVien order by ID desc";
+            DataTable dt = DataProvider.Instance.GetRecords(query);
+            if (dt.Rows.Count == 0)
+            {
+                return "";
+            }
+            else
+            {
+                return dt.Rows[0]["ID"].ToString().Substring(2,3);
+            }
+        }
+        public string setIdNV()
+        {
+            string kq = "";
+            int s = 0;
+            if (getLastNV() == "") s = 1;
+            else s = Convert.ToInt32(getLastNV()) + 1;
+            if (s< 10) kq = "NV00" + s.ToString();
+            else if (s< 99) kq = "NV0" + s.ToString();
+            else kq = "NV" + s.ToString();
+            return kq;
+        }
     }
 }

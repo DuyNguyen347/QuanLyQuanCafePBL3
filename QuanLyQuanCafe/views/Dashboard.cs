@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -97,7 +98,7 @@ namespace QuanLyQuanCafe
             {
                 if (TB_emailNV.Text == "")
                 {
-                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(DataNhanVienDAL.Instance.setIdNV(), TB_TenNV.Text, DT_NSNV.Text,
                                                        cbB_ChucVu.Text, "", "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                 }
@@ -105,7 +106,7 @@ namespace QuanLyQuanCafe
                 {
                     //if (CheckEmail.Instance.Check(TB_emailNV.Text))
                     //{
-                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(DataNhanVienDAL.Instance.setIdNV(), TB_TenNV.Text, DT_NSNV.Text,
                                                            cbB_ChucVu.Text, TB_UserName.Text, "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                     //}
@@ -119,14 +120,33 @@ namespace QuanLyQuanCafe
         }
         private void BT_Xoa1_Click(object sender, EventArgs e)
         {
-            DataNhanVienDAL.Instance.deleteNhanVien(TB_IDNV.Text.ToString().ToUpper());
-            BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+            if(TB_IDNV.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn nhân viên cần xoá");
+            }
+            else
+            {
+                DialogResult d = MessageBox.Show("Bạn có chắc chắn muốn xoá nhân viên " + TB_TenNV.Text + " không?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (d == DialogResult.Yes)
+                {
+                    DataNhanVienDAL.Instance.deleteNhanVien(TB_IDNV.Text.ToString().ToUpper());
+                    BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+                    BT_List_Bill_Click(new object(), new EventArgs());
+                }
+            }
         }
         private void BT_Sua1_Click(object sender, EventArgs e)
         {
-            DataNhanVienDAL.Instance.updateNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+            if( TB_IDNV.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn nhân viên cần sửa thông tin");
+            }
+            else
+            {
+                DataNhanVienDAL.Instance.updateNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
                                                    cbB_ChucVu.Text, TB_UserName.Text, "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
-            BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+                BT_Refresh_Click_NhanVien(new object(), new EventArgs());
+            }
         }
         private void cbB_ChucVu_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -243,12 +263,13 @@ namespace QuanLyQuanCafe
         }
         private void BT_Refresh2_Click(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.loctatcadulieu();
+            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu();
             DGV_Mon.Columns[0].HeaderText = "Mã món";
-            DGV_Mon.Columns[1].HeaderText = "Tên món";
+            DGV_Mon.Columns[1].HeaderText = "Tên món ăn";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
             DGV_Mon.Columns[3].HeaderText = "Giá";
-            DGV_Mon.Columns["DaXoa"].HeaderText = "Đã xóa"; ;
+            DGV_Mon.Columns["DaXoa"].HeaderText = "Đã xóa";
+            DGV_Mon.Columns.Remove("DaXoa");
             TB_TimMon.Text = "";
             TB_IDmon.Text = "";
             TB_TenM0n.Text = "";
@@ -273,19 +294,33 @@ namespace QuanLyQuanCafe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi " + ex.Message);
+                MessageBox.Show("Vui lòng nhập đầy đủ và chính xác thông tin!! \nLỗi " + ex.Message);
             }
         }
         private void BT_Sua2_Click(object sender, EventArgs e)
         {
-            DataMonDAL.Instance.updateMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),
+            if(TB_IDmon.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn món");
+            }
+            else
+            {
+                DataMonDAL.Instance.updateMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),
                 DataDanhMucDAL.Instance.getDanhMucbyTen(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
-            BT_Refresh2_Click(new object(), new EventArgs());
+                BT_Refresh2_Click(new object(), new EventArgs());
+            }
         }
         private void BT_Xoa2_Click(object sender, EventArgs e)
         {
-            DataMonDAL.Instance.deleteMon(TB_IDmon.Text.ToString().ToUpper().Trim());
-            BT_Refresh2_Click(new object(), new EventArgs());
+            if (TB_IDmon.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn món muốn xoá");
+            }
+            else
+            {
+                DataMonDAL.Instance.deleteMon(TB_IDmon.Text.ToString().ToUpper().Trim());
+                BT_Refresh2_Click(new object(), new EventArgs());
+            }
         }
         #endregion
         //
@@ -435,27 +470,48 @@ namespace QuanLyQuanCafe
 
         private void BT_themChucVu_Click(object sender, EventArgs e)
         {
-            try
+            if (TB_Chucvuv.Text == "")
             {
-                DataChucVuDAL.Instance.addChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
-                BT_ResetChucVu_Click(new object(), new EventArgs());
+                MessageBox.Show("Vui lòng nhập tên chức vụ");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Lỗi " + ex.Message);
+                try
+                {
+                    DataChucVuDAL.Instance.addChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
+                    BT_ResetChucVu_Click(new object(), new EventArgs());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi " + ex.Message);
+                }
             }
         }
 
         private void BT_suaChucVu_Click(object sender, EventArgs e)
         {
-            DataChucVuDAL.Instance.updateChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
-            BT_ResetChucVu_Click(new object(), new EventArgs());
+            if(TB_Chucvuv.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn chức vụ cần sửa thông tin");
+            }
+            else
+            {
+                DataChucVuDAL.Instance.updateChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
+                BT_ResetChucVu_Click(new object(), new EventArgs());
+            }
         }
 
         private void BT_Xoachucvu_Click(object sender, EventArgs e)
         {
-            DataChucVuDAL.Instance.deleteChucvu(TB_Chucvuv.Text.ToString().ToUpper().Trim());
-            BT_ResetChucVu_Click(new object(), new EventArgs());
+            if (TB_Chucvuv.Text == "")
+            {
+                MessageBox.Show("Vui lòng chọn chức vụ cần xoá");
+            }
+            else
+            {
+                DataChucVuDAL.Instance.deleteChucvu(TB_Chucvuv.Text.ToString().ToUpper().Trim());
+                BT_ResetChucVu_Click(new object(), new EventArgs());
+            }
         }
         #endregion
 
@@ -479,7 +535,6 @@ namespace QuanLyQuanCafe
             LoadData();
             DisableCustomDates();
         }
-
         private void OneMonth_Click(object sender, EventArgs e)
         {
             DT_Danhthu_Begin.Value = DateTime.Today.AddDays(-30);
@@ -501,7 +556,8 @@ namespace QuanLyQuanCafe
                 chartTopProducts.Series[0].YValueMembers = "Value";
                 chartTopProducts.DataBind();
                 lbSoHD.Text = ThongKeDAL.Instance.NumOrders.ToString();
-                lbTongThu.Text = ThongKeDAL.Instance.TotalRevenue.ToString() + "đ";
+                CultureInfo culture = new CultureInfo("vi-VN");
+                lbTongThu.Text = ThongKeDAL.Instance.TotalRevenue.ToString("c",culture);
                 DGV_DoanhThu.DataSource = DataDanhThuDAL.data(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
                 DGV_DoanhThu.Columns[0].HeaderText = "Ngày";
                 DGV_DoanhThu.Columns[1].HeaderText = "Số đơn";
@@ -585,24 +641,32 @@ namespace QuanLyQuanCafe
         private void BT_XemChiTiet_Click(object sender, EventArgs e)
         {
             Detail detail = new Detail();
-            detail.MaHD.Text = DGV_Bill.CurrentRow.Cells[0].Value.ToString();
-            detail.CheckIn.Text = DGV_Bill.CurrentRow.Cells[1].Value.ToString();
-            detail.CheckOut.Text = DGV_Bill.CurrentRow.Cells[2].Value.ToString();
-            detail.Table_Id.Text = "";
-            foreach (String i in DataHoaDon_BanDAL.Instance.data(detail.MaHD.Text))
-                detail.Table_Id.Text += i + "  ";
-            detail.Tong.Text = DGV_Bill.CurrentRow.Cells[3].Value.ToString();
-            detail.ThanhTien.Text = DGV_Bill.CurrentRow.Cells[4].Value.ToString();
-            detail.DGV_ListMon.DataSource = DataHoaDonDAL.Instance.LoadMonDaChon(detail.MaHD.Text);
+            detail.maHD = DGV_Bill.CurrentRow.Cells[0].Value.ToString();
+            detail.gioVao = Convert.ToDateTime(DGV_Bill.CurrentRow.Cells[1].Value);
+            detail.gioRa = Convert.ToDateTime(DGV_Bill.CurrentRow.Cells[2].Value);
+            detail.ban = "";
+            foreach (String i in DataHoaDon_BanDAL.Instance.data(detail.maHD))
+                detail.ban += i + "  ";
+            detail.tongTinh = Convert.ToInt32(DGV_Bill.CurrentRow.Cells[3].Value.ToString());
+            detail.thanhTien = Convert.ToInt32(DGV_Bill.CurrentRow.Cells[4].Value.ToString());
             if (DGV_Bill.CurrentRow.Cells[5].Value.ToString().Trim() != "")
             {
-                detail.lbTenNV.Text = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+                try
+                {
+                    detail.tenNV = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+                }
+                catch (Exception)
+                {
+                    detail.tenNV = "";
+                }
             }
             else
             {
-                detail.lbTenNV.Text = "";
+                detail.tenNV = "";
             }
-            detail.ShowDialog();
+            detail.Show();
         }
+
+
     }
 }
