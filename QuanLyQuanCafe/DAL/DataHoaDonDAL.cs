@@ -26,7 +26,7 @@ namespace QuanLyQuanCafe.DAL
         {
             DataTable data;
             //string query = " select * from HoaDon where LEN(ID_HoaDon) <12 and TimeCheckout between '" + DataProvider.FormatDatetimeShort(datebegin) + "' and '" + DataProvider.FormatDatetimeShort(dateend) + "'";
-            string query = $" select * from HoaDon where LEN(ID_HoaDon) <12 and TimeCheckout between '{datebegin}' and '{dateend}'";
+            string query = $" select * from HoaDon where LEN(ID_HoaDon) <12 and TimeCheckout between '{DataProvider.FormatDatetimeShort(datebegin)}' and '{DataProvider.FormatDatetimeShort(dateend)}'";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }

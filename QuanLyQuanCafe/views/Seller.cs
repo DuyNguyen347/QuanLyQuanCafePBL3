@@ -166,14 +166,15 @@ namespace QuanLyQuanCafe
                         //TB_Tongtien.Text = hoa_don.Tongtinh.ToString();
                         thanhtien = hoa_don.Dathu;
                         int dathu = hoa_don.Dathu;
-                        TB_thanhtien.Text = dathu.ToString("c",culture);
+                        TB_thanhtien.Text = dathu.ToString("c", culture);
                         //TB_thanhtien.Text = hoa_don.Dathu.ToString();
-                        NumericGiamGia.Value = hoa_don.Tongtinh - hoa_don.Dathu;
+                        NumericGiamGia.Value = 100*(hoa_don.Tongtinh - hoa_don.Dathu)/hoa_don.Tongtinh;
                     }
                 }
                 catch (Exception ex)
                 {
                     Tinh_tong_tien();
+                    NumericGiamGia.Value = 0;
                 }
             }
             suppercurrenttble = ((Button)sender).Text.ToString().Split('\n')[0].Trim();
