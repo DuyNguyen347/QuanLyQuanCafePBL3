@@ -52,26 +52,29 @@ namespace QuanLyQuanCafe.DAL
         }
         public BanAn getBanAnbyID(string id)
         {
-            List<BanAn> banans = new List<BanAn>();
-            foreach (DataRow row in data().Rows)
-                if (row["ID"].ToString().ToUpper().Trim() == id.ToUpper().Trim())
-                    banans.Add(new BanAn(row));
-            return banans[0];
+            DataTable data;
+            string query = "select * from BanAn where ID = '"+id+"'";
+            data = DataProvider.Instance.GetRecords(query);
+            return new BanAn(data.Rows[0]);
         }
         public List<BanAn> locBanAnbyID(string id)
         {
+            DataTable data;
+            string query = "select * from BanAn where ID like '%" + id + "%'";
+            data = DataProvider.Instance.GetRecords(query);
             List<BanAn> banans = new List<BanAn>();
-            foreach (DataRow row in data().Rows)
-                if (row["ID"].ToString().ToUpper().Trim().Contains(id.ToUpper().Trim()))
-                    banans.Add(new BanAn(row));
+            foreach (DataRow row in data.Rows)
+                banans.Add(new BanAn(row));
             return banans;
         }
         public List<BanAn> getBanAnbyStatus(string trangthai)
         {
+            DataTable data;
             List<BanAn> banans = new List<BanAn>();
-            foreach (DataRow row in data().Rows)
-                if (row["Status"].ToString().ToUpper().Trim() == trangthai.ToUpper().Trim())
-                    banans.Add(new BanAn(row));
+            string query = "select * from BanAn where Status = '"+trangthai+"'";
+            data = DataProvider.Instance.GetRecords(query);
+            foreach (DataRow row in data.Rows)
+                banans.Add(new BanAn(row));
             return banans;
         }
         public void addBanAn(BanAn banan)

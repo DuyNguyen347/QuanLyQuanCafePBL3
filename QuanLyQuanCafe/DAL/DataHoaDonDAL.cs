@@ -60,7 +60,7 @@ namespace QuanLyQuanCafe.DAL
         public HoaDon getHoaDonHienTaibyTable(string ID_table)
         {
             DataTable data;
-            data = DataProvider.Instance.GetRecords("select * from View_HienTai");
+            data = DataProvider.Instance.GetRecords("select * from View_HienTai where ID_table ='"+ID_table+"'");
             foreach (DataRow row in data.Rows)
             {
                 if (row["ID_table"].ToString() == ID_table)

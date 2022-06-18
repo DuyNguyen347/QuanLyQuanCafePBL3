@@ -96,6 +96,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\QLBanAnBLL.cs" />
+    <Compile Include="BLL\QLDanhMucBLL.cs" />
+    <Compile Include="BLL\QLHoaDonBLL.cs" />
+    <Compile Include="BLL\QLHoaDon_BanBLL.cs" />
+    <Compile Include="BLL\QLMonBLL.cs" />
+    <Compile Include="BLL\QLThongTinHoaDonBLL.cs" />
     <Compile Include="DAL\CheckEmail.cs" />
     <Compile Include="DAL\DataBanAnDAL.cs" />
     <Compile Include="DAL\DataChucVuDAL.cs" />

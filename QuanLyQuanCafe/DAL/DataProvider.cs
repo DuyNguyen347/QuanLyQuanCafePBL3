@@ -30,7 +30,7 @@ namespace QuanLyQuanCafe.DAL
         public DataProvider()
         {
             // ConnectionString of Tinh 
-            s = @"Data Source = 192.168.1.4,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
+            s = @"Data Source = 192.168.1.5,1433; Initial Catalog = QL_cafe; User ID = NQT; Password = 68709502";
             // ConnectionString of Duy
             //s = ConfigurationManager.ConnectionStrings["QuanLyQuanCafeConnectionString"].ConnectionString;
             //s = @"Data Source=DESKTOP-KMNS09Q\SQLEXPRESS;Initial Catalog=QL_cafe;Integrated Security=True";

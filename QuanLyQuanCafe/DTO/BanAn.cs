@@ -25,5 +25,9 @@ namespace QuanLyQuanCafe.DTO
             ID = dataRow["ID"].ToString();
             Status = Convert.ToBoolean(dataRow["Status"].ToString());
         }
+        public override string ToString()
+        {
+            return ID.ToString();
+        }
     }
 }

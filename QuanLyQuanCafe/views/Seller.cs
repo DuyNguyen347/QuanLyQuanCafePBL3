@@ -8,10 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QuanLyQuanCafe.DAL;
 using QuanLyQuanCafe.DTO;
 using QuanLyQuanCafe.Report;
 using System.Globalization;
+using QuanLyQuanCafe.BLL;
 
 namespace QuanLyQuanCafe
 {
@@ -29,10 +29,6 @@ namespace QuanLyQuanCafe
             InitializeComponent();
             dt = new DataTable();
             Add_Column();
-            TB_IDban.Enabled = false;
-            TB_IDhoadon.Enabled = false;
-            TB_Checkin.Enabled = false;
-            TB_nhanvien.Enabled = false;
             Add_CbbChonBan();
         }
 
@@ -57,9 +53,9 @@ namespace QuanLyQuanCafe
                 }
             }
             else if (cbB_ChonBan.SelectedItem.ToString() == "Trống")
-                Load_FLP_Table(DataBanAnDAL.Instance.getBanAnbyStatus("True"));
+                Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("True"));
             else if (cbB_ChonBan.SelectedItem.ToString() == "Có người")
-                Load_FLP_Table(DataBanAnDAL.Instance.getBanAnbyStatus("False"));
+                Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("False"));
             current_cbb = cbB_ChonBan.Text.Trim();
         }
         public void Load_FLP_Table(List<BanAn> banans)
@@ -116,7 +112,7 @@ namespace QuanLyQuanCafe
             {
                 refresh(true, false, false, false, false, false);
                 string str = ((Button)sender).Text.ToString().Split('\n')[0];
-                BanAn banan = DataBanAnDAL.Instance.getBanAnbyID(str);
+                BanAn banan = QLBanAnBLL.Instance.getBanAnbyID(str);
                 if (banan.Status)
                 {
                     TB_IDban.Text = banan.ID.Trim();
@@ -130,8 +126,8 @@ namespace QuanLyQuanCafe
                 }
                 else
                 {
-                    HoaDon hoaDon = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(banan.ID);
-                    foreach (String j in DataHoaDon_BanDAL.Instance.data(hoaDon.ID_HoaDon.Substring(0,11)))
+                    HoaDon hoaDon = QLHoaDonBLL.Instance.getHoaDonHienTaibyTable(banan.ID);
+                    foreach (String j in QLHoaDon_BanBLL.Instance.getListBanbyHoaDon(hoaDon.ID_HoaDon.Substring(0,11)))
                     {
                         if (TB_IDban.Text.Trim() == "")
                             TB_IDban.Text += j.Trim();
@@ -143,7 +139,7 @@ namespace QuanLyQuanCafe
                     TB_IDhoadon.Text = hoaDon.ID_HoaDon;
                     TB_Checkin.Text = hoaDon.TimeCheckin.ToString();
                     dt.Clear();
-                    dt = DataThongTinHoaDonDAL.Instance.LoadMonDaChon(hoaDon.ID_HoaDon);
+                    dt = QLHoaDonBLL.Instance.LoadMonByHoaDon(hoaDon.ID_HoaDon);
                     DGV_DaChon.DataSource = dt;
                     try
                     {
@@ -157,7 +153,7 @@ namespace QuanLyQuanCafe
                 currenttable = TB_IDban.Text;
                 try
                 {
-                    HoaDon hoa_don = DataHoaDonDAL.Instance.getHoaDonHienTaibyID(TB_IDhoadon.Text.Substring(0, 11));
+                    HoaDon hoa_don = QLHoaDonBLL.Instance.getHoaDonHienTaibyID(TB_IDhoadon.Text.Substring(0, 11));
                     if (hoa_don != null)
                     {
                         tongtien = hoa_don.Tongtinh;
@@ -239,19 +235,19 @@ namespace QuanLyQuanCafe
         #region Tĩnh Món
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu(TB_TimMon.Text.ToUpper().Trim());
+            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName(TB_TimMon.Text.ToUpper().Trim());
             Change_HeaderText();
         }
         private void Cbb_Danhmuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu("", Cbb_Danhmuc.Text.ToUpper().Trim());
+            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyDanhMuc(Cbb_Danhmuc.Text.ToUpper().Trim());
             Change_HeaderText();
         }
 
         private void BT_refreshMon_Click(object sender, EventArgs e)
         {
             refresh(false, true, false, false, false, true);
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu();
+            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName("");
             Change_HeaderText();
         }
 
@@ -261,7 +257,7 @@ namespace QuanLyQuanCafe
         #region Long CellContentClick
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Mon mon = DataMonDAL.Instance.getMonbyID(DGV_Mon.CurrentRow.Cells["ID"].FormattedValue.ToString());
+            Mon mon =QLMonBLL.Instance.getMonbyID(DGV_Mon.CurrentRow.Cells["ID"].FormattedValue.ToString());
             int dem = 0;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -366,30 +362,30 @@ namespace QuanLyQuanCafe
         {
             ///// Thêm bàn mới
             if (LB_Gopban.Visible) btGopban_Click(new object(), new EventArgs());
-            if (DataBanAnDAL.Instance.getBanAnbyID(TB_IDban.Text.Split(',')[0].ToUpper()).Status)
+            if (QLBanAnBLL.Instance.getBanAnbyID(TB_IDban.Text.Split(',')[0].ToUpper()).Status)
             {
                 if (TB_IDban.Text.Trim() != "")
                 {
                     //try
                     //{
                     TB_Checkin.Text = DateTime.Now.ToString();
-                    TB_IDhoadon.Text = DataProvider.CapIdHoaDon();
+                    TB_IDhoadon.Text = DAL.DataProvider.CapIdHoaDon();
                     try
                     {
                         HoaDon hoadon = new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text),
                                        tongtien, thanhtien, nv.ID);
-                        DataHoaDonDAL.Instance.addHoaDon(hoadon);
+                        QLHoaDonBLL.Instance.addHoaDon(hoadon);
                         foreach (string i in TB_IDban.Text.Split(','))
                         {
-                            DataHoaDon_BanDAL.Instance.addHoaDon_Ban(new HoaDon_Ban(hoadon.ID_HoaDon, i));
-                            DataBanAnDAL.Instance.updateBanAn(new BanAn(i.Trim().ToUpper(), false));
+                            QLHoaDon_BanBLL.Instance.ThemBanVoiHoaDon(new HoaDon_Ban(hoadon.ID_HoaDon, i), 
+                                                                      new BanAn(i.Trim().ToUpper(), false));
                         }
                     }
                     catch (Exception ex) { MessageBox.Show("Thanh toán không thành công!\n" + ex.Message); }
                     try
                     {
                         foreach (DataGridViewRow i in DGV_DaChon.Rows)
-                            DataThongTinHoaDonDAL.Instance.addThongTinHoaDon(new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(),
+                            QLHoaDonBLL.Instance.addThongTinHoaDon(new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(),
                                 i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())));
                         MessageBox.Show("Thanh toán thành công!");
                     }
@@ -397,8 +393,8 @@ namespace QuanLyQuanCafe
                     refresh(false, false, false, false, true, false);
 
                     ///// Đơn tại quán
-                    HoaDon hoaDon = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(currenttable.Split(',')[0]);
-                    foreach (string j in DataHoaDon_BanDAL.Instance.data(hoaDon.ID_HoaDon))
+                    HoaDon hoaDon = QLHoaDonBLL.Instance.getHoaDonHienTaibyTable(currenttable.Split(',')[0]);
+                    foreach (string j in QLHoaDon_BanBLL.Instance.getListBanbyHoaDon(hoaDon.ID_HoaDon))
                     {
                         if (TB_IDban.Text.Trim() == "")
                             TB_IDban.Text += j.Trim();
@@ -410,7 +406,7 @@ namespace QuanLyQuanCafe
                     TB_IDhoadon.Text = hoaDon.ID_HoaDon;
                     TB_Checkin.Text = hoaDon.TimeCheckin.ToString();
                     dt.Clear();
-                    dt = DataThongTinHoaDonDAL.Instance.LoadMonDaChon(hoaDon.ID_HoaDon);
+                    dt = QLHoaDonBLL.Instance.LoadMonByHoaDon(hoaDon.ID_HoaDon);
                     DGV_DaChon.DataSource = dt;
                     try
                     {
@@ -428,12 +424,12 @@ namespace QuanLyQuanCafe
                     try
                     {
                         TB_Checkin.Text = DateTime.Now.ToString();
-                        TB_IDhoadon.Text = DataProvider.CapIdHoaDon();
-                        DataHoaDonDAL.Instance.addHoaDon(
+                        TB_IDhoadon.Text = DAL.DataProvider.CapIdHoaDon();
+                        QLHoaDonBLL.Instance.addHoaDon(
                             new HoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper(),Convert.ToDateTime(TB_Checkin.Text),
                             Convert.ToDateTime(TB_Checkin.Text), tongtien,thanhtien, nv.ID));
                         foreach (DataGridViewRow i in DGV_DaChon.Rows)
-                            DataThongTinHoaDonDAL.Instance.addThongTinHoaDon(new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(), 
+                            QLHoaDonBLL.Instance.addThongTinHoaDon(new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(), 
                                 i.Cells[1].Value.ToString().Trim(), Convert.ToInt32(i.Cells[5].Value.ToString())));
                         DialogResult d = MessageBox.Show("Thanh toán thành công!.Bạn có muốn in hoá đơn không ?", "In hoá đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (d == DialogResult.Yes)
@@ -453,22 +449,22 @@ namespace QuanLyQuanCafe
                 foreach (DataGridViewRow i in DGV_DaChon.Rows)
                     try
                     {
-                        DataThongTinHoaDonDAL.Instance.updateThongTinHoaDon(
+                        QLHoaDonBLL.Instance.updateMonforHoaDon(
                             new ThongTinHoaDon(TB_IDhoadon.Text.Trim().ToUpper(), i.Cells[1].Value.ToString().Trim(),
                                                                                 Convert.ToInt32(i.Cells[5].Value.ToString())));
                     }
                     catch (Exception ex) { MessageBox.Show("Ở " + i.Cells["Mã món"].Value.ToString().Trim() + " chưa được cập nhật!\n" + ex.Message); }
 
                 Tinh_tong_tien();
-                DataHoaDonDAL.Instance.updateHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text),
+                QLHoaDonBLL.Instance.updateHoaDon(new HoaDon(TB_IDhoadon.Text.Trim().ToUpper(), Convert.ToDateTime(TB_Checkin.Text),
                                                        tongtien,thanhtien,nv.ID));
                 MessageBox.Show("Thanh toán thành công!");
                 if (TB_IDhoadon.Text.Trim().Length > 11)
-                    DataThongTinHoaDonDAL.Instance.dongbohoadonchinh(TB_IDhoadon.Text.Substring(0, 11));
+                    QLThongTinHoaDonBLL.Instance.dongbohoadonchinh(TB_IDhoadon.Text.Substring(0, 11));
                 {
-                    HoaDon hoaDon = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(TB_IDban.Text.Split(',')[0]);
+                    HoaDon hoaDon = QLHoaDonBLL.Instance.getHoaDonHienTaibyTable(TB_IDban.Text.Split(',')[0]);
                     dt.Clear();
-                    dt = DataThongTinHoaDonDAL.Instance.LoadMonDaChon(hoaDon.ID_HoaDon);
+                    dt = QLHoaDonBLL.Instance.LoadMonByHoaDon(hoaDon.ID_HoaDon);
                     DGV_DaChon.DataSource = dt;
                     try
                     {
@@ -484,9 +480,9 @@ namespace QuanLyQuanCafe
         {
             try
             {
-                foreach (string i in DataHoaDon_BanDAL.Instance.data(TB_IDhoadon.Text.Substring(0, 11)))
-                    DataBanAnDAL.Instance.updateBanAn(new BanAn(i.Trim().ToUpper(), true));
-                DataHoaDonDAL.Instance.checkoutHoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper());
+                foreach (string i in QLHoaDon_BanBLL.Instance.getListBanbyHoaDon(TB_IDhoadon.Text.Substring(0, 11)))
+                    QLBanAnBLL.Instance.setBanTrong(i);
+                QLHoaDonBLL.Instance.checkoutHoaDon(TB_IDhoadon.Text.Substring(0, 11).ToUpper());
                 DialogResult d = MessageBox.Show("Checkout thành công!.Bạn có muốn in hoá đơn không ?", "In hoá đơn", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (d == DialogResult.Yes)
                 {
@@ -509,7 +505,7 @@ namespace QuanLyQuanCafe
             }
             if (dgv_mon)
             {
-                DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu();
+                DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName("");
                 Change_HeaderText();
 
             }
@@ -522,13 +518,13 @@ namespace QuanLyQuanCafe
             if (flp)
             {
                 //MessageBox.Show("1");
-                Load_FLP_Table(DataBanAnDAL.Instance.locBanAnbyID(""));
+                Load_FLP_Table(QLBanAnBLL.Instance.getListBanAnbyID(""));
             }
             if (cbb_ban)
             {
                 cbB_ChonBan.Items.Clear();
                 cbB_ChonBan.Items.Add("Tất cả");
-                foreach (String i in DataBanAnDAL.Instance.statuses())
+                foreach (String i in QLBanAnBLL.Instance.getListStatus())
                 {
                     if (i.ToUpper().Trim().Equals("True"))
                     {
@@ -543,7 +539,7 @@ namespace QuanLyQuanCafe
             {
                 TB_TimMon.Clear();
                 Cbb_Danhmuc.Items.Clear();
-                foreach (DataRow i in DataDanhMucDAL.Instance.data().Rows)
+                foreach (DataRow i in QLDanhMucBLL.Instance.getAllDanhMuc().Rows)
                 {
                     Cbb_Danhmuc.Items.Add(i[1].ToString().Trim());
                 }
@@ -561,33 +557,29 @@ namespace QuanLyQuanCafe
             {
                 foreach (string i in TB_IDban.Text.ToString().Split(','))
                 {
-                    hoaDon = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(i);////// i dịch lên 1 nếu i đang trống
+                    hoaDon = QLHoaDonBLL.Instance.getHoaDonHienTaibyTable(i);////// i dịch lên 1 nếu i đang trống
                     if (hoaDon != null)
                     {
-                        DataHoaDon_BanDAL.Instance.deleteHoaDon_Ban_(new HoaDon_Ban(hoaDon.ID_HoaDon, i));
+                        QLHoaDon_BanBLL.Instance.XoaMotBanKhoiHoaDon(new HoaDon_Ban(hoaDon.ID_HoaDon, i));
                         foreach (string j in TB_IDban.Text.ToString().Split(','))
                         {
                             if (j.Trim() != "" && j != i) ////// Nếu là bàn "" hoặc trùng i thì j dịch lên 1
                             {
-                                if (!DataBanAnDAL.Instance.getBanAnbyID(j.Trim()).Status) /////Kiểm tra bàn j đang trống hay không
+                                if (!QLBanAnBLL.Instance.getBanAnbyID(j.Trim()).Status) /////Kiểm tra bàn j đang trống hay không
                                 {
-                                    if (DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(j) != null)
+                                    if (QLHoaDonBLL.Instance.getHoaDonHienTaibyTable(j) != null)
                                     {
-                                        String hoadon_truoc = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(j).ID_HoaDon.Trim();
-                                        DataHoaDon_BanDAL.Instance.updateHoaDon_Ban(new HoaDon_Ban(hoaDon.ID_HoaDon, j));
-                                        DataThongTinHoaDonDAL.Instance.gophoadon(hoadon_truoc, hoaDon.ID_HoaDon);                ////Gộp 2 hóa đơn lại
-                                        DataHoaDonDAL.Instance.deleteHoaDon(hoadon_truoc);///// cập nhật lại hóa đơn cho mấy bàn đã gộp
+                                        QLHoaDon_BanBLL.Instance.gopBan(new HoaDon_Ban(hoaDon.ID_HoaDon, j));
                                     }
                                     else
                                     {
-                                        DataHoaDon_BanDAL.Instance.addHoaDon_Ban(new HoaDon_Ban(hoaDon.ID_HoaDon, j));
+                                        QLHoaDon_BanBLL.Instance.addHoaDon_Ban(new HoaDon_Ban(hoaDon.ID_HoaDon, j));
                                     }
                                 }
                                 else
                                     try
                                     {
-                                        DataHoaDon_BanDAL.Instance.addHoaDon_Ban(new HoaDon_Ban(hoaDon.ID_HoaDon, j));         //////////// thêm bàn vào hóa đơn
-                                        DataBanAnDAL.Instance.updateBanAn(new BanAn(j.Trim().ToUpper(), false)); /////////// chỉnh lại trạng thái bàn
+                                        QLHoaDon_BanBLL.Instance.gopBanTrong(new HoaDon_Ban(hoaDon.ID_HoaDon, j.Trim().ToUpper()));
                                     }
                                     catch (Exception ex) { }
                             }
@@ -596,7 +588,7 @@ namespace QuanLyQuanCafe
                         ///Hiển thị lại dữ liệu thôi
                         ///
                         TB_IDban.Clear();
-                        foreach (String j in DataHoaDon_BanDAL.Instance.data(hoaDon.ID_HoaDon))
+                        foreach (String j in QLHoaDon_BanBLL.Instance.getListBanbyHoaDon(hoaDon.ID_HoaDon))
                         {
                             if (TB_IDban.Text.Trim() == "")
                                 TB_IDban.Text += j.Trim();
@@ -607,7 +599,7 @@ namespace QuanLyQuanCafe
                         }
                         dt.Clear();
                         currenttable = TB_IDban.Text;
-                        dt = DataThongTinHoaDonDAL.Instance.LoadMonDaChon(hoaDon.ID_HoaDon);
+                        dt = QLHoaDonBLL.Instance.LoadMonByHoaDon(hoaDon.ID_HoaDon);
                         DGV_DaChon.DataSource = dt;
                         try
                         {
@@ -634,9 +626,9 @@ namespace QuanLyQuanCafe
         #region Long Chuyển bàn & Show Combobox chọn bàn 25/4
         private void Add_CbbChonBan()      //Add Bàn vào Combobox CBB_Ban
         {
-            foreach (DataRow i in DataBanAnDAL.Instance.data().Rows)
+            foreach (BanAn i in QLBanAnBLL.Instance.getListBanAnbyID(""))
             {
-                cbbChonBan.Items.Add(i[0].ToString().Trim());
+                cbbChonBan.Items.Add(i.ID);
             }
         }
 
@@ -653,26 +645,26 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                if (DataBanAnDAL.Instance.locBanAnbyID(tab)[0].Status && DataBanAnDAL.Instance.locBanAnbyID(tab1)[0].Status) { }
+                if (QLBanAnBLL.Instance.getBanAnbyID(tab).Status && QLBanAnBLL.Instance.getBanAnbyID(tab1).Status) { }
                 else
                 {
-                    if (DataBanAnDAL.Instance.locBanAnbyID(tab)[0].Status)///// tab1 có người, tab trống
+                    if (QLBanAnBLL.Instance.getBanAnbyID(tab).Status)///// tab1 có người, tab trống
                     {
-                        DataHoaDonDAL.Instance.Doi_IDBan_ChoNhau(tab1, tab, 1);
+                        QLHoaDonBLL.Instance.Doi_IDBan_ChoNhau(tab1, tab, 1);
                         ///// tab có người, tab1 trống
-                        DataBanAnDAL.Instance.updateBanAn(new BanAn(tab, false));
-                        DataBanAnDAL.Instance.updateBanAn(new BanAn(tab1, true));
+                        QLBanAnBLL.Instance.setBanCoNguoi(tab);
+                        QLBanAnBLL.Instance.setBanTrong(tab1);
                     }
-                    else if (DataBanAnDAL.Instance.locBanAnbyID(tab1)[0].Status) ///// tab có người, tab1 trống
+                    else if (QLBanAnBLL.Instance.getBanAnbyID(tab1).Status) ///// tab có người, tab1 trống
                     {
-                        DataHoaDonDAL.Instance.Doi_IDBan_ChoNhau(tab, tab1, 1);
+                        QLHoaDonBLL.Instance.Doi_IDBan_ChoNhau(tab, tab1, 1);
                         ///// tab1 có người, tab trống
-                        DataBanAnDAL.Instance.updateBanAn(new BanAn(tab1, false));
-                        DataBanAnDAL.Instance.updateBanAn(new BanAn(tab, true));
+                        QLBanAnBLL.Instance.setBanCoNguoi(tab1);
+                        QLBanAnBLL.Instance.setBanTrong(tab);
                     }
-                    else if (!DataBanAnDAL.Instance.locBanAnbyID(tab)[0].Status && !DataBanAnDAL.Instance.locBanAnbyID(tab1)[0].Status)
+                    else if (!QLBanAnBLL.Instance.getBanAnbyID(tab).Status && !QLBanAnBLL.Instance.getBanAnbyID(tab1).Status)
                     {
-                        DataHoaDonDAL.Instance.Doi_IDBan_ChoNhau(tab, tab1, 2);
+                        QLHoaDonBLL.Instance.Doi_IDBan_ChoNhau(tab, tab1, 2);
                     }
                     dt.Clear();
                     refresh(true, false, false, false, true, false);
