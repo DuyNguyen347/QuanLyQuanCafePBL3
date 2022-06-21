@@ -41,22 +41,22 @@ namespace QuanLyQuanCafe
         string current_cbb = "Tất cả";
         private void cbB_ChonBan_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbB_ChonBan.SelectedItem.ToString() == "Tất cả")
+            if (cbb_trangthaiban.SelectedItem.ToString() == "Tất cả")
             {
                 if (current_cbb == "Tất cả")
                     refresh(true, false, false, true, false, false);
                 else
                 {
-                    current_cbb = cbB_ChonBan.Text.Trim();
+                    current_cbb = cbb_trangthaiban.Text.Trim();
                     refresh(true, false, false, true, true, false);
                     currenttable = "";
                 }
             }
-            else if (cbB_ChonBan.SelectedItem.ToString() == "Trống")
+            else if (cbb_trangthaiban.SelectedItem.ToString() == "Trống")
                 Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("True"));
-            else if (cbB_ChonBan.SelectedItem.ToString() == "Có người")
+            else if (cbb_trangthaiban.SelectedItem.ToString() == "Có người")
                 Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("False"));
-            current_cbb = cbB_ChonBan.Text.Trim();
+            current_cbb = cbb_trangthaiban.Text.Trim();
         }
         public void Load_FLP_Table(List<BanAn> banans)
         {
@@ -522,18 +522,7 @@ namespace QuanLyQuanCafe
             }
             if (cbb_ban)
             {
-                cbB_ChonBan.Items.Clear();
-                cbB_ChonBan.Items.Add("Tất cả");
-                foreach (String i in QLBanAnBLL.Instance.getListStatus())
-                {
-                    if (i.ToUpper().Trim().Equals("True"))
-                    {
-                        cbB_ChonBan.Items.Add("Trống");
-                    }
-                    else if (i.ToUpper().Trim().Equals("FALSE"))
-                        cbB_ChonBan.Items.Add("Có người");
-                }
-                cbB_ChonBan.Text = cbB_ChonBan.Items[0].ToString();
+                cbb_trangthaiban.DataSource = QLBanAnBLL.Instance.getListStatus();
             }
             if (cbb_danhmuc)
             {
@@ -628,7 +617,8 @@ namespace QuanLyQuanCafe
         {
             foreach (BanAn i in QLBanAnBLL.Instance.getListBanAnbyID(""))
             {
-                cbbChonBan.Items.Add(i.ID);
+                if(i.ID!="")
+                    cbbChonBan.Items.Add(i.ID);
             }
         }
 

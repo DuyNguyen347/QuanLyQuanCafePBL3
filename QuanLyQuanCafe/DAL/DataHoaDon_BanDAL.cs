@@ -60,7 +60,6 @@ namespace QuanLyQuanCafe.DAL
         {
             HoaDon hoadon = DataHoaDonDAL.Instance.getHoaDonHienTaibyTable(hoadon_ban.BanAn.ID);
             DataProvider.Instance.setdata("update HoaDon_Ban set ID_HoaDon = '" + hoadon_ban.HoaDon.ID_HoaDon + "' where ID_HoaDon = '" + hoadon.ID_HoaDon + "'");
-            MessageBox.Show(hoadon_ban.BanAn.ID);
         }
         public void updateHoaDon_Ban(string id_hoadontruoc, string id_hoadonsau, string id_ban)
         {

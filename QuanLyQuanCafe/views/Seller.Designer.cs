@@ -71,7 +71,7 @@
             this.BT_ThanhToan = new Guna.UI2.WinForms.Guna2GradientButton();
             this.TB_Tongtien = new Guna.UI2.WinForms.Guna2TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbB_ChonBan = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cbb_trangthaiban = new Guna.UI2.WinForms.Guna2ComboBox();
             this.DGV_BILL = new Guna.UI2.WinForms.Guna2DataGridView();
             this.DGV_Mon = new Guna.UI2.WinForms.Guna2DataGridView();
             this.DGV_DaChon = new Guna.UI2.WinForms.Guna2DataGridView();
@@ -154,7 +154,7 @@
             this.guna2CustomGradientPanel1.Controls.Add(this.BT_ThanhToan);
             this.guna2CustomGradientPanel1.Controls.Add(this.TB_Tongtien);
             this.guna2CustomGradientPanel1.Controls.Add(this.label1);
-            this.guna2CustomGradientPanel1.Controls.Add(this.cbB_ChonBan);
+            this.guna2CustomGradientPanel1.Controls.Add(this.cbb_trangthaiban);
             this.guna2CustomGradientPanel1.Controls.Add(this.DGV_BILL);
             this.guna2CustomGradientPanel1.Controls.Add(this.DGV_Mon);
             this.guna2CustomGradientPanel1.Controls.Add(this.DGV_DaChon);
@@ -631,24 +631,24 @@
             this.label1.TabIndex = 1009;
             this.label1.Text = "Tổng:";
             // 
-            // cbB_ChonBan
+            // cbb_trangthaiban
             // 
-            this.cbB_ChonBan.BackColor = System.Drawing.Color.Transparent;
-            this.cbB_ChonBan.BorderRadius = 1;
-            this.cbB_ChonBan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cbB_ChonBan.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbB_ChonBan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbB_ChonBan.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbB_ChonBan.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbB_ChonBan.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cbB_ChonBan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cbB_ChonBan.ItemHeight = 30;
-            this.cbB_ChonBan.Location = new System.Drawing.Point(20, 9);
-            this.cbB_ChonBan.Margin = new System.Windows.Forms.Padding(4);
-            this.cbB_ChonBan.Name = "cbB_ChonBan";
-            this.cbB_ChonBan.Size = new System.Drawing.Size(407, 36);
-            this.cbB_ChonBan.TabIndex = 1008;
-            this.cbB_ChonBan.SelectedIndexChanged += new System.EventHandler(this.cbB_ChonBan_SelectedIndexChanged);
+            this.cbb_trangthaiban.BackColor = System.Drawing.Color.Transparent;
+            this.cbb_trangthaiban.BorderRadius = 1;
+            this.cbb_trangthaiban.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cbb_trangthaiban.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbb_trangthaiban.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbb_trangthaiban.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbb_trangthaiban.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbb_trangthaiban.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cbb_trangthaiban.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cbb_trangthaiban.ItemHeight = 30;
+            this.cbb_trangthaiban.Location = new System.Drawing.Point(20, 9);
+            this.cbb_trangthaiban.Margin = new System.Windows.Forms.Padding(4);
+            this.cbb_trangthaiban.Name = "cbb_trangthaiban";
+            this.cbb_trangthaiban.Size = new System.Drawing.Size(407, 36);
+            this.cbb_trangthaiban.TabIndex = 1008;
+            this.cbb_trangthaiban.SelectedIndexChanged += new System.EventHandler(this.cbB_ChonBan_SelectedIndexChanged);
             // 
             // DGV_BILL
             // 
@@ -910,7 +910,7 @@
         private Guna.UI2.WinForms.Guna2GradientButton BT_ThanhToan;
         private Guna.UI2.WinForms.Guna2TextBox TB_Tongtien;
         private System.Windows.Forms.Label label1;
-        private Guna.UI2.WinForms.Guna2ComboBox cbB_ChonBan;
+        private Guna.UI2.WinForms.Guna2ComboBox cbb_trangthaiban;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_BILL;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_Mon;
         private Guna.UI2.WinForms.Guna2DataGridView DGV_DaChon;

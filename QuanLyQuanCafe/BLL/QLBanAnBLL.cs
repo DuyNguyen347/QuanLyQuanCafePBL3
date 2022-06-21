@@ -45,7 +45,18 @@ namespace QuanLyQuanCafe.BLL
         }
         public List<string> getListStatus()
         {
-            return DataBanAnDAL.Instance.statuses();
+            List<string> list = new List<string>();
+            list.Add("Tất cả");
+            foreach (string i in DataBanAnDAL.Instance.statuses())
+            {
+                if (i.ToUpper().Trim().Equals("TRUE"))
+                {
+                    list.Add("Trống");
+                }
+                else if (i.ToUpper().Trim().Equals("FALSE"))
+                    list.Add("Có người");
+            }
+            return list;
         }
             
     }
