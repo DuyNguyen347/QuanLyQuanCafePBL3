@@ -96,8 +96,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\ChucVuBLL.cs" />
+    <Compile Include="BLL\DanhMucBLL.cs" />
+    <Compile Include="BLL\DoanhThuBLL.cs" />
+    <Compile Include="BLL\NhanVienBLL.cs" />
     <Compile Include="BLL\QLBanAnBLL.cs" />
-    <Compile Include="BLL\QLDanhMucBLL.cs" />
     <Compile Include="BLL\QLHoaDonBLL.cs" />
     <Compile Include="BLL\QLHoaDon_BanBLL.cs" />
     <Compile Include="BLL\QLMonBLL.cs" />

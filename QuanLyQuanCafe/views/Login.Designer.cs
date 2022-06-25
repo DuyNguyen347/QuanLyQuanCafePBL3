@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Guna.UI2.AnimatorNS.Animation animation1 = new Guna.UI2.AnimatorNS.Animation();
+            Guna.UI2.AnimatorNS.Animation animation4 = new Guna.UI2.AnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
@@ -58,6 +58,7 @@
             this.tbGetCode = new Guna.UI2.WinForms.Guna2Button();
             this.panelLogin = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
+            this.tbUserNameFP = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             this.panelChangepass.SuspendLayout();
@@ -220,7 +221,7 @@
             this.tbUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbUserName.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbUserName.IconLeft")));
-            this.tbUserName.Location = new System.Drawing.Point(9, 175);
+            this.tbUserName.Location = new System.Drawing.Point(9, 176);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.PasswordChar = '\0';
             this.tbUserName.PlaceholderText = "Username";
@@ -256,6 +257,7 @@
             // 
             // panelChangepass
             // 
+            this.panelChangepass.Controls.Add(this.tbUserNameFP);
             this.panelChangepass.Controls.Add(this.btDoiMatKhau);
             this.panelChangepass.Controls.Add(this.tbXacNhanPass);
             this.panelChangepass.Controls.Add(this.tbNewPass);
@@ -287,7 +289,7 @@
             this.btDoiMatKhau.FillColor = System.Drawing.Color.Transparent;
             this.btDoiMatKhau.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btDoiMatKhau.ForeColor = System.Drawing.Color.White;
-            this.btDoiMatKhau.Location = new System.Drawing.Point(11, 299);
+            this.btDoiMatKhau.Location = new System.Drawing.Point(11, 326);
             this.btDoiMatKhau.Name = "btDoiMatKhau";
             this.btDoiMatKhau.Size = new System.Drawing.Size(271, 25);
             this.btDoiMatKhau.TabIndex = 19;
@@ -309,8 +311,7 @@
             this.tbXacNhanPass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbXacNhanPass.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbXacNhanPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbXacNhanPass.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbXacNhanPass.IconLeft")));
-            this.tbXacNhanPass.Location = new System.Drawing.Point(11, 261);
+            this.tbXacNhanPass.Location = new System.Drawing.Point(11, 288);
             this.tbXacNhanPass.Name = "tbXacNhanPass";
             this.tbXacNhanPass.PasswordChar = '*';
             this.tbXacNhanPass.PlaceholderText = "Xác nhận mật khẩu";
@@ -333,8 +334,7 @@
             this.tbNewPass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbNewPass.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbNewPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbNewPass.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbNewPass.IconLeft")));
-            this.tbNewPass.Location = new System.Drawing.Point(11, 223);
+            this.tbNewPass.Location = new System.Drawing.Point(11, 250);
             this.tbNewPass.Name = "tbNewPass";
             this.tbNewPass.PasswordChar = '*';
             this.tbNewPass.PlaceholderText = "Mật khẩu mới";
@@ -357,7 +357,7 @@
             this.btXacNhan.FillColor = System.Drawing.Color.Transparent;
             this.btXacNhan.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btXacNhan.ForeColor = System.Drawing.Color.White;
-            this.btXacNhan.Location = new System.Drawing.Point(11, 192);
+            this.btXacNhan.Location = new System.Drawing.Point(11, 219);
             this.btXacNhan.Name = "btXacNhan";
             this.btXacNhan.Size = new System.Drawing.Size(271, 25);
             this.btXacNhan.TabIndex = 16;
@@ -370,11 +370,12 @@
             this.guna2Transition1.SetDecoration(this.label2, Guna.UI2.AnimatorNS.DecorationType.None);
             this.label2.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(23, 41);
+            this.label2.Location = new System.Drawing.Point(33, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(247, 39);
             this.label2.TabIndex = 15;
-            this.label2.Text = "Please enter your email address and we will email to a code to get your account";
+            this.label2.Text = "Please enter your email address, username and we will email to a code to get your" +
+    " account";
             // 
             // label5
             // 
@@ -382,7 +383,7 @@
             this.guna2Transition1.SetDecoration(this.label5, Guna.UI2.AnimatorNS.DecorationType.None);
             this.label5.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(33, 11);
+            this.label5.Location = new System.Drawing.Point(32, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(163, 23);
             this.label5.TabIndex = 14;
@@ -415,8 +416,7 @@
             this.tbEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbEmail.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbEmail.IconLeft")));
-            this.tbEmail.Location = new System.Drawing.Point(11, 83);
+            this.tbEmail.Location = new System.Drawing.Point(11, 68);
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.PasswordChar = '\0';
             this.tbEmail.PlaceholderText = "Email";
@@ -438,8 +438,7 @@
             this.tbCode.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbCode.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tbCode.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.tbCode.IconLeft = ((System.Drawing.Image)(resources.GetObject("tbCode.IconLeft")));
-            this.tbCode.Location = new System.Drawing.Point(11, 154);
+            this.tbCode.Location = new System.Drawing.Point(11, 181);
             this.tbCode.Name = "tbCode";
             this.tbCode.PasswordChar = '*';
             this.tbCode.PlaceholderText = "Code";
@@ -462,7 +461,7 @@
             this.tbGetCode.FillColor = System.Drawing.Color.Transparent;
             this.tbGetCode.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbGetCode.ForeColor = System.Drawing.Color.White;
-            this.tbGetCode.Location = new System.Drawing.Point(11, 123);
+            this.tbGetCode.Location = new System.Drawing.Point(11, 150);
             this.tbGetCode.Name = "tbGetCode";
             this.tbGetCode.Size = new System.Drawing.Size(271, 25);
             this.tbGetCode.TabIndex = 8;
@@ -488,17 +487,44 @@
             // guna2Transition1
             // 
             this.guna2Transition1.Cursor = null;
-            //animation8.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.BlindCoeff")));
-            //animation8.LeafCoeff = 0F;
-            //animation8.MaxTime = 1F;
-            //animation8.MinTime = 0F;
-            //animation8.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicCoeff")));
-            //animation8.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation8.MosaicShift")));
-            //animation8.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.ScaleCoeff")));
-            //animation8.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation8.SlideCoeff")));
-            //animation8.TimeCoeff = 0F;
-            //animation8.TransparencyCoeff = 0F;
-            //this.guna2Transition1.DefaultAnimation = animation8;
+            animation4.AnimateOnlyDifferences = true;
+            animation4.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.BlindCoeff")));
+            animation4.LeafCoeff = 0F;
+            animation4.MaxTime = 1F;
+            animation4.MinTime = 0F;
+            animation4.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicCoeff")));
+            animation4.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation4.MosaicShift")));
+            animation4.MosaicSize = 0;
+            animation4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
+            animation4.RotateCoeff = 0F;
+            animation4.RotateLimit = 0F;
+            animation4.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.ScaleCoeff")));
+            animation4.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation4.SlideCoeff")));
+            animation4.TimeCoeff = 0F;
+            animation4.TransparencyCoeff = 0F;
+            this.guna2Transition1.DefaultAnimation = animation4;
+            // 
+            // tbUserNameFP
+            // 
+            this.tbUserNameFP.BorderRadius = 10;
+            this.tbUserNameFP.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2Transition1.SetDecoration(this.tbUserNameFP, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.tbUserNameFP.DefaultText = "";
+            this.tbUserNameFP.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.tbUserNameFP.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.tbUserNameFP.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbUserNameFP.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.tbUserNameFP.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(27)))), ((int)(((byte)(7)))));
+            this.tbUserNameFP.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbUserNameFP.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbUserNameFP.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.tbUserNameFP.Location = new System.Drawing.Point(11, 110);
+            this.tbUserNameFP.Name = "tbUserNameFP";
+            this.tbUserNameFP.PasswordChar = '\0';
+            this.tbUserNameFP.PlaceholderText = "UserName";
+            this.tbUserNameFP.SelectedText = "";
+            this.tbUserNameFP.Size = new System.Drawing.Size(271, 34);
+            this.tbUserNameFP.TabIndex = 20;
             // 
             // Login
             // 
@@ -555,6 +581,7 @@
         private Guna.UI2.WinForms.Guna2TextBox tbCode;
         private Guna.UI2.WinForms.Guna2Button tbGetCode;
         private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
+        private Guna.UI2.WinForms.Guna2TextBox tbUserNameFP;
     }
 }
 

@@ -28,7 +28,7 @@ namespace QuanLyQuanCafe.Report
 
         private void PrintThongKe_Load(object sender, EventArgs e)
         {
-            string s = DataProvider.Instance.getConnectionString();
+            string s = DataProvider.Instance.GetConnectionString();
             SqlConnection con = new SqlConnection(s);
             string query = "select convert(nvarchar(10),TimeCheckout,103) as TimeCheckout,Total,TongTinh,DaThu from View_DanhThuNgay where TimeCheckout between '" + DataProvider.FormatDatetimeShort(start) + "' and '" + DataProvider.FormatDatetimeShort(end) + "'";
             SqlDataAdapter da = new SqlDataAdapter(query, con);

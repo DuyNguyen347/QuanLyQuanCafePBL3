@@ -26,7 +26,7 @@ namespace QuanLyQuanCafe.BLL
         public void ThemBanVoiHoaDon(HoaDon_Ban hoadon_ban, BanAn banan)
         {
             DataHoaDon_BanDAL.Instance.addHoaDon_Ban(hoadon_ban);
-            DataBanAnDAL.Instance.updateBanAn(banan);
+            DataBanAnDAL.Instance.UpdateTable(banan);
         }
         public List<string> getListBanbyHoaDon(String ID_HoaDon)
         {

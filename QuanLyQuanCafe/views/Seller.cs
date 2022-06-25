@@ -53,9 +53,9 @@ namespace QuanLyQuanCafe
                 }
             }
             else if (cbb_trangthaiban.SelectedItem.ToString() == "Trống")
-                Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("True"));
+                Load_FLP_Table(QLBanAnBLL.Instance.GetBanAnbyStatus("True"));
             else if (cbb_trangthaiban.SelectedItem.ToString() == "Có người")
-                Load_FLP_Table(QLBanAnBLL.Instance.getBanAnbyStatus("False"));
+                Load_FLP_Table(QLBanAnBLL.Instance.GetBanAnbyStatus("False"));
             current_cbb = cbb_trangthaiban.Text.Trim();
         }
         public void Load_FLP_Table(List<BanAn> banans)
@@ -235,19 +235,19 @@ namespace QuanLyQuanCafe
         #region Tĩnh Món
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName(TB_TimMon.Text.ToUpper().Trim());
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyName(TB_TimMon.Text.ToUpper().Trim());
             Change_HeaderText();
         }
         private void Cbb_Danhmuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyDanhMuc(Cbb_Danhmuc.Text.ToUpper().Trim());
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyDanhMuc(Cbb_Danhmuc.Text.ToUpper().Trim());
             Change_HeaderText();
         }
 
         private void BT_refreshMon_Click(object sender, EventArgs e)
         {
             refresh(false, true, false, false, false, true);
-            DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName("");
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyName("");
             Change_HeaderText();
         }
 
@@ -257,7 +257,7 @@ namespace QuanLyQuanCafe
         #region Long CellContentClick
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Mon mon =QLMonBLL.Instance.getMonbyID(DGV_Mon.CurrentRow.Cells["ID"].FormattedValue.ToString());
+            Mon mon =QLMonBLL.Instance.GetMonbyID(DGV_Mon.CurrentRow.Cells["ID"].FormattedValue.ToString());
             int dem = 0;
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -505,7 +505,7 @@ namespace QuanLyQuanCafe
             }
             if (dgv_mon)
             {
-                DGV_Mon.DataSource = QLMonBLL.Instance.getListMonbyName("");
+                DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyName("");
                 Change_HeaderText();
 
             }
@@ -518,7 +518,7 @@ namespace QuanLyQuanCafe
             if (flp)
             {
                 //MessageBox.Show("1");
-                Load_FLP_Table(QLBanAnBLL.Instance.getListBanAnbyID(""));
+                Load_FLP_Table(QLBanAnBLL.Instance.GetListBanAnbyID(""));
             }
             if (cbb_ban)
             {
@@ -528,7 +528,7 @@ namespace QuanLyQuanCafe
             {
                 TB_TimMon.Clear();
                 Cbb_Danhmuc.Items.Clear();
-                foreach (DataRow i in QLDanhMucBLL.Instance.getAllDanhMuc().Rows)
+                foreach (DataRow i in DanhMucBLL.Instance.GetAllDanhMuc().Rows)
                 {
                     Cbb_Danhmuc.Items.Add(i[1].ToString().Trim());
                 }
@@ -615,7 +615,7 @@ namespace QuanLyQuanCafe
         #region Long Chuyển bàn & Show Combobox chọn bàn 25/4
         private void Add_CbbChonBan()      //Add Bàn vào Combobox CBB_Ban
         {
-            foreach (BanAn i in QLBanAnBLL.Instance.getListBanAnbyID(""))
+            foreach (BanAn i in QLBanAnBLL.Instance.GetListBanAnbyID(""))
             {
                 if(i.ID!="")
                     cbbChonBan.Items.Add(i.ID);

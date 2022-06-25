@@ -16,12 +16,12 @@ namespace QuanLyQuanCafe.DTO
         public HoaDon_Ban(string id_hoadon,string idban)
         {
             HoaDon = DataHoaDonDAL.Instance.getHoaDonbyID(id_hoadon);
-            BanAn = DataBanAnDAL.Instance.getBanAnbyID(idban);
+            BanAn = DataBanAnDAL.Instance.GetTableByID(idban);
         }
         public HoaDon_Ban(DataRow row)
         {
             HoaDon = DataHoaDonDAL.Instance.getHoaDonbyID(row["ID_HoaDon"].ToString());
-            BanAn = DataBanAnDAL.Instance.getBanAnbyID(row["ID_table"].ToString());
+            BanAn = DataBanAnDAL.Instance.GetTableByID(row["ID_table"].ToString());
         }
     }
 }

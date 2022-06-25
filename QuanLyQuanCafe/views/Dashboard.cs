@@ -1,4 +1,5 @@
-﻿using QuanLyQuanCafe.DAL;
+﻿using QuanLyQuanCafe.BLL;
+using QuanLyQuanCafe.DAL;
 using QuanLyQuanCafe.DTO;
 using QuanLyQuanCafe.Report;
 using QuanLyQuanCafe.views;
@@ -45,7 +46,7 @@ namespace QuanLyQuanCafe
             cbB_ChucVuNV.Items.Clear();
             cbB_ChucVu.Items.Clear();
             cbB_ChucVuNV.Items.Add("Tất cả");
-            foreach (DataRow i in DataChucVuDAL.Instance.data().Rows)
+            foreach (DataRow i in ChucVuBLL.Instance.GetChucVu().Rows)
             {
                 cbB_ChucVu.Items.Add(i[0].ToString());
                 cbB_ChucVuNV.Items.Add(i[0].ToString());
@@ -58,7 +59,7 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimNhanVien_TextChanged(object sender, EventArgs e)
         {
-            DGV_NhanVien.DataSource = DataNhanVienDAL.Instance.locdulieu(TB_TimNhanVien.Text.Trim());
+            DGV_NhanVien.DataSource = NhanVienBLL.Instance.GetNhanVien(TB_TimNhanVien.Text.Trim());
             if (DGV_NhanVien.Columns.Contains("Anh"))
                 DGV_NhanVien.Columns.Remove("Anh");
         }
@@ -66,12 +67,12 @@ namespace QuanLyQuanCafe
         {
             if (cbB_ChucVuNV.Text.ToString().Trim() == "Tất cả")
             {
-                DGV_NhanVien.DataSource = DataNhanVienDAL.Instance.data();
+                DGV_NhanVien.DataSource = NhanVienBLL.Instance.GetAllNhanVien();
                 DGV_NhanVien.Columns.Remove("Anh");
             }
             else
             {
-                DGV_NhanVien.DataSource = DataNhanVienDAL.Instance.locdulieu("", cbB_ChucVuNV.Text.Trim());
+                DGV_NhanVien.DataSource = NhanVienBLL.Instance.GetNhanVien("", cbB_ChucVuNV.Text.Trim());
                 if (DGV_NhanVien.Columns.Contains("Anh"))
                     DGV_NhanVien.Columns.Remove("Anh");
             }
@@ -79,7 +80,7 @@ namespace QuanLyQuanCafe
         private void DGV_NhanVien_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             TB_IDNV.Text = DGV_NhanVien.CurrentRow.Cells[0].Value.ToString().Trim();
-            NhanVien nv = DataNhanVienDAL.Instance.getNhanVienbyID(TB_IDNV.Text);
+            NhanVien nv = NhanVienBLL.Instance.GetNhanVienByID(TB_IDNV.Text);
             TB_TenNV.Text = nv.Name.Trim();
             DT_NSNV.Text = nv.NgaySinh.ToString().Trim();
             cbB_ChucVu.Text = nv.ChucVu.TenChucVu.Trim();
@@ -98,7 +99,7 @@ namespace QuanLyQuanCafe
             {
                 if (TB_emailNV.Text == "")
                 {
-                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(DataNhanVienDAL.Instance.setIdNV(), TB_TenNV.Text, DT_NSNV.Text,
+                    DataNhanVienDAL.Instance.AddNhanVien(new NhanVien(DataNhanVienDAL.Instance.SetIdNV(), TB_TenNV.Text, DT_NSNV.Text,
                                                        cbB_ChucVu.Text, "", "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                 }
@@ -106,7 +107,7 @@ namespace QuanLyQuanCafe
                 {
                     //if (CheckEmail.Instance.Check(TB_emailNV.Text))
                     //{
-                    DataNhanVienDAL.Instance.addNhanVien(new NhanVien(DataNhanVienDAL.Instance.setIdNV(), TB_TenNV.Text, DT_NSNV.Text,
+                    DataNhanVienDAL.Instance.AddNhanVien(new NhanVien(DataNhanVienDAL.Instance.SetIdNV(), TB_TenNV.Text, DT_NSNV.Text,
                                                            cbB_ChucVu.Text, TB_UserName.Text, "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                     //}
@@ -129,7 +130,7 @@ namespace QuanLyQuanCafe
                 DialogResult d = MessageBox.Show("Bạn có chắc chắn muốn xoá nhân viên " + TB_TenNV.Text + " không?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (d == DialogResult.Yes)
                 {
-                    DataNhanVienDAL.Instance.deleteNhanVien(TB_IDNV.Text.ToString().ToUpper());
+                    NhanVienBLL.Instance.DeleteNhanVien(TB_IDNV.Text.ToString().ToUpper());
                     BT_Refresh_Click_NhanVien(new object(), new EventArgs());
                     BT_List_Bill_Click(new object(), new EventArgs());
                 }
@@ -143,14 +144,14 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                DataNhanVienDAL.Instance.updateNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
+                NhanVienBLL.Instance.UpdateNhanVien(new NhanVien(TB_IDNV.Text.ToString().ToUpper(), TB_TenNV.Text, DT_NSNV.Text,
                                                    cbB_ChucVu.Text, TB_UserName.Text, "", TB_emailNV.Text, TB_SDT.Text, pbAnhNV.Image));
                 BT_Refresh_Click_NhanVien(new object(), new EventArgs());
             }
         }
         private void cbB_ChucVu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TB_LuongNV.Text = DataChucVuDAL.Instance.getChucVubyID(cbB_ChucVu.Text.Trim()).Luong.ToString();
+            TB_LuongNV.Text = ChucVuBLL.Instance.GetChucVuByID(cbB_ChucVu.Text.Trim()).Luong.ToString();
         }
         #endregion
 
@@ -162,7 +163,7 @@ namespace QuanLyQuanCafe
         {
             CBB_DanhMuc.Items.Clear();
             CBB_ChonDanhMuc.Items.Clear();
-            foreach (DataRow i in DataDanhMucDAL.Instance.data().Rows)
+            foreach (DataRow i in DanhMucBLL.Instance.GetAllDanhMuc().Rows)
             {
                 CBB_ChonDanhMuc.Items.Add(i[1].ToString().Trim());
                 CBB_DanhMuc.Items.Add(i[1].ToString().Trim());
@@ -170,13 +171,13 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimDM_TextChanged(object sender, EventArgs e)
         {
-            DGV_DanhMuc.DataSource = DataDanhMucDAL.Instance.locdulieu(TB_TimDM.Text.Trim());
+            DGV_DanhMuc.DataSource = DanhMucBLL.Instance.LocDuLieu(TB_TimDM.Text.Trim());
             DGV_DanhMuc.Columns[0].HeaderText = "Mã DM";
             DGV_DanhMuc.Columns[1].HeaderText = "Tên danh mục";
         }
         private void BT_Refresh_Click_NhanVien(object sender, EventArgs e)
         {
-            DataTable data = DataNhanVienDAL.Instance.data();
+            DataTable data = NhanVienBLL.Instance.GetAllNhanVien();
             data.Columns.Remove("Anh");
             DGV_NhanVien.DataSource = data;
             DGV_NhanVien.Columns[0].HeaderText = "Mã NV";
@@ -202,7 +203,7 @@ namespace QuanLyQuanCafe
 
         private void BT_refresh_DanhMuc_Click(object sender, EventArgs e)
         {
-            DGV_DanhMuc.DataSource = DataDanhMucDAL.Instance.data();
+            DGV_DanhMuc.DataSource = DanhMucBLL.Instance.GetAllDanhMuc();
             DGV_DanhMuc.Columns[0].HeaderText = "Mã DM";
             DGV_DanhMuc.Columns[1].HeaderText = "Tên danh mục";
             load_cbb_danhmuc();
@@ -219,7 +220,7 @@ namespace QuanLyQuanCafe
         {
             try
             {
-                DataDanhMucDAL.Instance.addDanhMuc(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()));
+                DanhMucBLL.Instance.AddDanhMuc(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()));
                 BT_refresh_DanhMuc_Click(new object(), new EventArgs());
             }
             catch (Exception ex)
@@ -230,12 +231,12 @@ namespace QuanLyQuanCafe
         }
         private void BT_Xoa3_Click(object sender, EventArgs e)
         {
-            DataDanhMucDAL.Instance.deleteDanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim());
+            DanhMucBLL.Instance.DeleteDanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim());
             BT_refresh_DanhMuc_Click(new object(), new EventArgs());
         }
         private void BT_Sua3_Click(object sender, EventArgs e)
         {
-            DataDanhMucDAL.Instance.updateDanhMuc(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()));
+            DanhMucBLL.Instance.UpdateDanhMuc(new DanhMuc(TB_ID_DM.Text.ToString().ToUpper().Trim(), TB_NhapDanhMuc.Text.ToString().Trim()));
             BT_refresh_DanhMuc_Click(new object(), new EventArgs());
         }
 
@@ -246,7 +247,7 @@ namespace QuanLyQuanCafe
         #region Mon
         private void TB_TimMon_TextChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu(TB_TimMon.Text.ToUpper());
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyName(TB_TimMon.Text.ToUpper());
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -254,7 +255,7 @@ namespace QuanLyQuanCafe
         }
         private void CBB_DanhMuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu("", CBB_DanhMuc.Text.ToUpper().Trim());
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetListMonbyDanhMuc(CBB_DanhMuc.Text.ToUpper().Trim());
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -263,7 +264,7 @@ namespace QuanLyQuanCafe
         }
         private void BT_Refresh2_Click(object sender, EventArgs e)
         {
-            DGV_Mon.DataSource = DataMonDAL.Instance.locdulieu();
+            DGV_Mon.DataSource = QLMonBLL.Instance.GetAllListMon();
             DGV_Mon.Columns[0].HeaderText = "Mã món";
             DGV_Mon.Columns[1].HeaderText = "Tên món ăn";
             DGV_Mon.Columns[2].HeaderText = "Danh mục";
@@ -280,7 +281,7 @@ namespace QuanLyQuanCafe
         private void DGV_Mon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             TB_IDmon.Text = DGV_Mon.CurrentRow.Cells[0].Value.ToString().Trim();
-            TB_TenM0n.Text = DGV_Mon.CurrentRow.Cells[1].Value.ToString().Trim(); ;
+            TB_TenM0n.Text = DGV_Mon.CurrentRow.Cells[1].Value.ToString().Trim(); 
             CBB_ChonDanhMuc.Text = DGV_Mon.CurrentRow.Cells[2].Value.ToString().Trim();
             TB_Gia.Text = DGV_Mon.CurrentRow.Cells[3].Value.ToString().Trim();
         }
@@ -288,8 +289,8 @@ namespace QuanLyQuanCafe
         {
             try
             {
-                DataMonDAL.Instance.addMon(new Mon(DataMonDAL.Instance.CapIDmon(), TB_TenM0n.Text.ToString().Trim(),
-                    DataDanhMucDAL.Instance.getDanhMucbyTen(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
+                QLMonBLL.Instance.AddMon(new Mon(DataMonDAL.Instance.CapIDmon(), TB_TenM0n.Text.ToString().Trim(),
+                    DanhMucBLL.Instance.GetDanhMucByName(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
                 BT_Refresh2_Click(new object(), new EventArgs());
             }
             catch (Exception ex)
@@ -305,8 +306,8 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                DataMonDAL.Instance.updateMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),
-                DataDanhMucDAL.Instance.getDanhMucbyTen(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
+                QLMonBLL.Instance.UpdateMon(new Mon(TB_IDmon.Text.ToString().ToUpper().Trim(), TB_TenM0n.Text.ToString().Trim(),
+                DanhMucBLL.Instance.GetDanhMucByName(CBB_ChonDanhMuc.Text.ToString().Trim()).ID, Convert.ToInt32(TB_Gia.Text)));
                 BT_Refresh2_Click(new object(), new EventArgs());
             }
         }
@@ -318,7 +319,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                DataMonDAL.Instance.deleteMon(TB_IDmon.Text.ToString().ToUpper().Trim());
+                QLMonBLL.Instance.DeleteMon(TB_IDmon.Text.ToString().ToUpper().Trim());
                 BT_Refresh2_Click(new object(), new EventArgs());
             }
         }
@@ -330,7 +331,7 @@ namespace QuanLyQuanCafe
         void load_cbb_status()
         {
             cbB_TrangThai.Items.Clear();
-            foreach (string i in DataBanAnDAL.Instance.statuses())
+            foreach (string i in DataBanAnDAL.Instance.GetStatuses())
             {
                 if (Convert.ToBoolean(i.ToString()))
                     cbB_TrangThai.Items.Add("Trống");
@@ -340,7 +341,7 @@ namespace QuanLyQuanCafe
         }
         private void TB_TimBan_TextChanged(object sender, EventArgs e)
         {
-            load_FLP_Table(DataBanAnDAL.Instance.locBanAnbyID(TB_TimBan.Text.Trim()));
+            load_FLP_Table(QLBanAnBLL.Instance.GetListBanAnbyID(TB_TimBan.Text.Trim()));
         }
         private void cbB_TrangThai_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -349,11 +350,11 @@ namespace QuanLyQuanCafe
                 str = "True";
             else if (cbB_TrangThai.Text.Trim() == "Có người")
                 str = "False";
-            load_FLP_Table(DataBanAnDAL.Instance.getBanAnbyStatus(str));
+            load_FLP_Table(QLBanAnBLL.Instance.GetBanAnbyStatus(str));
         }
         private void BT_Refresh_Ban_Click(object sender, EventArgs e)
         {
-            load_FLP_Table(DataBanAnDAL.Instance.listban());
+            load_FLP_Table(QLBanAnBLL.Instance.GetListTable());
             load_cbb_status();
             TB_TimBan.Text = "";
             TB_IDban.Text = "";
@@ -363,7 +364,7 @@ namespace QuanLyQuanCafe
         {
             try
             {
-                DataBanAnDAL.Instance.addBanAn(new BanAn(TB_IDban.Text.ToString().ToUpper().Trim(), Convert.ToBoolean("True")));
+                QLBanAnBLL.Instance.AddTable(new BanAn(TB_IDban.Text.ToString().ToUpper().Trim(), Convert.ToBoolean("True")));
                 BT_Refresh_Ban_Click(new object(), new EventArgs());
             }
             catch (Exception ex)
@@ -377,7 +378,7 @@ namespace QuanLyQuanCafe
                 MessageBox.Show("Lỗi!");
             else
             {
-                DataBanAnDAL.Instance.deleteBanAn(TB_IDban.Text.Trim().ToUpper());
+                QLBanAnBLL.Instance.DeleteTable(TB_IDban.Text.Trim().ToUpper());
                 BT_Refresh_Ban_Click(new object(), new EventArgs());
             }
         }
@@ -420,7 +421,7 @@ namespace QuanLyQuanCafe
         }
         private void BT_List_Bill_Click(object sender, EventArgs e)
         {
-            DGV_Bill.DataSource = DataHoaDonDAL.Instance.locdata(DT_Bill_Begin.Value, DT_Bill_End.Value);
+            DGV_Bill.DataSource = QLHoaDonBLL.Instance.GetListBill(DT_Bill_Begin.Value, DT_Bill_End.Value);
             DGV_Bill.Columns[0].HeaderText = "Mã hóa đơn";
             DGV_Bill.Columns[1].HeaderText = "Thời gian vào";
             DGV_Bill.Columns[2].HeaderText = "Thời gian ra";
@@ -452,14 +453,14 @@ namespace QuanLyQuanCafe
         #region Chức vụ
         private void TB_TimChucVu_TextChanged(object sender, EventArgs e)
         {
-            DGV_ChucVu.DataSource = DataChucVuDAL.Instance.locdulieu(TB_TimChucVu.Text.Trim());
+            DGV_ChucVu.DataSource = ChucVuBLL.Instance.GetChucVuByName(TB_TimChucVu.Text.Trim());
             DGV_ChucVu.Columns[0].HeaderText = "Tên chức vụ";
             DGV_ChucVu.Columns[1].HeaderText = "Lương";
         }
 
         private void BT_ResetChucVu_Click(object sender, EventArgs e)
         {
-            DGV_ChucVu.DataSource = DataChucVuDAL.Instance.data();
+            DGV_ChucVu.DataSource = ChucVuBLL.Instance.GetChucVu();
             DGV_ChucVu.Columns[0].HeaderText = "Tên chức vụ";
             DGV_ChucVu.Columns[1].HeaderText = "Lương";
             load_cbb_chucvu();
@@ -478,7 +479,7 @@ namespace QuanLyQuanCafe
             {
                 try
                 {
-                    DataChucVuDAL.Instance.addChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
+                    ChucVuBLL.Instance.AddChucVu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
                     BT_ResetChucVu_Click(new object(), new EventArgs());
                 }
                 catch (Exception ex)
@@ -496,7 +497,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                DataChucVuDAL.Instance.updateChucvu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
+                ChucVuBLL.Instance.UpdateChucVu(new ChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim(), Convert.ToInt32(TB_Luong.Text.ToString().Trim())));
                 BT_ResetChucVu_Click(new object(), new EventArgs());
             }
         }
@@ -509,7 +510,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                DataChucVuDAL.Instance.deleteChucvu(TB_Chucvuv.Text.ToString().ToUpper().Trim());
+                ChucVuBLL.Instance.DeleteChucVu(TB_Chucvuv.Text.ToString().ToUpper().Trim());
                 BT_ResetChucVu_Click(new object(), new EventArgs());
             }
         }
@@ -544,21 +545,21 @@ namespace QuanLyQuanCafe
         }
         private void LoadData()
         {
-            bool refreshData = ThongKeDAL.Instance.LoadData(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
+            bool refreshData = DoanhThuBLL.Instance.LoadData(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
             if (refreshData == true)
             {
-                chart1.DataSource = ThongKeDAL.Instance.GrossRevenueList;
+                chart1.DataSource = DoanhThuBLL.Instance.GetListDoanhThu();
                 chart1.Series[0].XValueMember = "Date";
                 chart1.Series[0].YValueMembers = "TotalAmount";
                 chart1.DataBind();
-                chartTopProducts.DataSource = ThongKeDAL.Instance.TopProductsList;
+                chartTopProducts.DataSource = DoanhThuBLL.Instance.GetListTopSeller();
                 chartTopProducts.Series[0].XValueMember = "Key";
                 chartTopProducts.Series[0].YValueMembers = "Value";
                 chartTopProducts.DataBind();
-                lbSoHD.Text = ThongKeDAL.Instance.NumOrders.ToString();
+                lbSoHD.Text = DoanhThuBLL.Instance.GetNumberOrder();
                 CultureInfo culture = new CultureInfo("vi-VN");
-                lbTongThu.Text = ThongKeDAL.Instance.TotalRevenue.ToString("c",culture);
-                DGV_DoanhThu.DataSource = DataDanhThuDAL.data(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
+                lbTongThu.Text = DoanhThuBLL.Instance.GetTotalDoanhThu().ToString("c",culture);
+                DGV_DoanhThu.DataSource = DoanhThuBLL.Instance.GetListDoanhThuTheoNgay(DT_Danhthu_Begin.Value, DT_Danhthu_End.Value);
                 DGV_DoanhThu.Columns[0].HeaderText = "Ngày";
                 DGV_DoanhThu.Columns[1].HeaderText = "Số đơn";
                 DGV_DoanhThu.Columns[2].HeaderText = "Đã tính";
@@ -576,7 +577,7 @@ namespace QuanLyQuanCafe
 
         private void ThisMonth_Click(object sender, EventArgs e)
         {
-            DT_Danhthu_Begin.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            DT_Danhthu_Begin.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month -3, 1);
             DT_Danhthu_End.Value = DateTime.Now;
             LoadData();
             DisableCustomDates();
@@ -645,7 +646,7 @@ namespace QuanLyQuanCafe
             detail.gioVao = Convert.ToDateTime(DGV_Bill.CurrentRow.Cells[1].Value);
             detail.gioRa = Convert.ToDateTime(DGV_Bill.CurrentRow.Cells[2].Value);
             detail.ban = "";
-            foreach (String i in DataHoaDon_BanDAL.Instance.data(detail.maHD))
+            foreach (String i in QLHoaDon_BanBLL.Instance.getListBanbyHoaDon(detail.maHD))
                 detail.ban += i + "  ";
             detail.tongTinh = Convert.ToInt32(DGV_Bill.CurrentRow.Cells[3].Value.ToString());
             detail.thanhTien = Convert.ToInt32(DGV_Bill.CurrentRow.Cells[4].Value.ToString());
@@ -653,7 +654,7 @@ namespace QuanLyQuanCafe
             {
                 try
                 {
-                    detail.tenNV = DataNhanVienDAL.Instance.getNhanVienbyID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
+                    detail.tenNV = NhanVienBLL.Instance.GetNhanVienByID(DGV_Bill.CurrentRow.Cells[5].Value.ToString()).Name.ToString();
                 }
                 catch (Exception)
                 {

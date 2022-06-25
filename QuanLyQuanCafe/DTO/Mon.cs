@@ -22,7 +22,7 @@ namespace QuanLyQuanCafe
         {
             ID = id;
             TenMon = tenmon;
-            DanhMuc = DataDanhMucDAL.Instance.getDanhMucbyID(ID_category);
+            DanhMuc = DataDanhMucDAL.Instance.GetDanhMucByID(ID_category);
             Gia = gia;
             DaXoa = false;
         }
@@ -32,7 +32,7 @@ namespace QuanLyQuanCafe
             TenMon = dataRow["TenMon"].ToString();
             try
             {
-                DanhMuc = DataDanhMucDAL.Instance.getDanhMucbyID(dataRow["ID_category"].ToString());
+                DanhMuc = DataDanhMucDAL.Instance.GetDanhMucByID(dataRow["ID_category"].ToString());
             }
             catch(Exception ex)
             {

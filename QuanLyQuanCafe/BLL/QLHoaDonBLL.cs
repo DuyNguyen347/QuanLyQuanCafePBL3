@@ -62,5 +62,9 @@ namespace QuanLyQuanCafe.BLL
         {
             DataHoaDonDAL.Instance.updateHoaDon(hoadon);
         }
+        public DataTable GetListBill(DateTime dateBegin,DateTime dateEnd)
+        {
+            return DataHoaDonDAL.Instance.locdata(dateBegin, dateEnd);
+        }
     }
 }

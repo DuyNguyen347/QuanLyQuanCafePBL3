@@ -25,14 +25,14 @@ namespace QuanLyQuanCafe.DAL
             }
             private set => _Instance = value;
         }
-        public bool Reload(string email)
+        public bool Reload(string email,string username)
         {
-            string q = "select * from dbo.NhanVien where Email = N'" + email + "'";
+            string q = "select * from dbo.NhanVien where Email = N'" + email + "' and UserName = N'" + username + "'";
             DataTable dt = DataProvider.Instance.GetRecords(q);
             return dt.Rows.Count > 0;
         }
         private static readonly string _from = "duynguyen347.study@gmail.com"; // Email của Sender (của bạn)
-        private static readonly string _pass = "16112002study"; // Mật khẩu Email của Sender (của bạn)
+        private static readonly string _pass = "goivjkvvvfdnejyz"; // Mật khẩu Email của Sender (của bạn)
         public bool Send(string sendto, string subject, string content)
         {
             //sendto: Email receiver (người nhận)

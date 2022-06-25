@@ -24,21 +24,21 @@ namespace QuanLyQuanCafe.DAL
 
             }
         }
-        public DataTable data()
+        public DataTable Data()
         {
             DataTable data;
             string query = "select * from BanAn";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public List<BanAn> listban()
+        public List<BanAn> ListTable()
         {
             List<BanAn> tables = new List<BanAn>();
-            foreach (DataRow i in DataBanAnDAL.Instance.data().Rows)
+            foreach (DataRow i in DataBanAnDAL.Instance.Data().Rows)
                 tables.Add(new BanAn(i));
             return tables;
         }
-        public List<String> statuses()
+        public List<String> GetStatuses()
         {
             DataTable data;
             string query = "select Status from BanAn Group by Status";
@@ -50,14 +50,14 @@ namespace QuanLyQuanCafe.DAL
             }
             return list;
         }
-        public BanAn getBanAnbyID(string id)
+        public BanAn GetTableByID(string id)
         {
             DataTable data;
             string query = "select * from BanAn where ID = '"+id+"'";
             data = DataProvider.Instance.GetRecords(query);
             return new BanAn(data.Rows[0]);
         }
-        public List<BanAn> locBanAnbyID(string id)
+        public List<BanAn> FilterTableByID(string id)
         {
             DataTable data;
             string query = "select * from BanAn where ID like '%" + id + "%'";
@@ -67,7 +67,7 @@ namespace QuanLyQuanCafe.DAL
                 banans.Add(new BanAn(row));
             return banans;
         }
-        public List<BanAn> getBanAnbyStatus(string trangthai)
+        public List<BanAn> GetTableByStatus(string trangthai)
         {
             DataTable data;
             List<BanAn> banans = new List<BanAn>();
@@ -77,18 +77,18 @@ namespace QuanLyQuanCafe.DAL
                 banans.Add(new BanAn(row));
             return banans;
         }
-        public void addBanAn(BanAn banan)
+        public void AddTable(BanAn banan)
         {
-            DataProvider.Instance.setdata("insert into BanAn values('" + banan.ID +"', N'"+banan.Status.ToString()+"')");
+            DataProvider.Instance.SetData("insert into BanAn values('" + banan.ID +"', N'"+banan.Status.ToString()+"')");
         }
-        public void deleteBanAn(string ID)
+        public void DeleteTable(string ID)
         {
             DataHoaDon_BanDAL.Instance.deleteHoaDon_BanbyBan(ID);
-            DataProvider.Instance.setdata("delete from BanAn where ID = '" + ID + "'");
+            DataProvider.Instance.SetData("delete from BanAn where ID = '" + ID + "'");
         }
-        public void updateBanAn(BanAn banan)
+        public void UpdateTable(BanAn banan)
         {
-            DataProvider.Instance.setdata("update BanAn set Status = '" + banan.Status.ToString() + "'  where ID = '" + banan.ID + "'");
+            DataProvider.Instance.SetData("update BanAn set Status = '" + banan.Status.ToString() + "'  where ID = '" + banan.ID + "'");
         }
     }
 }

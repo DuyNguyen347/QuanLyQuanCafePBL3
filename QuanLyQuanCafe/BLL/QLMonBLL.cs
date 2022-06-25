@@ -20,17 +20,33 @@ namespace QuanLyQuanCafe.BLL
             }
             private set { }
         }
-        public List<Mon> getListMonbyName(string tenmon)
+        public List<Mon> GetListMonbyName(string tenmon)
         {
-            return DataMonDAL.Instance.locdulieu(tenmon);
+            return DataMonDAL.Instance.LocDuLieu(tenmon);
         }
-        public List<Mon> getListMonbyDanhMuc(string danhmuc)
+        public List<Mon> GetListMonbyDanhMuc(string danhmuc)
         {
-            return DataMonDAL.Instance.locdulieu("", danhmuc);
+            return DataMonDAL.Instance.LocDuLieu("", danhmuc);
         }
-        public Mon getMonbyID(string ID)
+        public List<Mon> GetAllListMon()
         {
-            return DataMonDAL.Instance.getMonbyID(ID);
+            return DataMonDAL.Instance.LocDuLieu();
+        }
+        public Mon GetMonbyID(string ID)
+        {
+            return DataMonDAL.Instance.GetMonByID(ID);
+        }
+        public void AddMon(Mon mon)
+        {
+            DataMonDAL.Instance.AddMon(mon);
+        }
+        public void UpdateMon(Mon mon)
+        {
+            DataMonDAL.Instance.UpdateMon(mon);
+        }
+        public void DeleteMon(string idMon)
+        {
+            DataMonDAL.Instance.DeleteMon(idMon);
         }
     }
 }

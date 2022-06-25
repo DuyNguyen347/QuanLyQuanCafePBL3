@@ -30,7 +30,7 @@ namespace QuanLyQuanCafe
 
             else
             {
-                NhanVien nv = DataNhanVienDAL.Instance.getNhanVienbyUserName(tbUserName.Text);
+                NhanVien nv = DataNhanVienDAL.Instance.GetNhanVienbyUserName(tbUserName.Text);
                 if (tbUserName.Text == username_admin && tbPassword.Text == password_admin)
                 {
                     Dashboard ds = new Dashboard();
@@ -122,13 +122,13 @@ namespace QuanLyQuanCafe
 
         private void tbGetCode_Click(object sender, EventArgs e)
         {
-            if (tbEmail.Text == "")
+            if (tbEmail.Text == "" || tbUserNameFP.Text == "")
             {
-                MessageBox.Show("Vui lòng nhập email");
+                MessageBox.Show("Vui lòng nhập email và username");
             }
             else
             {
-                if (ReloadAccountDAL.Instance.Reload(tbEmail.Text))
+                if (ReloadAccountDAL.Instance.Reload(tbEmail.Text,tbUserNameFP.Text))
                 {
                     tbCode.Visible = true;
                     btXacNhan.Visible = true;
@@ -136,7 +136,7 @@ namespace QuanLyQuanCafe
                 }
                 else
                 {
-                    MessageBox.Show("Email khong đúng");
+                    MessageBox.Show("Email hoặc UserName khong đúng");
                 }
             }
         }
@@ -175,10 +175,12 @@ namespace QuanLyQuanCafe
             else
             {
                 string query = "update TaiKhoan set PassWord = '" + MaHoaMatKhau.Instance.EncodePass(tbXacNhanPass.Text)
-                    + "' from TaiKhoan tk inner join NhanVien nv on tk.UserName = nv.UserName where nv.Email = '" + tbEmail.Text + "'";
+                    + "' from TaiKhoan tk inner join NhanVien nv on tk.UserName = nv.UserName where nv.Email = '" + tbEmail.Text + "' and nv.UserName = N'"
+                    + tbUserNameFP.Text + "'";
                 if (DataProvider.Instance.executeDB(query))
                 {
                     MessageBox.Show("Đổi mật khẩu thành công");
+                    lbLogin_Click(new object(), new EventArgs());
                 }
                 else MessageBox.Show("Error");
             }
@@ -186,6 +188,7 @@ namespace QuanLyQuanCafe
         public void setPanelChangePass()
         {
             tbEmail.Text = "";
+            tbUserNameFP.Text = "";
             tbCode.Text = "";
             tbNewPass.Text = "";
             tbXacNhanPass.Text = "";

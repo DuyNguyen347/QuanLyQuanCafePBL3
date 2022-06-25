@@ -1,4 +1,5 @@
-﻿using QuanLyQuanCafe.DAL;
+﻿using QuanLyQuanCafe.BLL;
+using QuanLyQuanCafe.DAL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace QuanLyQuanCafe
         NhanVien nv;
         public InforAccount(NhanVien s)
         {
-            nv = DataNhanVienDAL.Instance.getNhanVienbyID(s.ID);
+            nv = NhanVienBLL.Instance.GetNhanVienByID(s.ID);
             InitializeComponent();
             GUI();
         }
@@ -50,7 +51,7 @@ namespace QuanLyQuanCafe
             }
             else
             {
-                if (oldpass != DataNhanVienDAL.Instance.getNhanVienbyID(nv.ID).TaiKhoan.PassWord.Replace(" ", ""))
+                if (oldpass != NhanVienBLL.Instance.GetNhanVienByID(nv.ID).TaiKhoan.PassWord.Replace(" ", ""))
                 {
                     MessageBox.Show("Vui lòng nhập đúng  mật khẩu cũ", "Xác nhận mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -59,16 +60,16 @@ namespace QuanLyQuanCafe
                     try
                     {
                         string username_ = nv.TaiKhoan.UserName;
-                        DataProvider.Instance.setdata("insert into TaiKhoan values('" + tbUserName.Text + "','" + nv.TaiKhoan.PassWord + "')");
+                        DataProvider.Instance.SetData("insert into TaiKhoan values('" + tbUserName.Text + "','" + nv.TaiKhoan.PassWord + "')");
                         string query = "update Nhanvien set UserName = '" + tbUserName.Text + "' where UserName = '" + nv.TaiKhoan.UserName + "'";
                         if (DataProvider.Instance.executeDB(query))
                         {
-                            DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + username_ + "'");
+                            DataProvider.Instance.SetData("delete TaiKhoan where UserName ='" + username_ + "'");
                             MessageBox.Show("Cap nhat thanh cong", " ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Dispose();
                         }
-                        else DataProvider.Instance.setdata("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
-                    }catch(Exception ex) { }
+                        else DataProvider.Instance.SetData("delete TaiKhoan where UserName ='" + tbUserName.Text + "'");
+                    }catch(Exception ) { }
                 }
                 else
                 {
@@ -112,7 +113,7 @@ namespace QuanLyQuanCafe
 
         private void InforAccount_Load(object sender, EventArgs e)
         {
-            nv = DataNhanVienDAL.Instance.getNhanVienbyID(nv.ID);
+            nv = NhanVienBLL.Instance.GetNhanVienByID(nv.ID);
         }
     }
 }

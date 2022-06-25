@@ -24,16 +24,16 @@ namespace QuanLyQuanCafe.DAL
                 return _Instance;
             }
             set => _Instance = value; }
-        public DataTable data()
+        public DataTable Data()
         {
             DataTable data;
             string query = "select * from View_NhanVien";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public NhanVien getNhanVienbyID(string ID)
+        public NhanVien GetNhanVienbyID(string ID)
         {
-            foreach (DataRow row in data().Rows)
+            foreach (DataRow row in Data().Rows)
             {
                 NhanVien nhanvien = new NhanVien(row);
                 if (nhanvien.ID == ID)
@@ -41,17 +41,17 @@ namespace QuanLyQuanCafe.DAL
             }
             return null;
         }
-        public void addNhanVien(NhanVien nhanvien)
+        public void AddNhanVien(NhanVien nhanvien)
         {
             if (nhanvien.Anh == null)
             {
             if (nhanvien.Email.Trim() == "" || nhanvien.TaiKhoan.UserName.Trim()=="")
-                DataProvider.Instance.setdata("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "'," + "null" + ",'" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "'," + "null" + ",null)");
+                DataProvider.Instance.SetData("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "'," + "null" + ",'" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "'," + "null" + ",null)");
             else
             {
                 nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                DataTaiKhoanDAL.Instance.addTaiKhoan(nhanvien.TaiKhoan);
-                DataProvider.Instance.setdata("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "','" + nhanvien.Email + "','" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "','" + nhanvien.TaiKhoan.UserName + "',null)");
+                DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
+                DataProvider.Instance.SetData("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "','" + nhanvien.Email + "','" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "','" + nhanvien.TaiKhoan.UserName + "',null)");
             }
             }
             else
@@ -65,39 +65,39 @@ namespace QuanLyQuanCafe.DAL
                 else
                 {
                     nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                    DataTaiKhoanDAL.Instance.addTaiKhoan(nhanvien.TaiKhoan);
+                    DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
                     query2 = "insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "','" + nhanvien.Email + "','" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "','" + nhanvien.TaiKhoan.UserName + "',@data)";
                     DataProvider.Instance.Execute(query2, ImageToByteArray(nhanvien.Anh));
                 }
             }
 
         }
-        public void deleteNhanVien(string ID)
+        public void DeleteNhanVien(string ID)
         {
-            NhanVien nhanvien = getNhanVienbyID(ID);
-            DataProvider.Instance.setdata("update HoaDon set ID_NhanVien = null where ID_NhanVien = '" + ID + "'");
-            DataProvider.Instance.setdata("delete from NhanVien where ID = '" + ID + "'");
-            DataProvider.Instance.setdata("delete TaiKhoan where Username = '" + nhanvien.TaiKhoan.UserName + "'");
+            NhanVien nhanvien = GetNhanVienbyID(ID);
+            DataProvider.Instance.SetData("update HoaDon set ID_NhanVien = null where ID_NhanVien = '" + ID + "'");
+            DataProvider.Instance.SetData("delete from NhanVien where ID = '" + ID + "'");
+            DataProvider.Instance.SetData("delete TaiKhoan where Username = '" + nhanvien.TaiKhoan.UserName + "'");
         }
-        public void updateNhanVien(NhanVien nhanvien)
+        public void UpdateNhanVien(NhanVien nhanvien)
         {
-            NhanVien a = getNhanVienbyID(nhanvien.ID);
+            NhanVien a = GetNhanVienbyID(nhanvien.ID);
             if (nhanvien.Anh == null)
             {
                 if (nhanvien.Email.Trim() == "" || nhanvien.TaiKhoan.UserName.Trim() == "" || a.Email.Trim() != "")
-                    DataProvider.Instance.setdata("update NhanVien set Name = N'" + nhanvien.Name + "',NgaySinh = '" +
+                    DataProvider.Instance.SetData("update NhanVien set Name = N'" + nhanvien.Name + "',NgaySinh = '" +
                     DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "',ChucVu = N'" + nhanvien.ChucVu.TenChucVu +
                     "',Phone = '" + nhanvien.SDT + "' where ID= '" + nhanvien.ID + "'");
                 else
                 {
                     try
                     {
-                        DataTaiKhoanDAL.Instance.addTaiKhoan(nhanvien.TaiKhoan);
+                        DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
                         nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                        DataTaiKhoanDAL.Instance.updateTaiKhoan(nhanvien.TaiKhoan);
+                        DataTaiKhoanDAL.Instance.UpdateTaiKhoan(nhanvien.TaiKhoan);
                     }
-                    catch (Exception e) { }
-                    DataProvider.Instance.setdata("update NhanVien set Name = N'" + nhanvien.Name + "',NgaySinh = '" +
+                    catch (Exception ) { }
+                    DataProvider.Instance.SetData("update NhanVien set Name = N'" + nhanvien.Name + "',NgaySinh = '" +
                     DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "',ChucVu = N'" + nhanvien.ChucVu.TenChucVu +
                     "',Email='" + nhanvien.Email + "',UserName='" + nhanvien.TaiKhoan.UserName + "', Phone = '" + nhanvien.SDT + "' where ID= '" + nhanvien.ID + "'");
                 }
@@ -116,11 +116,11 @@ namespace QuanLyQuanCafe.DAL
                 {
                     try
                     {
-                        DataTaiKhoanDAL.Instance.addTaiKhoan(nhanvien.TaiKhoan);
+                        DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
                         nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                        DataTaiKhoanDAL.Instance.updateTaiKhoan(nhanvien.TaiKhoan);
+                        DataTaiKhoanDAL.Instance.UpdateTaiKhoan(nhanvien.TaiKhoan);
                     }
-                    catch (Exception e) { }
+                    catch (Exception ) { }
                     query3 = "update NhanVien set Name = N'" + nhanvien.Name + "',NgaySinh = '" +DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) +
                         "',ChucVu = N'" +nhanvien.ChucVu.TenChucVu +"',Email='" + nhanvien.Email + "',UserName='" + nhanvien.TaiKhoan.UserName + 
                         "', Phone = '" + nhanvien.SDT + "',Anh = @data where ID= '" + nhanvien.ID + "'";
@@ -130,18 +130,18 @@ namespace QuanLyQuanCafe.DAL
 
         }
 
-        public List<NhanVien> locdulieu(string ten = "", string chucvu = "")
+        public List<NhanVien> LocDuLieu(string ten = "", string chucvu = "")
         {
             List<NhanVien> nhanViens = new List<NhanVien>();
-            foreach (DataRow i in data().Rows)
+            foreach (DataRow i in Data().Rows)
                 if ((i["Name"].ToString().ToUpper()).Contains(ten.ToUpper()) && (i["ChucVu"].ToString().ToUpper()).Contains(chucvu.ToUpper()))
                     nhanViens.Add(new NhanVien(i));
             return nhanViens;
         }
         
-        public NhanVien getNhanVienbyUserName(string username)
+        public NhanVien GetNhanVienbyUserName(string username)
         {
-            foreach (DataRow row in data().Rows)
+            foreach (DataRow row in Data().Rows)
             {
                 NhanVien nhanvien = new NhanVien(row);
                 if (nhanvien.TaiKhoan.UserName == username)
@@ -149,9 +149,9 @@ namespace QuanLyQuanCafe.DAL
             }
             return null;
         }
-        public NhanVien getNhanVienbyEmail(string email)
+        public NhanVien GetNhanVienbyEmail(string email)
         {
-            foreach (DataRow row in data().Rows)
+            foreach (DataRow row in Data().Rows)
             {
                 NhanVien nhanvien = new NhanVien(row);
                 if (nhanvien.Email == email)
@@ -172,7 +172,7 @@ namespace QuanLyQuanCafe.DAL
             MemoryStream ms = new MemoryStream(b);
             return Image.FromStream(ms);
         }
-        public string getLastNV()
+        public string GetLastNV()
         {
             string query = "select top 1 * from NhanVien order by ID desc";
             DataTable dt = DataProvider.Instance.GetRecords(query);
@@ -185,12 +185,12 @@ namespace QuanLyQuanCafe.DAL
                 return dt.Rows[0]["ID"].ToString().Substring(2,3);
             }
         }
-        public string setIdNV()
+        public string SetIdNV()
         {
             string kq = "";
             int s = 0;
-            if (getLastNV() == "") s = 1;
-            else s = Convert.ToInt32(getLastNV()) + 1;
+            if (GetLastNV() == "") s = 1;
+            else s = Convert.ToInt32(GetLastNV()) + 1;
             if (s< 10) kq = "NV00" + s.ToString();
             else if (s< 99) kq = "NV0" + s.ToString();
             else kq = "NV" + s.ToString();

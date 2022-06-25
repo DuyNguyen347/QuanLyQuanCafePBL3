@@ -24,7 +24,7 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckout = new DateTime();
             Tongtinh = tongtinh;
             Dathu = dathu;
-            NhanVien = DataNhanVienDAL.Instance.getNhanVienbyID(id_nhanvien);
+            NhanVien = DataNhanVienDAL.Instance.GetNhanVienbyID(id_nhanvien);
         }
         public HoaDon(string id, DateTime timecheckin,DateTime timecheckout,int tongtinh,int dathu,string id_nhanvien)
         {
@@ -33,7 +33,7 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckout = timecheckout;
             Tongtinh = tongtinh;
             Dathu = dathu;
-            NhanVien = DataNhanVienDAL.Instance.getNhanVienbyID(id_nhanvien);
+            NhanVien = DataNhanVienDAL.Instance.GetNhanVienbyID(id_nhanvien);
         }
         public HoaDon(DataRow row)
         {
@@ -42,7 +42,7 @@ namespace QuanLyQuanCafe.DTO
             TimeCheckout =Convert.ToDateTime(row["TimeCheckout"].ToString().Trim());
             Tongtinh = Convert.ToInt32(row["TongTinh"].ToString());
             Dathu = Convert.ToInt32(row["DaThu"].ToString());
-            NhanVien = DataNhanVienDAL.Instance.getNhanVienbyID(row["ID_NhanVien"].ToString());
+            NhanVien = DataNhanVienDAL.Instance.GetNhanVienbyID(row["ID_NhanVien"].ToString());
         }
     }
 }

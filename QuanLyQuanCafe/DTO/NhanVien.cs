@@ -32,7 +32,7 @@ namespace QuanLyQuanCafe
             ID = iD;
             Name = name;
             NgaySinh = ngaysinh;
-            ChucVu = DataChucVuDAL.Instance.getChucVubyID(chucvu);
+            ChucVu = DataChucVuDAL.Instance.GetChucVuByID(chucvu);
             TaiKhoan = new TaiKhoan(username,password);
             Email = email;
             Luong = ChucVu.Luong;
@@ -59,7 +59,7 @@ namespace QuanLyQuanCafe
             NgaySinh = row["NgaySinh"].ToString().Split(' ').First();
             try
             {
-                ChucVu = DataChucVuDAL.Instance.getChucVubyID(row["ChucVu"].ToString());
+                ChucVu = DataChucVuDAL.Instance.GetChucVuByID(row["ChucVu"].ToString());
                 Luong = ChucVu.Luong;
             }
             catch (Exception ex)
@@ -69,7 +69,7 @@ namespace QuanLyQuanCafe
             }
             try
             {
-                TaiKhoan = DataTaiKhoanDAL.Instance.getTaiKhoanbyUserName(row["UserName"].ToString());
+                TaiKhoan = DataTaiKhoanDAL.Instance.GetTaiKhoanbyUserName(row["UserName"].ToString());
             }
             catch (Exception ex)
             {

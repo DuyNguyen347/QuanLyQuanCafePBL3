@@ -20,49 +20,49 @@ namespace QuanLyQuanCafe.DAL
 
             }
         }
-        public DataTable data()
+        public DataTable Data()
         {
             DataTable data;
             string query = "select *  from DanhMuc";
             data = DataProvider.Instance.GetRecords(query);
             return data;
         }
-        public List<DanhMuc> locdulieu(string ten="")
+        public List<DanhMuc> LocDuLieu(string ten="")
         {
             List<DanhMuc> danhMucs = new List<DanhMuc>();
-            foreach (DataRow i in data().Rows)
+            foreach (DataRow i in Data().Rows)
                 if ((i["Ten_Category"].ToString().ToUpper()).Contains(ten.ToUpper()))
                     danhMucs.Add(new DanhMuc(i));
             return danhMucs;
         }
-        public DanhMuc getDanhMucbyID(string ID)
+        public DanhMuc GetDanhMucByID(string ID)
         {
             List<DanhMuc> danhMucs = new List<DanhMuc>();
-            foreach (DataRow i in data().Rows)
+            foreach (DataRow i in Data().Rows)
                 if (i["ID"].ToString().ToUpper().Trim().Equals(ID.ToUpper().Trim()))
                     danhMucs.Add(new DanhMuc(i));
             return danhMucs[0];
         }
-        public DanhMuc getDanhMucbyTen(string Ten)
+        public DanhMuc GetDanhMucByTen(string Ten)
         {
             List<DanhMuc> danhMucs = new List<DanhMuc>();
-            foreach (DataRow i in data().Rows)
+            foreach (DataRow i in Data().Rows)
                 if (i["Ten_Category"].ToString().ToUpper().Trim().Equals(Ten.ToUpper().Trim()))
                     danhMucs.Add(new DanhMuc(i));
             return danhMucs[0];
         }
-        public void addDanhMuc(DanhMuc danhmuc)
+        public void AddDanhMuc(DanhMuc danhmuc)
         {
-            DataProvider.Instance.setdata("insert into DanhMuc values('" + danhmuc.ID + "',N'" + danhmuc.Ten_Category + "')");
+            DataProvider.Instance.SetData("insert into DanhMuc values('" + danhmuc.ID + "',N'" + danhmuc.Ten_Category + "')");
         }
-        public void deleteDanhMuc(String ID)
+        public void DeleteDanhMuc(String ID)
         {
-            DataProvider.Instance.setdata("update Mon set ID_category = null where ID_category = '" + ID + "'");
-            DataProvider.Instance.setdata("delete from DanhMuc where ID = '" + ID + "'");
+            DataProvider.Instance.SetData("update Mon set ID_category = null where ID_category = '" + ID + "'");
+            DataProvider.Instance.SetData("delete from DanhMuc where ID = '" + ID + "'");
         }
-        public void updateDanhMuc(DanhMuc danhmuc)
+        public void UpdateDanhMuc(DanhMuc danhmuc)
         {
-            DataProvider.Instance.setdata("update DanhMuc set Ten_Category = N'" + danhmuc.Ten_Category + "'where ID= '" + danhmuc.ID + "' ");
+            DataProvider.Instance.SetData("update DanhMuc set Ten_Category = N'" + danhmuc.Ten_Category + "'where ID= '" + danhmuc.ID + "' ");
         }
 
     }

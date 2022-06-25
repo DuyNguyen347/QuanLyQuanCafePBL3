@@ -32,7 +32,7 @@ namespace QuanLyQuanCafe.Report
 
         private void PrintInvoice_Load(object sender, EventArgs e)
         {
-            string s = DataProvider.Instance.getConnectionString();
+            string s = DataProvider.Instance.GetConnectionString();
             SqlConnection con = new SqlConnection(s);
             string query = "select * from View_All_Bill4 where ID_HoaDon = '" + MS + "'";
             SqlDataAdapter da = new SqlDataAdapter(query, con);

@@ -23,31 +23,31 @@ namespace QuanLyQuanCafe.BLL
             {
             }
         }
-        public List<BanAn> getBanAnbyStatus(string trangthai)
+        public List<BanAn> GetBanAnbyStatus(string trangthai)
         {
-            return DataBanAnDAL.Instance.getBanAnbyStatus(trangthai);
+            return DataBanAnDAL.Instance.GetTableByStatus(trangthai);
         }
         public BanAn getBanAnbyID(string id)
         {
-            return DataBanAnDAL.Instance.getBanAnbyID(id);
+            return DataBanAnDAL.Instance.GetTableByID(id);
         }
         public void setBanTrong(string idban)
         {
-            DataBanAnDAL.Instance.updateBanAn(new BanAn(idban.Trim().ToUpper(), true));
+            DataBanAnDAL.Instance.UpdateTable(new BanAn(idban.Trim().ToUpper(), true));
         }
         public void setBanCoNguoi(string idban)
         {
-            DataBanAnDAL.Instance.updateBanAn(new BanAn(idban.Trim().ToUpper(), false));
+            DataBanAnDAL.Instance.UpdateTable(new BanAn(idban.Trim().ToUpper(), false));
         }
-        public List<BanAn> getListBanAnbyID(string id)
+        public List<BanAn> GetListBanAnbyID(string id)
         {
-            return DataBanAnDAL.Instance.locBanAnbyID(id);
+            return DataBanAnDAL.Instance.FilterTableByID(id);
         }
         public List<string> getListStatus()
         {
             List<string> list = new List<string>();
             list.Add("Tất cả");
-            foreach (string i in DataBanAnDAL.Instance.statuses())
+            foreach (string i in DataBanAnDAL.Instance.GetStatuses())
             {
                 if (i.ToUpper().Trim().Equals("TRUE"))
                 {
@@ -58,6 +58,21 @@ namespace QuanLyQuanCafe.BLL
             }
             return list;
         }
-            
+        public void AddTable(BanAn table)
+        {
+            DataBanAnDAL.Instance.AddTable(table);
+        }
+        public void UpdateTable(BanAn table)
+        {
+            DataBanAnDAL.Instance.UpdateTable(table);
+        }
+        public void DeleteTable(string idTable)
+        {
+            DataBanAnDAL.Instance.DeleteTable(idTable);
+        }
+        public List<BanAn> GetListTable()
+        {
+            return DataBanAnDAL.Instance.ListTable();
+        }
     }
 }

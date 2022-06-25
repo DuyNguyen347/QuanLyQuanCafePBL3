@@ -55,15 +55,15 @@ namespace QuanLyQuanCafe.DAL
         }
         public void addThongTinHoaDon(ThongTinHoaDon thongtinhoadon)
         {
-            DataProvider.Instance.setdata("insert into ThongTinHoaDon values('" + thongtinhoadon.ID_HoaDon + "','" + thongtinhoadon.ID_Mon + "'," + thongtinhoadon.Soluong + ")");
+            DataProvider.Instance.SetData("insert into ThongTinHoaDon values('" + thongtinhoadon.ID_HoaDon + "','" + thongtinhoadon.ID_Mon + "'," + thongtinhoadon.Soluong + ")");
         }
         public void deleteThongTinHoaDonbyIDHoaDon(string id_hoadon)
         {
-            DataProvider.Instance.setdata("delete from ThongTinHoaDon where ID_HoaDon = '" + id_hoadon + "'");
+            DataProvider.Instance.SetData("delete from ThongTinHoaDon where ID_HoaDon = '" + id_hoadon + "'");
         }
         public void deleteThongTinHoaDonbyIDMon(string id_mon)
         {
-            DataProvider.Instance.setdata("delete from ThongTinHoaDon where ID_Mon = '" + id_mon + "'");
+            DataProvider.Instance.SetData("delete from ThongTinHoaDon where ID_Mon = '" + id_mon + "'");
         }
         public void updateThongTinHoaDon(ThongTinHoaDon thongtinhoadon)
         {
@@ -74,10 +74,10 @@ namespace QuanLyQuanCafe.DAL
                     count++;
                     if (i.Soluong <=
                         thongtinhoadon.Soluong)
-                        DataProvider.Instance.setdata("update ThongTinHoaDon set Soluong = " + thongtinhoadon.Soluong + "where ID_Mon= '" + thongtinhoadon.ID_Mon + "' ");
+                        DataProvider.Instance.SetData("update ThongTinHoaDon set Soluong = " + thongtinhoadon.Soluong + "where ID_Mon= '" + thongtinhoadon.ID_Mon + "' ");
                 }
             if (count == 0)
-                DataProvider.Instance.setdata("insert into ThongTinHoaDon values('" + thongtinhoadon.ID_HoaDon + "','" + thongtinhoadon.ID_Mon + "'," + thongtinhoadon.Soluong + ")");
+                DataProvider.Instance.SetData("insert into ThongTinHoaDon values('" + thongtinhoadon.ID_HoaDon + "','" + thongtinhoadon.ID_Mon + "'," + thongtinhoadon.Soluong + ")");
         }
         public void gophoadon(string id_truoc, string id_sau)
         {
@@ -85,16 +85,16 @@ namespace QuanLyQuanCafe.DAL
                 try
                 {
                     DataProvider.Instance.GetRecords("select Soluong from ThongTinHoaDon where ID_HoaDon ='" + id_sau + "' and ID_Mon = '" + i.ID_Mon + "'").Rows[0].ToString();
-                    DataProvider.Instance.setdata("update ThongTinHoaDon set  Soluong = " +
+                    DataProvider.Instance.SetData("update ThongTinHoaDon set  Soluong = " +
                         "(select Soluong from ThongTinHoaDon where ID_HoaDon ='" + id_sau + "' and ID_Mon = '" + i.ID_Mon + "')+" + i.Soluong +
                         "where ID_HoaDon ='" + id_sau + "' and ID_Mon = '" + i.ID_Mon + "'");
-                    DataProvider.Instance.setdata("delete ThongTinHoaDon where ID_HoaDon = '" + id_truoc + "' and ID_Mon = '" + i.ID_Mon + "'");
+                    DataProvider.Instance.SetData("delete ThongTinHoaDon where ID_HoaDon = '" + id_truoc + "' and ID_Mon = '" + i.ID_Mon + "'");
                 }
                 catch (Exception e)
                 {
-                    DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon ='" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'and ID_Mon = '" + i.ID_Mon + "'");
+                    DataProvider.Instance.SetData("update ThongTinHoaDon set ID_HoaDon ='" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'and ID_Mon = '" + i.ID_Mon + "'");
                 }
-            DataProvider.Instance.setdata("update HoaDon set TongTinh = TongTinh + (select TongTinh from HoaDon where ID_HoaDon = '" + id_truoc + "')," +
+            DataProvider.Instance.SetData("update HoaDon set TongTinh = TongTinh + (select TongTinh from HoaDon where ID_HoaDon = '" + id_truoc + "')," +
                                                             "DaThu = DaThu + (select DaThu from HoaDon where ID_HoaDon = '" + id_truoc + "')" +
                                             "where ID_HoaDon = '" + id_sau + "'");
         }
@@ -122,9 +122,9 @@ namespace QuanLyQuanCafe.DAL
             ////MessageBox.Show("update HoaDon set TongTinh =" + tongtinh + " ,DaThu =" + dathu + " where ID_HoaDon = '" + id_hoadonchinh + "'");
             //DataProvider.Instance.setdata("update HoaDon set TongTinh =" + tongtinh + " ,DaThu =" + dathu + " where ID_HoaDon = '" + id_hoadonchinh + "'");
         }
-        public void doiidhoadon(string id_truoc, string id_sau)
+        public void DoiIdHoaDon(string id_truoc, string id_sau)
         {
-            DataProvider.Instance.setdata("update ThongTinHoaDon set ID_HoaDon = '" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'");
+            DataProvider.Instance.SetData("update ThongTinHoaDon set ID_HoaDon = '" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'");
             //MessageBox.Show("update ThongTinHoaDon set ID_HoaDon = '" + id_sau + "' where ID_HoaDon = '" + id_truoc + "'");
         }
     }
