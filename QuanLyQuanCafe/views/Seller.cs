@@ -283,13 +283,17 @@ namespace QuanLyQuanCafe
         }
         private void DGV_DaChon_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (DGV_DaChon.Columns[e.ColumnIndex].Name == "btXoa")
+            try
             {
-                dt.Rows.RemoveAt(e.RowIndex);
-                dt.AcceptChanges();
-                Tinh_tong_tien();
+                if (DGV_DaChon.Columns[e.ColumnIndex].Name == "btXoa")
+                {
+                    dt.Rows.RemoveAt(e.RowIndex);
+                    dt.AcceptChanges();
+                    Tinh_tong_tien();
+                }
+                else loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
             }
-            else loadnumric(DGV_DaChon.SelectedRows[0].Cells["Mã món"].Value.ToString());
+            catch (Exception ex) { }
         }
         #endregion
 
