@@ -30,6 +30,8 @@
         {
             this.tcAccount = new Guna.UI2.WinForms.Guna2TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pbAnhNV = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tbLuong = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbSDT = new Guna.UI2.WinForms.Guna2TextBox();
             this.tbEmail = new Guna.UI2.WinForms.Guna2TextBox();
@@ -52,12 +54,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.pbAnhNV = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tcAccount.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcAccount
@@ -107,11 +107,32 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(574, 262);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Thông tin cá nhân";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // pbAnhNV
+            // 
+            this.pbAnhNV.ImageRotate = 0F;
+            this.pbAnhNV.Location = new System.Drawing.Point(408, 15);
+            this.pbAnhNV.Name = "pbAnhNV";
+            this.pbAnhNV.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pbAnhNV.Size = new System.Drawing.Size(151, 176);
+            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbAnhNV.TabIndex = 14;
+            this.pbAnhNV.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(438, 209);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(97, 19);
+            this.label11.TabIndex = 13;
+            this.label11.Text = "Ảnh nhân viên:";
             // 
             // tbLuong
             // 
@@ -123,6 +144,7 @@
             this.tbLuong.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbLuong.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbLuong.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbLuong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbLuong.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbLuong.Location = new System.Drawing.Point(165, 210);
             this.tbLuong.Name = "tbLuong";
@@ -142,6 +164,7 @@
             this.tbSDT.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbSDT.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSDT.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbSDT.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbSDT.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbSDT.Location = new System.Drawing.Point(165, 173);
             this.tbSDT.Name = "tbSDT";
@@ -161,6 +184,7 @@
             this.tbEmail.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbEmail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbEmail.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbEmail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbEmail.Location = new System.Drawing.Point(165, 138);
             this.tbEmail.Name = "tbEmail";
@@ -180,6 +204,7 @@
             this.tbChucVu.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbChucVu.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbChucVu.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbChucVu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbChucVu.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbChucVu.Location = new System.Drawing.Point(165, 99);
             this.tbChucVu.Name = "tbChucVu";
@@ -199,6 +224,7 @@
             this.tbNgaySinh.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbNgaySinh.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbNgaySinh.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbNgaySinh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbNgaySinh.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbNgaySinh.Location = new System.Drawing.Point(165, 54);
             this.tbNgaySinh.Name = "tbNgaySinh";
@@ -218,6 +244,7 @@
             this.tbName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbName.Location = new System.Drawing.Point(168, 16);
             this.tbName.Name = "tbName";
@@ -300,7 +327,7 @@
             this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(574, 262);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Tài khoản";
@@ -389,6 +416,7 @@
             this.tbUserName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.tbUserName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbUserName.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tbUserName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.tbUserName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.tbUserName.Location = new System.Drawing.Point(221, 26);
             this.tbUserName.Name = "tbUserName";
@@ -438,27 +466,6 @@
             this.label7.TabIndex = 0;
             this.label7.Text = "Tên đăng nhập:";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(438, 209);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(97, 19);
-            this.label11.TabIndex = 13;
-            this.label11.Text = "Ảnh nhân viên:";
-            // 
-            // pbAnhNV
-            // 
-            this.pbAnhNV.ImageRotate = 0F;
-            this.pbAnhNV.Location = new System.Drawing.Point(408, 15);
-            this.pbAnhNV.Name = "pbAnhNV";
-            this.pbAnhNV.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pbAnhNV.Size = new System.Drawing.Size(151, 176);
-            this.pbAnhNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbAnhNV.TabIndex = 14;
-            this.pbAnhNV.TabStop = false;
-            // 
             // InforAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,9 +479,9 @@
             this.tcAccount.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbAnhNV)).EndInit();
             this.ResumeLayout(false);
 
         }

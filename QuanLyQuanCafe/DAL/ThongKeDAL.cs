@@ -36,13 +36,14 @@ namespace QuanLyQuanCafe.DAL
             try
             {
                 string query = " select count (*) as Tong from HoaDon" +
-                          " where LEN(ID_HoaDon) < 12 and TimeCheckout between '" + DataProvider.FormatDatetimeShort(startDate) + "' and '" + DataProvider.FormatDatetimeShort(endDate) + "'";
+                               $" where LEN(ID_HoaDon) < 12 and TimeCheckout between '{startDate}' and '{endDate}'";
                 NumOrders = Convert.ToInt32(DataProvider.Instance.GetRecords(query).Rows[0]["Tong"].ToString());
             }
             catch(Exception ex)
             {
+                
                 string query = " select count (*) as Tong from HoaDon" +
-                               $" where LEN(ID_HoaDon) < 12 and TimeCheckout between '{startDate}' and '{endDate}'";
+                          " where LEN(ID_HoaDon) < 12 and TimeCheckout between '" + DataProvider.FormatDatetimeShort(startDate) + "' and '" + DataProvider.FormatDatetimeShort(endDate) + "'";
                 NumOrders = Convert.ToInt32(DataProvider.Instance.GetRecords(query).Rows[0]["Tong"].ToString());
             }
         }

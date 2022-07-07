@@ -44,7 +44,7 @@ namespace QuanLyQuanCafe
             string username = tbUserName.Text;
             string oldpass = MaHoaMatKhau.Instance.EncodePass(tbOldPass.Text);
             string newpass = MaHoaMatKhau.Instance.EncodePass(tbNewPass.Text);
-            string xacnhanPass = MaHoaMatKhau.Instance.EncodePass(tbNewPass.Text);
+            string xacnhanPass = MaHoaMatKhau.Instance.EncodePass(tbXacNhanPass.Text);
             if(newpass != xacnhanPass)
             {
                 MessageBox.Show("Vui lòng nhập đúng  mật khẩu mới", "Xác nhận mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);

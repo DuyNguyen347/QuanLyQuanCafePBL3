@@ -34,7 +34,7 @@ namespace QuanLyQuanCafe
             updatedate();
             BT_List_Bill_Click(new object(), new EventArgs());
             BT_List_Danhthu_Click(new object(), new EventArgs());
-
+            Day_Click(new object(), new EventArgs());
         }
 
         /// <summary>
@@ -593,7 +593,7 @@ namespace QuanLyQuanCafe
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            chart1.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            chart1.Series["Series1"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
