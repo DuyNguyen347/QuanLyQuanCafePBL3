@@ -49,8 +49,7 @@ namespace QuanLyQuanCafe.DAL
                 DataProvider.Instance.SetData("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "'," + "null" + ",'" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "'," + "null" + ",null)");
             else
             {
-                nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
+                DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan.UserName,nhanvien.Email);
                 DataProvider.Instance.SetData("insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "','" + nhanvien.Email + "','" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "','" + nhanvien.TaiKhoan.UserName + "',null)");
             }
             }
@@ -64,8 +63,7 @@ namespace QuanLyQuanCafe.DAL
                 }
                 else
                 {
-                    nhanvien.TaiKhoan.PassWord = DataProvider.sendcode(nhanvien.Email, 1);
-                    DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan);
+                    DataTaiKhoanDAL.Instance.AddTaiKhoan(nhanvien.TaiKhoan.UserName,nhanvien.Email);
                     query2 = "insert into NhanVien values('" + nhanvien.ID + "',N'" + nhanvien.Name + "','" + DataProvider.FormatDatetimeShort(Convert.ToDateTime(nhanvien.NgaySinh)) + "','" + nhanvien.Email + "','" + nhanvien.SDT + "' ,N'" + nhanvien.ChucVu.TenChucVu + "','" + nhanvien.TaiKhoan.UserName + "',@data)";
                     DataProvider.Instance.Execute(query2, ImageToByteArray(nhanvien.Anh));
                 }

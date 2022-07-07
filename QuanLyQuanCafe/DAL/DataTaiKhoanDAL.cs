@@ -51,7 +51,20 @@ namespace QuanLyQuanCafe.DAL
         {
             DataProvider.Instance.SetData("insert into TaiKhoan values('" + taikhoan.UserName + "','" + MaHoaMatKhau.Instance.EncodePass(taikhoan.PassWord) + "')");
         }
-        public void DeleteTaiKhoan(String username)
+        public void AddTaiKhoan(string username,string email)
+        {
+            try
+            {
+                DataProvider.Instance.SetData("insert into TaiKhoan values('" + username + "','" + "24062002" + "')");
+                string passWord = DataProvider.sendcode(email, 1);
+                UpdateTaiKhoan(new TaiKhoan(username, passWord));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void DeleteTaiKhoan(string username)
         {
             DataProvider.Instance.SetData("update NhanVien set UserName = null where UserName = '" + username + "'");
             DataProvider.Instance.SetData("delete from TaiKhoan where UserName = N'" + username + "'");
